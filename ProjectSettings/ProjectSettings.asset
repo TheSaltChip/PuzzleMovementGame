@@ -46,7 +46,7 @@ PlayerSettings:
   defaultScreenHeight: 768
   defaultScreenWidthWeb: 960
   defaultScreenHeightWeb: 600
-  m_StereoRenderingPath: 0
+  m_StereoRenderingPath: 2
   m_ActiveColorSpace: 1
   m_MTRendering: 1
   mipStripping: 0
@@ -136,7 +136,8 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleVersion: 0.1.0
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: 4818e643f1a0ae54485779840294f656, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -166,7 +167,7 @@ PlayerSettings:
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 29
   AndroidTargetSdkVersion: 0
-  AndroidPreferredInstallLocation: 1
+  AndroidPreferredInstallLocation: 0
   aotOptions: 
   stripEngineCode: 1
   iPhoneStrippingLevel: 0
@@ -510,6 +511,9 @@ PlayerSettings:
   - m_BuildTarget: AndroidPlayer
     m_APIs: 0b000000
     m_Automatic: 1
+  - m_BuildTarget: WindowsStandaloneSupport
+    m_APIs: 02000000
+    m_Automatic: 0
   m_BuildTargetVRSettings: []
   m_DefaultShaderChunkSizeInMB: 16
   m_DefaultShaderChunkCount: 0
@@ -777,9 +781,22 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: USE_INPUT_SYSTEM_POSE_CONTROL
-    Standalone: USE_INPUT_SYSTEM_POSE_CONTROL
-    Windows Store Apps: USE_INPUT_SYSTEM_POSE_CONTROL
+    Android: USE_INPUT_SYSTEM_POSE_CONTROL;ULTIMATEXR_USE_OCULUS_SDK
+    EmbeddedLinux: ULTIMATEXR_USE_OCULUS_SDK
+    GameCoreScarlett: ULTIMATEXR_USE_OCULUS_SDK
+    GameCoreXboxOne: ULTIMATEXR_USE_OCULUS_SDK
+    LinuxHeadlessSimulation: ULTIMATEXR_USE_OCULUS_SDK
+    Lumin: ULTIMATEXR_USE_OCULUS_SDK
+    Nintendo Switch: ULTIMATEXR_USE_OCULUS_SDK
+    PS4: ULTIMATEXR_USE_OCULUS_SDK
+    PS5: ULTIMATEXR_USE_OCULUS_SDK
+    Stadia: ULTIMATEXR_USE_OCULUS_SDK
+    Standalone: USE_INPUT_SYSTEM_POSE_CONTROL;ULTIMATEXR_USE_OCULUS_SDK
+    WebGL: ULTIMATEXR_USE_OCULUS_SDK
+    Windows Store Apps: USE_INPUT_SYSTEM_POSE_CONTROL;ULTIMATEXR_USE_OCULUS_SDK
+    XboxOne: ULTIMATEXR_USE_OCULUS_SDK
+    iPhone: ULTIMATEXR_USE_OCULUS_SDK
+    tvOS: ULTIMATEXR_USE_OCULUS_SDK
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
