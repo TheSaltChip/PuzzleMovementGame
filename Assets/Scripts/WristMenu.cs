@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SceneTransition;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,12 +14,12 @@ public class WristMenu : MonoBehaviour
 
     public void OpenCloseMenu()
     {
-        canvas.SetActive(!gameObject.activeSelf);
+        canvas.SetActive(!canvas.activeSelf);
     }
 
     public void ChangeScene()
     {
-        SceneTransitionManager.singleton.GoToSceneAsync(dropdown.options[dropdown.value].text);
+        SceneTransitioner.Instance.LoadScene(dropdown.options[dropdown.value].text, SceneTransitionMode.Fade);
     }
 
     void Start()
