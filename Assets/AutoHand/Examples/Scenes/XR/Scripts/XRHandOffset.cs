@@ -44,8 +44,6 @@ public class XRHandOffset : MonoBehaviour
         new DeviceData("PICO", new Vector3(0.005f, -0.016f, 0.014f), new Vector3(24, 0, 15))
     };
 
-    [SerializeField] private TMP_Text text;
-
     bool offsetDone = false;
     bool hasProvider = false;
 
@@ -54,12 +52,6 @@ public class XRHandOffset : MonoBehaviour
         InputDevices.deviceConnected += DeviceConnected;
         List<InputDevice> devices = new List<InputDevice>();
         InputDevices.GetDevices(devices);
-
-        text.text = "";
-        foreach (var de in devices)
-        {
-            text.text += $"{de.name}\n";
-        }
 
         foreach (var device in devices)
             DeviceConnected(device);
@@ -106,10 +98,9 @@ public class XRHandOffset : MonoBehaviour
                     Debug.Log(inputDevice.name, this);
                     if (inputDevice.name.Contains(device.deviceNames[i]))
                     {
-                        
                         var offsetPos = GetPositionOffset(defaultDevice, device.deviceNames[i]);
                         var offsetRot = GetRotationOffset(defaultDevice, device.deviceNames[i]);
-                        text.text += $"Nice {offsetPos} : {offsetRot}\n";
+                        
                         foreach (var leftOffset in leftOffsets)
                         {
                             leftOffset.localPosition += new Vector3(-offsetPos.x, offsetPos.y, offsetPos.z);
