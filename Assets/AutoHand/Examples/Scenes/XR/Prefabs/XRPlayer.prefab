@@ -6986,7 +6986,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7942002210973373747}
-  - component: {fileID: 7412725206770988215}
   m_Layer: 0
   m_Name: XRPlayer
   m_TagString: Untagged
@@ -7011,42 +7010,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7412725206770988215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7942002210973373748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b661ef26e3b3e0c4ba5d9ecd8097bf6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultDevice: Oculus
-  rightOffsets:
-  - {fileID: 7942002210253447911}
-  - {fileID: 7942002210876816003}
-  leftOffsets:
-  - {fileID: 7942002210360757120}
-  - {fileID: 7942002210478575250}
-  devices:
-  - deviceNames:
-    - Windows MR
-    position: {x: 0.003, y: -0.005, z: -0.078}
-    rotation: {x: 36, y: -12, z: 2}
-  - deviceNames:
-    - Vive
-    - HTC
-    - Index
-    - Cosmos
-    - Elite
-    position: {x: 0.035, y: -0.022, z: -0.11}
-    rotation: {x: 50, y: -2, z: -11}
-  - deviceNames:
-    - Oculus
-    position: {x: 0.04, y: -0.04, z: -0.023}
-    rotation: {x: 16, y: 8, z: 8}
 --- !u!1 &7942002211305997993
 GameObject:
   m_ObjectHideFlags: 0
