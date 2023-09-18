@@ -54,20 +54,20 @@ namespace SceneTransition
                 return;
             }
 
-
             _loadLevelOperation.allowSceneActivation = false;
             _transitionCanvas.enabled = true;
             _activeTransition = transition.animationSO;
             StartCoroutine(Exit());
         }
-        
+
 
         private IEnumerator Exit()
         {
             yield return StartCoroutine(_activeTransition.Exit(_transitionCanvas));
+            
             _loadLevelOperation.allowSceneActivation = true;
         }
-        
+
         private IEnumerator Enter()
         {
             yield return StartCoroutine(_activeTransition.Enter(_transitionCanvas));
