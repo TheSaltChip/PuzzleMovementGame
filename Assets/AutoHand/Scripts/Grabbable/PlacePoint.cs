@@ -292,10 +292,19 @@ namespace Autohand {
             }
 
             placingFrame = true;
-            originParent = placeObj.transform.parent;
+            originParent = transform.parent;
 
             placeObj.rootTransform.position = placedOffset.position;
-            placeObj.rootTransform.rotation = placedOffset.rotation;
+            //Debug.Log(placedObject.transform.eulerAngles.z);
+            float zRotation =  Mathf.Round( placedObject.transform.eulerAngles.z/ 90)*90;
+            //Debug.Log(zRotation);
+            Transform t = new GameObject().transform;
+            t.eulerAngles = new Vector3(0, 0, zRotation);
+            //Debug.Log(t.rotation.z);
+            //Debug.Log(t.eulerAngles.z);
+            var rot = placedOffset.rotation;
+            rot = Quaternion.Euler(0,rot.y,rot.z);
+            placedObject.transform.rotation = Quaternion.Euler(new Vector3(rot.x-90f, rot.y, t.eulerAngles.z));
 
             if (placeObj.body != null)
             {
