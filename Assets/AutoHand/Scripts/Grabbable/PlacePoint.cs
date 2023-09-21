@@ -292,10 +292,10 @@ namespace Autohand {
             }
 
             placingFrame = true;
-            originParent = placeObj.transform.parent;
+            originParent = transform.parent;
 
             placeObj.rootTransform.position = placedOffset.position;
-            placeObj.rootTransform.rotation = placedOffset.rotation;
+            placedObject.rootTransform.rotation = placedOffset.rotation;
 
             if (placeObj.body != null)
             {
