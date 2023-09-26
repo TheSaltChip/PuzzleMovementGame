@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Options;
 using SceneTransition.TransitionScriptableObject;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -70,6 +71,7 @@ namespace SceneTransition
 
         private IEnumerator Enter()
         {
+            OptionsManager.Instance.SetOptions();
             yield return StartCoroutine(_activeTransition.Enter(_transitionCanvas));
             _transitionCanvas.enabled = false;
             _loadLevelOperation = null;
