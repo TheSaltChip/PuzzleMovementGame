@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Autohand;
 using Options;
 using SceneTransition.TransitionScriptableObject;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace SceneTransition
@@ -15,6 +17,8 @@ namespace SceneTransition
 
         [SerializeField] private List<Transition> transitions = new();
 
+        public event UnityAction OnSceneChanged;
+        
         private Canvas _transitionCanvas;
 
         private AsyncOperation _loadLevelOperation;
@@ -80,6 +84,7 @@ namespace SceneTransition
 
         private void HandleSceneChange(Scene oldScene, Scene newScene)
         {
+            OnSceneChanged?.Invoke();
             if (_activeTransition != null)
             {
                 StartCoroutine(Enter());
