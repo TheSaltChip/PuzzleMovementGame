@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using SceneTransition;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -8,31 +10,29 @@ using UnityEngine.EventSystems;
 namespace Autohand
 {
     [Serializable]
-    public class UnityCanvasPointerEvent : UnityEvent<Vector3, GameObject> { }
+    public class UnityCanvasPointerEvent : UnityEvent<Vector3, GameObject>
+    { }
 
     [HelpURL("https://app.gitbook.com/s/5zKO0EvOjzUDeT2aiFk3/auto-hand/extras/ui-interaction")]
     public class HandCanvasPointer : MonoBehaviour
     {
-        [Header("References")]
-        public GameObject hitPointMarker;
+        [Header("References")] public GameObject hitPointMarker;
         private LineRenderer lineRenderer;
 
 
-        [Header("Ray settings")]
-        public float raycastLength = 8.0f;
+        [Header("Ray settings")] public float raycastLength = 8.0f;
         public bool autoShowTarget = true;
         public LayerMask UILayer;
 
 
-        [Header("Events")]
-        public UnityCanvasPointerEvent StartSelect;
+        [Header("Events")] public UnityCanvasPointerEvent StartSelect;
         public UnityCanvasPointerEvent StopSelect;
         public UnityCanvasPointerEvent StartPoint;
         public UnityCanvasPointerEvent StopPoint;
 
 
-
         public GameObject _currTarget;
+
         public GameObject currTarget
         {
             get { return _currTarget; }
@@ -47,13 +47,16 @@ namespace Autohand
         float lineSegements = 10f;
 
         static Camera cam = null;
+
         public static Camera UICamera
         {
             get
             {
                 if (cam == null)
                 {
-                    cam = new GameObject("Camera Canvas Pointer (I AM CREATED AT RUNTIME FOR UI CANVAS INTERACTION, I AM NOT RENDERING ANYTHING, I AM NOT CREATING ADDITIONAL OVERHEAD)").AddComponent<Camera>();
+                    cam = new GameObject(
+                            "Camera Canvas Pointer (I AM CREATED AT RUNTIME FOR UI CANVAS INTERACTION, I AM NOT RENDERING ANYTHING, I AM NOT CREATING ADDITIONAL OVERHEAD)")
+                        .AddComponent<Camera>();
                     cam.clearFlags = CameraClearFlags.Nothing;
                     cam.stereoTargetEye = StereoTargetEyeMask.None;
                     cam.orthographic = true;
@@ -75,14 +78,15 @@ namespace Autohand
                         if (canvas.renderMode == RenderMode.WorldSpace)
                             canvas.worldCamera = cam;
                 }
+
                 return cam;
             }
         }
+
         int pointerIndex;
 
         void OnEnable()
         {
-
             lineRenderer.positionCount = (int)lineSegements;
             if (inputModule.Instance != null)
                 pointerIndex = inputModule.Instance.AddPointer(this);
@@ -91,7 +95,7 @@ namespace Autohand
 
         void OnDisable()
         {
-            if(inputModule) inputModule.Instance?.RemovePointer(this);
+            if (inputModule) inputModule.Instance?.RemovePointer(this);
         }
 
         public void SetIndex(int index)
@@ -108,7 +112,7 @@ namespace Autohand
         public void Press()
         {
             // Handle the UI events
-            if(inputModule) inputModule.ProcessPress(pointerIndex);
+            if (inputModule) inputModule.ProcessPress(pointerIndex);
 
             // Show the ray when they attemp to press
             if (!autoShowTarget && hover) ShowRay(true);
@@ -121,7 +125,9 @@ namespace Autohand
             else
             {
                 PointerEventData data = inputModule.GetData(pointerIndex);
-                float targetLength = data.pointerCurrentRaycast.distance == 0 ? raycastLength : data.pointerCurrentRaycast.distance;
+                float targetLength = data.pointerCurrentRaycast.distance == 0
+                    ? raycastLength
+                    : data.pointerCurrentRaycast.distance;
                 StartSelect?.Invoke(transform.position + (transform.forward * targetLength), null);
             }
         }
@@ -129,7 +135,7 @@ namespace Autohand
         public void Release()
         {
             // Handle the UI events
-            if(inputModule) inputModule.ProcessRelease(pointerIndex);
+            if (inputModule) inputModule.ProcessRelease(pointerIndex);
 
             if (lastHit.collider != null)
             {
@@ -139,10 +145,18 @@ namespace Autohand
             else
             {
                 PointerEventData data = inputModule.GetData(pointerIndex);
-                float targetLength = data.pointerCurrentRaycast.distance == 0 ? raycastLength : data.pointerCurrentRaycast.distance;
+                float targetLength = data.pointerCurrentRaycast.distance == 0
+                    ? raycastLength
+                    : data.pointerCurrentRaycast.distance;
                 StopSelect?.Invoke(transform.position + (transform.forward * targetLength), null);
             }
+        }
 
+        public void OnNewScene()
+        {
+            Awake();
+            Preprocess();
+            OnEnable();
         }
 
         private void Awake()
@@ -159,14 +173,21 @@ namespace Autohand
                 else if (!(inputModule = FindObjectOfType<AutoInputModule>()))
                 {
                     EventSystem system = FindObjectOfType<EventSystem>();
-                    if(system == null) {
+                    if (system == null)
+                    {
                         system = new GameObject().AddComponent<EventSystem>();
                         system.name = "UI Input Event System";
                     }
+
                     inputModule = system.gameObject.AddComponent<AutoInputModule>();
                     inputModule.transform.parent = AutoHandExtensions.transformParent;
                 }
             }
+        }
+
+        private void Start()
+        {
+            SceneTransitioner.Instance.OnSceneChanged += OnNewScene;
         }
 
         private void Update()
@@ -177,7 +198,9 @@ namespace Autohand
         private void UpdateLine()
         {
             PointerEventData data = inputModule.GetData(pointerIndex);
-            float targetLength = data.pointerCurrentRaycast.distance == 0 ? raycastLength : data.pointerCurrentRaycast.distance;
+            float targetLength = data.pointerCurrentRaycast.distance == 0
+                ? raycastLength
+                : data.pointerCurrentRaycast.distance;
 
             if (targetLength > 0)
                 _currTarget = data.pointerCurrentRaycast.gameObject;
@@ -219,25 +242,28 @@ namespace Autohand
                 hover = false;
             }
 
-            if(hover) {
+            if (hover)
+            {
                 lastHit = CreateRaycast(targetLength);
 
                 Vector3 endPosition = transform.position + (transform.forward * targetLength);
 
-                if(lastHit.collider) endPosition = lastHit.point;
+                if (lastHit.collider) endPosition = lastHit.point;
 
                 //Handle the hitmarker
                 hitPointMarker.transform.position = endPosition;
                 hitPointMarker.transform.forward = data.pointerCurrentRaycast.worldNormal;
 
-                if(lastHit.collider) {
+                if (lastHit.collider)
+                {
                     hitPointMarker.transform.forward = lastHit.collider.transform.forward;
                     hitPointMarker.transform.position = endPosition + hitPointMarker.transform.forward * 0.002f;
                 }
 
                 //Handle the line renderer
-                for(int i = 0; i < lineSegements; i++) {
-                    lineRenderer.SetPosition(i, Vector3.Lerp(transform.position, endPosition, i/ lineSegements));
+                for (int i = 0; i < lineSegements; i++)
+                {
+                    lineRenderer.SetPosition(i, Vector3.Lerp(transform.position, endPosition, i / lineSegements));
                 }
             }
         }
@@ -256,6 +282,5 @@ namespace Autohand
             hitPointMarker.SetActive(show);
             lineRenderer.enabled = show;
         }
-
     }
 }

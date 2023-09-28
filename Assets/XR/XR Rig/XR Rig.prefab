@@ -10977,6 +10977,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7292963240484694954}
   - component: {fileID: 7916534086470339118}
+  - component: {fileID: 5452786011085727098}
   m_Layer: 0
   m_Name: XR Rig
   m_TagString: Untagged
@@ -11041,6 +11042,18 @@ MonoBehaviour:
     - PICO
     position: {x: 0.005, y: -0.016, z: 0.014}
     rotation: {x: 16, y: -2, z: 15}
+--- !u!114 &5452786011085727098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7292963240484694957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71bbf794b87de544b9645fd47638a24a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7292963240559256168
 GameObject:
   m_ObjectHideFlags: 0
@@ -12285,6 +12298,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 165222653978168725, guid: 386242486c5972145be957989b61c7df,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 165222653978168726, guid: 386242486c5972145be957989b61c7df,
         type: 3}
       propertyPath: buffer
@@ -12510,6 +12528,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 371269585037716189, guid: 386242486c5972145be957989b61c7df,
+        type: 3}
+      propertyPath: link
+      value: 
+      objectReference: {fileID: 7292963239043039324}
     - target: {fileID: 492640576310161498, guid: 386242486c5972145be957989b61c7df,
         type: 3}
       propertyPath: m_Layer
@@ -12793,7 +12816,7 @@ PrefabInstance:
     - target: {fileID: 1982879836239456625, guid: 386242486c5972145be957989b61c7df,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2218293816570526395, guid: 386242486c5972145be957989b61c7df,
         type: 3}
