@@ -1,88 +1,43 @@
-﻿using System;
-using Autohand;
+﻿using Autohand;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Options
 {
     public class OptionsManager : MonoBehaviour
     {
-        public static OptionsManager Instance;
-
-        private XROptions _options;
-
         private void Awake()
         {
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
-
-            _options = new XROptions(AutoHandPlayer.Instance);
-
             if (PlayerPrefs.HasKey(Constants.PlayerPrefsNames.Turn))
-                _options.turn = PlayerPrefs.GetInt(Constants.PlayerPrefsNames.Turn);
+                AutoHandPlayer.Instance.rotationType = (RotationType)PlayerPrefs.GetInt(Constants.PlayerPrefsNames.Turn);
 
-            if (PlayerPrefs.HasKey(Constants.PlayerPrefsNames.TurnSpeed))
-                _options.turnSpeed = PlayerPrefs.GetFloat(Constants.PlayerPrefsNames.TurnSpeed);
-
-            if (PlayerPrefs.HasKey(Constants.PlayerPrefsNames.SnapTurnAngle))
-                _options.snapTurnAngle = PlayerPrefs.GetFloat(Constants.PlayerPrefsNames.SnapTurnAngle);
-
-            DontDestroyOnLoad(gameObject);
-        }
-
-        public void SetOptions()
-        {
-            SetTurnOption();
-            SetTurnSpeed();
-            SetSnapTurnAngle();
-        }
-
-        public void SetTurnOption()
-        {
-            AutoHandPlayer.Instance.rotationType = _options.turn switch
-            {
-                1 => RotationType.smooth,
-                _ => RotationType.snap
-            };
-        }
-
-        public void SetTurnSpeed()
-        {
             if (PlayerPrefs.HasKey(Constants.PlayerPrefsNames.TurnSpeed))
                 AutoHandPlayer.Instance.smoothTurnSpeed = PlayerPrefs.GetFloat(Constants.PlayerPrefsNames.TurnSpeed);
-        }
 
-        public void SetSnapTurnAngle()
-        {
             if (PlayerPrefs.HasKey(Constants.PlayerPrefsNames.SnapTurnAngle))
                 AutoHandPlayer.Instance.snapTurnAngle = PlayerPrefs.GetFloat(Constants.PlayerPrefsNames.SnapTurnAngle);
         }
 
-        private void OnDestroy()
+        public static void SetTurnOption(RotationType value)
         {
-            PlayerPrefs.SetFloat(Constants.PlayerPrefsNames.Turn, _options.turn);
-            PlayerPrefs.SetFloat(Constants.PlayerPrefsNames.TurnSpeed, _options.turnSpeed);
-            PlayerPrefs.SetFloat(Constants.PlayerPrefsNames.SnapTurnAngle, _options.snapTurnAngle);
-            PlayerPrefs.Save();
+            AutoHandPlayer.Instance.rotationType = value;
+            PlayerPrefs.SetInt(Constants.PlayerPrefsNames.Turn, (int)value);
         }
-    }
 
-    internal struct XROptions
-    {
-        public int turn;
-        public float turnSpeed;
-        public float snapTurnAngle;
-
-        public XROptions(AutoHandPlayer instance)
+        public static void SetTurnSpeed(float smoothTurnSpeed)
         {
-            turn = (int) instance.rotationType;
-            turnSpeed = instance.smoothTurnSpeed;
-            snapTurnAngle = instance.snapTurnAngle;
+            AutoHandPlayer.Instance.smoothTurnSpeed = smoothTurnSpeed;
+            PlayerPrefs.SetFloat(Constants.PlayerPrefsNames.TurnSpeed, smoothTurnSpeed);
+        }
+
+        public static void SetSnapTurnAngle(float snapTurnAngle)
+        {
+            AutoHandPlayer.Instance.snapTurnAngle = snapTurnAngle;
+            PlayerPrefs.SetFloat(Constants.PlayerPrefsNames.SnapTurnAngle, snapTurnAngle);
+        }
+
+        public static void SaveToPlayerPrefs()
+        {
+            PlayerPrefs.Save();
         }
     }
 }

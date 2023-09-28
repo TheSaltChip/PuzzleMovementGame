@@ -75,7 +75,6 @@ namespace SceneTransition
 
         private IEnumerator Enter()
         {
-            OptionsManager.Instance.SetOptions();
             yield return StartCoroutine(_activeTransition.Enter(_transitionCanvas));
             _transitionCanvas.enabled = false;
             _loadLevelOperation = null;
