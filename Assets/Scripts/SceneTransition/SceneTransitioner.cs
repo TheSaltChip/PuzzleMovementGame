@@ -84,6 +84,7 @@ namespace SceneTransition
 
         private void HandleSceneChange(Scene oldScene, Scene newScene)
         {
+            AutoHandPlayer.Instance.SetPosition(Vector3.zero);
             OnSceneChanged?.Invoke();
             if (_activeTransition != null)
             {
