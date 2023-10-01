@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using Autohand;
-using Options;
-using SceneTransition.TransitionScriptableObject;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace SceneTransition
 {
-    [DisallowMultipleComponent, RequireComponent(typeof(Canvas))]
+    [DisallowMultipleComponent]
     public class SceneTransitioner : MonoBehaviour
     {
         public static SceneTransitioner Instance { get; private set; }
 
-        [SerializeField] private List<Transition> transitions = new();
-
         public event UnityAction OnSceneChanged;
+        public event UnityAction OnSceneExit;
+        public event UnityAction OnSceneEnter;
+
+        public delegate IEnumerator SceneEventCoroutineHandler();
+        public event SceneEventCoroutineHandler OnSceneExitCoroutine;
+        public event SceneEventCoroutineHandler OnSceneEnterCoroutine;
         
-        private Canvas _transitionCanvas;
 
         private AsyncOperation _loadLevelOperation;
-        private AbstractSceneTransitionScriptableObject _activeTransition;
 
         private void Awake()
         {
@@ -38,64 +36,43 @@ namespace SceneTransition
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
-
-            _transitionCanvas = GetComponent<Canvas>();
-            _transitionCanvas.enabled = false;
         }
 
 
         public void LoadScene(string sceneName,
-            SceneTransitionMode transitionMode = SceneTransitionMode.None,
             LoadSceneMode sceneMode = LoadSceneMode.Single)
         {
             _loadLevelOperation = SceneManager.LoadSceneAsync(sceneName, sceneMode);
-
-            var transition = transitions.Find(t => t.mode == transitionMode);
-
-            if (transition == null)
-            {
-                Debug.LogWarning($"No transition found for TransitionMode {transitionMode}! " +
-                                 $"Maybe you are missing a configuration?");
-                return;
-            }
-
             _loadLevelOperation.allowSceneActivation = false;
-            _transitionCanvas.enabled = true;
-            _activeTransition = transition.animationSO;
+            
             StartCoroutine(Exit());
         }
 
 
         private IEnumerator Exit()
         {
-            yield return StartCoroutine(_activeTransition.Exit(_transitionCanvas));
+            OnSceneExit?.Invoke();
+            if (OnSceneExitCoroutine != null) 
+                yield return StartCoroutine(OnSceneExitCoroutine());
             
             _loadLevelOperation.allowSceneActivation = true;
         }
 
         private IEnumerator Enter()
         {
-            yield return StartCoroutine(_activeTransition.Enter(_transitionCanvas));
-            _transitionCanvas.enabled = false;
+            OnSceneEnter?.Invoke();
+            if (OnSceneEnterCoroutine != null) 
+                yield return StartCoroutine(OnSceneEnterCoroutine());
+            
             _loadLevelOperation = null;
-            _activeTransition = null;
         }
 
         private void HandleSceneChange(Scene oldScene, Scene newScene)
         {
             AutoHandPlayer.Instance.SetPosition(Vector3.zero);
             OnSceneChanged?.Invoke();
-            if (_activeTransition != null)
-            {
-                StartCoroutine(Enter());
-            }
-        }
-    }
 
-    [Serializable]
-    public class Transition
-    {
-        public SceneTransitionMode mode;
-        public AbstractSceneTransitionScriptableObject animationSO;
+            StartCoroutine( Enter());
+        }
     }
 }
