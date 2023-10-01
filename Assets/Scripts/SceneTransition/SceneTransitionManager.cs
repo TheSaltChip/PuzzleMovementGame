@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 namespace SceneTransition
 {
     [DisallowMultipleComponent]
-    public class SceneTransitioner : MonoBehaviour
+    public class SceneTransitionManager : MonoBehaviour
     {
-        public static SceneTransitioner Instance { get; private set; }
+        public static SceneTransitionManager Instance { get; private set; }
 
         public event UnityAction OnSceneChanged;
         public event UnityAction OnSceneExit;
