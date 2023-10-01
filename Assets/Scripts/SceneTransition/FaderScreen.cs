@@ -17,16 +17,26 @@ namespace SceneTransition
             _renderer = GetComponent<Renderer>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            SceneTransitioner.Instance.OnSceneExitCoroutine += FadeIn;
-            SceneTransitioner.Instance.OnSceneEnterCoroutine += FadeOut;
+            StartCoroutine(Init());
+        }
+
+        private IEnumerator Init()
+        {
+            while (SceneTransitionManager.Instance == null)
+            {
+                yield return null;
+            }
+            
+            SceneTransitionManager.Instance.OnSceneExitCoroutine += FadeIn;
+            SceneTransitionManager.Instance.OnSceneEnterCoroutine += FadeOut;
         }
 
         private void OnDisable()
         {
-            SceneTransitioner.Instance.OnSceneExitCoroutine -= FadeIn;
-            SceneTransitioner.Instance.OnSceneEnterCoroutine -= FadeOut;
+            SceneTransitionManager.Instance.OnSceneExitCoroutine -= FadeIn;
+            SceneTransitionManager.Instance.OnSceneEnterCoroutine -= FadeOut;
         }
 
         private IEnumerator FadeIn()
