@@ -44,7 +44,7 @@ public class GameStartMenu : MonoBehaviour
     public void StartGame()
     {
         HideAll();
-        SceneTransitioner.Instance.LoadScene("2 Game Scene");
+        SceneTransitionManager.Instance.LoadScene("2 Game Scene");
     }
 
     public void HideAll()
