@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using SceneTransition;
 using TMPro;
 using UnityEngine;
@@ -31,7 +32,11 @@ public class WristMenu : MonoBehaviour
 
         for (var i = 1; i < sceneCount; i++)
         {
-            var sceneName = SceneUtility.GetScenePathByBuildIndex(i);
+            var sceneName = SceneUtility.GetScenePathByBuildIndex(i)
+                .Split('/')
+                .Last()
+                .Split('.')[0];
+            
             optionDataList.Add(new TMP_Dropdown.OptionData(sceneName));
         }
 
