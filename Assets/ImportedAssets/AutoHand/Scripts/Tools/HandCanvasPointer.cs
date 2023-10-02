@@ -96,6 +96,9 @@ namespace Autohand
         void OnDisable()
         {
             if (inputModule) inputModule.Instance?.RemovePointer(this);
+            
+            SceneTransitionManager.Instance.OnSceneExit -= HideRay;
+            SceneTransitionManager.Instance.OnSceneChanged -= OnNewScene;
         }
 
         public void SetIndex(int index)
@@ -187,7 +190,8 @@ namespace Autohand
 
         private void Start()
         {
-            SceneTransitioner.Instance.OnSceneChanged += OnNewScene;
+            SceneTransitionManager.Instance.OnSceneExit += HideRay;
+            SceneTransitionManager.Instance.OnSceneChanged += OnNewScene;
         }
 
         private void Update()
@@ -281,6 +285,11 @@ namespace Autohand
         {
             hitPointMarker.SetActive(show);
             lineRenderer.enabled = show;
+        }
+
+        private void HideRay()
+        {
+            ShowRay(false);
         }
     }
 }

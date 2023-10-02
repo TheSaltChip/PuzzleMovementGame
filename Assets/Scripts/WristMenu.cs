@@ -19,7 +19,7 @@ public class WristMenu : MonoBehaviour
 
     public void ChangeScene()
     {
-        SceneTransitioner.Instance.LoadScene(dropdown.options[dropdown.value].text, SceneTransitionMode.Fade);
+        SceneTransitionManager.Instance.LoadScene(dropdown.options[dropdown.value].text);
     }
 
     void Start()
@@ -32,7 +32,7 @@ public class WristMenu : MonoBehaviour
         var sceneCount = SceneManager.sceneCountInBuildSettings;
         var optionDataList = new List<TMP_Dropdown.OptionData>();
 
-        for (var i = 0; i < sceneCount; i++)
+        for (var i = 1; i < sceneCount; i++)
         {
             var sceneName = SceneUtility.GetScenePathByBuildIndex(i);
             optionDataList.Add(new TMP_Dropdown.OptionData(sceneName));
