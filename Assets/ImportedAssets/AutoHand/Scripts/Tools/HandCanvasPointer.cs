@@ -97,8 +97,8 @@ namespace Autohand
         {
             if (inputModule) inputModule.Instance?.RemovePointer(this);
             
-            SceneTransitionManager.Instance.OnSceneExit -= HideRay;
-            SceneTransitionManager.Instance.OnSceneChanged -= OnNewScene;
+            SceneTransitionManager.Instance.OnSceneExit.RemoveListener(HideRay);
+            SceneTransitionManager.Instance.OnSceneChanged.RemoveListener(OnNewScene);
         }
 
         public void SetIndex(int index)
@@ -190,8 +190,8 @@ namespace Autohand
 
         private void Start()
         {
-            SceneTransitionManager.Instance.OnSceneExit += HideRay;
-            SceneTransitionManager.Instance.OnSceneChanged += OnNewScene;
+            SceneTransitionManager.Instance.OnSceneExit.AddListener(HideRay);
+            SceneTransitionManager.Instance.OnSceneChanged.AddListener(OnNewScene);
         }
 
         private void Update()

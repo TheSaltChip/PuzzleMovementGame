@@ -10,8 +10,7 @@ namespace SceneTransition
     public class SceneTransitionManager : MonoBehaviour
     {
         public delegate IEnumerator SceneEventCoroutineHandler();
-
-
+        
         private AsyncOperation _loadLevelOperation;
         public static SceneTransitionManager Instance { get; private set; }
 
@@ -27,13 +26,18 @@ namespace SceneTransition
 
             SceneManager.activeSceneChanged += HandleSceneChange;
 
+            OnSceneChanged = new UnityEvent();
+            OnSceneExit = new UnityEvent();
+            OnSceneEnter = new UnityEvent();
+
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
 
-        public event UnityAction OnSceneChanged;
-        public event UnityAction OnSceneExit;
-        public event UnityAction OnSceneEnter;
+        public UnityEvent OnSceneChanged;
+        public UnityEvent OnSceneExit;
+        public UnityEvent OnSceneEnter;
+        
         public event SceneEventCoroutineHandler OnSceneExitCoroutine;
         public event SceneEventCoroutineHandler OnSceneEnterCoroutine;
 
