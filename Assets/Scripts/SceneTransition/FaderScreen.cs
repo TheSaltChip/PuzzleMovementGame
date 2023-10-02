@@ -29,7 +29,7 @@ namespace SceneTransition
 
         private IEnumerator Init()
         {
-            while (SceneTransitionManager.Instance == null) yield return null;
+            yield return new WaitUntil(() => SceneTransitionManager.Instance != null);
 
             SceneTransitionManager.Instance.OnSceneExitCoroutine += FadeIn;
             SceneTransitionManager.Instance.OnSceneEnterCoroutine += FadeOut;
