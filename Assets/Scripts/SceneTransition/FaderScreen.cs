@@ -6,11 +6,10 @@ namespace SceneTransition
     [RequireComponent(typeof(Renderer))]
     public class FaderScreen : MonoBehaviour
     {
+        private static readonly int Color1 = Shader.PropertyToID("_Color");
         public float animationTime = 0.5f;
 
         private Renderer _renderer;
-
-        private static readonly int Color1 = Shader.PropertyToID("_Color");
 
         private void Awake()
         {
@@ -22,21 +21,18 @@ namespace SceneTransition
             StartCoroutine(Init());
         }
 
-        private IEnumerator Init()
-        {
-            while (SceneTransitionManager.Instance == null)
-            {
-                yield return null;
-            }
-            
-            SceneTransitionManager.Instance.OnSceneExitCoroutine += FadeIn;
-            SceneTransitionManager.Instance.OnSceneEnterCoroutine += FadeOut;
-        }
-
         private void OnDisable()
         {
             SceneTransitionManager.Instance.OnSceneExitCoroutine -= FadeIn;
             SceneTransitionManager.Instance.OnSceneEnterCoroutine -= FadeOut;
+        }
+
+        private IEnumerator Init()
+        {
+            while (SceneTransitionManager.Instance == null) yield return null;
+
+            SceneTransitionManager.Instance.OnSceneExitCoroutine += FadeIn;
+            SceneTransitionManager.Instance.OnSceneEnterCoroutine += FadeOut;
         }
 
         private IEnumerator FadeIn()

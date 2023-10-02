@@ -1,4 +1,5 @@
 ﻿using Autohand;
+using Constants;
 using UnityEngine;
 
 namespace Options
@@ -7,32 +8,32 @@ namespace Options
     {
         private void Awake()
         {
-            if (PlayerPrefs.HasKey(Constants.PlayerPrefsNames.Turn))
-                AutoHandPlayer.Instance.rotationType = (RotationType)PlayerPrefs.GetInt(Constants.PlayerPrefsNames.Turn);
+            if (PlayerPrefs.HasKey(PlayerPrefsNames.Turn))
+                AutoHandPlayer.Instance.rotationType = (RotationType)PlayerPrefs.GetInt(PlayerPrefsNames.Turn);
 
-            if (PlayerPrefs.HasKey(Constants.PlayerPrefsNames.TurnSpeed))
-                AutoHandPlayer.Instance.smoothTurnSpeed = PlayerPrefs.GetFloat(Constants.PlayerPrefsNames.TurnSpeed);
+            if (PlayerPrefs.HasKey(PlayerPrefsNames.TurnSpeed))
+                AutoHandPlayer.Instance.smoothTurnSpeed = PlayerPrefs.GetFloat(PlayerPrefsNames.TurnSpeed);
 
-            if (PlayerPrefs.HasKey(Constants.PlayerPrefsNames.SnapTurnAngle))
-                AutoHandPlayer.Instance.snapTurnAngle = PlayerPrefs.GetFloat(Constants.PlayerPrefsNames.SnapTurnAngle);
+            if (PlayerPrefs.HasKey(PlayerPrefsNames.SnapTurnAngle))
+                AutoHandPlayer.Instance.snapTurnAngle = PlayerPrefs.GetFloat(PlayerPrefsNames.SnapTurnAngle);
         }
 
         public static void SetTurnOption(RotationType value)
         {
             AutoHandPlayer.Instance.rotationType = value;
-            PlayerPrefs.SetInt(Constants.PlayerPrefsNames.Turn, (int)value);
+            PlayerPrefs.SetInt(PlayerPrefsNames.Turn, (int)value);
         }
 
         public static void SetTurnSpeed(float smoothTurnSpeed)
         {
             AutoHandPlayer.Instance.smoothTurnSpeed = smoothTurnSpeed;
-            PlayerPrefs.SetFloat(Constants.PlayerPrefsNames.TurnSpeed, smoothTurnSpeed);
+            PlayerPrefs.SetFloat(PlayerPrefsNames.TurnSpeed, smoothTurnSpeed);
         }
 
         public static void SetSnapTurnAngle(float snapTurnAngle)
         {
             AutoHandPlayer.Instance.snapTurnAngle = snapTurnAngle;
-            PlayerPrefs.SetFloat(Constants.PlayerPrefsNames.SnapTurnAngle, snapTurnAngle);
+            PlayerPrefs.SetFloat(PlayerPrefsNames.SnapTurnAngle, snapTurnAngle);
         }
 
         public static void SaveToPlayerPrefs()

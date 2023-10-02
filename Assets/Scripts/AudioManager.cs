@@ -9,7 +9,7 @@ public class Sound
     public AudioClip clip;
     [Range(0, 1)] public float volume;
     [Range(-3, 3)] public float pitch;
-    public bool loop = false;
+    public bool loop;
     public AudioSource source;
 
     public Sound()
@@ -22,20 +22,19 @@ public class Sound
 
 public class AudioManager : MonoBehaviour
 {
-    public Sound[] sounds;
+    public static AudioManager Instance;
 
-    public static AudioManager instance;
-    //AudioManager
+    public Sound[] sounds;
 
     private void Awake()
     {
-        if (instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
 
-        instance = this;
+        Instance = this;
 
         DontDestroyOnLoad(gameObject);
 

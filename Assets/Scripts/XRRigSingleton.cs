@@ -3,7 +3,7 @@
 public class XRRigSingleton : MonoBehaviour
 {
     public static XRRigSingleton Instance { get; private set; }
-        
+
     private void Awake()
     {
         if (Instance != null)
@@ -13,8 +13,8 @@ public class XRRigSingleton : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-
 }

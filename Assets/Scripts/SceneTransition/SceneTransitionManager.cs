@@ -9,18 +9,11 @@ namespace SceneTransition
     [DisallowMultipleComponent]
     public class SceneTransitionManager : MonoBehaviour
     {
-        public static SceneTransitionManager Instance { get; private set; }
-
-        public event UnityAction OnSceneChanged;
-        public event UnityAction OnSceneExit;
-        public event UnityAction OnSceneEnter;
-
         public delegate IEnumerator SceneEventCoroutineHandler();
-        public event SceneEventCoroutineHandler OnSceneExitCoroutine;
-        public event SceneEventCoroutineHandler OnSceneEnterCoroutine;
-        
+
 
         private AsyncOperation _loadLevelOperation;
+        public static SceneTransitionManager Instance { get; private set; }
 
         private void Awake()
         {
@@ -38,13 +31,19 @@ namespace SceneTransition
             DontDestroyOnLoad(gameObject);
         }
 
+        public event UnityAction OnSceneChanged;
+        public event UnityAction OnSceneExit;
+        public event UnityAction OnSceneEnter;
+        public event SceneEventCoroutineHandler OnSceneExitCoroutine;
+        public event SceneEventCoroutineHandler OnSceneEnterCoroutine;
+
 
         public void LoadScene(string sceneName,
             LoadSceneMode sceneMode = LoadSceneMode.Single)
         {
             _loadLevelOperation = SceneManager.LoadSceneAsync(sceneName, sceneMode);
             _loadLevelOperation.allowSceneActivation = false;
-            
+
             StartCoroutine(Exit());
         }
 
@@ -52,18 +51,18 @@ namespace SceneTransition
         private IEnumerator Exit()
         {
             OnSceneExit?.Invoke();
-            if (OnSceneExitCoroutine != null) 
+            if (OnSceneExitCoroutine != null)
                 yield return StartCoroutine(OnSceneExitCoroutine());
-            
+
             _loadLevelOperation.allowSceneActivation = true;
         }
 
         private IEnumerator Enter()
         {
             OnSceneEnter?.Invoke();
-            if (OnSceneEnterCoroutine != null) 
+            if (OnSceneEnterCoroutine != null)
                 yield return StartCoroutine(OnSceneEnterCoroutine());
-            
+
             _loadLevelOperation = null;
         }
 
@@ -72,7 +71,7 @@ namespace SceneTransition
             AutoHandPlayer.Instance.SetPosition(Vector3.zero);
             OnSceneChanged?.Invoke();
 
-            StartCoroutine( Enter());
+            StartCoroutine(Enter());
         }
     }
 }

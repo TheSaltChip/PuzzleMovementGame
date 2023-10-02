@@ -1,16 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
 using SceneTransition;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class WristMenu : MonoBehaviour
 {
     [SerializeField] private GameObject canvas;
     [SerializeField] private TMP_Dropdown dropdown;
+
+    private void Start()
+    {
+        ListScenes();
+    }
 
     public void OpenCloseMenu()
     {
@@ -20,11 +22,6 @@ public class WristMenu : MonoBehaviour
     public void ChangeScene()
     {
         SceneTransitionManager.Instance.LoadScene(dropdown.options[dropdown.value].text);
-    }
-
-    void Start()
-    {
-        ListScenes();
     }
 
     private void ListScenes()
