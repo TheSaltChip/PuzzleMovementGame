@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.XR.CoreUtils;
+using Autohand;
+using Constants;
+using Options;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class SetOptionFromUI : MonoBehaviour
 {
-    public Scrollbar volumeSlider;
-    public TMPro.TMP_Dropdown turnDropdown;
-    public SetTurnTypeFromPlayerPref turnTypeFromPlayerPref;
+    public Slider volumeSlider;
+    public TMP_Dropdown turnDropdown;
+    public Button confirmButton;
 
     private void Start()
     {
         volumeSlider.onValueChanged.AddListener(SetGlobalVolume);
         turnDropdown.onValueChanged.AddListener(SetTurnPlayerPref);
+        confirmButton.onClick.AddListener(OptionsManager.SaveToPlayerPrefs);
 
-        if (PlayerPrefs.HasKey("turn"))
-            turnDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt("turn"));
+        if (PlayerPrefs.HasKey(PlayerPrefsNames.Turn))
+            turnDropdown.SetValueWithoutNotify(PlayerPrefs.GetInt(PlayerPrefsNames.Turn));
     }
 
     public void SetGlobalVolume(float value)
@@ -27,7 +28,16 @@ public class SetOptionFromUI : MonoBehaviour
 
     public void SetTurnPlayerPref(int value)
     {
-        PlayerPrefs.SetInt("turn", value); 
-        turnTypeFromPlayerPref.ApplyPlayerPref();
+        OptionsManager.SetTurnOption((RotationType)value);
+    }
+
+    public void SetTurnSpeedPlayerPref(float value)
+    {
+        OptionsManager.SetTurnSpeed(value);
+    }
+
+    public void SetSnapTurnAnglePlayerPref(float value)
+    {
+        OptionsManager.SetSnapTurnAngle(value);
     }
 }
