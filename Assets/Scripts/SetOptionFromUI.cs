@@ -4,24 +4,26 @@ using Autohand;
 using Options;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class SetOptionFromUI : MonoBehaviour
 {
-    [SerializeField] private int SnapTurnConstant = 15;
-    [SerializeField] private int SmoothTurnConstant = 5;
+    [SerializeField] private int snapTurnFactor = 15;
+    [SerializeField] private int smoothTurnFactor = 5;
 
-    public Slider volumeSlider;
+    [SerializeField] private Slider volumeSlider;
 
-    public TMP_Dropdown turnDropdown;
+    [SerializeField] private TMP_Dropdown turnDropdown;
 
-    public Slider smoothTurnSpeedSlider;
-    public Slider snapTurnAngleSlider;
+    [SerializeField] private Slider smoothTurnSpeedSlider;
+    [SerializeField] private Slider snapTurnAngleSlider;
 
-    public Button confirmButton;
+    [SerializeField] private Button confirmButton;
 
     private void Start()
     {
+        print("Hello");
         volumeSlider.onValueChanged.AddListener(SetGlobalVolume);
         turnDropdown.onValueChanged.AddListener(SetTurnPlayerPref);
 
@@ -31,11 +33,23 @@ public class SetOptionFromUI : MonoBehaviour
 
         turnDropdown.SetValueWithoutNotify((int)rotationType);
 
-        snapTurnAngleSlider.value = OptionsManager.SnapAngle / SnapTurnConstant;
+        snapTurnAngleSlider.value = OptionsManager.SnapAngle / snapTurnFactor;
         snapTurnAngleSlider.onValueChanged.AddListener(SetSnapTurnAnglePlayer);
 
-        smoothTurnSpeedSlider.value = OptionsManager.TurnSpeed / SmoothTurnConstant;
+        smoothTurnSpeedSlider.value = OptionsManager.TurnSpeed / smoothTurnFactor;
         smoothTurnSpeedSlider.onValueChanged.AddListener(SetTurnSpeedPlayer);
+
+        switch (rotationType)
+        {
+            case RotationType.snap:
+                smoothTurnSpeedSlider.gameObject.SetActive(false);
+                break;
+            case RotationType.smooth:
+                snapTurnAngleSlider.gameObject.SetActive(false);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     public void SetGlobalVolume(float value)
@@ -66,11 +80,11 @@ public class SetOptionFromUI : MonoBehaviour
 
     private void SetTurnSpeedPlayer(float value)
     {
-        OptionsManager.SetTurnSpeed(value * SmoothTurnConstant);
+        OptionsManager.SetTurnSpeed(value * smoothTurnFactor);
     }
 
     private void SetSnapTurnAnglePlayer(float value)
     {
-        OptionsManager.SetSnapTurnAngle(value * SnapTurnConstant);
+        OptionsManager.SetSnapTurnAngle(value * snapTurnFactor);
     }
 }
