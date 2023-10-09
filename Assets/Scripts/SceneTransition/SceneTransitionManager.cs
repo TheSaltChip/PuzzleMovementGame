@@ -10,9 +10,16 @@ namespace SceneTransition
     public class SceneTransitionManager : MonoBehaviour
     {
         public delegate IEnumerator SceneEventCoroutineHandler();
-        
+
         private AsyncOperation _loadLevelOperation;
         public static SceneTransitionManager Instance { get; private set; }
+
+        public UnityEvent OnSceneChanged;
+        public UnityEvent OnSceneExit;
+        public UnityEvent OnSceneEnter;
+
+        public event SceneEventCoroutineHandler OnSceneExitCoroutine;
+        public event SceneEventCoroutineHandler OnSceneEnterCoroutine;
 
         private void Awake()
         {
@@ -33,14 +40,6 @@ namespace SceneTransition
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-
-        public UnityEvent OnSceneChanged;
-        public UnityEvent OnSceneExit;
-        public UnityEvent OnSceneEnter;
-        
-        public event SceneEventCoroutineHandler OnSceneExitCoroutine;
-        public event SceneEventCoroutineHandler OnSceneEnterCoroutine;
-
 
         public void LoadScene(string sceneName,
             LoadSceneMode sceneMode = LoadSceneMode.Single)
