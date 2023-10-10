@@ -40,5 +40,9 @@ namespace Options
         {
             PlayerPrefs.Save();
         }
+
+        public static RotationType RotationType => AutoHandPlayer.Instance.rotationType;
+        public static float TurnSpeed => AutoHandPlayer.Instance.smoothTurnSpeed;
+        public static float SnapAngle => AutoHandPlayer.Instance.snapTurnAngle;
     }
 }
