@@ -1,75 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Level.Completables
 {
-    [Serializable]
-    public class SequencedCompletableCollection : Completable
+    public class SequencedCompletableCollection : CompletableCollection
     {
-        [SerializeReference] private List<Completable> items;
-
-        private bool _isDone;
+        public UnityEvent OnFailedCheck;
+        
         private int _completedIndex;
-
-        public SequencedCompletableCollection(List<Completable> items)
-        {
-            this.items = items;
-        }
-
-        public override bool IsDone()
-        {
-            return _isDone;
-        }
 
         public override void ResetState()
         {
-            foreach (var completable in items)
-            {
-                completable.ResetState();
-            }
+            base.ResetState();
+            print("Reset sequenced collection state");
+            _completedIndex = 0;
         }
 
-        public bool CheckCompletion()
+        protected override void CheckCompletion()
         {
-            _isDone = true;
+            print("Sequenced Collection Check");
+
+            IsDone = true;
 
             for (var i = _completedIndex; i < items.Count; i++)
             {
-                if (items[i].IsDone())
+                if (items[i].IsDone)
                 {
                     _completedIndex = i;
                     continue;
                 }
 
-                _isDone = false;
+                IsDone = false;
+                print("Sequenced Collection false");
 
                 CheckRestOfList(i);
 
-                break;
+                return;
             }
-
-            return _isDone;
+            
+            OnCorrectCheck.Invoke();
+            print("Sequenced Collection true");
         }
 
         private void CheckRestOfList(int start)
         {
             for (var j = start; j < items.Count; j++)
             {
-                if (!items[j].IsDone()) continue;
+                if (!items[j].IsDone) continue;
 
-                ResetList();
-                break;
+                print("Sequenced Collection reset");
+                OnFailedCheck.Invoke();
+                ResetState();
+                return;
             }
-        }
-
-        public void ResetList()
-        {
-            _completedIndex = 0;
-            foreach (var item in items)
-            {
-                item.ResetState();
-            }
+            
+            OnIncompleteCheck.Invoke();
         }
     }
 }

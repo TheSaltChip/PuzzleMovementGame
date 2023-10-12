@@ -1,55 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Level.Completables
 {
-    [Serializable]
     public class CompletableCollection : Completable
     {
-        [SerializeReference] private List<Completable> items;
+        [SerializeReference] protected List<Completable> items;
 
-        private bool _isDone;
+        public UnityEvent OnResetList;
+        public UnityEvent OnCorrectCheck;
+        public UnityEvent OnIncompleteCheck;
 
-        public CompletableCollection(List<Completable> items)
+        protected void Awake()
         {
-            this.items = items;
-        }
-
-        public override bool IsDone()
-        {
-            return _isDone;
+            print("Hello");
+            foreach (var completable in items)
+            {
+                completable.OnDone += CheckCompletion;
+            }
         }
 
         public override void ResetState()
         {
+            IsDone = false;
+            print("Reset collection state");
             foreach (var completable in items)
             {
                 completable.ResetState();
             }
+            OnResetList.Invoke();
         }
 
-        public bool CheckCompletion()
+        protected virtual void CheckCompletion()
         {
-            _isDone = true;
+            print("Collection Check");
+            IsDone = true;
 
             for (var i = 0; i < items.Count; i++)
             {
-                if (items[i].IsDone()) continue;
+                if (items[i].IsDone) continue;
 
-                _isDone = false;
-                break;
+                print("Collection false");
+                IsDone = false;
+                OnIncompleteCheck.Invoke();
+                return;
             }
 
-            return _isDone;
-        }
-
-        public void ResetList()
-        {
-            foreach (var item in items)
-            {
-                item.ResetState();
-            }
+            print("Collection true");
+            OnCorrectCheck.Invoke();
         }
     }
 }
