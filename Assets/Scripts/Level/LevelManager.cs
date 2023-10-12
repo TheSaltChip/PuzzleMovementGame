@@ -11,8 +11,9 @@ namespace Level
 
         private void Update()
         {
-            if (task.IsDone())
+            if (task.IsDone)
             {
+                print("Done");
             }
         }
     }
