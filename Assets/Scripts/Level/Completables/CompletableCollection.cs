@@ -14,12 +14,20 @@ namespace Level.Completables
         public UnityEvent OnCorrectCheck;
         public UnityEvent OnIncompleteCheck;
 
-        protected void Awake()
+        protected void OnEnable()
         {
             print("Hello");
             foreach (var completable in items)
             {
                 completable.OnDone += CheckCompletion;
+            }
+        }
+
+        protected void OnDisable()
+        {
+            foreach (var completable in items)
+            {
+                completable.OnDone -= CheckCompletion;
             }
         }
 
