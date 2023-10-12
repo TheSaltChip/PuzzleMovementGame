@@ -13,24 +13,18 @@ namespace Utilities.Localization
 
         private void Start()
         {
-            dropdown.ClearOptions();
-            
-            var snap = options[0].text.GetLocalizedString();
-            var cont = options[1].text.GetLocalizedString();
-            
-            dropdown.AddOptions(new List<string>() {snap});
-            dropdown.AddOptions(new List<string>() {cont});
+            updateOptions();
         }
 
-        public void updateLocal()
+        public void updateOptions()
         {
             dropdown.ClearOptions();
-            
-            var snap = options[0].text.GetLocalizedString();
-            var cont = options[1].text.GetLocalizedString();
-            
-            dropdown.AddOptions(new List<string>() {snap});
-            dropdown.AddOptions(new List<string>() {cont});
+
+            foreach (var option in options)
+            {
+                var str = option.text.GetLocalizedString();
+                dropdown.AddOptions(new List<string>() {str});
+            }
         }
     }
 }
