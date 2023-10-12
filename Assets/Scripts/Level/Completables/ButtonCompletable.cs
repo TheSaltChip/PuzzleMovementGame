@@ -1,33 +1,44 @@
 ﻿using Autohand;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Level.Completables
 {
-    [RequireComponent(typeof(PhysicsGadgetButton))]
     public class ButtonCompletable : Completable
     {
         [SerializeField] private PhysicsGadgetButton button;
 
-        private bool _pressed;
+        public UnityEvent OnPressed;
 
         private void Awake()
         {
+            print("Button");
             button.OnPressed.AddListener(Pressed);
+            
+            button.OnPressed.AddListener(InvokeOnPressed);
+        }
+
+        private void InvokeOnPressed()
+        {
+            OnPressed.Invoke();
+        }
+
+        private void OnDisable()
+        {
+            button.OnPressed.RemoveListener(Pressed);
         }
 
         private void Pressed()
         {
-            _pressed = true;
-        }
-
-        public override bool IsDone()
-        {
-            return _pressed;
+            print("BUTTON PRESSED");
+            IsDone = true;
+            InvokeOnDone();
         }
 
         public override void ResetState()
         {
-            _pressed = false;
+            print("Reset button state");
+            IsDone = false;
         }
     }
 }
