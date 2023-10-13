@@ -10,16 +10,11 @@ namespace Level.Completables
     {
         [SerializeReference] protected List<Completable> items;
 
-        public UnityEvent OnResetList;
-        public UnityEvent OnCorrectCheck;
-        public UnityEvent OnIncompleteCheck;
-
         protected void OnEnable()
         {
-            print("Hello");
             foreach (var completable in items)
             {
-                completable.OnDone += CheckCompletion;
+                completable.OnDone.AddListener(CheckCompletion);
             }
         }
 
@@ -27,38 +22,33 @@ namespace Level.Completables
         {
             foreach (var completable in items)
             {
-                completable.OnDone -= CheckCompletion;
+                completable.OnDone.RemoveListener(CheckCompletion);
             }
         }
 
         public override void ResetState()
         {
             IsDone = false;
-            print("Reset collection state");
             foreach (var completable in items)
             {
                 completable.ResetState();
             }
-            OnResetList.Invoke();
+            OnResetState.Invoke();
         }
 
         protected virtual void CheckCompletion()
         {
-            print("Collection Check");
             IsDone = true;
 
             for (var i = 0; i < items.Count; i++)
             {
                 if (items[i].IsDone) continue;
-
-                print("Collection false");
                 IsDone = false;
                 OnIncompleteCheck.Invoke();
                 return;
             }
-
-            print("Collection true");
-            OnCorrectCheck.Invoke();
+            
+            OnDone.Invoke();
         }
     }
 }
