@@ -40,9 +40,9 @@ namespace Level.Completables
         {
             IsDone = true;
 
-            for (var i = 0; i < items.Count; i++)
+            foreach (var completable in items)
             {
-                if (items[i].IsDone) continue;
+                if (completable.IsDone) continue;
                 IsDone = false;
                 OnIncompleteCheck.Invoke();
                 return;
