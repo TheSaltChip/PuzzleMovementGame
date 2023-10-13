@@ -1,26 +1,28 @@
 ﻿using Autohand;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Level.Completables
 {
+    /// <summary>
+    /// A Completable that represents the completion state of a button press.
+    /// </summary>
     public class ButtonCompletable : Completable
     {
         [SerializeField] private PhysicsGadgetButton button;
 
-        public UnityEvent OnPressed;
-
-        private void Awake()
+        /// <summary>
+        /// Resets the state of the button completable, marking it as not done.
+        /// </summary>
+        public override void ResetState()
         {
-            print("Button");
-            button.OnPressed.AddListener(Pressed);
-            
-            button.OnPressed.AddListener(InvokeOnPressed);
+            IsDone = false;
         }
 
-        private void InvokeOnPressed()
+        private void OnEnable()
         {
-            OnPressed.Invoke();
+            button.OnPressed.AddListener(Pressed);
         }
 
         private void OnDisable()
@@ -30,15 +32,8 @@ namespace Level.Completables
 
         private void Pressed()
         {
-            print("BUTTON PRESSED");
             IsDone = true;
-            InvokeOnDone();
-        }
-
-        public override void ResetState()
-        {
-            print("Reset button state");
-            IsDone = false;
+            OnDone.Invoke();
         }
     }
 }
