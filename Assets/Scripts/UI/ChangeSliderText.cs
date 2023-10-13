@@ -1,10 +1,9 @@
-using System;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
 using Slider = UnityEngine.UI.Slider;
 
-namespace Options
+namespace UI
 {
     [RequireComponent(typeof(Slider))]
     public class ChangeSliderText : MonoBehaviour
