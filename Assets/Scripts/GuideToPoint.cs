@@ -28,13 +28,6 @@ public class GuideToPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_track)
-        {
-            transform.LookAt(_target);
-        }
-        else
-        {
-            transform.LookAt(origin);
-        }
+        transform.LookAt(_track ? _target : origin);
     }
 }
