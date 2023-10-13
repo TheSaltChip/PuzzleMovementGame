@@ -18,6 +18,7 @@ namespace Utilities.Localization
 
         public void updateOptions()
         {
+            var selected = dropdown.value;
             dropdown.ClearOptions();
 
             foreach (var option in options)
@@ -25,6 +26,8 @@ namespace Utilities.Localization
                 var str = option.text.GetLocalizedString();
                 dropdown.AddOptions(new List<string>() {str});
             }
+            
+            dropdown.SetValueWithoutNotify(selected);
         }
     }
 }
