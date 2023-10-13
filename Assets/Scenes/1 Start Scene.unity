@@ -3281,7 +3281,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 667788199}
         m_TargetAssemblyTypeName: Utilities.Localization.LocalizeDropdown, Assembly-CSharp
-        m_MethodName: updateOptions
+        m_MethodName: UpdateOptions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3291,7 +3291,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!114 &633310483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3304,7 +3304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a2834e28c8fccf478a2f0564e25faef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toggle: {fileID: 633310480}
+  active: {fileID: 633310482}
 --- !u!1 &667788193
 GameObject:
   m_ObjectHideFlags: 0
@@ -3318,7 +3318,6 @@ GameObject:
   - component: {fileID: 667788196}
   - component: {fileID: 667788195}
   - component: {fileID: 667788199}
-  - component: {fileID: 667788198}
   m_Layer: 5
   m_Name: Dropdown
   m_TagString: Untagged
@@ -3407,13 +3406,13 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 667788193}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 667788199}
+        m_TargetAssemblyTypeName: Utilities.Localization.LocalizeDropdown, Assembly-CSharp
+        m_MethodName: UpdateOptions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3458,18 +3457,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667788193}
   m_CullTransparentMesh: 0
---- !u!114 &667788198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667788193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abc8c40e6aeb06447ab0ba6f57a26ceb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &667788199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3848,7 +3835,7 @@ PrefabInstance:
     - target: {fileID: 7387125324240799344, guid: efebdf03cb1ccd043827e933755e413e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 122
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7387125324240799344, guid: efebdf03cb1ccd043827e933755e413e,
         type: 3}
@@ -4738,7 +4725,7 @@ PrefabInstance:
     - target: {fileID: 781630663273105846, guid: fcac0c3f142ea3742a0565751dec41de,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 262.09998
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 781630663273105846, guid: fcac0c3f142ea3742a0565751dec41de,
         type: 3}
@@ -4748,7 +4735,7 @@ PrefabInstance:
     - target: {fileID: 781630663273105846, guid: fcac0c3f142ea3742a0565751dec41de,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 147.04999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 781630663273105846, guid: fcac0c3f142ea3742a0565751dec41de,
         type: 3}
@@ -5544,7 +5531,7 @@ PrefabInstance:
     - target: {fileID: 6242851353689079636, guid: f9da24840c60a814295b88e6319d9f9c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 91
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6242851353689079636, guid: f9da24840c60a814295b88e6319d9f9c,
         type: 3}
@@ -9041,7 +9028,7 @@ PrefabInstance:
     - target: {fileID: 8107108474233336363, guid: 49e2fbde9521b4341879174df5a51b64,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 262.09998
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8107108474233336363, guid: 49e2fbde9521b4341879174df5a51b64,
         type: 3}
@@ -9051,7 +9038,7 @@ PrefabInstance:
     - target: {fileID: 8107108474233336363, guid: 49e2fbde9521b4341879174df5a51b64,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 147.04999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8107108474233336363, guid: 49e2fbde9521b4341879174df5a51b64,
         type: 3}
