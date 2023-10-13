@@ -11,22 +11,31 @@ namespace Utilities.Localization
         public List<LocalizedDropdownOption> options;
         [SerializeField] private TMP_Dropdown dropdown;
 
-        private void Start()
+        private List<string> _list;
+
+        private void Awake()
         {
-            updateOptions();
+            _list = new List<string>();
         }
 
-        public void updateOptions()
+        private void Start()
+        {
+            UpdateOptions();
+        }
+
+        public void UpdateOptions()
         {
             var selected = dropdown.value;
             dropdown.ClearOptions();
 
+            _list.Clear();
+            
             foreach (var option in options)
             {
-                var str = option.text.GetLocalizedString();
-                dropdown.AddOptions(new List<string>() {str});
+                _list.Add(option.text.GetLocalizedString());
             }
-            
+
+            dropdown.AddOptions(_list);
             dropdown.SetValueWithoutNotify(selected);
         }
     }
