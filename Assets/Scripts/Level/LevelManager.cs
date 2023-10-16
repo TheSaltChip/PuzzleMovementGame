@@ -9,13 +9,11 @@ namespace Level
     {
         [SerializeReference] private Completable task;
         private GameObject[] _pointsOfInterest;
-        private GuideToPoint _compassScript;
 
         void Start()
         {
-            _compassScript = GameObject.FindGameObjectWithTag("Compass").GetComponent<GuideToPoint>();
             _pointsOfInterest = GameObject.FindGameObjectsWithTag("Interest");
-            _compassScript.SetTarget(_pointsOfInterest[0].transform);
+            CompassSystem.Instance.SetTarget(_pointsOfInterest[0].transform);
         }
 
         private void Update()
