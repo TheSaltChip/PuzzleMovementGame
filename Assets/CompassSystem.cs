@@ -6,7 +6,7 @@ public class CompassSystem : MonoBehaviour
 {
     public static CompassSystem Instance { get; private set; }
 
-    [SerializeField] private GameObject needle;
+    [SerializeField] private GuideToPoint needle;
 
     private void Awake()
     {
@@ -24,6 +24,6 @@ public class CompassSystem : MonoBehaviour
 
     public void SetTarget(Transform target)
     {
-        needle.GetComponent<GuideToPoint>().SetTarget(target);
+        needle.SetTarget(target);
     }
 }

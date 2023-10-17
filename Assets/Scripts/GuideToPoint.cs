@@ -1,13 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 
 public class GuideToPoint : MonoBehaviour
 {
+    [SerializeField] private Rigidbody rb;
     private Transform _target;
     private bool _track = true;
-    private Transform _origin;
 
     public void SetTarget(Transform target)
     {
@@ -18,16 +20,18 @@ public class GuideToPoint : MonoBehaviour
     {
         _track = !_track;
     }
-    
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-        _origin = transform;
+        gameObject.layer = LayerMask.NameToLayer("CompassNeedle");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        transform.LookAt(_track ? _target : _origin);
+        Transform transform1;
+        
+        (transform1 = transform).LookAt(_target);
+        
+        rb.MoveRotation(Quaternion.LookRotation(transform1.forward));
     }
 }
