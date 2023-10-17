@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Autohand;
+using Level;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -71,7 +72,10 @@ namespace SceneTransition
 
         private void HandleSceneChange(Scene oldScene, Scene newScene)
         {
-            AutoHandPlayer.Instance.SetPosition(Vector3.zero);
+            AutoHandPlayer.Instance.SetPosition(
+                LevelManager.Instance.GetStartingPosition(),
+                LevelManager.Instance.GetStartingRotation());
+            
             OnSceneChanged?.Invoke();
 
             StartCoroutine(Enter());
