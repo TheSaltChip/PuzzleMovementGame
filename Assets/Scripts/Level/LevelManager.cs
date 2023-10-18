@@ -1,8 +1,6 @@
-﻿using System;
-using Autohand;
+﻿using Compass;
 using Level.Completables;
 using NaughtyAttributes;
-using SceneTransition;
 using UnityEngine;
 
 namespace Level
@@ -14,6 +12,8 @@ namespace Level
 
         public static LevelManager Instance { get; private set; }
 
+        private GameObject[] _pointsOfInterest;
+        
         private void Awake()
         {
             if (Instance != null)
@@ -25,6 +25,13 @@ namespace Level
             }
 
             Instance = this;
+        }
+
+
+        private void Start()
+        {
+            _pointsOfInterest = GameObject.FindGameObjectsWithTag("Interest");
+            CompassSystem.Instance.SetTarget(_pointsOfInterest[0].transform);
         }
 
         private void Update()

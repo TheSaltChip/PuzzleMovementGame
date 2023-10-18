@@ -1,29 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CompassSystem : MonoBehaviour
+namespace Compass
 {
-    public static CompassSystem Instance { get; private set; }
-
-    [SerializeField] private GuideToPoint needle;
-
-    private void Awake()
+    public class CompassSystem : MonoBehaviour
     {
-        if (Instance != null)
+        public static CompassSystem Instance { get; private set; }
+
+        [SerializeField] private GuideToPoint needle;
+
+        private void Awake()
         {
-            Debug.LogWarning(
-                $"Invalid configuration. Duplicate Instances found! First one: {Instance.name} Second one: {name}. Destroying second one.");
-            Destroy(gameObject);
-            return;
+            if (Instance != null)
+            {
+                Debug.LogWarning(
+                    $"Invalid configuration. Duplicate Instances found! First one: {Instance.name} Second one: {name}. Destroying second one.");
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
-    public void SetTarget(Transform target)
-    {
-        needle.SetTarget(target);
+        public void SetTarget(Transform target)
+        {
+            needle.SetTarget(target);
+        }
     }
 }
