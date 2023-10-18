@@ -1,6 +1,8 @@
-﻿
+﻿using System;
+using Autohand;
 using Level.Completables;
 using NaughtyAttributes;
+using SceneTransition;
 using UnityEngine;
 
 namespace Level
@@ -9,19 +11,8 @@ namespace Level
     {
         [SerializeField] private bool noTask;
         [SerializeReference, HideIf("noTask")] private Completable task;
-        [SerializeField] private Transform startingPosition;
 
         public static LevelManager Instance { get; private set; }
-        
-        public Vector3 GetStartingPosition()
-        {
-            return startingPosition.position;
-        }
-        
-        public Quaternion GetStartingRotation()
-        {
-            return startingPosition.rotation;
-        }
 
         private void Awake()
         {
@@ -34,15 +25,6 @@ namespace Level
             }
 
             Instance = this;
-        }
-
-        private void Start()
-        {
-            if (startingPosition != null) return;
-            
-            var go = GameObject.FindWithTag("SpawnPoint");
-
-            startingPosition = go == null ? transform : go.transform;
         }
 
         private void Update()
