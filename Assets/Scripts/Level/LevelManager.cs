@@ -1,16 +1,34 @@
-﻿using Level.Completables;
+﻿using Compass;
+using Level.Completables;
+using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 namespace Level
 {
     public class LevelManager : MonoBehaviour
     {
-        [SerializeReference] private Completable task;
-        private GameObject[] _pointsOfInterest;
+        [SerializeField] private bool noTask;
+        [SerializeReference, HideIf("noTask")] private Completable task;
 
-        void Start()
+        public static LevelManager Instance { get; private set; }
+
+        private GameObject[] _pointsOfInterest;
+        
+        private void Awake()
+        {
+            if (Instance != null)
+            {
+                Debug.LogWarning(
+                    $"Invalid configuration. Duplicate Instances found! First one: {Instance.name} Second one: {name}. Destroying second one.");
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+        }
+
+
+        private void Start()
         {
             _pointsOfInterest = GameObject.FindGameObjectsWithTag("Interest");
             CompassSystem.Instance.SetTarget(_pointsOfInterest[0].transform);
@@ -18,7 +36,7 @@ namespace Level
 
         private void Update()
         {
-            if (task.IsDone)
+            if (!noTask && task.IsDone)
             {
                 print("Done");
             }
