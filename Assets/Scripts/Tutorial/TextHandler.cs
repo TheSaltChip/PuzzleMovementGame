@@ -15,7 +15,7 @@ namespace DefaultNamespace
             texts[_i].ChangeActive(true);
         }
 
-        public (bool,string) NextText()
+        public (bool,bool) NextText()
         {
             texts[_i].ChangeActive(false);
             _i++;
@@ -24,7 +24,7 @@ namespace DefaultNamespace
             return (temp.IsLast(),temp.GetView());
         }
                 
-        public (bool,string) PreviousText()
+        public (bool,bool) PreviousText()
         {
             texts[_i].ChangeActive(false);
             _i--;

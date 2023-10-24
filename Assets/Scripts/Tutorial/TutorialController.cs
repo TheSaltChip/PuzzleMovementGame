@@ -23,7 +23,7 @@ public class TutorialController : MonoBehaviour
 
     public void NextText()
     {
-        (bool t,string str) = textHandler.NextText();
+        (bool t,bool str) = textHandler.NextText();
         if (t)
         {
             NextActive();
@@ -35,7 +35,7 @@ public class TutorialController : MonoBehaviour
 
     public void PreviousText()
     {
-        (bool t,string str) = textHandler.PreviousText();
+        (bool t,bool str) = textHandler.PreviousText();
         if (t)
         {
             PreviousActive();

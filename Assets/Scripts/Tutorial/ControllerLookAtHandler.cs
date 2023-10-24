@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ControllerLookAtHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject controllerL;
-    [SerializeField] private GameObject controllerR;
+    [SerializeField] private Transform controllerL;
+    [SerializeField] private Transform controllerR;
     [SerializeField] private Transform mockControllerRotation;
     private Quaternion _mockRotation;
 
@@ -15,23 +15,25 @@ public class ControllerLookAtHandler : MonoBehaviour
     void Start()
     {
         _mockRotation = mockControllerRotation.rotation;
+        _originalRotationL = controllerL.rotation;
+        _originalRotationR = controllerR.rotation;
     }
 
     private void SideView()
     {
-        controllerL.transform.rotation = _originalRotationL;
-        controllerR.transform.rotation = _originalRotationR;
+        controllerL.rotation = _originalRotationL;
+        controllerR.rotation = _originalRotationR;
     }
 
     private void TopView()
     {
-        controllerL.transform.rotation = _mockRotation;
-        controllerR.transform.rotation = _mockRotation;
+        controllerL.rotation = _mockRotation;
+        controllerR.rotation = _mockRotation;
     }
 
-    public void ChangeView(string view)
+    public void ChangeView(bool view)
     {
-        if (view.Equals("side"))
+        if (!view)
         {
             SideView();
         }

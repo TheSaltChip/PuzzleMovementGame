@@ -6,14 +6,19 @@ using UnityEngine;
 public class HighlightStore : MonoBehaviour
 {
     public static HighlightStore Instance { get; private set; }
-    private static Material _highlight;
+    private  Material _highlight;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
         _highlight = gameObject.GetComponent<Renderer>().material;
     }
 
-    public static Material GetMaterial()
+    public Material GetMaterial()
     {
         return _highlight;
     }
