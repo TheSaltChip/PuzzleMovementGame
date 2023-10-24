@@ -11,7 +11,20 @@ namespace SceneTransition
     {
         public delegate IEnumerator SceneEventCoroutineHandler();
 
+        private struct PosRot
+        {
+            public Vector3 Position;
+            public Quaternion Rotation;
+        }
+
+        private PosRot _startingPosRot = new ()
+        {
+            Position = new Vector3(0,0.5f,0),
+            Rotation = Quaternion.identity
+        };
+        
         private AsyncOperation _loadLevelOperation;
+        
         public static SceneTransitionManager Instance { get; private set; }
 
         public UnityEvent OnSceneChanged;
@@ -62,16 +75,36 @@ namespace SceneTransition
 
         private IEnumerator Enter()
         {
+            SetStartPositionAndRotation();
+
             OnSceneEnter?.Invoke();
+            
             if (OnSceneEnterCoroutine != null)
                 yield return StartCoroutine(OnSceneEnterCoroutine());
 
             _loadLevelOperation = null;
         }
 
+        private void SetStartPositionAndRotation()
+        {
+            var go = GameObject.FindWithTag("SpawnPoint");
+
+            if (go != null)
+            {
+                _startingPosRot = new PosRot()
+                {
+                    Position = go.transform.position,
+                    Rotation = go.transform.rotation
+                };
+            }
+
+            AutoHandPlayer.Instance.SetPosition(
+                _startingPosRot.Position,
+                _startingPosRot.Rotation);
+        }
+
         private void HandleSceneChange(Scene oldScene, Scene newScene)
         {
-            AutoHandPlayer.Instance.SetPosition(Vector3.zero);
             OnSceneChanged?.Invoke();
 
             StartCoroutine(Enter());
