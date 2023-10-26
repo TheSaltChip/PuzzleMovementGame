@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Audio;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -16,15 +17,17 @@ namespace Level.Completables.ColorRecognition
 
         private List<ColorButtonCompletable> _buttons;
         private List<int> _pattern;
+        private int _patternIndex;
+
+        private int[] _isInPattern;
 
         private void Awake()
         {
             _pattern = new List<int>();
+
             _buttons = new List<ColorButtonCompletable>();
             _buttons.AddRange(gameObject.GetComponentsInChildren<ColorButtonCompletable>());
-            OnFailedCheck.AddListener(BlinkButtons);
-            
-            
+            _isInPattern = new int[_buttons.Count];
         }
 
         public void CreatePattern()
@@ -45,18 +48,20 @@ namespace Level.Completables.ColorRecognition
 
             for (var i = 0; i < patternLength; i++)
             {
-                _pattern.Add(Random.Range(0, count));
+                var num = Random.Range(0, count);
+                _pattern.Add(num);
+                _isInPattern[num]++;
             }
 
             var sb = new StringBuilder();
-            
+
             foreach (var i in _pattern)
             {
                 sb.Append(i + ",");
             }
 
             sb.Remove(sb.Length - 1, 1);
-            
+
             print(sb.ToString());
         }
 
@@ -66,53 +71,106 @@ namespace Level.Completables.ColorRecognition
 
             for (var i = 0; i < patternLength; i++)
             {
-                if(_pattern.Count == _buttons.Count) return;
-                
+                if (_pattern.Count == _buttons.Count) return;
+
                 var num = Random.Range(0, count);
-                if(!_pattern.Contains(num))
-                    _pattern.Add(num);
+
+                if (_pattern.Contains(num)) continue;
+
+                _pattern.Add(num);
+                _isInPattern[num]++;
             }
         }
 
 
         private void CheckCompletion()
         {
-            print("Hello");
-            for (var i = 0; i < _pattern.Count; i++)
+            for (var i = 0; i < _buttons.Count; i++)
             {
-                if (_buttons[_pattern[i]].IsDone) continue;
-                
-                CheckRestOfList(i);
-                return;
-            }
-            
-            OnDone.Invoke();
-        }
-        
-        private void CheckRestOfList(int start)
-        {
-            for (var j = start; j < _pattern.Count; j++)
-            {
-                if (!_buttons[_pattern[j]].IsDone) continue;
+                if (
+                    _isInPattern[i] > 0 // Button is in the pattern 
+                    && _buttons[i].IsDone // and is pressed 
+                    && _pattern[_patternIndex] == i // and the current button is the next in the pattern
+                )
+                {
+                    _buttons[i].ResetState();
+                    _patternIndex++;
 
-                OnFailedCheck.Invoke();
-                ResetState();
-                return;
+                    if (_patternIndex == _pattern.Count)
+                    {
+                        Completed();
+                        return;
+                    }
+
+                    continue;
+                }
+
+
+                // Button is not in the pattern or is not pressed or is not the current button
+
+                if (_isInPattern[i] == 0 && _buttons[i].IsDone) // Button is not in the pattern and is pressed
+                {
+                    Failed();
+                    return;
+                }
+
+                if (_isInPattern[i] > 0 && _pattern[_patternIndex] != i &&
+                    _buttons[i].IsDone) // Button is in the pattern and pressed but not the next one 
+                {
+                    Failed();
+                    return;
+                }
             }
 
             OnIncompleteCheck.Invoke();
         }
 
+        private void Completed()
+        {
+            _patternIndex = 0;
+            BlinkCorrectButtons();
+
+            IsDone = true;
+            OnDone.Invoke();
+        }
+
+        private void Failed()
+        {
+            BlinkIncorrectButtons();
+            OnFailedCheck.Invoke();
+            ResetState();
+        }
+
         public void BlinkButtons()
         {
+            StopCoroutine(BlinkButtonsCoroutine());
             StartCoroutine(BlinkButtonsCoroutine());
         }
 
         private IEnumerator BlinkButtonsCoroutine()
         {
+            yield return new WaitForSeconds(1);
+
             foreach (var index in _pattern)
             {
                 yield return StartCoroutine(_buttons[index].Blink(blinkDuration));
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+
+        private void BlinkCorrectButtons()
+        {
+            foreach (var colorButtonCompletable in _buttons)
+            {
+                StartCoroutine(colorButtonCompletable.BlinkCorrectColor(blinkDuration));
+            }
+        }
+
+        private void BlinkIncorrectButtons()
+        {
+            foreach (var colorButtonCompletable in _buttons)
+            {
+                StartCoroutine(colorButtonCompletable.BlinkIncorrectColor(blinkDuration));
             }
         }
 
@@ -124,6 +182,8 @@ namespace Level.Completables.ColorRecognition
             {
                 button.ResetState();
             }
+
+            _patternIndex = 0;
         }
 
         protected void OnEnable()
