@@ -7,6 +7,8 @@ namespace DefaultNamespace
     {
         [SerializeField] private Quaternion rotation;
         private Quaternion _origin;
+        private int _rotated;
+        private bool rotated;
 
         private void Start()
         {
@@ -15,8 +17,20 @@ namespace DefaultNamespace
 
         private void OnCollisionEnter(Collision other)
         {
-            transform.rotation = rotation;
-            Debug.Log(transform.rotation + " vs " + rotation);
+            if (_rotated < 2 && !rotated)
+            {
+                transform.rotation = rotation;
+                rotated = true;
+                _rotated++;
+                BroadcastMessage("Flip");
+            }
+        }
+
+        public void Reset()
+        {
+            _rotated = 0;
+            transform.rotation = _origin;
+            rotated = false;
         }
     }
 }

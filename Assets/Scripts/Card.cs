@@ -1,3 +1,5 @@
+using System.ComponentModel.Design.Serialization;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -6,15 +8,19 @@ namespace DefaultNamespace
     {
         [SerializeField] private string suit;
         [SerializeField] private int number;
+        [SerializeField] private int id;
 
-        public string GetSuit()
+        public void Flip()
         {
-            return suit;
+            CardManager.Instance.Compare(suit,number,id);
         }
 
-        public int GetNumber()
+        public void Deactivate(int[] ids)
         {
-            return number;
+            if (id == ids[0] || id == ids[1])
+            {
+                this.GameObject().SetActive(false);
+            }
         }
     }
 }
