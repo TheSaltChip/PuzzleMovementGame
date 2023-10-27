@@ -19,8 +19,6 @@ namespace UI
             
             Slider = slider;
 
-            print(Slider.name);
-
             Slider.onValueChanged.AddListener(ChangeText);
         }
 
