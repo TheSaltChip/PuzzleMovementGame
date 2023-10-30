@@ -28,6 +28,12 @@ namespace Level.Completables
             IsDone = false;
         }
 
+        protected void Completed()
+        {
+            IsDone = true;
+            OnDone.Invoke();
+        }
+
         /// <summary>
         /// Returns a string representation of the Completable object.
         /// </summary>
