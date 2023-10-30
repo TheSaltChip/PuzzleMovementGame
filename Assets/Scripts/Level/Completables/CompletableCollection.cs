@@ -38,8 +38,6 @@ namespace Level.Completables
 
         protected virtual void CheckCompletion()
         {
-            IsDone = true;
-
             foreach (var completable in items)
             {
                 if (completable.IsDone) continue;
@@ -48,7 +46,7 @@ namespace Level.Completables
                 return;
             }
             
-            OnDone.Invoke();
+            Completed();
         }
     }
 }

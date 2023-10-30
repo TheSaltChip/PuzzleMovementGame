@@ -13,18 +13,12 @@ namespace Level.Completables.Button
         
         private void OnEnable()
         {
-            button.OnPressed.AddListener(Pressed);
+            button.OnPressed.AddListener(Completed);
         }
 
         private void OnDisable()
         {
-            button.OnPressed.RemoveListener(Pressed);
-        }
-
-        private void Pressed()
-        {
-            IsDone = true;
-            OnDone.Invoke();
+            button.OnPressed.RemoveListener(Completed);
         }
     }
 }

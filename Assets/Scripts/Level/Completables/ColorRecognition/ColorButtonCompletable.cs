@@ -56,8 +56,7 @@ namespace Level.Completables.ColorRecognition
         private void Pressed()
         {
             TurnOn();
-            IsDone = true;
-            OnDone.Invoke();
+            Completed();
         }
 
         private void TurnOn()

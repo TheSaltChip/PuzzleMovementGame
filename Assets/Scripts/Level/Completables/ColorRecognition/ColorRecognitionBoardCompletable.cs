@@ -8,7 +8,7 @@ namespace Level.Completables.ColorRecognition
 {
     public class ColorRecognitionBoardCompletable : Completable
     {
-        [SerializeField] private bool canRepeat;
+        [field: SerializeField] public bool CanRepeat { get; set; }
         [SerializeField] private int patternLength;
         [SerializeField] private float blinkDuration;
 
@@ -22,22 +22,22 @@ namespace Level.Completables.ColorRecognition
         {
             _pattern = new List<int>();
 
-            _buttons = gameObject.GetComponentsInChildren<ColorButtonCompletable>();
+            _buttons = GetComponentsInChildren<ColorButtonCompletable>();
             _isInPattern = new bool[_buttons.Length];
         }
 
         public void ResetValues()
         {
-            _pattern.Clear();
+            _pattern?.Clear();
 
-            _buttons = gameObject.GetComponentsInChildren<ColorButtonCompletable>();
+            _buttons = GetComponentsInChildren<ColorButtonCompletable>();
             _isInPattern = new bool[_buttons.Length];
         }
 
         public void CreatePattern()
         {
             _pattern.Clear();
-            if (canRepeat)
+            if (CanRepeat)
             {
                 CreateRepeatingPattern();
                 return;
@@ -56,17 +56,6 @@ namespace Level.Completables.ColorRecognition
                 _pattern.Add(num);
                 _isInPattern[num] = true;
             }
-
-            var sb = new StringBuilder();
-
-            foreach (var i in _pattern)
-            {
-                sb.Append(i + ",");
-            }
-
-            sb.Remove(sb.Length - 1, 1);
-
-            print(sb.ToString());
         }
 
         private void CreateNonRepeatingPattern()
@@ -77,12 +66,16 @@ namespace Level.Completables.ColorRecognition
             {
                 if (_pattern.Count == _buttons.Length) return;
 
-                var num = Random.Range(0, count);
+                while (true)
+                {
+                    var num = Random.Range(0, count);
 
-                if (_pattern.Contains(num)) continue;
+                    if (_pattern.Contains(num)) continue;
 
-                _pattern.Add(num);
-                _isInPattern[num] = true;
+                    _pattern.Add(num);
+                    _isInPattern[num] = true;
+                    break;
+                }
             }
         }
 
@@ -109,20 +102,19 @@ namespace Level.Completables.ColorRecognition
 
                 if (_patternIndex != _pattern.Count) continue;
 
-                Completed();
+                CompletedPattern();
                 return;
             }
 
             OnIncompleteCheck.Invoke();
         }
 
-        private void Completed()
+        private void CompletedPattern()
         {
             _patternIndex = 0;
             BlinkCorrectButtons();
 
-            IsDone = true;
-            OnDone.Invoke();
+            Completed();
         }
 
         private void Failed()

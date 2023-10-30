@@ -1,19 +1,19 @@
-﻿using System;
-using NaughtyAttributes;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Pool;
-using UnityEngine.Serialization;
 
 namespace Level.Completables.ColorRecognition
 {
     public class ColorRecognitionBoardEditor : MonoBehaviour
     {
         [SerializeField] private GameObject boardPlate;
-        [SerializeField] private Vector2 gridDimensions = new(3, 3);
+        [SerializeField] private int gridDimensionX = 3;
+        [SerializeField] private int gridDimensionZ = 3;
         [SerializeField] private GameObject buttonPrefab;
 
         [SerializeField] private Rigidbody rb;
+        [SerializeField] private BoxCollider poseCollider;
+
 
         private float _buttonScale = 0.05f;
         private float _padding = 0.0125f;
@@ -32,9 +32,9 @@ namespace Level.Completables.ColorRecognition
 
         private void Awake()
         {
-            _gridSize = new Vector3(gridDimensions.x * _buttonScale + (gridDimensions.x + 1) * _padding,
+            _gridSize = new Vector3(gridDimensionX * _buttonScale + (gridDimensionX + 1) * _padding,
                 boardPlate.transform.localScale.y,
-                gridDimensions.y * _buttonScale + (gridDimensions.y + 1) * _padding);
+                gridDimensionZ * _buttonScale + (gridDimensionZ + 1) * _padding);
 
             _buttonsPool = new ObjectPool<GameObject>(CreateButton, GetFromPool, OnReleaseToPool, OnDestroyFromPool,
                 defaultCapacity: 16);
@@ -68,16 +68,16 @@ namespace Level.Completables.ColorRecognition
 
         public void ScaleBoardX(float x)
         {
-            gridDimensions.x = Mathf.Round(x);
-            _gridSize.x = gridDimensions.x * _buttonScale + (gridDimensions.x + 1) * _padding;
+            gridDimensionX = (int)Mathf.Clamp(Mathf.Round(x), 1, 4);
+            _gridSize.x = gridDimensionX * _buttonScale + (gridDimensionX + 1) * _padding;
 
             ScaleBoard();
         }
 
-        public void ScaleBoardY(float y)
+        public void ScaleBoardZ(float z)
         {
-            gridDimensions.y = Mathf.Round(y);
-            _gridSize.z = gridDimensions.y * _buttonScale + (gridDimensions.y + 1) * _padding;
+            gridDimensionZ = (int)Mathf.Clamp(Mathf.Round(z), 1, 4);
+            _gridSize.z = gridDimensionZ * _buttonScale + (gridDimensionZ + 1) * _padding;
 
             ScaleBoard();
         }
@@ -85,35 +85,39 @@ namespace Level.Completables.ColorRecognition
         private void ScaleBoard()
         {
             beforeResize?.Invoke();
-            
+
+            var colSize = poseCollider.size;
+            colSize.z = _gridSize.z;
+            colSize.x = _gridSize.x;
+            poseCollider.size = colSize;
+
             boardPlate.transform.localScale = _gridSize;
+
+            boardPlate.GetComponent<BoxCollider>().size = _gridSize;
 
             var step = _padding + _buttonScale;
 
             var xLimit = _gridSize.x / 2 - _buttonScale / 2 - _padding;
             var zLimit = _gridSize.z / 2 - _buttonScale / 2 - _padding;
 
-            print($"{step} {xLimit} {zLimit}");
-
             for (var x = -xLimit; x <= xLimit; x += step)
             {
                 for (var z = -zLimit; z <= zLimit; z += step)
                 {
-                    print($"x and z: {x} {z}");
-
                     var button = _buttonsPool.Get();
 
                     var rb = button.GetComponent<Rigidbody>();
                     rb.isKinematic = true;
 
-                    button.transform.SetLocalPositionAndRotation(new Vector3(x, _gridSize.y-0.005f, z), Quaternion.identity);
+                    button.transform.SetLocalPositionAndRotation(new Vector3(x, _gridSize.y - 0.005f, z),
+                        Quaternion.identity);
 
                     button.GetComponent<ConfigurableJoint>().connectedBody = this.rb;
 
                     rb.isKinematic = false;
                 }
             }
-            
+
             afterResize?.Invoke();
         }
     }
@@ -127,7 +131,7 @@ namespace Level.Completables.ColorRecognition
             // Return to the pool
 
             if (!gameObject.activeSelf) return;
-            
+
             pool.Release(gameObject);
             GetComponent<ConfigurableJoint>().connectedBody = null;
         }

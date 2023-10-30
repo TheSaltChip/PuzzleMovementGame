@@ -23,8 +23,6 @@ namespace Level.Completables
         /// </summary>
         protected override void CheckCompletion()
         {
-            IsDone = true;
-
             for (var i = _completedIndex; i < items.Count; i++)
             {
                 if (items[i].IsDone)
@@ -40,7 +38,7 @@ namespace Level.Completables
                 return;
             }
 
-            OnDone.Invoke();
+            Completed();
         }
 
         /// <summary>
