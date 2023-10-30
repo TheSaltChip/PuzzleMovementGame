@@ -24,6 +24,12 @@ namespace Level.Completables
         /// Resets the state of the completable object. Derived classes must implement this method.
         /// </summary>
         public abstract void ResetState();
+        
+        protected void Completed()
+        {
+            IsDone = true;
+            OnDone.Invoke();
+        }
 
         /// <summary>
         /// Returns a string representation of the Completable object.
