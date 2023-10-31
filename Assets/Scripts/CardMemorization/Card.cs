@@ -15,19 +15,20 @@ namespace DefaultNamespace
         private Transform _t;
 
         private bool _hasRotated;
-        private Quaternion _origin;
         private static readonly int Front = Shader.PropertyToID("_Front");
 
-        public Card(int number, CardSuits suit)
+        public void SetValues(int number, CardSuits suit)
         {
             this.suit = suit;
             this.number = number;
+            
+            var tex = Resources.Load<Texture2D>($"PlayingCards\\{suit}{number:00}");
+                        gameObject.GetComponent<MeshRenderer>().material.SetTexture(Front,tex);
         }
 
         private void Awake()
         {
             _t = transform;
-            _origin = _t.rotation;
             var tex = Resources.Load<Texture2D>($"PlayingCards\\{suit}{number:00}");
             gameObject.GetComponent<MeshRenderer>().material.SetTexture(Front,tex);
         }
@@ -55,14 +56,14 @@ namespace DefaultNamespace
 
         public void Deactivate()
         {
-            gameObject.SetActive(false);
             Completed();
         }
 
         public override void ResetState()
         {
-            transform.rotation = _origin;
+            transform.rotation = Quaternion.Euler(0,0,180);
             _hasRotated = false;
+            OnResetState.Invoke();
         }
     }
 }
