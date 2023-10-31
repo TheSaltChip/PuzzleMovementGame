@@ -6,9 +6,11 @@ namespace Level.Completables.ColorRecognition
 {
     public class ColorRecognitionBoardEditor : MonoBehaviour
     {
+        private const int GridMax = 5;
+        
         [SerializeField] private GameObject boardPlate;
-        [SerializeField] private int gridDimensionX = 3;
-        [SerializeField] private int gridDimensionZ = 3;
+        [SerializeField] private int gridDimensionX = 1;
+        [SerializeField] private int gridDimensionZ = 5;
         [SerializeField] private GameObject buttonPrefab;
 
         [SerializeField] private Rigidbody rb;
@@ -68,7 +70,7 @@ namespace Level.Completables.ColorRecognition
 
         public void ScaleBoardX(float x)
         {
-            gridDimensionX = (int)Mathf.Clamp(Mathf.Round(x), 1, 4);
+            gridDimensionX = Mathf.Clamp(Mathf.RoundToInt(x), 1, GridMax);
             _gridSize.x = gridDimensionX * _buttonScale + (gridDimensionX + 1) * _padding;
 
             ScaleBoard();
@@ -76,7 +78,7 @@ namespace Level.Completables.ColorRecognition
 
         public void ScaleBoardZ(float z)
         {
-            gridDimensionZ = (int)Mathf.Clamp(Mathf.Round(z), 1, 4);
+            gridDimensionZ = Mathf.Clamp(Mathf.RoundToInt(z), 1, GridMax);
             _gridSize.z = gridDimensionZ * _buttonScale + (gridDimensionZ + 1) * _padding;
 
             ScaleBoard();
@@ -87,8 +89,9 @@ namespace Level.Completables.ColorRecognition
             beforeResize?.Invoke();
 
             var colSize = poseCollider.size;
-            colSize.z = _gridSize.z;
+            
             colSize.x = _gridSize.x;
+            colSize.z = _gridSize.z;
             poseCollider.size = colSize;
 
             boardPlate.transform.localScale = _gridSize;
@@ -100,9 +103,9 @@ namespace Level.Completables.ColorRecognition
             var xLimit = _gridSize.x / 2 - _buttonScale / 2 - _padding;
             var zLimit = _gridSize.z / 2 - _buttonScale / 2 - _padding;
 
-            for (var x = -xLimit; x <= xLimit; x += step)
+            for (var x = -xLimit; x <= xLimit + 0.001f; x += step)
             {
-                for (var z = -zLimit; z <= zLimit; z += step)
+                for (var z = -zLimit; z <= zLimit + 0.001f; z += step)
                 {
                     var button = _buttonsPool.Get();
 
@@ -132,8 +135,8 @@ namespace Level.Completables.ColorRecognition
 
             if (!gameObject.activeSelf) return;
 
-            pool.Release(gameObject);
             GetComponent<ConfigurableJoint>().connectedBody = null;
+            pool.Release(gameObject);
         }
     }
 }
