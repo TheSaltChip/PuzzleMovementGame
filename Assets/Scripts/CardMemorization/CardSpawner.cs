@@ -15,9 +15,14 @@ namespace DefaultNamespace
         [SerializeField] private int height; //Amount of cards in the height
         [SerializeField] private Transform spawnPoint;
         private ObjectPool<GameObject> _cards;
+        private CardRules _generationRule;
+        private int _matchAmount;
 
         private void Start()
         {
+            var ccm = gameObject.GetComponent<CardCompareManager>();
+            _generationRule = ccm.GetCardRule();
+            _matchAmount = ccm.GetAmountToMatch();
             _cards = new ObjectPool<GameObject>(CreateToPool, GetFromPool, OnReleaseToPool, DestroyFromPool);
             GenerateCards();
         }
@@ -52,12 +57,14 @@ namespace DefaultNamespace
             var cardAmount = width * height;
             var cards = new List<(int, CardSuits)>();
 
-            for (var i = 0; i < cardAmount / 2; i++)
+            for (var i = 0; i < cardAmount / _matchAmount; i++)
             {
                 var rnd = Mathf.FloorToInt(Random.Range(1, 14));
                 var cardSuit = (CardSuits)(i % 4);
-                cards.Add((rnd, cardSuit));
-                cards.Add((rnd, cardSuit));
+                for (var k = 0; k < _matchAmount; k++)
+                {
+                    cards.Add((rnd, cardSuit));
+                }
                 print(i);
             }
 

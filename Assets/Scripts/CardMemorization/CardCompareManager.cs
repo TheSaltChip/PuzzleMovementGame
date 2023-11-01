@@ -20,6 +20,16 @@ namespace DefaultNamespace
             _selectedCards = new List<Card>();
         }
 
+        public int GetAmountToMatch()
+        {
+            return amountToMatch;
+        }
+
+        public CardRules GetCardRule()
+        {
+            return rule;
+        }
+
         public void SetCompareRule(IRuleCompare newRule)
         {
             _ruleCompare = newRule;
