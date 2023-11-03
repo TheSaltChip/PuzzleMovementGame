@@ -1,12 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
-namespace Level.Completables
+namespace Completables
 {
     /// <summary>
-    /// An abstract base class for objects that represent something which can be completed.
+    ///     An abstract base class for objects that represent something which can be completed.
     /// </summary>
     public abstract class Completable : MonoBehaviour
     {
@@ -16,16 +14,17 @@ namespace Level.Completables
         public UnityEvent OnResetState;
 
         /// <summary>
-        /// Gets a value indicating whether the object is in a 'done' state.
+        ///     Gets a value indicating whether the object is in a 'done' state.
         /// </summary>
-        public bool IsDone { get; protected set; }
+        public bool IsDone { get; private set; }
 
         /// <summary>
-        /// Resets the state of the completable object. Derived classes must implement this method.
+        ///     Resets the state of the completable object.
         /// </summary>
         public virtual void ResetState()
         {
             IsDone = false;
+            OnResetState?.Invoke();
         }
 
         protected void Completed()
@@ -35,7 +34,7 @@ namespace Level.Completables
         }
 
         /// <summary>
-        /// Returns a string representation of the Completable object.
+        ///     Returns a string representation of the Completable object.
         /// </summary>
         /// <returns>A string containing the 'IsDone' state.</returns>
         public override string ToString()

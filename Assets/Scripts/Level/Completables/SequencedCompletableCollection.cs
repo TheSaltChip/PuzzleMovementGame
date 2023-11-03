@@ -1,16 +1,14 @@
-﻿using UnityEngine.Events;
-
-namespace Level.Completables
+﻿namespace Completables
 {
     /// <summary>
-    /// A collection of Completable objects that need to be completed in a specific sequence.
+    ///     A collection of Completable objects that need to be completed in a specific sequence.
     /// </summary>
     public class SequencedCompletableCollection : CompletableCollection
     {
         private int _completedIndex;
 
         /// <summary>
-        /// Resets the state of the collection and the completed index.
+        ///     Resets the state of the collection and the completed index.
         /// </summary>
         public override void ResetState()
         {
@@ -19,7 +17,7 @@ namespace Level.Completables
         }
 
         /// <summary>
-        /// Checks the completion state of the collection by iterating through the items.
+        ///     Checks the completion state of the collection by iterating through the items.
         /// </summary>
         protected override void CheckCompletion()
         {
@@ -31,8 +29,6 @@ namespace Level.Completables
                     continue;
                 }
 
-                IsDone = false;
-
                 CheckRestOfList(i);
 
                 return;
@@ -42,7 +38,7 @@ namespace Level.Completables
         }
 
         /// <summary>
-        /// Checks the completion state of the remaining items in the collection starting from a specified index.
+        ///     Checks the completion state of the remaining items in the collection starting from a specified index.
         /// </summary>
         /// <param name="start">The index from which to start checking.</param>
         private void CheckRestOfList(int start)
@@ -59,5 +55,4 @@ namespace Level.Completables
             OnIncompleteCheck.Invoke();
         }
     }
-
 }

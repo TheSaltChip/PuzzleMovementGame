@@ -2,7 +2,7 @@
 using Autohand;
 using UnityEngine;
 
-namespace Level.Completables.ColorRecognition
+namespace Completables.ColorRecognition
 {
     [RequireComponent(typeof(PhysicsGadgetButton), typeof(MeshRenderer))]
     public class ColorButtonCompletable : Completable
@@ -11,15 +11,15 @@ namespace Level.Completables.ColorRecognition
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private Color correct;
         [SerializeField] private Color incorrect;
-
-        private Material _material;
         private Color _dimmed;
         private Color _lit;
+
+        private Material _material;
 
         private void Awake()
         {
             _material = meshRenderer.material;
-            
+
             _lit = _material.color;
 
             Color.RGBToHSV(_material.color, out var h, out var s, out _);
@@ -27,6 +27,18 @@ namespace Level.Completables.ColorRecognition
             _dimmed = Color.HSVToRGB(h, s, 0.5f);
 
             _material.color = _dimmed;
+        }
+
+        private void OnEnable()
+        {
+            button.OnPressed.AddListener(Pressed);
+            button.OnUnpressed.AddListener(TurnOff);
+        }
+
+        private void OnDisable()
+        {
+            button.OnPressed.RemoveListener(Pressed);
+            button.OnUnpressed.RemoveListener(TurnOff);
         }
 
         public IEnumerator Blink(float duration)
@@ -67,18 +79,6 @@ namespace Level.Completables.ColorRecognition
         private void TurnOff()
         {
             _material.color = _dimmed;
-        }
-
-        private void OnEnable()
-        {
-            button.OnPressed.AddListener(Pressed);
-            button.OnUnpressed.AddListener(TurnOff);
-        }
-
-        private void OnDisable()
-        {
-            button.OnPressed.RemoveListener(Pressed);
-            button.OnUnpressed.RemoveListener(TurnOff);
         }
     }
 }
