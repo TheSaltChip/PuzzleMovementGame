@@ -1,4 +1,4 @@
-﻿using Level.Completables;
+﻿using Completables;
 using UnityEngine;
 
 namespace Audio
@@ -11,7 +11,7 @@ namespace Audio
         [SerializeField] private AudioClip doneClip;
         [SerializeField] private AudioClip failedClip;
 
-        private void Awake()
+        private void Start()
         {
             completable.OnDone.AddListener(PlayOnDoneSound);
             completable.OnFailedCheck.AddListener(PlayOnFailedSound);
