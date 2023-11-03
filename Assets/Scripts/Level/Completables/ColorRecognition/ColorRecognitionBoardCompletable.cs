@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-namespace Level.Completables.ColorRecognition
+namespace Completables.ColorRecognition
 {
     public class ColorRecognitionBoardCompletable : Completable
     {
@@ -16,22 +14,39 @@ namespace Level.Completables.ColorRecognition
         private List<int> _pattern;
         private int _patternIndex;
 
-        private bool[] _isInPattern;
+        private WaitForSeconds _waitForOneSecond;
+        private WaitForSeconds _waitForTenMilliSeconds;
+        private Coroutine _co;
 
         private void Awake()
         {
+            _waitForOneSecond = new WaitForSeconds(1);
+            _waitForTenMilliSeconds = new WaitForSeconds(0.1f);
             _pattern = new List<int>();
-
             _buttons = GetComponentsInChildren<ColorButtonCompletable>();
-            _isInPattern = new bool[_buttons.Length];
+            _co = null;
+        }
+
+        protected void OnEnable()
+        {
+            foreach (var completable in _buttons) completable.OnDone.AddListener(CheckCompletion);
+        }
+
+        protected void OnDisable()
+        {
+            foreach (var completable in _buttons) completable.OnDone.RemoveListener(CheckCompletion);
         }
 
         public void ResetValues()
         {
             _pattern?.Clear();
 
+            OnDisable();
+
             _buttons = GetComponentsInChildren<ColorButtonCompletable>();
-            _isInPattern = new bool[_buttons.Length];
+            _patternIndex = 0;
+
+            OnEnable();
         }
 
         public void CreatePattern()
@@ -54,7 +69,6 @@ namespace Level.Completables.ColorRecognition
             {
                 var num = Random.Range(0, count);
                 _pattern.Add(num);
-                _isInPattern[num] = true;
             }
         }
 
@@ -73,7 +87,6 @@ namespace Level.Completables.ColorRecognition
                     if (_pattern.Contains(num)) continue;
 
                     _pattern.Add(num);
-                    _isInPattern[num] = true;
                     break;
                 }
             }
@@ -82,25 +95,28 @@ namespace Level.Completables.ColorRecognition
 
         private void CheckCompletion()
         {
+            if (_pattern.Count == 0) return;
+
             for (var buttonIndex = 0; buttonIndex < _buttons.Length; buttonIndex++)
             {
-                if ((!_isInPattern[buttonIndex] // Button is not in the pattern
-                     // Button is in the pattern but not the next one
-                     || (_isInPattern[buttonIndex] && _pattern[_patternIndex] != buttonIndex))
-                    && _buttons[buttonIndex].IsDone) // Button is pressed
+                var currentButton = _buttons[buttonIndex];
+
+                if (!currentButton.IsDone) continue;
+
+                var nextButtonIndexInPattern = _pattern[_patternIndex];
+
+                if (buttonIndex != nextButtonIndexInPattern)
                 {
                     Failed();
                     return;
                 }
 
-                if (!_isInPattern[buttonIndex]
-                    || !_buttons[buttonIndex].IsDone
-                    || _pattern[_patternIndex] != buttonIndex) continue;
+                currentButton.ResetState();
+                ++_patternIndex;
 
-                _buttons[buttonIndex].ResetState();
-                _patternIndex++;
+                var patternIsNotDone = _patternIndex != _pattern.Count;
 
-                if (_patternIndex != _pattern.Count) continue;
+                if (patternIsNotDone) break;
 
                 CompletedPattern();
                 return;
@@ -124,65 +140,48 @@ namespace Level.Completables.ColorRecognition
             ResetState();
         }
 
-        public void BlinkButtons()
+        public void SetPatternLength(float val)
         {
-            StopCoroutine(BlinkButtonsCoroutine());
-            StartCoroutine(BlinkButtonsCoroutine());
+            patternLength = CanRepeat ? (int)val : (int)Mathf.Min(val, _buttons.Length);
         }
 
-        private IEnumerator BlinkButtonsCoroutine()
+        public void BlinkPattern()
         {
-            yield return new WaitForSeconds(1);
+            if (_co is not null)
+                StopCoroutine(_co);
+            _co = StartCoroutine(BlinkPatternCoroutine());
+        }
+
+        private IEnumerator BlinkPatternCoroutine()
+        {
+            yield return _waitForOneSecond;
 
             foreach (var index in _pattern)
             {
                 yield return StartCoroutine(_buttons[index].Blink(blinkDuration));
-                yield return new WaitForSeconds(0.1f);
+                yield return _waitForTenMilliSeconds;
             }
         }
 
         private void BlinkCorrectButtons()
         {
             foreach (var colorButtonCompletable in _buttons)
-            {
                 StartCoroutine(colorButtonCompletable.BlinkCorrectColor(blinkDuration));
-            }
         }
 
         private void BlinkIncorrectButtons()
         {
             foreach (var colorButtonCompletable in _buttons)
-            {
                 StartCoroutine(colorButtonCompletable.BlinkIncorrectColor(blinkDuration));
-            }
         }
 
         public override void ResetState()
         {
             base.ResetState();
 
-            foreach (var button in _buttons)
-            {
-                button.ResetState();
-            }
+            foreach (var button in _buttons) button.ResetState();
 
             _patternIndex = 0;
-        }
-
-        protected void OnEnable()
-        {
-            foreach (var completable in _buttons)
-            {
-                completable.OnDone.AddListener(CheckCompletion);
-            }
-        }
-
-        protected void OnDisable()
-        {
-            foreach (var completable in _buttons)
-            {
-                completable.OnDone.RemoveListener(CheckCompletion);
-            }
         }
     }
 }
