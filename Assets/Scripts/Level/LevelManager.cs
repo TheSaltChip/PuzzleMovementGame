@@ -1,5 +1,5 @@
 ﻿using Compass;
-using Level.Completables;
+using Completables;
 using NaughtyAttributes;
 using UnityEngine;
 
