@@ -1,29 +1,31 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using Unity.XR.CoreUtils.Bindings.Variables;
+using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Pool;
 
-namespace Level.Completables.ColorRecognition
+namespace Completables.ColorRecognition
 {
     public class ColorRecognitionBoardEditor : MonoBehaviour
     {
         private const int GridMax = 5;
-        
+
         [SerializeField] private GameObject boardPlate;
         [SerializeField] private int gridDimensionX = 1;
-        [SerializeField] private int gridDimensionZ = 5;
+        [SerializeField] private int gridDimensionZ = 1;
         [SerializeField] private GameObject buttonPrefab;
 
-        [SerializeField] private Rigidbody rb;
+        [SerializeField] private Rigidbody baseRigidbody;
         [SerializeField] private BoxCollider poseCollider;
-
-
-        private float _buttonScale = 0.05f;
-        private float _padding = 0.0125f;
 
         public UnityEvent beforeResize;
         public UnityEvent afterResize;
 
-        private ObjectPool<GameObject> _buttonsPool;
+
+        private readonly float _buttonScale = 0.05f;
+        private readonly float _padding = 0.0125f;
+
+        private GameObject[] _buttonsPool;
 
         // Base is 0.2 x 0.2 for 3x3
         // 0.05 * 3 = 0.15 => 0.0125 * (num buttons + 1) padding = 0.0125 * 4 = 0.05
@@ -38,34 +40,60 @@ namespace Level.Completables.ColorRecognition
                 boardPlate.transform.localScale.y,
                 gridDimensionZ * _buttonScale + (gridDimensionZ + 1) * _padding);
 
-            _buttonsPool = new ObjectPool<GameObject>(CreateButton, GetFromPool, OnReleaseToPool, OnDestroyFromPool,
-                defaultCapacity: 16);
+            _buttonsPool = new GameObject[25];
+        }
+
+        private void Start()
+        {
+            var colSize = poseCollider.size;
+
+            colSize.x = _gridSize.x;
+            colSize.z = _gridSize.z;
+            poseCollider.size = colSize;
+
+            boardPlate.transform.localScale = _gridSize;
+
+            boardPlate.GetComponent<BoxCollider>().size = _gridSize;
+
+            var x = 0f;
+            var z = 0f;
+            var dx = 0f;
+            var dz = -1f;
+
+            var scale = _buttonScale + _padding;
+
+            const int gridMaxSquared = GridMax * GridMax;
+            
+            for (var i = 0; i < gridMaxSquared; i++)
+            {
+                var button = Instantiate(buttonPrefab, transform, true);
+                button.SetActive(false);
+
+                var rb = button.GetComponent<Rigidbody>();
+                rb.isKinematic = true;
+                
+                button.transform.SetLocalPositionAndRotation(
+                    new Vector3(x * scale, _gridSize.y - 0.005f, z * scale),
+                    Quaternion.identity);
+                button.GetComponent<ConfigurableJoint>().connectedBody = baseRigidbody;
+
+                rb.isKinematic = false;
+
+                _buttonsPool[i] = button;
+
+
+                if (Math.Abs(x - z) < 0.001f
+                    || (x < 0 && Math.Abs(x - -z) < 0.001f)
+                    || (x > 0 && Math.Abs(x - (1 - z)) < 0.001f))
+                {
+                    (dx, dz) = (-dz, dx);
+                }
+
+                x += dx;
+                z += dz;
+            }
 
             ScaleBoard();
-        }
-
-        private void OnDestroyFromPool(GameObject obj)
-        {
-            Destroy(obj);
-        }
-
-        private void OnReleaseToPool(GameObject obj)
-        {
-            obj.SetActive(false);
-        }
-
-        private void GetFromPool(GameObject obj)
-        {
-            obj.SetActive(true);
-        }
-
-        private GameObject CreateButton()
-        {
-            var go = Instantiate(buttonPrefab, transform, true);
-            var rtp = go.AddComponent<ReturnToPool>();
-            rtp.pool = _buttonsPool;
-            beforeResize.AddListener(rtp.Return);
-            return go;
         }
 
         public void ScaleBoardX(float x)
@@ -89,7 +117,7 @@ namespace Level.Completables.ColorRecognition
             beforeResize?.Invoke();
 
             var colSize = poseCollider.size;
-            
+
             colSize.x = _gridSize.x;
             colSize.z = _gridSize.z;
             poseCollider.size = colSize;
@@ -98,45 +126,34 @@ namespace Level.Completables.ColorRecognition
 
             boardPlate.GetComponent<BoxCollider>().size = _gridSize;
 
-            var step = _padding + _buttonScale;
+            var x = 0f;
+            var z = 0f;
+            var dx = 0f;
+            var dz = -1f;
 
-            var xLimit = _gridSize.x / 2 - _buttonScale / 2 - _padding;
-            var zLimit = _gridSize.z / 2 - _buttonScale / 2 - _padding;
+            const int gridMaxSquared = GridMax * GridMax;
+            var halfDimensionX = gridDimensionX / 2f;
+            var halfDimensionZ = gridDimensionZ / 2f;
 
-            for (var x = -xLimit; x <= xLimit + 0.001f; x += step)
+            for (var i = 0; i < gridMaxSquared; i++)
             {
-                for (var z = -zLimit; z <= zLimit + 0.001f; z += step)
+                _buttonsPool[i].SetActive(-halfDimensionX <= x 
+                                          && x <= halfDimensionX 
+                                          && -halfDimensionZ <= z 
+                                          && z <= halfDimensionZ);
+
+                if (Math.Abs(x - z) < 0.001f
+                    || (x < 0 && Math.Abs(x - -z) < 0.001f)
+                    || (x > 0 && Math.Abs(x - (1 - z)) < 0.001f))
                 {
-                    var button = _buttonsPool.Get();
-
-                    var rb = button.GetComponent<Rigidbody>();
-                    rb.isKinematic = true;
-
-                    button.transform.SetLocalPositionAndRotation(new Vector3(x, _gridSize.y - 0.005f, z),
-                        Quaternion.identity);
-
-                    button.GetComponent<ConfigurableJoint>().connectedBody = this.rb;
-
-                    rb.isKinematic = false;
+                    (dx, dz) = (-dz, dx);
                 }
+
+                x += dx;
+                z += dz;
             }
 
             afterResize?.Invoke();
-        }
-    }
-
-    public class ReturnToPool : MonoBehaviour
-    {
-        public IObjectPool<GameObject> pool;
-
-        public void Return()
-        {
-            // Return to the pool
-
-            if (!gameObject.activeSelf) return;
-
-            GetComponent<ConfigurableJoint>().connectedBody = null;
-            pool.Release(gameObject);
         }
     }
 }
