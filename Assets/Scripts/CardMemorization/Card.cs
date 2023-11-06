@@ -1,39 +1,44 @@
+using CardMemorization.Enums;
 using Level.Completables;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace CardMemorization
 {
     public class Card : Completable
     {
-        [SerializeField] private CardSuits suit;
+        [SerializeField] private CardSuit suit;
         [SerializeField] private int number;
-        private Transform _t;
+        private CardColor _color;
 
         private bool _hasRotated;
         private static readonly int Front = Shader.PropertyToID("_Front");
 
-        public void SetValues(int number, CardSuits suit)
-        public void SetValues(int number, CardSuits suit, CardColors colors)
+        public void SetValues(int number, CardSuit suit, CardColor color)
         {
             this.suit = suit;
             this.number = number;
-            
+            _color = color;
+
             var tex = Resources.Load<Texture2D>($"PlayingCards\\{suit}{number:00}");
-                        gameObject.GetComponent<MeshRenderer>().material.SetTexture(Front,tex);
+            gameObject.GetComponent<MeshRenderer>().material.SetTexture(Front, tex);
         }
 
         private void Awake()
         {
-            _t = transform;
             var tex = Resources.Load<Texture2D>($"PlayingCards\\{suit}{number:00}");
-            gameObject.GetComponent<MeshRenderer>().material.SetTexture(Front,tex);
+            gameObject.GetComponent<MeshRenderer>().material.SetTexture(Front, tex);
         }
 
-        public CardSuits GetSuit()
+        public CardSuit GetSuit()
         {
             return suit;
         }
+
+        public CardColor GetColor()
+        {
+            return _color;
+        }
+
         public int GetNumber()
         {
             return number;
@@ -47,7 +52,7 @@ namespace DefaultNamespace
 
         public void Flip()
         {
-            transform.rotation = Quaternion.Euler(0,0,0);
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
             _hasRotated = true;
         }
 
@@ -58,7 +63,7 @@ namespace DefaultNamespace
 
         public override void ResetState()
         {
-            transform.rotation = Quaternion.Euler(0,0,180);
+            transform.localRotation = Quaternion.Euler(0, 0, 180);
             _hasRotated = false;
             OnResetState.Invoke();
         }
