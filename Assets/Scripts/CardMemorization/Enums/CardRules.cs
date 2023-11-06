@@ -1,4 +1,4 @@
-namespace DefaultNamespace
+namespace CardMemorization.Enums
 {
     public enum CardRules
     {
