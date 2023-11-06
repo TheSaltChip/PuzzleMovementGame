@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
 using Level.Completables;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -18,6 +14,7 @@ namespace DefaultNamespace
         private static readonly int Front = Shader.PropertyToID("_Front");
 
         public void SetValues(int number, CardSuits suit)
+        public void SetValues(int number, CardSuits suit, CardColors colors)
         {
             this.suit = suit;
             this.number = number;
