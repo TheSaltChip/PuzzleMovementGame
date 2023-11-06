@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DefaultNamespace
+namespace CardMemorization.Strategies
 {
     public interface IRuleCompare
     {
