@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using CardMemorization.Enums;
+using CardMemorization.Strategies;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace CardMemorization
 {
     public class CardCompareManager : MonoBehaviour
     {
         public static CardCompareManager Instance { get; private set; }
-        [SerializeField] private CardRules rule;
-        private List<Card> _selectedCards;
+
+        [SerializeField] private CardRule rule;
         [SerializeField] private int amountToMatch;
+
+        private List<Card> _selectedCards;
         private int _arrayPos;
         private IRuleCompare _ruleCompare;
 
@@ -25,7 +29,7 @@ namespace DefaultNamespace
             return amountToMatch;
         }
 
-        public CardRules GetCardRule()
+        public CardRule GetCardRule()
         {
             return rule;
         }
@@ -46,6 +50,7 @@ namespace DefaultNamespace
 
             _selectedCards.Add(card);
             card.Flip();
+            
             if (_selectedCards.Count != amountToMatch)
             {
                 return;
