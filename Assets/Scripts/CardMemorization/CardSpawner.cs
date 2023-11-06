@@ -1,18 +1,26 @@
 using System.Collections.Generic;
+using CardMemorization.Enums;
 using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
-namespace DefaultNamespace
+namespace CardMemorization
 {
     public class CardSpawner : MonoBehaviour
     {
-        [SerializeField] private GameObject card;
-        [SerializeField] private int width; //Amount of cards in the width
-        [SerializeField] private int height; //Amount of cards in the height
+        [SerializeField] private GameObject cardPrefab;
+
+        [SerializeField, Tooltip("Amount of cards in the width")]
+        private int width;
+
+        [SerializeField, Tooltip("Amount of cards in the height")]
+        private int height;
+
         [SerializeField] private Transform spawnPoint;
-        private ObjectPool<GameObject> _cards;
-        private CardRules _generationRule;
+
+        private ObjectPool<GameObject> _cardsPool;
+        private List<(int, CardSuit)> _cardNumberAndSuitList;
+        private CardRule _generationRule;
         private int _matchAmount;
 
         private void Start()
@@ -20,17 +28,23 @@ namespace DefaultNamespace
             var ccm = gameObject.GetComponent<CardCompareManager>();
             _generationRule = ccm.GetCardRule();
             _matchAmount = ccm.GetAmountToMatch();
-            _cards = new ObjectPool<GameObject>(CreateToPool, GetFromPool, OnReleaseToPool, DestroyFromPool);
+            _cardsPool = new ObjectPool<GameObject>(CreateToPool, GetFromPool, OnReleaseToPool, DestroyFromPool);
+            _cardNumberAndSuitList = new List<(int, CardSuit)>(52);
+
             GenerateCards();
+            PlaceCards();
         }
 
         private GameObject CreateToPool()
         {
-            GameObject temp = Instantiate(card, transform, true);
+            GameObject temp = Instantiate(cardPrefab, transform, true);
+
             var ret = temp.AddComponent<ReturnToPool>();
+            ret.pool = _cardsPool;
+
             var c = temp.GetComponent<Card>();
             c.OnDone.AddListener(ret.Return);
-            ret.pool = _cards;
+
             return temp;
         }
 
@@ -52,34 +66,42 @@ namespace DefaultNamespace
         private void GenerateCards()
         {
             var cardAmount = width * height;
-            var cards = new List<(int, CardSuits)>();
+
+            _cardNumberAndSuitList.Clear();
+
 
             for (var i = 0; i < cardAmount / _matchAmount; i++)
             {
                 var rnd = Mathf.FloorToInt(Random.Range(1, 14));
-                var cardSuit = (CardSuits)(i % 4);
+                var cardSuit = (CardSuit)(i % 4);
                 for (var k = 0; k < _matchAmount; k++)
                 {
-                    cards.Add((rnd, cardSuit));
+                    _cardNumberAndSuitList.Add((rnd, cardSuit));
                 }
-                print(i);
             }
 
-            cards.Shuffle();
+            _cardNumberAndSuitList.Shuffle();
+        }
 
-            var localScale = card.transform.localScale;
-            var mat = card.GetComponent<MeshFilter>().sharedMesh.bounds.size;
+        private void PlaceCards()
+        {
+            // TODO Recall cards back to the pool before doing this
+            
+            var localScale = cardPrefab.transform.localScale;
+            var mat = cardPrefab.GetComponent<MeshFilter>().sharedMesh.bounds.size;
             localScale.Scale(mat);
+
             var paddingSide = 0.02f;
             var paddingTop = 0.035f;
-            var boardX = width * localScale.x + ((width ) * paddingSide);
-            var boardZ = height * localScale.z + ((height) * paddingTop);
-            
+
+            var boardX = width * localScale.x + width * paddingSide;
+            var boardZ = height * localScale.z + height * paddingTop;
+
             var stepHeight = paddingTop + localScale.z;
             var stepWidth = paddingSide + localScale.x;
 
-            var limitWidth = boardX / 2f - (localScale.x / 2 + paddingSide);
-            var limitHeight = boardZ / 2f - (localScale.z / 2 + paddingTop);
+            var limitWidth = boardX / 2f - (localScale.x / 2f + paddingSide);
+            var limitHeight = boardZ / 2f - (localScale.z / 2f + paddingTop);
 
             var j = 0;
 
@@ -87,15 +109,31 @@ namespace DefaultNamespace
             {
                 for (var z = -limitHeight; z < limitHeight + 0.1f; z += stepHeight)
                 {
-                    var newCard = _cards.Get();
-                    //Instantiate(card, new Vector3(0, 0, 0), Quaternion.identity);
-                    newCard.GetComponent<Card>().SetValues(cards[j].Item1, cards[j].Item2);
-                    var pos = spawnPoint.localPosition;
-                    newCard.transform.SetLocalPositionAndRotation(
-                        new Vector3(x, spawnPoint.localScale.y / 2 + 0.0001f + pos.y, z), Quaternion.identity);
-                    newCard.transform.rotation = Quaternion.Euler(0, 0, 180);
+                    var newCard = _cardsPool.Get();
+                    newCard.GetComponent<Card>()
+                        .SetValues(_cardNumberAndSuitList[j].Item1, _cardNumberAndSuitList[j].Item2,
+                            GetColorFromSuit(_cardNumberAndSuitList[j].Item2));
+
+                    var y = spawnPoint.localScale.y / 2f + 0.0001f + spawnPoint.localPosition.y;
+
+                    newCard.transform.SetLocalPositionAndRotation(new Vector3(x, y, z), Quaternion.Euler(0, 0, 180));
+
                     j++;
                 }
+            }
+        }
+
+        private static CardColor GetColorFromSuit(CardSuit suit)
+        {
+            switch (suit)
+            {
+                case CardSuit.Club:
+                case CardSuit.Spade:
+                    return CardColor.Black;
+                case CardSuit.Diamond:
+                case CardSuit.Heart:
+                default:
+                    return CardColor.Red;
             }
         }
     }
