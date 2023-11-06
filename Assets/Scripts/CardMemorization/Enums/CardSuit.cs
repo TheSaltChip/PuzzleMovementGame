@@ -1,6 +1,6 @@
 namespace CardMemorization.Enums
 {
-    public enum CardSuits
+    public enum CardSuit
     {
         Diamond,
         Club,

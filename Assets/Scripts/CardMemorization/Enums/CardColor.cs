@@ -1,6 +1,6 @@
 ﻿namespace CardMemorization.Enums
 {
-    public enum CardColors
+    public enum CardColor
     {
         Black,
         Red

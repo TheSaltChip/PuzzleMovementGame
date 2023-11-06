@@ -1,6 +1,6 @@
 namespace CardMemorization.Enums
 {
-    public enum CardRules
+    public enum CardRule
     {
         AllNumber, //All suits and colors, matching numbers
         Color, //Same color
