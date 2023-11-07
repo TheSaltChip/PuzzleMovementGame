@@ -1,5 +1,5 @@
 using CardMemorization.Enums;
-using Level.Completables;
+using Completables;
 using UnityEngine;
 
 namespace CardMemorization
