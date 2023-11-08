@@ -62,7 +62,7 @@ MonoBehaviour:
   OnResetState:
     m_PersistentCalls:
       m_Calls: []
-  canRepeat: 1
+  <CanRepeat>k__BackingField: 0
   patternLength: 5
   blinkDuration: 0.5
 --- !u!114 &4636577624453923166
@@ -321,10 +321,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardPlate: {fileID: 4636577625771362803}
-  gridDimensions: {x: 1, y: 5}
+  gridDimensionX: 3
+  gridDimensionZ: 3
   buttonPrefab: {fileID: 2213294441689331794, guid: 3f440b50537819a4a80cab4674180e01,
     type: 3}
-  rb: {fileID: 4636577625771362812}
+  baseRigidbody: {fileID: 4636577625771362812}
   poseCollider: {fileID: 4636577624453923167}
   beforeResize:
     m_PersistentCalls:
@@ -408,7 +409,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9371706bd8efd3945867783d22c13d76, type: 2}
+  - {fileID: 2100000, guid: 4108c3b5aa613a14a9e7d395a5f75fa6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

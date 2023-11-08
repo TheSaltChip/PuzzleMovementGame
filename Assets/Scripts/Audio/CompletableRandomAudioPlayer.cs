@@ -1,7 +1,5 @@
-﻿using Autohand;
-using Level.Completables;
+﻿using Completables;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Audio
 {
@@ -9,12 +7,12 @@ namespace Audio
     public class CompletableRandomAudioPlayer : MonoBehaviour
     {
         [SerializeField] private AudioSource source;
-        [SerializeField] private Completable button;
+        [SerializeField] private Completable completable;
         [SerializeField] private AudioClip[] clips;
 
         private void Awake()
         {
-            button.OnDone.AddListener(PlayRandomClickSound);
+            completable.OnDone.AddListener(PlayRandomClickSound);
         }
 
         private void PlayRandomClickSound()

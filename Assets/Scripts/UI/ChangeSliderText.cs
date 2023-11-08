@@ -5,26 +5,27 @@ using Slider = UnityEngine.UI.Slider;
 
 namespace UI
 {
-    [RequireComponent(typeof(Slider))]
     public class ChangeSliderText : MonoBehaviour
     {
+        [SerializeField] private Slider slider;
         [SerializeField] private TMP_Text text;
         [SerializeField] private float constant = 1f;
-        
-        public Slider Slider { get; private set; }
 
-        private void Awake()
+        private void Start()
         {
-            if (!gameObject.TryGetComponent(out Slider slider)) return;
-            
-            Slider = slider;
-
-            Slider.onValueChanged.AddListener(ChangeText);
+            slider.onValueChanged.AddListener(ChangeText);
+            ChangeText(slider.value);
         }
 
-        public void ChangeText(float inputText)
+        private void OnDisable()
         {
-            text.text = (inputText * constant).ToString(CultureInfo.InvariantCulture);
+            slider.onValueChanged?.RemoveListener(ChangeText);
+        }
+        
+        private void ChangeText(float inputText)
+        {
+            text.text = (inputText * constant)
+                .ToString(CultureInfo.InvariantCulture);
         }
     }
 }
