@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using CardMemorization.Enums;
 using UnityEngine;
 using UnityEngine.Pool;
+using Util;
 using Random = UnityEngine.Random;
 
 namespace CardMemorization
@@ -151,19 +152,6 @@ namespace CardMemorization
                 var k = Rng.Next(n + 1);
                 (list[k], list[n]) = (list[n], list[k]);
             }
-        }
-    }
-
-    public class ReturnToPool : MonoBehaviour
-    {
-        public IObjectPool<GameObject> pool;
-
-        public void Return()
-        {
-            // Return to the pool
-
-            if (!gameObject.activeSelf) return;
-            pool.Release(gameObject);
         }
     }
 }
