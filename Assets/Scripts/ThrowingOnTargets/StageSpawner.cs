@@ -1,16 +1,16 @@
-﻿using Events;
-using ThrowingOnTargets.ScriptableObjects;
-using Unity.VisualScripting;
+﻿using ThrowingOnTargets.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Pool;
 using Util;
+using Variables;
 
 namespace ThrowingOnTargets
 {
     public class StageSpawner : MonoBehaviour
     {
-        [SerializeField] private Stages stages;
+        [SerializeField] private StagesSO stages;
         [SerializeField] private GameObject target;
+        [SerializeField] private IntVariable targetsInStage;
 
         private IObjectPool<GameObject> _targets;
 
@@ -28,14 +28,18 @@ namespace ThrowingOnTargets
         public void SetupStage()
         {
             var stageLocations = stages.CurrentStage();
-            var locations = stageLocations.locations;
-            var rotations = stageLocations.locations;
-            
-            for (var i = 0; i < locations.Length; i++)
+
+            var posRots = stageLocations.posRots;
+
+            targetsInStage.value = posRots.Length;
+
+            for (var i = 0; i < posRots.Length; i++)
             {
                 var t = _targets.Get();
 
-                t.transform.SetLocalPositionAndRotation(locations[i], Quaternion.Euler(rotations[i]));
+                t.transform.SetLocalPositionAndRotation(
+                    posRots[i].location,
+                    Quaternion.Euler(posRots[i].rotation));
             }
         }
 

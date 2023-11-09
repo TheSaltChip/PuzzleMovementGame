@@ -129,9 +129,9 @@ MonoBehaviour:
   m_OnEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 61060182026405198}
-        m_TargetAssemblyTypeName: Util.ReturnToPool, Assembly-CSharp
-        m_MethodName: Return
+      - m_Target: {fileID: 11400000, guid: cfe9b1138b275034ab626d2acba9487d, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -141,9 +141,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: cfe9b1138b275034ab626d2acba9487d, type: 2}
-        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
+      - m_Target: {fileID: 61060182026405198}
+        m_TargetAssemblyTypeName: Util.ReturnToPool, Assembly-CSharp
+        m_MethodName: Return
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

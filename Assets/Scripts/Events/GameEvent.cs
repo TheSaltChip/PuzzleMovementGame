@@ -12,7 +12,7 @@ namespace Events
 
         public void Raise()
         {
-            for (var i = _listeners.Count; i >= 0; i--)
+            for (var i = _listeners.Count-1; i >= 0; i--)
             {
                 _listeners[i].OnEventRaised();
             }

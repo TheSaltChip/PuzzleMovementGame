@@ -9,6 +9,21 @@ namespace Variables
         public int ConstantValue;
         public IntVariable Variable;
 
-        public int Value => UseConstant ? ConstantValue : Variable.value;
+        public int Value
+        {
+            get =>
+                UseConstant ? ConstantValue : Variable.value;
+            set
+
+            {
+                if (UseConstant)
+                {
+                    ConstantValue = value;
+                    return;
+                }
+
+                Variable.value = value;
+            }
+        }
     }
 }

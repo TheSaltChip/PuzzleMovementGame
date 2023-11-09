@@ -3,10 +3,8 @@
 namespace ThrowingOnTargets.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "StageLocations", menuName = "Target/StageLocations")]
-    public class StageLocations : ScriptableObject
+    public class StageLocationsSO : ScriptableObject
     {
-        public Vector3[] locations;
-        public Vector3[] eulerRotations;
-        
+        public PosRotScl[] posRots;
     }
 }
