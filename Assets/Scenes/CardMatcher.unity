@@ -1607,8 +1607,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 590811603}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.344, y: 0.278, z: 0.996}
+  m_LocalRotation: {x: -0.54325193, y: -0, z: -0, w: 0.83956975}
+  m_LocalPosition: {x: -0.344, y: 0.887, z: 0.996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1616,7 +1616,7 @@ Transform:
   - {fileID: 6952692004078663777}
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -65.811, y: 0, z: 0}
 --- !u!114 &590811606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2891,6 +2891,37 @@ MonoBehaviour:
       m_Calls: []
   suit: 3
   number: 5
+--- !u!1 &1289485595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1289485596}
+  m_Layer: 0
+  m_Name: Spawnpoint
+  m_TagString: SpawnPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1289485596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289485595}
+  m_LocalRotation: {x: -0, y: 0.02478112, z: -0, w: 0.9996929}
+  m_LocalPosition: {x: -0.444, y: 0.638, z: -0.32}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1400001559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3881,6 +3912,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XR Rig
+      objectReference: {fileID: 0}
+    - target: {fileID: 7292963240484694957, guid: 838cedad75eab554b8a177b7ca90e98d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 838cedad75eab554b8a177b7ca90e98d, type: 3}
@@ -6339,6 +6375,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pieces
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916252098901692417, guid: af4c032808726f9498910796b7b99b18,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af4c032808726f9498910796b7b99b18, type: 3}
@@ -9113,6 +9154,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Puzzleboard
+      objectReference: {fileID: 0}
+    - target: {fileID: 8150025081296378681, guid: dc1691bac5da8bd4d83f490c575d115a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8813935956555039107, guid: dc1691bac5da8bd4d83f490c575d115a,
         type: 3}
