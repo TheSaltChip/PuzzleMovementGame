@@ -1,4 +1,6 @@
-﻿using ThrowingOnTargets.ScriptableObjects;
+﻿using System.Collections;
+using System.Collections.Generic;
+using ThrowingOnTargets.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Pool;
 using Util;
@@ -13,10 +15,13 @@ namespace ThrowingOnTargets
         [SerializeField] private IntVariable targetsInStage;
 
         private IObjectPool<GameObject> _targets;
+        private Coroutine _setupCoroutine;
+        private WaitForSeconds _waitFor100Milliseconds;
 
         private void Awake()
         {
             _targets = new ObjectPool<GameObject>(CreateTarget, GetFromPool, OnReleaseToPool, DestroyFromPool);
+            _waitFor100Milliseconds = new WaitForSeconds(0.1f);
         }
 
         private void Start()
@@ -32,14 +37,20 @@ namespace ThrowingOnTargets
             var posRots = stageLocations.posRots;
 
             targetsInStage.value = posRots.Length;
+            
+            StartCoroutine(SetStageCoroutine(posRots));
+        }
 
-            for (var i = 0; i < posRots.Length; i++)
+        private IEnumerator SetStageCoroutine(IList<PosRotScl> posRotScl)
+        {
+            for (var i = 0; i < posRotScl.Count; i++)
             {
+                yield return _waitFor100Milliseconds;
                 var t = _targets.Get();
 
                 t.transform.SetLocalPositionAndRotation(
-                    posRots[i].location,
-                    Quaternion.Euler(posRots[i].rotation));
+                    posRotScl[i].location,
+                    Quaternion.Euler(posRotScl[i].rotation));
             }
         }
 
