@@ -1,4 +1,7 @@
-﻿using ThrowingOnTargets.ScriptableObjects;
+﻿using System;
+using System.IO;
+using ThrowingOnTargets.ScriptableObjects;
+using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
 
 namespace ThrowingOnTargets
@@ -11,6 +14,9 @@ namespace ThrowingOnTargets
 
         [SerializeField] private bool save;
         [SerializeField] private int stageNumber;
+
+        private StreamWriter _writer;
+        private FileStream _fileStream;
 
         private void SaveStage()
         {
@@ -33,6 +39,25 @@ namespace ThrowingOnTargets
                 stage.posRots[i - 1].rotation = t.localRotation.eulerAngles;
                 stage.posRots[i - 1].scale = t.localScale;
             }
+
+            var dest = Application.dataPath + "/Stages/" + "test.dat";
+
+            print(dest);
+            
+            _fileStream = File.Exists(dest) ? File.OpenWrite(dest) : File.Create(dest);
+            
+            print(stages);
+            
+            var data = JsonUtility.ToJson(stages);
+            JsonUtility.FromJsonOverwrite(data, stages);
+            
+            print(stages);
+
+            _writer = new StreamWriter(_fileStream);
+            
+            _writer.Write(data);
+            _writer.Close();
+            _fileStream.Close();
         }
 
         private void Update()
