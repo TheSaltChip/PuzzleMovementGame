@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Events;
 using ThrowingOnTargets.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -13,7 +14,8 @@ namespace ThrowingOnTargets
         [SerializeField] private StagesSO stages;
         [SerializeField] private GameObject target;
         [SerializeField] private IntVariable targetsInStage;
-
+        [SerializeField] private GameEvent spawnStage; 
+            
         private IObjectPool<GameObject> _targets;
         private Coroutine _setupCoroutine;
         private WaitForSeconds _waitFor100Milliseconds;
