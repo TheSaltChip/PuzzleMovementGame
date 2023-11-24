@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Constants;
 using ThrowingOnTargets.Saveable;
 using ThrowingOnTargets.ScriptableObjects;
 using UnityEngine;
@@ -9,16 +10,18 @@ using Variables;
 namespace ThrowingOnTargets
 {
     [ExecuteInEditMode]
-    public class LevelSaver : MonoBehaviour
+    public class LevelSaverLoader : MonoBehaviour
     {
         [SerializeField] private GameObject parent;
         [SerializeField] private StagesSO stagesSO;
         [SerializeField] private IntVariable currentStageVariable;
-        [SerializeField, Min(1)] private int currentStage;
+        [SerializeField] private StringVariable levelName;
 
+        [Space]
+        
+        [SerializeField, Min(1)] private int currentStage;
         [SerializeField] private bool save;
         [SerializeField] private bool load;
-        [SerializeField] private string levelName;
 
         public UnityEvent stageLoaded;
 
@@ -27,9 +30,9 @@ namespace ThrowingOnTargets
         private StreamWriter _writer;
         private FileStream _fileStream;
 
-        private void SaveStage()
+        public void SaveStage()
         {
-            var dest = Path.Combine(Application.dataPath, "ThrowableLevels", $"{levelName}.dat");
+            var dest = Path.Combine(Application.dataPath, PathNames.Throwable, $"{levelName.value}.dat");
 
             var level = LoadLevel(dest);
 
@@ -79,7 +82,7 @@ namespace ThrowingOnTargets
 
             var level = new StagesSaveable
             {
-                name = levelName,
+                name = levelName.value,
                 stages = new Stage[5]
             };
 
@@ -96,9 +99,9 @@ namespace ThrowingOnTargets
             return level;
         }
 
-        private void LoadStage()
+        public void LoadStage()
         {
-            var dest = Path.Combine(Application.dataPath, "ThrowableLevels", $"{levelName}.dat");
+            var dest = Path.Combine(Application.dataPath, "ThrowableLevels", $"{levelName.value}.dat");
 
             Directory.CreateDirectory(Path.GetDirectoryName(dest)!);
 
@@ -119,7 +122,7 @@ namespace ThrowingOnTargets
             JsonUtility.FromJsonOverwrite(fileReader.ReadToEnd(), stagesSaveable);
 
             stagesSO.stages = stagesSaveable.stages;
-            stagesSO.levelName = levelName;
+            stagesSO.levelName = levelName.value;
 
             currentStageVariable.value = currentStage-1;
             
