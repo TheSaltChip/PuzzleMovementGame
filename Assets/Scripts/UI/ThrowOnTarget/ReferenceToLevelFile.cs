@@ -1,11 +1,32 @@
-﻿using TMPro;
+﻿using System.IO;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.ThrowOnTarget
 {
     public class ReferenceToLevelFile : MonoBehaviour
     {
         [SerializeField] private TMP_Text text;
-        [SerializeField] private string 
+        
+        private string _filePath;
+
+        public string FileName
+        {
+            get => _filePath;
+            set
+            {
+                _filePath = value;
+                text.text = _filePath.Split(Path.DirectorySeparatorChar)[^1].Split('.')[0];
+            }
+        }
+
+        private Button Button;
+
+        public string FilePath()
+        {
+            
+            return Path.Combine(Constants.PathNames.Throwable, FileName);
+        }
     }
 }
