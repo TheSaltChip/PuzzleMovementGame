@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using UnityEngine.Device;
 
 namespace Constants
 {
@@ -11,8 +12,8 @@ namespace Constants
 
     public static class PathNames
     {
-        public const string Levels = "Levels";
-
+        public static readonly string Levels = Path.Combine(Application.dataPath, "Levels");
         public static readonly string Throwable = Path.Combine(Levels, "Throwable");
+        public static readonly string CustomThrowable = Path.Combine(Throwable, "Custom");
     }
 }
