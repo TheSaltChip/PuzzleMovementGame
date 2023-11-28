@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CollisionPainter : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class CollisionPainter : MonoBehaviour
     private float strength = 1f;
     private float hardness = 0.5f;
     private float radius = 0.25f;
+    public UnityEvent collided;
 
     private void OnCollisionEnter(Collision other)
     {
@@ -18,5 +20,11 @@ public class CollisionPainter : MonoBehaviour
             Vector3 pos = other.contacts[0].point;
             PaintManager.Instance.paint(p,pos,radius,hardness,strength,paintColor);
         }
+        collided.Invoke();
+    }
+
+    public void SetColor(Color color)
+    {
+        paintColor = color;
     }
 }

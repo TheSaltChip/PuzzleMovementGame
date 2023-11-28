@@ -14,5 +14,15 @@ namespace Util
             if (!gameObject.activeSelf) return;
             pool?.Release(gameObject);
         }
+
+        public void ReturnByName(Object obj)
+        {
+            if (!gameObject.activeSelf) return;
+            if (obj.name == gameObject.name)
+            {
+                pool?.Release(gameObject);
+                print(gameObject.name);
+            }
+        }
     }
 }
