@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using CardMemorization;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,7 +11,6 @@ namespace Painting
     public class Shooter : MonoBehaviour
     {
         private Color _activeColor = Color.black;
-
         [SerializeField] private GameObject paintballPrefab;
         [SerializeField] private float projectileSpeed;
         
@@ -55,7 +55,7 @@ namespace Painting
             Destroy(obj);
         }
 
-        public void Shoot()
+        void Shoot()
         {
             var ball = _paintballPool.Get();
             var rb = ball.GetComponent<Rigidbody>();
@@ -66,5 +66,6 @@ namespace Painting
             ball.transform.position = tr.position;
             rb.AddForce(speed);
         }
+        
     }
 }

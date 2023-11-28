@@ -7,9 +7,9 @@ using UnityEngine.Events;
 public class CollisionPainter : MonoBehaviour
 {
     [SerializeField] private Color paintColor;
-    private float strength = 1f;
-    private float hardness = 0.5f;
-    private float radius = 0.25f;
+    [SerializeField] private float strength = 1f;
+    [SerializeField] private float hardness = 0.5f;
+    [SerializeField] private float radius = 0.25f;
     public UnityEvent collided;
 
     private void OnCollisionEnter(Collision other)
@@ -17,6 +17,7 @@ public class CollisionPainter : MonoBehaviour
         Paintable p = other.collider.GetComponent<Paintable>();
         if (p != null)
         {
+            print("collided");
             Vector3 pos = other.contacts[0].point;
             PaintManager.Instance.paint(p,pos,radius,hardness,strength,paintColor);
         }
