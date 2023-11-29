@@ -21,13 +21,8 @@ namespace UI.ThrowOnTarget
                 var option = Instantiate(template, transform, false);
                 var referenceToLevelFile = option.GetComponent<ReferenceToLevelFile>();
 
-                referenceToLevelFile.FileName = fileName;
+                referenceToLevelFile.FilePath = fileName;
             }
-        }
-
-        private void Awake()
-        {
-            Populate();
         }
     }
 }

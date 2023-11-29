@@ -13,7 +13,7 @@ namespace ThrowingOnTargets
     public class LevelSaverLoader : MonoBehaviour
     {
         [SerializeField] private GameObject parent;
-        [SerializeField] private StagesSO stagesSO;
+        [SerializeField] private ThrowLevelSO throwLevelSO;
         [SerializeField] private IntVariable currentStageVariable;
         [SerializeField] private StringVariable levelName;
 
@@ -121,8 +121,8 @@ namespace ThrowingOnTargets
 
             JsonUtility.FromJsonOverwrite(fileReader.ReadToEnd(), stagesSaveable);
 
-            stagesSO.stages = stagesSaveable.stages;
-            stagesSO.levelName = levelName.value;
+            throwLevelSO.stages = stagesSaveable.stages;
+            throwLevelSO.levelName = levelName.value;
 
             currentStageVariable.value = currentStage-1;
             

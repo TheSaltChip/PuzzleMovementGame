@@ -11,7 +11,7 @@ namespace UI.ThrowOnTarget
         
         private string _filePath;
 
-        public string FileName
+        public string FilePath
         {
             get => _filePath;
             set
@@ -19,14 +19,6 @@ namespace UI.ThrowOnTarget
                 _filePath = value;
                 text.text = _filePath.Split(Path.DirectorySeparatorChar)[^1].Split('.')[0];
             }
-        }
-
-        private Button Button;
-
-        public string FilePath()
-        {
-            
-            return Path.Combine(Constants.PathNames.Throwable, FileName);
         }
     }
 }

@@ -4,6 +4,7 @@ using Events;
 using ThrowingOnTargets.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Serialization;
 using Util;
 using Variables;
 
@@ -11,10 +12,9 @@ namespace ThrowingOnTargets
 {
     public class StageSpawner : MonoBehaviour
     {
-        [SerializeField] private StagesSO stages;
+        [SerializeField] private ThrowLevelSO throwLevel;
         [SerializeField] private GameObject target;
-        [SerializeField] private IntVariable targetsInStage;
-        [SerializeField] private GameEvent spawnStage; 
+        [SerializeField] private IntVariable targetsInStage; 
             
         private IObjectPool<GameObject> _targets;
         private Coroutine _setupCoroutine;
@@ -28,13 +28,13 @@ namespace ThrowingOnTargets
 
         private void Start()
         {
-            if (stages.stages.Length == 0) return;
+            if (throwLevel.stages.Length == 0) return;
             SetupStage();
         }
 
         public void SetupStage()
         {
-            var stageLocations = stages.CurrentStage();
+            var stageLocations = throwLevel.CurrentStage();
 
             var posRots = stageLocations.posRots;
 

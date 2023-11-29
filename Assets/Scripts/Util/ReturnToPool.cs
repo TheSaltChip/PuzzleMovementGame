@@ -12,6 +12,7 @@ namespace Util
             // Return to the pool
 
             if (!gameObject.activeSelf) return;
+            
             pool?.Release(gameObject);
         }
     }
