@@ -1,16 +1,26 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ColorTracker : MonoBehaviour
+namespace Painting
 {
-    [SerializeField] private Color color;
-    public UnityEvent<Color> press;
-
-    private void OnCollisionEnter(Collision other)
+    public class ColorTracker : MonoBehaviour
     {
-        press.Invoke(color);
+        [SerializeField] private Color color;
+        public UnityEvent<Color> press;
+        public UnityEvent<Color> changeColor;
+
+        private void OnCollisionEnter(Collision other)
+        {
+            press.Invoke(color);
+            changeColor.Invoke(color);
+            gameObject.SetActive(false);
+        }
+
+        public void Activate(Color c)
+        {
+            gameObject.SetActive(true);
+        }
     }
 }
