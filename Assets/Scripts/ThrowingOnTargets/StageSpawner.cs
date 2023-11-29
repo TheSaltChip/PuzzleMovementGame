@@ -26,12 +26,6 @@ namespace ThrowingOnTargets
             _waitFor100Milliseconds = new WaitForSeconds(0.1f);
         }
 
-        private void Start()
-        {
-            if (throwLevel.stages.Length == 0) return;
-            SetupStage();
-        }
-
         public void SetupStage()
         {
             var stageLocations = throwLevel.CurrentStage();
