@@ -182,9 +182,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962c35f98ce84f809657c13d7ed316ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedLevelReference: {fileID: 11400000, guid: bd19921e34f85cd41b243a4265dea457,
+  selectedLevelReference: {fileID: 11400000, guid: be15dafaa2ae2b1478b3db6fa4da529b,
     type: 2}
-  loadLevelInfo: {fileID: 11400000, guid: 2d3ff602e5640c84fbfe13c2d7a987f5, type: 2}
+  onButtonSet:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 2d3ff602e5640c84fbfe13c2d7a987f5, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8834380977009600802
 GameObject:
   m_ObjectHideFlags: 0

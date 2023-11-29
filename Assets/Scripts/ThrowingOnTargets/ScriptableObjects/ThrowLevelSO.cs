@@ -5,7 +5,7 @@ using Variables;
 namespace ThrowingOnTargets.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "TargetStages", menuName = "Target/Stages")]
-    public class StagesSO : ScriptableObject
+    public class ThrowLevelSO : ScriptableObject
     {
         public string levelName;
         public IntReference currentStage;
