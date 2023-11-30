@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Events;
 using ThrowingOnTargets.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Serialization;
 using Util;
 using Variables;
 
@@ -15,6 +13,7 @@ namespace ThrowingOnTargets
         [SerializeField] private ThrowLevelSO throwLevel;
         [SerializeField] private GameObject target;
         [SerializeField] private IntVariable targetsInStage; 
+        [SerializeField] private TargetInfo targetInfo; 
             
         private IObjectPool<GameObject> _targets;
         private Coroutine _setupCoroutine;
@@ -22,6 +21,7 @@ namespace ThrowingOnTargets
 
         private void Awake()
         {
+            targetInfo.spawnPoint = transform.localPosition;
             _targets = new ObjectPool<GameObject>(CreateTarget, GetFromPool, OnReleaseToPool, DestroyFromPool);
             _waitFor100Milliseconds = new WaitForSeconds(0.1f);
         }
