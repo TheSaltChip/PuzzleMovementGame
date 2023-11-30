@@ -1,6 +1,4 @@
 ﻿using System;
-using ThrowingOnTargets.ScriptableObjects;
-using Variables;
 
 namespace ThrowingOnTargets.Saveable
 {
