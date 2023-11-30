@@ -39,7 +39,7 @@ namespace UI
         public void StartGame()
         {
             HideAll();
-            SceneTransitionManager.Instance.LoadScene("2 Game Scene");
+            SceneTransitionManager.Instance.LoadScene("PuzzleWorld");
         }
 
         public void HideAll()
