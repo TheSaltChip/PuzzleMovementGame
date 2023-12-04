@@ -10,9 +10,10 @@ namespace Util
         public void Return()
         {
             // Return to the pool
-
+            print($"Name: {name} {gameObject.activeSelf}");
+            print(pool);
             if (!gameObject.activeSelf) return;
-            
+
             pool?.Release(gameObject);
         }
     }

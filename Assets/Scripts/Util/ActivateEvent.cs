@@ -14,7 +14,7 @@ namespace Util
             if (!value) return;
             
             value = false;
-            activate.Invoke();
+            activate?.Invoke();
         }
-    }
+    }   
 }

@@ -17,8 +17,6 @@ namespace ThrowingOnTargets
 
         public void TargetHit()
         {
-            if (--targetsLeftInStage.value > 0) return;
-            
             ++currentStage.Value;
             if (currentStage.Value == 4) currentStage.Value = 0;
             
