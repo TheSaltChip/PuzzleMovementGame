@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ThrowingOnTargets.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Pool;
 using Util;
 using Variables;
@@ -15,6 +16,8 @@ namespace ThrowingOnTargets
         [SerializeField] private IntVariable targetsInStage;
         [SerializeField] private TargetInfo targetInfo;
 
+        public UnityEvent onStageReady;
+        
         private IObjectPool<GameObject> _targets;
         private Coroutine _setupCoroutine;
         private WaitForSeconds _waitFor100Milliseconds;
@@ -50,6 +53,8 @@ namespace ThrowingOnTargets
             targetsInStage.value = posRots.Length;
 
             StartCoroutine(SetStageCoroutine(posRots));
+            
+            onStageReady?.Invoke();
         }
 
         private IEnumerator SetStageCoroutine(IList<PosRotScl> posRotScl)

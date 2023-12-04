@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using ThrowingOnTargets.Saveable;
 using ThrowingOnTargets.ScriptableObjects;
 using UnityEngine;
-using Util;
 using Random = UnityEngine.Random;
 
 namespace Difficulty
@@ -27,7 +26,7 @@ namespace Difficulty
                     CreateStages(5, 6, 10);
                     break;
                 case LevelDifficulty.Hard:
-                    CreateStages(7, 8, 13);
+                    CreateStages(7, 10, 15);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null);
@@ -43,11 +42,11 @@ namespace Difficulty
             for (var i = 0; i < numStages; i++)
             {
                 var rand = Random.Range(minTargetsPerStage, maxTargetsPerStage + 1);
-                
+
                 while (true)
                 {
                     if (pos.Count == gridLength || pos.Count == rand) break;
-                    
+
                     var num = Random.Range(0, gridLength);
 
                     if (pos.Contains(num)) continue;
@@ -55,12 +54,10 @@ namespace Difficulty
                     pos.Add(num);
                 }
 
-
                 var stage = new Stage { posRots = new PosRotScl[pos.Count] };
 
                 for (var j = 0; j < pos.Count; j++)
                 {
-                    Debug.Log($"{j} {stage.posRots.Length} , {targetInfo.grid.Length} {pos[j]}");
                     stage.posRots[j] = new PosRotScl
                     {
                         location = targetInfo.grid[pos[j]],
@@ -73,6 +70,8 @@ namespace Difficulty
                 throwLevel.currentStage.Value = 0;
                 pos.Clear();
             }
+
+            Array.Sort(throwLevel.stages, (s, w) => s.posRots.Length - w.posRots.Length);
         }
     }
 }

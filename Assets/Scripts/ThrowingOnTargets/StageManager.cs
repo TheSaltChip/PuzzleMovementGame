@@ -19,8 +19,9 @@ namespace ThrowingOnTargets
         {
             ++currentStage.Value;
             if (currentStage.Value == 4) currentStage.Value = 0;
-            
-            stageDone?.Invoke();
+
+            if (targetsLeftInStage.value == 0)
+                stageDone?.Invoke();
         }
     }
 }

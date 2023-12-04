@@ -8,11 +8,11 @@ namespace UI.ThrowOnTarget
     {
         [SerializeField] private TMP_Text text;
         [SerializeField] private IntVariable variable;
-        [SerializeField] private int padding;
+        [SerializeField] private int offset;
 
         public void UpdateText()
         {
-            text.text = (padding + variable.value).ToString();
+            text.text = (offset + variable.value).ToString();
         }
     }
 }
