@@ -26,6 +26,11 @@ namespace Painting
         {
             _rot = this.transform.rotation;
             _paintballPool = new ObjectPool<GameObject>(CreateToPool, GetFromPool, OnReleaseToPool, DestroyFromPool);
+            for (int i = 0; i < 10; i++)
+            {
+                GameObject obj = _paintballPool.Get();
+                _paintballPool.Release(obj);
+            }
         }
         
         private GameObject CreateToPool()
