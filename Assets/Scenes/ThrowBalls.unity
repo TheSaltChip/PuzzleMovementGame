@@ -1755,14 +1755,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetsLeftInStage: {fileID: 11400000, guid: 33bfed20c3b262c42920e5f23c1e4a7b, type: 2}
-  currentStage:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 11400000, guid: d04d211d079c9ad41b53fa7f36c70c49, type: 2}
-  stageDone:
+  currentLevel: {fileID: 11400000, guid: 0d66f0d5414b28f4fbe65c1e077af74b, type: 2}
+  onStageDone:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: d70b579659e90ff47bf60201c6701e79, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onLevelDone:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 3cec2ce2074757142934308ece0d1e54, type: 2}
         m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 1
@@ -1807,7 +1819,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 731297409}
         m_TargetAssemblyTypeName: ThrowingOnTargets.StageManager, Assembly-CSharp
-        m_MethodName: TargetHit
+        m_MethodName: CheckLevelStatus
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2407,9 +2419,9 @@ MonoBehaviour:
   activate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 605fcae2f7e4405418ff6574a8e2d0d1, type: 2}
+      - m_Target: {fileID: 11400000, guid: 7118d75cd2f5c924f8c024e4f25eb016, type: 2}
         m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2600,7 +2612,7 @@ PrefabInstance:
     - target: {fileID: 7292963240484694957, guid: 838cedad75eab554b8a177b7ca90e98d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 838cedad75eab554b8a177b7ca90e98d, type: 3}
@@ -3446,7 +3458,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1801707136}
   m_LocalRotation: {x: 0.11413701, y: 0.031454884, z: 0.0009580244, w: 0.9929665}
-  m_LocalPosition: {x: 0.49267435, y: 4.467073, z: -5.6205354}
+  m_LocalPosition: {x: -1.02, y: 2.83, z: -1.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

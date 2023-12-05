@@ -20,24 +20,30 @@ namespace Difficulty
             switch (difficulty)
             {
                 case LevelDifficulty.Easy:
-                    CreateStages(3, 4, 6);
+                    CreateStages(3, 4, 6, 1);
                     break;
                 case LevelDifficulty.Medium:
-                    CreateStages(5, 6, 10);
+                    CreateStages(5, 6, 10, 2);
                     break;
                 case LevelDifficulty.Hard:
-                    CreateStages(7, 10, 15);
+                    CreateStages(7, 10, 15, 2);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null);
             }
         }
 
-        private void CreateStages(int numStages, int minTargetsPerStage, int maxTargetsPerStage)
+        private void CreateStages(int numStages, int minTargetsPerStage, int maxTargetsPerStage, int ring)
         {
-            var gridLength = targetInfo.grid.Length;
+            var gridLength = ring switch
+            {
+                1 => targetInfo.GridRing1.Length,
+                _ => targetInfo.GridRing1To2.Length
+            };
+
             var pos = new List<int>(numStages);
             throwLevel.stages = new Stage[numStages];
+            throwLevel.currentStage.Value = 0;
 
             for (var i = 0; i < numStages; i++)
             {
@@ -66,8 +72,9 @@ namespace Difficulty
                     };
                 }
 
+
                 throwLevel.stages[i] = stage;
-                throwLevel.currentStage.Value = 0;
+
                 pos.Clear();
             }
 

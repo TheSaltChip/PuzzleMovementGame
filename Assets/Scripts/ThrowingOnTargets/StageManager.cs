@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ThrowingOnTargets.ScriptableObjects;
+using UnityEngine;
 using UnityEngine.Events;
 using Variables;
 
@@ -7,21 +8,24 @@ namespace ThrowingOnTargets
     public class StageManager : MonoBehaviour
     {
         [SerializeField] private IntVariable targetsLeftInStage;
-        [SerializeField] private IntReference currentStage;
-        public UnityEvent stageDone;
+        [SerializeField] private ThrowLevelSO currentLevel;
+        
+        public UnityEvent onStageDone;
+        public UnityEvent onLevelDone;
 
-        private void Awake()
+        public void CheckLevelStatus()
         {
-            currentStage.Variable.value = 0;
-        }
+            if (targetsLeftInStage.value == 0) return;
 
-        public void TargetHit()
-        {
-            ++currentStage.Value;
-            if (currentStage.Value == 4) currentStage.Value = 0;
+            ++currentLevel.currentStage.Value;
+            
+            if (currentLevel.currentStage.Value == currentLevel.stages.Length)
+            {
+                onLevelDone?.Invoke();
+                return;
+            }
 
-            if (targetsLeftInStage.value == 0)
-                stageDone?.Invoke();
+            onStageDone?.Invoke();
         }
     }
 }
