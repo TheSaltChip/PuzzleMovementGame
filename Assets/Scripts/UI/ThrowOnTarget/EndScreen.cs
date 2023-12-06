@@ -13,6 +13,5 @@ namespace UI.ThrowOnTarget
         {
             text.text = level.levelName;
         }
-
     }
 }
