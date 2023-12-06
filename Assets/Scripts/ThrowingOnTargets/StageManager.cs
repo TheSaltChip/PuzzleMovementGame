@@ -20,7 +20,7 @@ namespace ThrowingOnTargets
             if (--targetsLeftInStage.value > 0) return;
             
             ++currentStage.Value;
-            if (currentStage.Value == 4) currentStage.Value = 0;
+            if (currentStage.Value > 4) currentStage.Value = 0;
             
             stageDone?.Invoke();
         }
