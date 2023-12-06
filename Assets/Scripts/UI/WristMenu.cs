@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using SceneTransition;
 using TMPro;
@@ -35,7 +36,7 @@ namespace UI
             for (var i = 1; i < sceneCount; i++)
             {
                 var sceneName = SceneUtility.GetScenePathByBuildIndex(i)
-                    .Split('/')
+                    .Split(Path.PathSeparator)
                     .Last()
                     .Split('.')[0];
             

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Autohand;
 using UnityEngine;
 
 public class Throwable : MonoBehaviour
@@ -19,21 +16,20 @@ public class Throwable : MonoBehaviour
 
     public void Grabbed()
     {
-        _useForce = true;
+        
     }
 
     public void Released()
     {
-        _useForce = false;
+        _useForce = true;
     }
 
     void FixedUpdate()
     {
         if (_useForce)
         {
-            _rigidBody.AddForce(_rigidBody.mass*_rigidBody.velocity);
+            _useForce = false;
+            _rigidBody.AddForce(_rigidBody.mass*_rigidBody.velocity, ForceMode.Impulse);
         }
-        
-        
     }
 }

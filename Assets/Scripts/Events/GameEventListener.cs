@@ -20,7 +20,7 @@ namespace Events
 
         public void OnEventRaised()
         {
-            response.Invoke();
+            response?.Invoke();
         }
     }
 }
