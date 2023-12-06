@@ -6,5 +6,15 @@ namespace Variables
     public class IntVariable : ScriptableObject
     {
         public int value;
+        
+        public void Increment()
+        {
+            ++value;
+        }
+
+        public void Decrement()
+        {
+            --value;
+        }
     }
 }
