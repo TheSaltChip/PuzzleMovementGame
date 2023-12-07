@@ -2077,7 +2077,6 @@ GameObject:
   - component: {fileID: 1915315747351309140}
   - component: {fileID: 6848510780333725763}
   - component: {fileID: 3503554920653746543}
-  - component: {fileID: 5315080829250799393}
   m_Layer: 5
   m_Name: Info
   m_TagString: Untagged
@@ -2212,25 +2211,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5315080829250799393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2163511587835142240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7951c64acb0fa62458bf30a60089fe2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 0
-  m_CheckFor2DOcclusion: 0
-  m_CheckFor3DOcclusion: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RaycastTriggerInteraction: 1
 --- !u!1 &2237194786505937158
 GameObject:
   m_ObjectHideFlags: 0
@@ -5927,7 +5907,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Edit Custom Levels
+  m_text: 'Edit
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d434188bcc4843745a3fd626038061b6, type: 2}
   m_sharedMaterial: {fileID: 4687939059374929122, guid: d434188bcc4843745a3fd626038061b6,
@@ -5955,7 +5937,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.8
+  m_fontSize: 39.65
   m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 1
