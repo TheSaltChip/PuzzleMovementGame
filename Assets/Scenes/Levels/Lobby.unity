@@ -1397,81 +1397,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.27556974, y: 0.23379983, z: 1.8696854}
   m_Center: {x: 0.93499994, y: 4.0012846, z: -0.22508344}
---- !u!1 &1018653712 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2626148472099397916, guid: b811c9844b8ec444cbfb996d1566fba1,
-    type: 3}
-  m_PrefabInstance: {fileID: 2626148473637990816}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1018653717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018653712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c191f4eb1483e24284ae06235f40375, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneInfo: {fileID: 11400000, guid: 50ddc4227ad49924fb1184c570629f81, type: 2}
---- !u!114 &1018653722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018653712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: ecd7bd45cc67daf4db90a3bc139979a9, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1018653717}
-        m_TargetAssemblyTypeName: Gate, Assembly-CSharp
-        m_MethodName: DeactivateGate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1018653723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018653712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: ba840275324bc534c991aecd26d1eb25, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1018653717}
-        m_TargetAssemblyTypeName: Gate, Assembly-CSharp
-        m_MethodName: ActivateGate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &1122560692 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3726740952248020482, guid: 5fbfbee0f9885764383291c4c5e18668,
@@ -3178,21 +3103,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4894362234438530392, guid: b811c9844b8ec444cbfb996d1566fba1,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5819418
-      objectReference: {fileID: 0}
-    - target: {fileID: 4894362234438530392, guid: b811c9844b8ec444cbfb996d1566fba1,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5819418
-      objectReference: {fileID: 0}
-    - target: {fileID: 4894362234438530392, guid: b811c9844b8ec444cbfb996d1566fba1,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5819418
       objectReference: {fileID: 0}
     - target: {fileID: 4894362234438530392, guid: b811c9844b8ec444cbfb996d1566fba1,
         type: 3}

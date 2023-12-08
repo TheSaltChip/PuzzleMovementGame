@@ -6,25 +6,25 @@ namespace Lobby
     public class Gate : MonoBehaviour
     {
         [SerializeField] private SceneInfo sceneInfo;
+        [SerializeField] private bool active;
 
         private bool _collided;
-        private bool _active;
 
         private void OnCollisionEnter()
         {
-            if (_collided || !_active) return;
+            if (_collided || !active) return;
             _collided = true;
             SceneTransitionManager.Instance.LoadScene(sceneInfo.sceneName);
         }
 
         public void ActivateGate()
         {
-            _active = true;
+            active = true;
         }
 
         public void DeactivateGate()
         {
-            _active = false;
+            active = false;
         }
     }
 }
