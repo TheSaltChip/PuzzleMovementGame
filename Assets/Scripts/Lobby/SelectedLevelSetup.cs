@@ -1,43 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using Lobby;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 
-public class SelectedLevelSetup : MonoBehaviour
+namespace Lobby
 {
-    [SerializeField] private SceneInfo sceneInfo;
-    private string _name;
-    private string _description;
-
-    // Sets scene information on interactive UI button
-    public void SetInfo()
+    public class SelectedLevelSetup : MonoBehaviour
     {
-        _name = gameObject.GetComponentInChildren<TMP_Text>().text;
-        sceneInfo.sceneName = _name;
+        [SerializeField] private SceneInfo sceneInfo;
 
-        var levelPath = Application.dataPath + "/Scenes/SceneInfo/" + _name + ".txt";
-
-        Directory.CreateDirectory(Path.GetDirectoryName(levelPath)!);
-        
-        if (!File.Exists(levelPath))
+        // Sets scene information on interactive UI button
+        public void SetSceneName()
         {
-            Debug.LogError("File not found");
-            return;
+            sceneInfo.sceneName = gameObject.GetComponentInChildren<TMP_Text>().text;
         }
-
-        var sceneSaveable = gameObject.AddComponent<sceneSaveable>();
-
-        using var filestream = File.OpenRead(levelPath);
-        using var fileReader = new StreamReader(filestream);
-
-        JsonUtility.FromJsonOverwrite(fileReader.ReadToEnd(), sceneSaveable);
-            
-        _description = sceneSaveable.description;
-        sceneInfo.sceneDescription = _description;
-        print(_description);
     }
-
 }
