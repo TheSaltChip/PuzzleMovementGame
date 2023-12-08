@@ -36,7 +36,7 @@ namespace UI
             for (var i = 1; i < sceneCount; i++)
             {
                 var sceneName = SceneUtility.GetScenePathByBuildIndex(i)
-                    .Split("/")
+                    .Split('/')
                     .Last()
                     .Split('.')[0];
             
