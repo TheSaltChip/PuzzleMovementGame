@@ -1,31 +1,30 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Lobby;
 using SceneTransition;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
-public class Gate : MonoBehaviour
+namespace Lobby
 {
-    [SerializeField] private SceneInfo sceneInfo;
-    private bool _collided;
-    private bool _active;
-    private void OnCollisionEnter(Collision other)
+    public class Gate : MonoBehaviour
     {
-        if (_collided || !_active) return;
-        _collided = true;
-        SceneTransitionManager.Instance.LoadScene(sceneInfo.sceneName);
-    }
+        [SerializeField] private SceneInfo sceneInfo;
 
-    public void ActivateGate()
-    {
-        _active = true;
-    }
+        private bool _collided;
+        private bool _active;
 
-    public void DeactivateGate()
-    {
-        _active = false;
+        private void OnCollisionEnter()
+        {
+            if (_collided || !_active) return;
+            _collided = true;
+            SceneTransitionManager.Instance.LoadScene(sceneInfo.sceneName);
+        }
+
+        public void ActivateGate()
+        {
+            _active = true;
+        }
+
+        public void DeactivateGate()
+        {
+            _active = false;
+        }
     }
 }
