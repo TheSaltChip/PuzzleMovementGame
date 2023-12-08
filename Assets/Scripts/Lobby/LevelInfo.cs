@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using Lobby;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
 
-public class LevelInfo : MonoBehaviour
+namespace Lobby
 {
-    [SerializeField] private SceneInfo sceneInfo;
-    public void DisplayInfo()
+    public class LevelInfo : MonoBehaviour
     {
-        var info = gameObject.GetComponent<TMP_Text>();
-        info.text = sceneInfo.sceneDescription;
-    }
+        [SerializeField] private SceneInfo sceneInfo;
+        [SerializeField] private LocalizeStringEvent localizeStringEvent;
+        [SerializeField] private TMP_Text sceneDescription;
 
-    public void Localize()
-    {
-        gameObject.GetComponent<LocalizeStringEvent>().SetEntry(sceneInfo.sceneName);
+        public void DisplayInfo()
+        {
+            sceneDescription.text = sceneInfo.sceneDescription;
+        }
+
+        public void Localize()
+        {
+            localizeStringEvent.SetEntry(sceneInfo.sceneName);
+        }
     }
 }
