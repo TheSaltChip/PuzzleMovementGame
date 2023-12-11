@@ -1,30 +1,36 @@
+using NaughtyAttributes;
 using SceneTransition;
 using UnityEngine;
+using Variables;
 
 namespace Lobby
 {
     public class Gate : MonoBehaviour
     {
-        [SerializeField] private SceneInfo sceneInfo;
-        [SerializeField] private bool active;
+        [SerializeField] private bool staticGate;
 
+        [SerializeField, HideIf("staticGate")] private SceneInfo sceneInfo;
+        [SerializeField, ShowIf("staticGate")] private StringVariable targetSceneName;
+
+        private bool _active;
         private bool _collided;
 
         private void OnCollisionEnter()
         {
-            if (_collided || !active) return;
+            if (_collided || (!_active && !staticGate)) return;
+            
             _collided = true;
-            SceneTransitionManager.Instance.LoadScene(sceneInfo.sceneName);
+            SceneTransitionManager.Instance.LoadScene(staticGate ? targetSceneName.value : sceneInfo.sceneName);
         }
 
         public void ActivateGate()
         {
-            active = true;
+            _active = true;
         }
 
         public void DeactivateGate()
         {
-            active = false;
+            _active = false;
         }
     }
 }
