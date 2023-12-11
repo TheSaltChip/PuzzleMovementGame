@@ -163,7 +163,19 @@ MonoBehaviour:
   m_FormatArguments: []
   m_UpdateString:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2615502882195964390}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   references:
     version: 2
     RefIds: []
@@ -597,7 +609,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  strings: {fileID: 11400000, guid: d6f0d8710f377ce4a9291522d5754c38, type: 2}
 --- !u!1 &2615502882463221732
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,7 +772,19 @@ MonoBehaviour:
   m_FormatArguments: []
   m_UpdateString:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2615502882463221722}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   references:
     version: 2
     RefIds: []
@@ -1937,7 +1960,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &2615502883749342494
+--- !u!114 &2615502882285641251
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1946,38 +1969,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2922075100354732922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58febea3ca76bec40a488c6d0e6426eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 667c29443dd908e46ba5f49cc9495937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationForFace: {x: 0, y: -90, z: 90}
---- !u!114 &2615502883749342493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2922075100354732922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 1ab482482af56024c9204aef45730d93, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2615502883749342494}
-        m_TargetAssemblyTypeName: Tutorial.ControllerLookAtHandler, Assembly-CSharp
-        m_MethodName: TopView
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  tutorialData: {fileID: 11400000, guid: a42d00259eedbfb439223387aa935794, type: 2}
+  trigger: {fileID: 3440822200065027151}
+  grip: {fileID: 571602949366936762}
+  a: {fileID: 893714840780554214}
+  b: {fileID: 6280838828522781003}
+  joystick: {fileID: 3869786319325958744}
+  menu: {fileID: 9092150651793409910}
+  materialContainer: {fileID: 11400000, guid: 836e7d055b9dbb84483e7b6b094ba12d, type: 2}
+  lookAt: {fileID: 2615502883749342494}
+  animator: {fileID: 2615502883749342495}
 --- !u!114 &2615502883749342492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2006,7 +2010,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2615502882285641251
+--- !u!114 &2615502883749342493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2015,19 +2019,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 2922075100354732922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 667c29443dd908e46ba5f49cc9495937, type: 3}
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialData: {fileID: 11400000, guid: a42d00259eedbfb439223387aa935794, type: 2}
-  trigger: {fileID: 3440822200065027151}
-  grip: {fileID: 571602949366936762}
-  a: {fileID: 893714840780554214}
-  b: {fileID: 6280838828522781003}
-  joystick: {fileID: 3869786319325958744}
-  menu: {fileID: 9092150651793409910}
-  materialContainer: {fileID: 11400000, guid: 836e7d055b9dbb84483e7b6b094ba12d, type: 2}
-  lookAt: {fileID: 2615502883749342494}
-  animator: {fileID: 2615502883749342495}
+  Event: {fileID: 11400000, guid: 1ab482482af56024c9204aef45730d93, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2615502883749342494}
+        m_TargetAssemblyTypeName: Tutorial.ControllerLookAtHandler, Assembly-CSharp
+        m_MethodName: TopView
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2615502883749342494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922075100354732922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58febea3ca76bec40a488c6d0e6426eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationForFace: {x: 0, y: -90, z: 90}
 --- !u!1 &3440822200065027151 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 48f8998958e02e944b815bc012c53d73,
@@ -2224,7 +2247,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &2615502882805500004
+--- !u!114 &2615502882805499993
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2233,38 +2256,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2922075098590995199}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58febea3ca76bec40a488c6d0e6426eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 667c29443dd908e46ba5f49cc9495937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationForFace: {x: 0, y: 270, z: 90}
---- !u!114 &2615502882805499995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2922075098590995199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 1ab482482af56024c9204aef45730d93, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2615502882805500004}
-        m_TargetAssemblyTypeName: Tutorial.ControllerLookAtHandler, Assembly-CSharp
-        m_MethodName: TopView
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  tutorialData: {fileID: 11400000, guid: a42d00259eedbfb439223387aa935794, type: 2}
+  trigger: {fileID: 3440822201556200906}
+  grip: {fileID: 571602950829077823}
+  a: {fileID: 893714842238041699}
+  b: {fileID: 6280838829179615438}
+  joystick: {fileID: 3869786320821326813}
+  menu: {fileID: 9092150650331203315}
+  materialContainer: {fileID: 11400000, guid: 836e7d055b9dbb84483e7b6b094ba12d, type: 2}
+  lookAt: {fileID: 2615502882805500004}
+  animator: {fileID: 2615502882805500005}
 --- !u!114 &2615502882805499994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2293,7 +2297,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2615502882805499993
+--- !u!114 &2615502882805499995
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2302,19 +2306,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 2922075098590995199}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 667c29443dd908e46ba5f49cc9495937, type: 3}
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialData: {fileID: 11400000, guid: a42d00259eedbfb439223387aa935794, type: 2}
-  trigger: {fileID: 3440822201556200906}
-  grip: {fileID: 571602950829077823}
-  a: {fileID: 893714842238041699}
-  b: {fileID: 6280838829179615438}
-  joystick: {fileID: 3869786320821326813}
-  menu: {fileID: 9092150650331203315}
-  materialContainer: {fileID: 11400000, guid: 836e7d055b9dbb84483e7b6b094ba12d, type: 2}
-  lookAt: {fileID: 2615502882805500004}
-  animator: {fileID: 2615502882805500005}
+  Event: {fileID: 11400000, guid: 1ab482482af56024c9204aef45730d93, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2615502882805500004}
+        m_TargetAssemblyTypeName: Tutorial.ControllerLookAtHandler, Assembly-CSharp
+        m_MethodName: TopView
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2615502882805500004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922075098590995199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58febea3ca76bec40a488c6d0e6426eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationForFace: {x: 0, y: 270, z: 90}
 --- !u!1 &3440822201556200906 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 1a4e7f5b038932b4c89617d5114acd6e,

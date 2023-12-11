@@ -1,11 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using Tutorial;
-using Unity.XR.PXR.Editor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ControllerButtonSetUp : MonoBehaviour
 {
