@@ -8,7 +8,7 @@ namespace Tutorial
         private Quaternion _originalRotation;
         private Transform _tr;
     
-        void Start()
+        void Awake()
         {
             _tr = gameObject.transform;
             _originalRotation = _tr.rotation;
