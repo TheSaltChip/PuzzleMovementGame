@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
+using Variables;
 
 namespace SceneTransition
 {
     public class StraightToFirstScene : MonoBehaviour
     {
-        [SerializeField] private string sceneName;
+        [SerializeField] private StringVariable sceneName;
         
         private void Start()
         {
-            SceneTransitionManager.Instance.LoadScene(sceneName);
+            SceneTransitionManager.Instance.LoadScene(sceneName.value);
         }
     }
 }
