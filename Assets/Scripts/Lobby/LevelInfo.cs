@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
-using UnityEngine.Serialization;
 
 namespace Lobby
 {
