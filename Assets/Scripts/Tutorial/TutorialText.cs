@@ -1,77 +1,73 @@
 using System;
 using TMPro;
+using Tutorial;
+using UnityEditor.Localization;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Localization.Components;
 using UnityEngine.Serialization;
 
 namespace DefaultNamespace
 {
     public class TutorialText : MonoBehaviour
     {
-        [SerializeField] private bool view; // false = Side view, true = Top view
-        [SerializeField] private TMP_Text text;
-        [SerializeField] private bool first;
-        [SerializeField] private bool last;
-        [SerializeField] private MeshRenderer[] mediums;
-        [SerializeField] private AnimationClip[] anims;
-        [SerializeField] private Animation animL;
-        [SerializeField] private Animation animR;
-        [SerializeField] private int hand; //0 = left, 1 = right, 2 = both
-        private Material _originalMaterial;
-        private Material _highlight;
-        private bool _initial = true;
+        [SerializeField] private UnityEvent first;
+        [SerializeField] private UnityEvent last;
+        [SerializeField] private UnityEvent middle;
+        [SerializeField] private StringTableCollection strings;
 
-        private void SetUp()
+        private bool _firstInLine;
+        private int _start;
+        private int _end;
+        private int _current;
+        private LocalizeStringEvent _text;
+
+        private void Start()
         {
-            if (mediums.Length <= 0) return;
-            
-            _originalMaterial = mediums[0].material;
-            _highlight = HighlightStore.Instance.GetMaterial();
-            
-            
+            _end = strings.SharedData.Entries.Count-1;
+            _start = 2; //First 2 entries in the table are next and previous
+            _current = _start;
+            _text = gameObject.GetComponent<LocalizeStringEvent>();
+            _text.StringReference.TableEntryReference = strings.SharedData.Entries[_current].Key;
+            _firstInLine = true;
         }
 
-        public bool GetView()
+        private void ActiveButtons()
         {
-            return view;
-        }
-
-        public bool IsLast()
-        {
-            return last;
-        }
-
-        public bool IsFirst()
-        {
-            return first;
-        }
-
-        public void ChangeActive(bool active)
-        {
-            if (_initial)
+            if (_current == _start)
             {
-                SetUp();
-                _initial = false;
-            }
-            gameObject.SetActive(active);
-            if (anims.Length > 0 && active)
+                first.Invoke();
+                print("Invoked start");
+                _firstInLine = true;
+            } else if (_current == _end)
             {
-                if (hand == 0)
-                {
-                    animL.Play(anims[0].name);
-                }else if (hand == 1)
-                {
-                    animR.Play(anims[0].name);
-                }
-                else if(anims.Length == 2 && hand == 2)
-                {
-                    animL.Play(anims[0].name);
-                    animR.Play(anims[1].name);
-                }
+                last.Invoke();
+                print("Invoked end");
+                _firstInLine = true;
             }
-            foreach (var medium in mediums)
+            else if (_firstInLine)
             {
-                medium.material = active ? _highlight : _originalMaterial;
+                middle.Invoke();
+                _firstInLine = false;
             }
+        }
+
+        public void NextText()
+        {
+            if (_current == _end)
+                return;
+            _current++;
+            _text.StringReference.TableEntryReference = strings.SharedData.Entries[_current].Key;
+            ActiveButtons();
+        }
+
+        public void PreviousText()
+        {
+            if (_current == _start)
+                return;
+            _current--;
+            _text.StringReference.TableEntryReference = strings.SharedData.Entries[_current].Key;
+            ActiveButtons();
         }
     }
 }
