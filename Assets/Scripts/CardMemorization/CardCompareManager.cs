@@ -1,27 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using CardMemorization.Enums;
 using CardMemorization.Strategies;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CardMemorization
 {
     public class CardCompareManager : MonoBehaviour
     {
-        public static CardCompareManager Instance { get; private set; }
 
         [SerializeField] private CardRule rule;
         [SerializeField] private int amountToMatch;
+        [SerializeField] private CardContainer cardContainer;
+        [SerializeField] private UnityEvent missMatch;
+        [SerializeField] private UnityEvent matched;
 
-        private List<Card> _selectedCards;
         private int _arrayPos;
         private IRuleCompare _ruleCompare;
+        private int _clearedCards;
 
         private void Awake()
         {
-            Instance = this;
+            cardContainer.position = 0; //Due to editor
             _ruleCompare = new AllNumberCompare();
-            _selectedCards = new List<Card>();
+            cardContainer.cards = new Card[amountToMatch];
         }
 
         public int GetAmountToMatch()
@@ -39,46 +44,49 @@ namespace CardMemorization
             _ruleCompare = newRule;
         }
 
-        public void Compare(Card card)
+        private void ClearCards()
         {
-            if (_selectedCards.Contains(card))
-            {
-                return;
-            }
-
-            if (_selectedCards.Count >= amountToMatch) return;
-
-            _selectedCards.Add(card);
-            card.Flip();
-            
-            if (_selectedCards.Count != amountToMatch)
-            {
-                return;
-            }
-
-            StartCoroutine(Delay(card));
+            cardContainer.cards = new Card[amountToMatch];
+            cardContainer.position = 0;
+            _clearedCards = 0;
         }
 
-        private IEnumerator Delay(Card card)
+        private void ResetCards()
+        {
+            ClearCards();
+        }
+
+        public void ResetCardsEvent()
+        {
+            if (_clearedCards < cardContainer.cards.Length)
+            {
+                _clearedCards++;
+            }
+            else
+            {
+                ClearCards();
+            }
+        }
+
+        public void Compare()
+        {
+            if (cardContainer.position-1 < cardContainer.cards.Length) return;
+            StartCoroutine(Delay());
+        }
+
+        private IEnumerator Delay()
         {
             yield return new WaitForSeconds(1);
-            if (!_ruleCompare.Match(_selectedCards))
+            if (!_ruleCompare.Match(cardContainer.cards,cardContainer.position,amountToMatch))
             {
-                foreach (var c in _selectedCards)
-                {
-                    c.ResetState();
-                }
-
-                _selectedCards.Clear();
-                yield break;
+                missMatch.Invoke();
+                ResetCards();
             }
-
-            foreach (var c in _selectedCards)
+            else
             {
-                c.Deactivate();
+                matched.Invoke();
             }
-
-            _selectedCards.Clear();
+            
         }
     }
 }

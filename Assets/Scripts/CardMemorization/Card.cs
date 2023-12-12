@@ -1,6 +1,10 @@
+using System.Linq;
 using CardMemorization.Enums;
 using Completables;
+using Events;
 using UnityEngine;
+using UnityEngine.Events;
+using Util;
 
 namespace CardMemorization
 {
@@ -8,6 +12,9 @@ namespace CardMemorization
     {
         [SerializeField] private CardSuit suit;
         [SerializeField] private int number;
+        [SerializeField] private CardContainer cardContainer;
+        [SerializeField] private UnityEvent cardFlipped;
+        [SerializeField] private UnityEvent cardDeactivated;
         private CardColor _color;
 
         private bool _hasRotated;
@@ -47,10 +54,15 @@ namespace CardMemorization
         private void OnCollisionEnter(Collision other)
         {
             if (_hasRotated) return;
-            CardCompareManager.Instance.Compare(this);
+            if (cardContainer.position >= cardContainer.cards.Length) return;
+            Flip();
+            cardContainer.cards[cardContainer.position] = this;
+            cardContainer.position++;
+            cardFlipped.Invoke();
+            print("Collision event completed");
         }
 
-        public void Flip()
+        private void Flip()
         {
             transform.localRotation = Quaternion.Euler(0, 0, 0);
             _hasRotated = true;
@@ -58,7 +70,11 @@ namespace CardMemorization
 
         public void Deactivate()
         {
+            if (!cardContainer.cards.Contains(this)) return;
             Completed();
+            gameObject.GetComponent<ReturnToPool>().Return();
+            cardDeactivated.Invoke();
+
         }
 
         public override void ResetState()
