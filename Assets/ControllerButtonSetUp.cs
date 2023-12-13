@@ -65,7 +65,7 @@ public class ControllerButtonSetUp : MonoBehaviour
             case VRControllerButtons.Joystick:
                 joystick.GetComponent<MeshRenderer>().material = materialContainer.material;
                 lookAt.TopView();
-                if (tutorialData.right)
+                if (tutorialData.selectedHand == SelectedHand.Right)
                 {
                     if (_i == 0)
                     {
@@ -78,7 +78,7 @@ public class ControllerButtonSetUp : MonoBehaviour
                         _i--;
                     }
                     
-                }else if (tutorialData.left)
+                }else if (tutorialData.selectedHand == SelectedHand.Left)
                 {
                     animator.Play(("JoystickAction.001"));
                 }

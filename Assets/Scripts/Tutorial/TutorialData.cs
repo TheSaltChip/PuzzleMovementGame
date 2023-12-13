@@ -6,8 +6,6 @@ namespace Tutorial
     public class TutorialData : ScriptableObject
     {
         public VRControllerButtons button;
-        public bool both;
-        public bool left;
-        public bool right;
+        public SelectedHand selectedHand;
     }
 }

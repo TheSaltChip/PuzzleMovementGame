@@ -1,17 +1,18 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CardMemorization.Strategies
 {
     public class SuitNumberCompare : IRuleCompare
     {
-        public bool Match(List<Card> cards)
+        public bool Match(Card[] cards,int entries,int matches)
         {
-            if (cards.Count < 2) return false;
+            if (entries < matches) return false;
 
             var suit = cards[0].GetSuit();
             var num = cards[0].GetNumber();
             
-            for (var i = 1; i < cards.Count; i++)
+            for (var i = 1; i < cards.Count(); i++)
             {
                 if (cards[i].GetSuit() != suit) return false;
 

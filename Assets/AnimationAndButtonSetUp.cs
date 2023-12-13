@@ -18,15 +18,15 @@ public class AnimationAndButtonSetUp : MonoBehaviour
 
     public void Activate()
     {
-        if (tutorialData.both)
+        if (tutorialData.selectedHand == SelectedHand.Both)
         {
             ControllerL.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();
             ControllerR.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();
-        }else if (tutorialData.right)
+        }else if (tutorialData.selectedHand == SelectedHand.Right)
         {
             ControllerR.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();
         }
-        else if (tutorialData.left)
+        else if (tutorialData.selectedHand == SelectedHand.Left)
         {
             ControllerL.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();
         }

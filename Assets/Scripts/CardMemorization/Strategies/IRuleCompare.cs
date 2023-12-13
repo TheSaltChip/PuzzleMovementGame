@@ -4,6 +4,6 @@ namespace CardMemorization.Strategies
 {
     public interface IRuleCompare
     {
-        public bool Match(List<Card> cards);
+        public bool Match(Card[] cards,int entries,int matches);
     }
 }

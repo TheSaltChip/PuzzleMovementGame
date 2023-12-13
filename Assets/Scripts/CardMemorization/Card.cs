@@ -1,6 +1,11 @@
+using System.Linq;
 using CardMemorization.Enums;
 using Completables;
+using Events;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using Util;
 
 namespace CardMemorization
 {
@@ -8,25 +13,28 @@ namespace CardMemorization
     {
         [SerializeField] private CardSuit suit;
         [SerializeField] private int number;
+        [SerializeField] private CardContainer cardContainer;
+        [SerializeField] private UnityEvent cardFlipped;
+        [SerializeField] private ReturnToPool returnToPool;
+        [SerializeField] private MeshRenderer meshRenderer;
         private CardColor _color;
 
         private bool _hasRotated;
         private static readonly int Front = Shader.PropertyToID("_Front");
+        private static readonly int Back = Shader.PropertyToID("_Back");
 
-        public void SetValues(int number, CardSuit suit, CardColor color)
+        public void SetValues(int number, CardSuit suit, CardColor color, Texture2D cardBack)
         {
             this.suit = suit;
             this.number = number;
             _color = color;
 
-            var tex = Resources.Load<Texture2D>($"PlayingCards\\{suit}{number:00}");
-            gameObject.GetComponent<MeshRenderer>().material.SetTexture(Front, tex);
-        }
+            var tex = Resources.Load<Texture2D>($"Images/Cards/{suit}{number:00}");
 
-        private void Awake()
-        {
-            var tex = Resources.Load<Texture2D>($"PlayingCards\\{suit}{number:00}");
-            gameObject.GetComponent<MeshRenderer>().material.SetTexture(Front, tex);
+            var material = meshRenderer.material;
+            
+            material.SetTexture(Front, tex);
+            material.SetTexture(Back,cardBack);
         }
 
         public CardSuit GetSuit()
@@ -47,10 +55,14 @@ namespace CardMemorization
         private void OnCollisionEnter(Collision other)
         {
             if (_hasRotated) return;
-            CardCompareManager.Instance.Compare(this);
+            if (cardContainer.position >= cardContainer.cards.Length) return;
+            Flip();
+            cardContainer.cards[cardContainer.position] = this;
+            cardContainer.position++;
+            cardFlipped.Invoke();
         }
 
-        public void Flip()
+        private void Flip()
         {
             transform.localRotation = Quaternion.Euler(0, 0, 0);
             _hasRotated = true;
@@ -59,6 +71,7 @@ namespace CardMemorization
         public void Deactivate()
         {
             Completed();
+            returnToPool.Return();
         }
 
         public override void ResetState()
