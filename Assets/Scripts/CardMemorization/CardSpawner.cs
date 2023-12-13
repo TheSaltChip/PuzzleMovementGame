@@ -124,11 +124,10 @@ namespace CardMemorization
                     var newCard = _cardsPool.Get();
                     newCard.GetComponent<Card>()
                         .SetValues(_cardNumberAndSuitList[j].Item1, _cardNumberAndSuitList[j].Item2,
-                            GetColorFromSuit(_cardNumberAndSuitList[j].Item2));
-                    var tex = newCard.GetComponent<MeshRenderer>().material;
-                    
-                    tex.SetTexture(Front, Resources.Load("/Images/Cards/" + _cardNumberAndSuitList[j].Item2 + "" + _cardNumberAndSuitList[j].Item1.ToString("00") ) as Texture);
-                    tex.SetTexture(Back, cardBack);
+                            GetColorFromSuit(_cardNumberAndSuitList[j].Item2),cardBack);
+                    //var tex = newCard.GetComponent<MeshRenderer>().material;
+                    //tex.SetTexture(Front, Resources.Load<Texture2D>("Images/Cards/" + _cardNumberAndSuitList[j].Item2 + "" + _cardNumberAndSuitList[j].Item1.ToString("00")));
+                    //tex.SetTexture(Back, cardBack);
                     
                     var y = spawnPoint.localScale.y / 2f + 0.0001f + spawnPoint.localPosition.y;
 

@@ -350,7 +350,6 @@ GameObject:
   - component: {fileID: 590811606}
   - component: {fileID: 590811607}
   - component: {fileID: 590811609}
-  - component: {fileID: 590811608}
   m_Layer: 0
   m_Name: CardManager
   m_TagString: Untagged
@@ -370,39 +369,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe9adf2f5704773906b0e04cd9d09e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rule: 0
+  rule: 4
   amountToMatch: 2
   cardContainer: {fileID: 11400000, guid: 0b260584c58ce5541bd03cea1b8825df, type: 2}
-  missMatch:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 3b61bd568a96f174798bf430b0993eee, type: 2}
-        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  matched:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 59c00765d5dde4c4c9e3e33547c87150, type: 2}
-        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &590811605
 Transform:
   m_ObjectHideFlags: 0
@@ -477,34 +446,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   cardBack: {fileID: 2800000, guid: 35b1aa564e0affa44b391cd24c36727c, type: 3}
---- !u!114 &590811608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 590811603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: e58894b795f8748479c482153e604ab7, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 590811604}
-        m_TargetAssemblyTypeName: CardMemorization.CardCompareManager, Assembly-CSharp
-        m_MethodName: ResetCardsEvent
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &590811609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,21 +567,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  cardDeactivated:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: e58894b795f8748479c482153e604ab7, type: 2}
-        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  returnToPool: {fileID: 8631305844978837123}
+  material: {fileID: 2100000, guid: b5e0c851c90553a4aa61def3eeec17ea, type: 2}
 --- !u!1 &1289485595
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,8 +843,6 @@ GameObject:
   - component: {fileID: 977494246}
   - component: {fileID: 977494245}
   - component: {fileID: 977494251}
-  - component: {fileID: 8631305844978837121}
-  - component: {fileID: 8631305844978837122}
   - component: {fileID: 8631305844978837124}
   - component: {fileID: 8631305844978837123}
   m_Layer: 23
@@ -1003,62 +929,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4379981022028017317}
   m_Mesh: {fileID: -4393675991995823134, guid: 0464afc39207ab540b94807b2273e3e5, type: 3}
---- !u!114 &8631305844978837121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4379981022028017317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 59c00765d5dde4c4c9e3e33547c87150, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 977494251}
-        m_TargetAssemblyTypeName: CardMemorization.Card, Assembly-CSharp
-        m_MethodName: Deactivate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &8631305844978837122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4379981022028017317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 3b61bd568a96f174798bf430b0993eee, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 977494251}
-        m_TargetAssemblyTypeName: CardMemorization.Card, Assembly-CSharp
-        m_MethodName: ResetState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &8631305844978837123
 MonoBehaviour:
   m_ObjectHideFlags: 0

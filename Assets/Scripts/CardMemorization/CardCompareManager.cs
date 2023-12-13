@@ -15,12 +15,9 @@ namespace CardMemorization
         [SerializeField] private CardRule rule;
         [SerializeField] private int amountToMatch;
         [SerializeField] private CardContainer cardContainer;
-        [SerializeField] private UnityEvent missMatch;
-        [SerializeField] private UnityEvent matched;
 
         private int _arrayPos;
         private IRuleCompare _ruleCompare;
-        private int _clearedCards;
 
         private void Awake()
         {
@@ -48,29 +45,29 @@ namespace CardMemorization
         {
             cardContainer.cards = new Card[amountToMatch];
             cardContainer.position = 0;
-            _clearedCards = 0;
+        }
+
+        private void DeactivateCards()
+        {
+            foreach (var card in cardContainer.cards)
+            {
+                card.Deactivate();
+            }
+            ClearCards();
         }
 
         private void ResetCards()
         {
+            foreach (var card in cardContainer.cards)
+            {
+                card.ResetState();
+            }
             ClearCards();
-        }
-
-        public void ResetCardsEvent()
-        {
-            if (_clearedCards < cardContainer.cards.Length)
-            {
-                _clearedCards++;
-            }
-            else
-            {
-                ClearCards();
-            }
         }
 
         public void Compare()
         {
-            if (cardContainer.position-1 < cardContainer.cards.Length) return;
+            if (cardContainer.position < cardContainer.cards.Length) return;
             StartCoroutine(Delay());
         }
 
@@ -79,12 +76,11 @@ namespace CardMemorization
             yield return new WaitForSeconds(1);
             if (!_ruleCompare.Match(cardContainer.cards,cardContainer.position,amountToMatch))
             {
-                missMatch.Invoke();
                 ResetCards();
             }
             else
             {
-                matched.Invoke();
+                DeactivateCards();
             }
             
         }
