@@ -192,6 +192,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 838cedad75eab554b8a177b7ca90e98d, type: 3}
+--- !u!1 &1441645692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1441645694}
+  - component: {fileID: 1441645693}
+  m_Layer: 0
+  m_Name: Figure Matcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1441645693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441645692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0b3e71f7f847e19e28081263b11170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1441645694
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441645692}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.80226815, y: 0.8865253, z: 1.7124285}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1589830868
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +325,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1589830868}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.8977563, y: 2.673164, z: -0.6823819}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
@@ -399,6 +443,7 @@ GameObject:
   - component: {fileID: 1884606404}
   - component: {fileID: 1884606403}
   - component: {fileID: 1884606402}
+  - component: {fileID: 1884606406}
   m_Layer: 0
   m_Name: Figure spawner
   m_TagString: Untagged
@@ -450,8 +495,20 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 11400000, guid: df257832c34b4d84d85b455da28c5bea, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1884606404}
-        m_TargetAssemblyTypeName: Memorization.Figures.FigureSpawner, Assembly-CSharp
+        m_TargetAssemblyTypeName: Memorization.Figure.FigureSpawner, Assembly-CSharp
         m_MethodName: Spawn
         m_Mode: 1
         m_Arguments:
@@ -476,11 +533,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1589830868}
   center: {x: 0, y: 0, z: 0}
-  amountOfFigures: 0
-  settings: {fileID: 11400000, guid: c59ae40d8de80144aaef7b07dc84548e, type: 2}
-  rules: {fileID: 0}
+  amountOfFigures: 21
+  rules: {fileID: 11400000, guid: abe2c270557b0fb468d4fae8a1adf406, type: 2}
   figures: {fileID: 11400000, guid: eb16ee568c35d964ca2732d11a676088, type: 2}
   materials: {fileID: 11400000, guid: 923bcc797c4536c41b46e525f7e500bb, type: 2}
+  positions: {fileID: 11400000, guid: 122129bf2d5a89045b4da0972cdfb93d, type: 2}
+  selectedFigures: {fileID: 0}
 --- !u!4 &1884606405
 Transform:
   m_ObjectHideFlags: 0
@@ -496,6 +554,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1884606406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884606401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e628cdd84754d6db05ce7a2135396b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positions: {fileID: 11400000, guid: 2be1e60dd5c734f40a8ec87365b8aab5, type: 2}
+  settings: {fileID: 11400000, guid: c59ae40d8de80144aaef7b07dc84548e, type: 2}
 --- !u!1 &1937856918
 GameObject:
   m_ObjectHideFlags: 0
