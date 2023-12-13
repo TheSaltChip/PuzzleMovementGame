@@ -1,4 +1,4 @@
-﻿namespace Memorization.Figures
+﻿namespace Memorization.Figure
 {
     public enum MatchingRule
     {

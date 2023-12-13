@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using Variables;
 
-namespace Memorization.Figures
+namespace Memorization.Figure.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "FigureSpawnerSettings", menuName = "Memorization/Figure/FigureSpawnerSettings")]
     public class FigureSpawnerSettings : ScriptableObject

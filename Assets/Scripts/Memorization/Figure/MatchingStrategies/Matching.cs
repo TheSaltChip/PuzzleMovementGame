@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Memorization.Figures.MatchingStrategies
+namespace Memorization.Figure.MatchingStrategies
 {
     public abstract class Matching : ScriptableObject
     {
