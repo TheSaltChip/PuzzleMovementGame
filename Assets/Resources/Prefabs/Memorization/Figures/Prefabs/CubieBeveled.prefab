@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 940973370405954740}
   - component: {fileID: 940973370404660372}
   - component: {fileID: 940973370403661396}
+  - component: {fileID: 6169944236816474588}
+  - component: {fileID: 3464283517683309318}
   m_Layer: 0
   m_Name: CubieBeveled
   m_TagString: Untagged
@@ -83,6 +85,51 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6169944236816474588
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940973370405664916}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 440549007ee0d02428b939e89c0bf3f9, type: 3}
+--- !u!114 &3464283517683309318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940973370405664916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1b1ca3d366080408e9007a6b566953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RequiredTag: 
+  m_OnEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -6092931766889274863}
+        m_TargetAssemblyTypeName: Memorization.Figure.FigureInfo, Assembly-CSharp
+        m_MethodName: AddToSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4328408503814558041
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,9 +141,7 @@ GameObject:
   - component: {fileID: 4328408503814558042}
   - component: {fileID: -3441801362783035030}
   - component: {fileID: -250513490486670770}
-  - component: {fileID: -680969192648548443}
   - component: {fileID: -6092931766889274863}
-  - component: {fileID: 1964317553340504010}
   m_Layer: 0
   m_Name: CubieBeveled
   m_TagString: Untagged
@@ -136,13 +181,13 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -250513490486670770}
-        m_TargetAssemblyTypeName: Util.DestroyObject, Assembly-CSharp
-        m_MethodName: Destroy
-        m_Mode: 1
+      - m_Target: {fileID: 11400000, guid: 1f05f310787a0a74e9ccbed1877b8128, type: 2}
+        m_TargetAssemblyTypeName: Events.Memorization.FigureInfoGameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: -6092931766889274863}
+          m_ObjectArgumentAssemblyTypeName: Memorization.Figure.FigureInfo, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -160,20 +205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 979fc57088034772ae44537619418604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!64 &-680969192648548443
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4328408503814558041}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!114 &-6092931766889274863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,29 +219,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shapeName: 
   color: {r: 0, g: 0, b: 0, a: 0}
-  sel: {fileID: 11400000, guid: 3debeb2e1304de94f9fa947fb03eaf8a, type: 2}
-  meshCollider: {fileID: -680969192648548443}
---- !u!114 &1964317553340504010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4328408503814558041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f1b1ca3d366080408e9007a6b566953, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RequiredTag: 
-  m_OnEnter:
+  meshCollider: {fileID: 6169944236816474588}
+  onAddedToSelected:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -1588302761438245030, guid: 3b4a5de005dffb745b2b8ca3cdf1da06,
-          type: 3}
-        m_TargetAssemblyTypeName: Memorization.Figure.FigureInfo, Assembly-CSharp
-        m_MethodName: AddToSelected
-        m_Mode: 1
+      - m_Target: {fileID: 11400000, guid: 1f05f310787a0a74e9ccbed1877b8128, type: 2}
+        m_TargetAssemblyTypeName: Events.Memorization.FigureInfoGameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -219,6 +235,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_OnExit:
-    m_PersistentCalls:
-      m_Calls: []

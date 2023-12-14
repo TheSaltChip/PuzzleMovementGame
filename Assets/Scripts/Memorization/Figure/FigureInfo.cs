@@ -1,6 +1,6 @@
 ﻿using System;
-using Memorization.Figure.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Memorization.Figure
 {
@@ -9,16 +9,27 @@ namespace Memorization.Figure
         public string shapeName;
         public Color color;
 
-        public SelectedFigures sel;
-
         [SerializeField] private MeshCollider meshCollider;
+
+        public UnityEvent<FigureInfo> onAddedToSelected;
+
+        public bool destroyed;
 
         public void AddToSelected()
         {
-            if (sel.Contains(this)) return;
+            if (destroyed)
+            {
+                print("Is destroyed");
+                return;
+            }
 
-            sel.Add(this);
-            meshCollider.enabled = false;
+            onAddedToSelected?.Invoke(this);
+        }
+
+        public void DestroySelf()
+        {
+            destroyed = false;
+            Destroy(gameObject);
         }
 
         public void EnableCollider()
@@ -26,13 +37,18 @@ namespace Memorization.Figure
             meshCollider.enabled = true;
         }
 
+        public void DisableCollider()
+        {
+            meshCollider.enabled = false;
+        }
+
         private bool Equals(FigureInfo other, MatchingRule rule)
         {
             return rule switch
             {
-                MatchingRule.Color => base.Equals(other) && color.Equals(other.color),
-                MatchingRule.Figure => base.Equals(other) && shapeName == other.shapeName,
-                _ => base.Equals(other) && shapeName == other.shapeName && color.Equals(other.color)
+                MatchingRule.Color => color.Equals(other.color),
+                MatchingRule.Figure => shapeName == other.shapeName,
+                _ => shapeName == other.shapeName && color.Equals(other.color)
             };
         }
 
@@ -41,9 +57,7 @@ namespace Memorization.Figure
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
 
-            if (rule == MatchingRule.Color) return obj.GetType() == GetType() && Equals((FigureInfo)obj, rule);
-
-            return obj.GetType() == GetType() && Equals((FigureInfo)obj);
+            return obj.GetType() == GetType() && Equals((FigureInfo)obj, rule);
         }
 
         public override int GetHashCode()

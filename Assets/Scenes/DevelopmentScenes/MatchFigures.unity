@@ -192,6 +192,108 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 838cedad75eab554b8a177b7ca90e98d, type: 3}
+--- !u!1 &1331664073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1331664077}
+  - component: {fileID: 1331664076}
+  - component: {fileID: 1331664075}
+  - component: {fileID: 1331664074}
+  m_Layer: 0
+  m_Name: Printer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1331664074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331664073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 1cfd2c275445a1045bfdb167de453d19, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1331664076}
+        m_TargetAssemblyTypeName: Util.Printer, Assembly-CSharp
+        m_MethodName: PrintMessage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Incorrect
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1331664075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331664073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 409226b0e15293b47bb0e7bcff68ee6b, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1331664076}
+        m_TargetAssemblyTypeName: Util.Printer, Assembly-CSharp
+        m_MethodName: PrintMessage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Correct
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1331664076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331664073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e20f75d39174c4fa8d8aa43017b9b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1331664077
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331664073}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.80226815, y: 0.8865253, z: 1.7124285}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1441645692
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1441645694}
   - component: {fileID: 1441645693}
+  - component: {fileID: 1441645696}
   m_Layer: 0
   m_Name: Figure Matcher
   m_TagString: Untagged
@@ -221,6 +324,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0b3e71f7f847e19e28081263b11170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rules: {fileID: 11400000, guid: abe2c270557b0fb468d4fae8a1adf406, type: 2}
+  onCorrectMatch:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 409226b0e15293b47bb0e7bcff68ee6b, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onIncorrectMatch:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 1cfd2c275445a1045bfdb167de453d19, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1441645694
 Transform:
   m_ObjectHideFlags: 0
@@ -236,6 +370,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1441645696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441645692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6683fc6d709d4706983b03aa70a03738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 1f05f310787a0a74e9ccbed1877b8128, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1441645693}
+        m_TargetAssemblyTypeName: Memorization.Figure.FigureMatchChecker, Assembly-CSharp
+        m_MethodName: Add
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1589830868
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +493,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1641828318
 GameObject:
@@ -445,7 +607,7 @@ GameObject:
   - component: {fileID: 1884606402}
   - component: {fileID: 1884606406}
   m_Layer: 0
-  m_Name: Figure spawner
+  m_Name: Figure Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -538,7 +700,6 @@ MonoBehaviour:
   figures: {fileID: 11400000, guid: eb16ee568c35d964ca2732d11a676088, type: 2}
   materials: {fileID: 11400000, guid: 923bcc797c4536c41b46e525f7e500bb, type: 2}
   positions: {fileID: 11400000, guid: 122129bf2d5a89045b4da0972cdfb93d, type: 2}
-  selectedFigures: {fileID: 0}
 --- !u!4 &1884606405
 Transform:
   m_ObjectHideFlags: 0
@@ -547,12 +708,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884606401}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.40131176, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0.504, y: 1.048, z: -1.845}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1884606406
 MonoBehaviour:

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Memorization.Figure.ScriptableObjects;
 using UnityEngine;
 using Util;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Memorization.Figure
@@ -18,13 +20,10 @@ namespace Memorization.Figure
 
         [SerializeField] private Figures figures;
         [SerializeField] private FigureMaterials materials;
-
         [SerializeField] private FigurePositions positions;
-        [SerializeField] private SelectedFigures selectedFigures;
 
-        
         private int AmountOfFigures => amountOfFigures * 2;
-        
+
         public void Spawn()
         {
             switch (rules.matchingRule)
@@ -56,14 +55,7 @@ namespace Memorization.Figure
                 var fig = figs[Random.Range(0, figs.Count)];
                 var mat = mats[Random.Range(0, mats.Count)];
 
-                var p1 = Instantiate(fig, transform);
-                p1.GetComponentInChildren<MeshRenderer>().material = mat;
-                p1.transform.localPosition = posCopy[i];
-                p1.transform.LookAt(transform);
-
-                var p2 = Instantiate(p1, transform);
-                p2.transform.localPosition = posCopy[i];
-                p2.transform.LookAt(transform);
+                CreateFigures(fig, mat, posCopy, i);
             }
         }
 
@@ -80,18 +72,24 @@ namespace Memorization.Figure
             {
                 var fig = figs[Random.Range(0, figs.Count)];
 
-                var p1 = Instantiate(fig, transform);
-                p1.GetComponentInChildren<MeshRenderer>().material = mat;
-                p1.transform.localPosition = posCopy[i];
-                p1.transform.LookAt(transform);
-                var figureInfo = p1.GetComponent<FigureInfo>();
-                figureInfo.color = mat.color;
-                figureInfo.shapeName = fig.name;
-
-                var p2 = Instantiate(p1, transform);
-                p2.transform.localPosition = posCopy[i];
-                p2.transform.LookAt(transform);
+                CreateFigures(fig, mat, posCopy, i);
             }
+        }
+
+        private void CreateFigures(GameObject fig, Material mat, List<Vector3> posCopy, int i)
+        {
+            var p1 = Instantiate(fig, transform);
+            p1.GetComponentInChildren<MeshRenderer>().material = mat;
+            p1.transform.localPosition = posCopy[i];
+            p1.transform.LookAt(transform);
+
+            var figureInfo = p1.GetComponent<FigureInfo>();
+            figureInfo.color = mat.color;
+            figureInfo.shapeName = fig.name;
+
+            var p2 = Instantiate(p1, transform);
+            p2.transform.localPosition = posCopy[i + 1];
+            p2.transform.LookAt(transform);
         }
 
         private void ColorSpawn()
@@ -105,16 +103,9 @@ namespace Memorization.Figure
 
             for (var i = 0; i < AmountOfFigures; i += 2)
             {
-                var material = mats[Random.Range(0, mats.Count)];
-                
-                var p1 = Instantiate(fig, transform);
-                p1.GetComponentInChildren<MeshRenderer>().material = material;
-                p1.transform.localPosition = posCopy[i];
-                p1.transform.LookAt(transform);
+                var mat = mats[Random.Range(0, mats.Count)];
 
-                var p2 = Instantiate(p1, transform);
-                p2.transform.localPosition = posCopy[i];
-                p2.transform.LookAt(transform);
+                CreateFigures(fig, mat, posCopy, i);
             }
         }
     }

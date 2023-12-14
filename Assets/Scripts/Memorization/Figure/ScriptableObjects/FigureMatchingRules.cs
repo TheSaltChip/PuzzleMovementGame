@@ -13,5 +13,7 @@ namespace Memorization.Figure.ScriptableObjects
 
         [HideIf("matchingRule", MatchingRule.Color)]
         public int numFigure;
+
+        public int numToMatch;
     }
 }

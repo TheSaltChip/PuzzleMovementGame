@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4736568082867073761}
   - component: {fileID: 4736568082863682241}
   - component: {fileID: 4736568082864779265}
+  - component: {fileID: 8423656412085164134}
+  - component: {fileID: 6355738094358398760}
   m_Layer: 0
   m_Name: Diamondo
   m_TagString: Untagged
@@ -83,6 +85,51 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8423656412085164134
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4736568082866712257}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 0561c8a1707de5f4e86326bd7a89d7f9, type: 3}
+--- !u!114 &6355738094358398760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4736568082866712257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1b1ca3d366080408e9007a6b566953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RequiredTag: 
+  m_OnEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -3886402424452681060}
+        m_TargetAssemblyTypeName: Memorization.Figure.FigureInfo, Assembly-CSharp
+        m_MethodName: AddToSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6084673926083069038
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,9 +141,7 @@ GameObject:
   - component: {fileID: 6084673926083069039}
   - component: {fileID: 9182909279098151726}
   - component: {fileID: 7452630707996142296}
-  - component: {fileID: 1819796239547850206}
   - component: {fileID: -3886402424452681060}
-  - component: {fileID: 1446099015078097782}
   m_Layer: 0
   m_Name: Diamondo
   m_TagString: Untagged
@@ -136,13 +181,13 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7452630707996142296}
-        m_TargetAssemblyTypeName: Util.DestroyObject, Assembly-CSharp
-        m_MethodName: Destroy
-        m_Mode: 1
+      - m_Target: {fileID: 11400000, guid: 1f05f310787a0a74e9ccbed1877b8128, type: 2}
+        m_TargetAssemblyTypeName: Events.Memorization.FigureInfoGameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: -3886402424452681060}
+          m_ObjectArgumentAssemblyTypeName: Memorization.Figure.FigureInfo, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -160,20 +205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 979fc57088034772ae44537619418604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!64 &1819796239547850206
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6084673926083069038}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!114 &-3886402424452681060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,29 +219,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shapeName: 
   color: {r: 0, g: 0, b: 0, a: 0}
-  sel: {fileID: 11400000, guid: 3debeb2e1304de94f9fa947fb03eaf8a, type: 2}
-  meshCollider: {fileID: 1819796239547850206}
---- !u!114 &1446099015078097782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6084673926083069038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f1b1ca3d366080408e9007a6b566953, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RequiredTag: 
-  m_OnEnter:
+  meshCollider: {fileID: 8423656412085164134}
+  onAddedToSelected:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -1588302761438245030, guid: 3b4a5de005dffb745b2b8ca3cdf1da06,
-          type: 3}
-        m_TargetAssemblyTypeName: Memorization.Figure.FigureInfo, Assembly-CSharp
-        m_MethodName: AddToSelected
-        m_Mode: 1
+      - m_Target: {fileID: 11400000, guid: 1f05f310787a0a74e9ccbed1877b8128, type: 2}
+        m_TargetAssemblyTypeName: Events.Memorization.FigureInfoGameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -219,6 +235,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_OnExit:
-    m_PersistentCalls:
-      m_Calls: []
