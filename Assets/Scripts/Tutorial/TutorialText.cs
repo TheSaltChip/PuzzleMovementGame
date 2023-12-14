@@ -1,77 +1,78 @@
 using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Events;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Tables;
 
-namespace DefaultNamespace
+namespace Tutorial
 {
     public class TutorialText : MonoBehaviour
     {
-        [SerializeField] private bool view; // false = Side view, true = Top view
-        [SerializeField] private TMP_Text text;
-        [SerializeField] private bool first;
-        [SerializeField] private bool last;
-        [SerializeField] private MeshRenderer[] mediums;
-        [SerializeField] private AnimationClip[] anims;
-        [SerializeField] private Animation animL;
-        [SerializeField] private Animation animR;
-        [SerializeField] private int hand; //0 = left, 1 = right, 2 = both
-        private Material _originalMaterial;
-        private Material _highlight;
-        private bool _initial = true;
+        [SerializeField] private UnityEvent first;
+        [SerializeField] private UnityEvent last;
+        [SerializeField] private UnityEvent middle;
 
-        private void SetUp()
+        private StringTable _strings;
+
+        private bool _firstInLine;
+        private int _start;
+        private int _end;
+        private int _current;
+        private LocalizeStringEvent _text;
+
+        private void Awake()
         {
-            if (mediums.Length <= 0) return;
-            
-            _originalMaterial = mediums[0].material;
-            _highlight = HighlightStore.Instance.GetMaterial();
-            
-            
+            _strings = LocalizationSettings.StringDatabase.GetTable("Tutorial");
         }
 
-        public bool GetView()
+        private void Start()
         {
-            return view;
+            _end = _strings.SharedData.Entries.Count - 1;
+            _start = 2; //First 2 entries in the table are next and previous
+            _current = _start;
+            _text = gameObject.GetComponent<LocalizeStringEvent>();
+            _text.StringReference.TableEntryReference = _strings.SharedData.Entries[_current].Key;
+            _firstInLine = true;
         }
 
-        public bool IsLast()
+        private void ActiveButtons()
         {
-            return last;
-        }
-
-        public bool IsFirst()
-        {
-            return first;
-        }
-
-        public void ChangeActive(bool active)
-        {
-            if (_initial)
+            if (_current == _start)
             {
-                SetUp();
-                _initial = false;
+                first.Invoke();
+                print("Invoked start");
+                _firstInLine = true;
             }
-            gameObject.SetActive(active);
-            if (anims.Length > 0 && active)
+            else if (_current == _end)
             {
-                if (hand == 0)
-                {
-                    animL.Play(anims[0].name);
-                }else if (hand == 1)
-                {
-                    animR.Play(anims[0].name);
-                }
-                else if(anims.Length == 2 && hand == 2)
-                {
-                    animL.Play(anims[0].name);
-                    animR.Play(anims[1].name);
-                }
+                last.Invoke();
+                print("Invoked end");
+                _firstInLine = true;
             }
-            foreach (var medium in mediums)
+            else if (_firstInLine)
             {
-                medium.material = active ? _highlight : _originalMaterial;
+                middle.Invoke();
+                _firstInLine = false;
             }
+        }
+
+        public void NextText()
+        {
+            if (_current == _end)
+                return;
+            _current++;
+            _text.StringReference.TableEntryReference = _strings.SharedData.Entries[_current].Key;
+            ActiveButtons();
+        }
+
+        public void PreviousText()
+        {
+            if (_current == _start)
+                return;
+            _current--;
+            _text.StringReference.TableEntryReference = _strings.SharedData.Entries[_current].Key;
+            ActiveButtons();
         }
     }
 }

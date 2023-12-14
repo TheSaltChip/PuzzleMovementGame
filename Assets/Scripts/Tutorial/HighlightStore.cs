@@ -1,25 +1,25 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HighlightStore : MonoBehaviour
+namespace Tutorial
 {
-    public static HighlightStore Instance { get; private set; }
-    private  Material _highlight;
-
-    private void Awake()
+    public class HighlightStore : MonoBehaviour
     {
-        Instance = this;
-    }
+        public static HighlightStore Instance { get; private set; }
+        private  Material _highlight;
 
-    private void Start()
-    {
-        _highlight = gameObject.GetComponent<Renderer>().material;
-    }
+        private void Awake()
+        {
+            Instance = this;
+        }
 
-    public Material GetMaterial()
-    {
-        return _highlight;
+        private void Start()
+        {
+            _highlight = gameObject.GetComponent<Renderer>().material;
+        }
+
+        public Material GetMaterial()
+        {
+            return _highlight;
+        }
     }
 }

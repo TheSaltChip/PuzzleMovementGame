@@ -1,16 +1,19 @@
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Util;
 
 namespace CardMemorization.Strategies
 {
     public class AllNumberCompare : IRuleCompare
     {
-        public bool Match(List<Card> cards)
+        public bool Match(Card[] cards,int entries,int matches)
         {
-            if (cards.Count < 2) return false;
+            if (entries < matches) return false;
 
             var i = cards[0].GetNumber();
 
-            for (var j = 1; j < cards.Count; j++)
+            for (var j = 1; j < cards.Length; j++)
             {
                 if (cards[j].GetNumber() != i) return false;
             }

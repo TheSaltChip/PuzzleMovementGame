@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.IO;
 using CardMemorization.Enums;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Pool;
 using Util;
 using Random = UnityEngine.Random;
@@ -19,19 +21,28 @@ namespace CardMemorization
 
         [SerializeField] private Transform spawnPoint;
 
+        [SerializeField] private UnityEvent spawnNew;
+        [SerializeField] private Texture2D cardBack;
+
+        private DirectoryInfo _info;
+
         private ObjectPool<GameObject> _cardsPool;
         private List<(int, CardSuit)> _cardNumberAndSuitList;
         private CardRule _generationRule;
         private int _matchAmount;
+        private static readonly int Back = Shader.PropertyToID("_Back");
 
-        private void Start()
+        private Texture2D _cardFronts;
+        private static readonly int Front = Shader.PropertyToID("_Front");
+
+        private void Awake()
         {
+            _info = new DirectoryInfo(Application.dataPath + "/ImportedAssets/Playing Cards/Image/PlayingCards");
             var ccm = gameObject.GetComponent<CardCompareManager>();
             _generationRule = ccm.GetCardRule();
             _matchAmount = ccm.GetAmountToMatch();
             _cardsPool = new ObjectPool<GameObject>(CreateToPool, GetFromPool, OnReleaseToPool, DestroyFromPool);
             _cardNumberAndSuitList = new List<(int, CardSuit)>(52);
-
             GenerateCards();
             PlaceCards();
         }
@@ -86,7 +97,7 @@ namespace CardMemorization
 
         private void PlaceCards()
         {
-            // TODO Recall cards back to the pool before doing this
+            spawnNew.Invoke();
             
             var localScale = cardPrefab.transform.localScale;
             var mat = cardPrefab.GetComponent<MeshFilter>().sharedMesh.bounds.size;
@@ -113,8 +124,11 @@ namespace CardMemorization
                     var newCard = _cardsPool.Get();
                     newCard.GetComponent<Card>()
                         .SetValues(_cardNumberAndSuitList[j].Item1, _cardNumberAndSuitList[j].Item2,
-                            GetColorFromSuit(_cardNumberAndSuitList[j].Item2));
-
+                            GetColorFromSuit(_cardNumberAndSuitList[j].Item2),cardBack);
+                    //var tex = newCard.GetComponent<MeshRenderer>().material;
+                    //tex.SetTexture(Front, Resources.Load<Texture2D>("Images/Cards/" + _cardNumberAndSuitList[j].Item2 + "" + _cardNumberAndSuitList[j].Item1.ToString("00")));
+                    //tex.SetTexture(Back, cardBack);
+                    
                     var y = spawnPoint.localScale.y / 2f + 0.0001f + spawnPoint.localPosition.y;
 
                     newCard.transform.SetLocalPositionAndRotation(new Vector3(x, y, z), Quaternion.Euler(0, 0, 180));

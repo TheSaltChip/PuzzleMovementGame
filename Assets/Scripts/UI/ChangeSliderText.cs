@@ -11,7 +11,7 @@ namespace UI
         [SerializeField] private TMP_Text text;
         [SerializeField] private float constant = 1f;
 
-        private void Start()
+        private void OnEnable()
         {
             slider.onValueChanged.AddListener(ChangeText);
             ChangeText(slider.value);
