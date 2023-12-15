@@ -104,6 +104,7 @@ public class PuzzleSetupManager : MonoBehaviour
                 var p = tr.position;
                 p += (tr.forward * grid[i, j].y);
                 tr.position = p+(tr.up * grid[i, j].x);
+                tr.rotation = trpp.rotation;
                 available++;
             }
         }
