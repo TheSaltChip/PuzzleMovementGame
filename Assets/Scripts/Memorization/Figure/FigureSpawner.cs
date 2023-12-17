@@ -3,26 +3,19 @@ using System.Collections.Generic;
 using Memorization.Figure.ScriptableObjects;
 using UnityEngine;
 using Util;
-using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Memorization.Figure
 {
     public class FigureSpawner : MonoBehaviour
     {
-        [SerializeField] private GameObject prefab;
         [SerializeField] private Vector3 center;
-
-        [SerializeField, Range(1, 48), Tooltip("This value will be doubled. 3 means that there are 6 total figures")]
-        private int amountOfFigures;
 
         [SerializeField] private FigureMatchingRules rules;
 
         [SerializeField] private Figures figures;
         [SerializeField] private FigureMaterials materials;
         [SerializeField] private FigurePositions positions;
-
-        private int AmountOfFigures => amountOfFigures * 2;
 
         public void Spawn()
         {
@@ -47,10 +40,10 @@ namespace Memorization.Figure
             var posCopy = positions.Copy();
             posCopy.Shuffle();
 
-            var figs = figures.RandomFigures(rules.numFigure);
-            var mats = materials.RandomMaterials(rules.numColor);
+            var figs = figures.RandomFigures(rules.maxNumFigure);
+            var mats = materials.RandomMaterials(rules.maxNumColor);
 
-            for (var i = 0; i < AmountOfFigures; i += 2)
+            for (var i = 0; i < rules.TotalTotalNumberOfFigures; i += rules.numToMatch)
             {
                 var fig = figs[Random.Range(0, figs.Count)];
                 var mat = mats[Random.Range(0, mats.Count)];
@@ -64,11 +57,11 @@ namespace Memorization.Figure
             var posCopy = positions.Copy();
             posCopy.Shuffle();
 
-            var figs = figures.RandomFigures(rules.numFigure);
+            var figs = figures.RandomFigures(rules.maxNumFigure);
 
             var mat = materials.RandomObject();
 
-            for (var i = 0; i < AmountOfFigures; i += 2)
+            for (var i = 0; i < rules.TotalTotalNumberOfFigures; i += rules.numToMatch)
             {
                 var fig = figs[Random.Range(0, figs.Count)];
 
@@ -76,7 +69,24 @@ namespace Memorization.Figure
             }
         }
 
-        private void CreateFigures(GameObject fig, Material mat, List<Vector3> posCopy, int i)
+        private void ColorSpawn()
+        {
+            var posCopy = positions.Copy();
+            posCopy.Shuffle();
+
+            var mats = materials.RandomMaterials(rules.maxNumColor);
+
+            var fig = figures.RandomObject();
+
+            for (var i = 0; i < rules.TotalTotalNumberOfFigures; i += rules.numToMatch)
+            {
+                var mat = mats[Random.Range(0, mats.Count)];
+
+                CreateFigures(fig, mat, posCopy, i);
+            }
+        }
+
+        private void CreateFigures(GameObject fig, Material mat, IReadOnlyList<Vector3> posCopy, int i)
         {
             var p1 = Instantiate(fig, transform);
             p1.GetComponentInChildren<MeshRenderer>().material = mat;
@@ -87,25 +97,11 @@ namespace Memorization.Figure
             figureInfo.color = mat.color;
             figureInfo.shapeName = fig.name;
 
-            var p2 = Instantiate(p1, transform);
-            p2.transform.localPosition = posCopy[i + 1];
-            p2.transform.LookAt(transform);
-        }
-
-        private void ColorSpawn()
-        {
-            var posCopy = positions.Copy();
-            posCopy.Shuffle();
-
-            var mats = materials.RandomMaterials(rules.numColor);
-
-            var fig = figures.RandomObject();
-
-            for (var i = 0; i < AmountOfFigures; i += 2)
+            for (var j = i + 1; j < i + rules.numToMatch; j++)
             {
-                var mat = mats[Random.Range(0, mats.Count)];
-
-                CreateFigures(fig, mat, posCopy, i);
+                var p2 = Instantiate(p1, transform);
+                p2.transform.localPosition = posCopy[j];
+                p2.transform.LookAt(transform);
             }
         }
     }
