@@ -1,6 +1,5 @@
 ﻿using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Memorization.Figure.ScriptableObjects
 {

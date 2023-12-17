@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Memorization.Figure.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
@@ -24,35 +21,10 @@ namespace Memorization.Figure
 
         public void Add(FigureInfo item)
         {
-            if (item == null)
-            {
-                print("NULL");
-                return;
-            }
-
-            if (item.destroyed)
-            {
-                print("DESTROYED");
-                return;
-            }
-            
-            if (_list.Contains(item))
-            {
-                print("CONTAINS");
-
-                var sb = new StringBuilder();
-                foreach (var figureInfo in _list)
-                {
-                    sb.Append(figureInfo.shapeName + " ");
-                }
-                
-                print(sb.ToString());
-                
-                return;
-            }
+            if (_list.Contains(item)) return;
 
             _list.Add(item);
-            
+
             if (_list.Count == rules.numToMatch)
             {
                 Matches();
@@ -83,14 +55,9 @@ namespace Memorization.Figure
         {
             var list = new List<FigureInfo>(_list);
             _list.Clear();
-            
+
             foreach (var figureInfo in list)
             {
-                if (figureInfo == null)
-                {
-                    print("Destroyed?");
-                    continue;
-                }
                 figureInfo.DestroySelf();
             }
         }
@@ -99,6 +66,5 @@ namespace Memorization.Figure
         {
             _list.Clear();
         }
-
     }
 }
