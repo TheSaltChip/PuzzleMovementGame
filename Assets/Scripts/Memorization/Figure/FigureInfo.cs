@@ -13,13 +13,12 @@ namespace Memorization.Figure
 
         public UnityEvent<FigureInfo> onAddedToSelected;
 
-        public bool destroyed;
+        public bool Destroyed { get; private set; }
 
         public void AddToSelected()
         {
-            if (destroyed)
+            if (Destroyed)
             {
-                print("Is destroyed");
                 return;
             }
 
@@ -28,36 +27,22 @@ namespace Memorization.Figure
 
         public void DestroySelf()
         {
-            destroyed = false;
+            Destroyed = true;
+            meshCollider.enabled = false;
             Destroy(gameObject);
         }
 
-        public void EnableCollider()
-        {
-            meshCollider.enabled = true;
-        }
-
-        public void DisableCollider()
-        {
-            meshCollider.enabled = false;
-        }
-
-        private bool Equals(FigureInfo other, MatchingRule rule)
-        {
-            return rule switch
-            {
-                MatchingRule.Color => color.Equals(other.color),
-                MatchingRule.Figure => shapeName == other.shapeName,
-                _ => shapeName == other.shapeName && color.Equals(other.color)
-            };
-        }
-
-        public bool Equals(object obj, MatchingRule rule)
+        public bool Equals(FigureInfo obj, MatchingRule rule)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
 
-            return obj.GetType() == GetType() && Equals((FigureInfo)obj, rule);
+            return rule switch
+            {
+                MatchingRule.Color => color.Equals(obj.color),
+                MatchingRule.Figure => shapeName == obj.shapeName,
+                _ => shapeName == obj.shapeName && color.Equals(obj.color)
+            };
         }
 
         public override int GetHashCode()
