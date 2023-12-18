@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UI.ThrowOnTarget
 {
-    public class EndScreen : MonoBehaviour
+    public class ThrowOnTargetEndScreen : MonoBehaviour
     {
         [SerializeField] private TMP_Text text;
         [SerializeField] private ThrowLevelSO level;
