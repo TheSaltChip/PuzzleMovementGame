@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using Variables;
 
-namespace UI.ThrowOnTarget
+namespace UI
 {
     public class TrackIntVariable : MonoBehaviour
     {
