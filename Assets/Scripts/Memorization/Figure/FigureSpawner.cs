@@ -19,89 +19,32 @@ namespace Memorization.Figure
 
         public void Spawn()
         {
-            switch (rules.matchingRule)
-            {
-                case MatchingRule.Color:
-                    ColorSpawn();
-                    break;
-                case MatchingRule.Figure:
-                    FigureSpawn();
-                    break;
-                case MatchingRule.FigureAndColor:
-                    FigureAndColorSpawn();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private void FigureAndColorSpawn()
-        {
             var posCopy = positions.Copy();
             posCopy.Shuffle();
 
-            var figs = figures.RandomFigures(rules.maxNumFigure);
-            var mats = materials.RandomMaterials(rules.maxNumColor);
+            var shapes = figures.RandomFigures(rules.MaxNumShapes);
+            var mats = materials.RandomMaterials(rules.MaxNumColor);
 
-            for (var i = 0; i < rules.TotalTotalNumberOfFigures; i += rules.numToMatch)
+            for (var i = 0; i < rules.TotalTotalNumberOfFigures; i += rules.NumToMatch)
             {
-                var fig = figs[Random.Range(0, figs.Count)];
+                var fig = shapes[Random.Range(0, shapes.Count)];
                 var mat = mats[Random.Range(0, mats.Count)];
 
-                CreateFigures(fig, mat, posCopy, i);
-            }
-        }
+                var p1 = Instantiate(fig, transform);
+                p1.GetComponentInChildren<MeshRenderer>().material = mat;
+                p1.transform.localPosition = posCopy[i];
+                p1.transform.LookAt(transform);
 
-        private void FigureSpawn()
-        {
-            var posCopy = positions.Copy();
-            posCopy.Shuffle();
+                var figureInfo = p1.GetComponent<FigureInfo>();
+                figureInfo.color = mat.color;
+                figureInfo.shapeName = fig.name;
 
-            var figs = figures.RandomFigures(rules.maxNumFigure);
-
-            var mat = materials.RandomObject();
-
-            for (var i = 0; i < rules.TotalTotalNumberOfFigures; i += rules.numToMatch)
-            {
-                var fig = figs[Random.Range(0, figs.Count)];
-
-                CreateFigures(fig, mat, posCopy, i);
-            }
-        }
-
-        private void ColorSpawn()
-        {
-            var posCopy = positions.Copy();
-            posCopy.Shuffle();
-
-            var mats = materials.RandomMaterials(rules.maxNumColor);
-
-            var fig = figures.RandomObject();
-
-            for (var i = 0; i < rules.TotalTotalNumberOfFigures; i += rules.numToMatch)
-            {
-                var mat = mats[Random.Range(0, mats.Count)];
-
-                CreateFigures(fig, mat, posCopy, i);
-            }
-        }
-
-        private void CreateFigures(GameObject fig, Material mat, IReadOnlyList<Vector3> posCopy, int i)
-        {
-            var p1 = Instantiate(fig, transform);
-            p1.GetComponentInChildren<MeshRenderer>().material = mat;
-            p1.transform.localPosition = posCopy[i];
-            p1.transform.LookAt(transform);
-
-            var figureInfo = p1.GetComponent<FigureInfo>();
-            figureInfo.color = mat.color;
-            figureInfo.shapeName = fig.name;
-
-            for (var j = i + 1; j < i + rules.numToMatch; j++)
-            {
-                var p2 = Instantiate(p1, transform);
-                p2.transform.localPosition = posCopy[j];
-                p2.transform.LookAt(transform);
+                for (var j = i + 1; j < i + rules.NumToMatch; j++)
+                {
+                    var p2 = Instantiate(p1, transform);
+                    p2.transform.localPosition = posCopy[j];
+                    p2.transform.LookAt(transform);
+                }
             }
         }
     }

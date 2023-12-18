@@ -32,17 +32,12 @@ namespace Memorization.Figure
             Destroy(gameObject);
         }
 
-        public bool Equals(FigureInfo obj, MatchingRule rule)
+        public bool Equals(FigureInfo obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
 
-            return rule switch
-            {
-                MatchingRule.Color => color.Equals(obj.color),
-                MatchingRule.Figure => shapeName == obj.shapeName,
-                _ => shapeName == obj.shapeName && color.Equals(obj.color)
-            };
+            return shapeName == obj.shapeName && color.Equals(obj.color);
         }
 
         public override int GetHashCode()

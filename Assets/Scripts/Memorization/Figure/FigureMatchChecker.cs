@@ -16,7 +16,7 @@ namespace Memorization.Figure
 
         private void Awake()
         {
-            _list = new List<FigureInfo>(rules.numToMatch);
+            _list = new List<FigureInfo>(rules.NumToMatch);
         }
 
         public void Add(FigureInfo item)
@@ -25,7 +25,7 @@ namespace Memorization.Figure
 
             _list.Add(item);
 
-            if (_list.Count == rules.numToMatch)
+            if (_list.Count == rules.NumToMatch)
             {
                 Matches();
             }
@@ -37,7 +37,7 @@ namespace Memorization.Figure
 
             for (var i = 1; i < _list.Count; i++)
             {
-                if (!item.Equals(_list[i], rules.matchingRule))
+                if (!item.Equals(_list[i]))
                 {
                     ReenableColliderAndClear();
                     onIncorrectMatch?.Invoke();
