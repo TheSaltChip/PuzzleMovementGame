@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Events.String;
+using UnityEngine;
 using Variables;
 
 namespace SceneTransition
@@ -6,10 +7,11 @@ namespace SceneTransition
     public class StraightToFirstScene : MonoBehaviour
     {
         [SerializeField] private StringVariable sceneName;
+        [SerializeField] private StringGameEvent loadScene;
         
         private void Start()
         {
-            SceneTransitionManager.Instance.LoadScene(sceneName.value);
+            loadScene.Raise(sceneName.value);
         }
     }
 }

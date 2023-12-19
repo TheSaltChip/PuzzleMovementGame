@@ -3,44 +3,19 @@ using UnityEngine;
 
 namespace SceneTransition
 {
-    [RequireComponent(typeof(Renderer))]
     public class FaderScreen : MonoBehaviour
     {
         private static readonly int Color1 = Shader.PropertyToID("_Color");
-        public float animationTime = 0.5f;
-
-        private Renderer _renderer;
-
-        private void Awake()
+        
+        [SerializeField] private float animationTime = 0.5f;
+        [SerializeField] private Renderer _renderer;
+        
+        public IEnumerator FadeIn()
         {
-            _renderer = GetComponent<Renderer>();
+           yield return StartCoroutine(FadeRoutine(new Color(0, 0, 0, 0), Color.black));
         }
 
-        private void OnEnable()
-        {
-            StartCoroutine(Init());
-        }
-
-        private void OnDisable()
-        {
-            SceneTransitionManager.Instance.OnSceneExitCoroutine -= FadeIn;
-            SceneTransitionManager.Instance.OnSceneEnterCoroutine -= FadeOut;
-        }
-
-        private IEnumerator Init()
-        {
-            yield return new WaitUntil(() => SceneTransitionManager.Instance != null);
-
-            SceneTransitionManager.Instance.OnSceneExitCoroutine += FadeIn;
-            SceneTransitionManager.Instance.OnSceneEnterCoroutine += FadeOut;
-        }
-
-        private IEnumerator FadeIn()
-        {
-            yield return StartCoroutine(FadeRoutine(new Color(0, 0, 0, 0), Color.black));
-        }
-
-        private IEnumerator FadeOut()
+        public IEnumerator FadeOut()
         {
             yield return StartCoroutine(FadeRoutine(Color.black, new Color(0, 0, 0, 0)));
         }
