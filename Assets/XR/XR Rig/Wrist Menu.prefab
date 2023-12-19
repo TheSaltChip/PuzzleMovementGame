@@ -786,6 +786,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 97596175504556799}
   dropdown: {fileID: 4566604376637321932}
+  changeScene:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 281a8351868310f4bbe50b52c9075128, type: 2}
+        m_TargetAssemblyTypeName: Events.String.StringGameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2836848732682385025
 GameObject:
   m_ObjectHideFlags: 0
