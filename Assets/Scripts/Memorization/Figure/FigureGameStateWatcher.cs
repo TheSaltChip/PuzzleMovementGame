@@ -1,7 +1,6 @@
 ﻿using Memorization.Figure.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using Variables;
 
 namespace Memorization.Figure

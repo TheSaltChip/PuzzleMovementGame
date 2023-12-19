@@ -1,5 +1,4 @@
 using NaughtyAttributes;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 #if UNITY_EDITOR
@@ -7,7 +6,6 @@ using UnityEditor;
 #endif
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.XR;
 
 namespace Autohand {
     [HelpURL("https://app.gitbook.com/s/5zKO0EvOjzUDeT2aiFk3/auto-hand/hand"), DefaultExecutionOrder(10)]

@@ -1,5 +1,4 @@
-﻿using System;
-using Memorization.Figure.ScriptableObjects;
+﻿using Memorization.Figure.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UI;
 
