@@ -53,6 +53,7 @@ namespace SceneTransition
 
             _loadLevelOperation.allowSceneActivation = true;
         }
+        // Custom method for calling fader screen and letting it fade completely out before changing scene
 
 
         private void SetStartPositionAndRotation()
