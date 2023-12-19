@@ -9,7 +9,7 @@ namespace UI
         [SerializeField] private Slider slider;
         [SerializeField] private float scaleValue;
 
-        public UnityEvent<float> OnValueAdded;
+        public UnityEvent<float> onValueAdded;
 
         private void Start()
         {
@@ -23,7 +23,7 @@ namespace UI
 
         private void AddValue(float input)
         {
-            OnValueAdded.Invoke(Mathf.CeilToInt(input + (input - slider.minValue) * (scaleValue - 1)));
+            onValueAdded?.Invoke(Mathf.CeilToInt(input + (input - slider.minValue) * (scaleValue - 1)));
         }
     }
 }
