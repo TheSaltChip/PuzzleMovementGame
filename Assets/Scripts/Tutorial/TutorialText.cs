@@ -41,13 +41,11 @@ namespace Tutorial
             if (_current == _start)
             {
                 first.Invoke();
-                print("Invoked start");
                 _firstInLine = true;
             }
             else if (_current == _end)
             {
                 last.Invoke();
-                print("Invoked end");
                 _firstInLine = true;
             }
             else if (_firstInLine)
