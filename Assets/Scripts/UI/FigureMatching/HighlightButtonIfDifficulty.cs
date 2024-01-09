@@ -1,13 +1,15 @@
-﻿using Memorization.Figure.ScriptableObjects;
+﻿using System.Collections.Generic;
+using Difficulty;
+using Memorization.Figure.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI.FigureMatching
 {
-    public class HighlightButtonIfInRules : MonoBehaviour
+    public class HighlightButtonIfDifficulty : MonoBehaviour
     {
-        [SerializeField] private FigureMatchingRules figureMatchingRules;
-        [SerializeField] private int valueOfThis;
+        [SerializeField] private LevelDifficulty valueOfThis;
         [SerializeField] private Button button;
 
         private Color _normalColor;
@@ -19,17 +21,17 @@ namespace UI.FigureMatching
             _selectedColor = button.colors.selectedColor;
         }
 
-        public void CheckStatus()
+        public void CheckStatus(LevelDifficulty difficulty)
         {
             var cb = button.colors;
 
             cb.normalColor = _normalColor;
 
-            if (valueOfThis == figureMatchingRules.NumToMatch)
+            if (difficulty == valueOfThis)
             {
                 cb.normalColor = _selectedColor;
             }
-            
+
             button.colors = cb;
         }
     }

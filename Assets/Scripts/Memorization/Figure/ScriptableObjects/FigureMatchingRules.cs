@@ -16,12 +16,7 @@ namespace Memorization.Figure.ScriptableObjects
         [SerializeField, Range(1, 96),
          Tooltip("This number will be changed to fit the criteria: (this num) % numberOfFiguresToMatch == 0 && (this num) >= numberOfFiguresToMatch")]
         private int totalNumberOfFigures;
-/*
- * Give button with preset values for total amount, with a toggle that enables slider and hides options
- * Amount to match is given as 4 buttons (2,3,4,5)
- * Give option to play again with the same settings or go back to change some
- * Start screen can have a quick play button (pre defined values) and a custom play button (user decides) 
- */
+
         public int TotalTotalNumberOfFigures
         {
             get

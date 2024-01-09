@@ -62,7 +62,7 @@ namespace SceneTransition
 
             if (go != null)
             {
-                _startingPosRot = new PosRot()
+                _startingPosRot = new PosRot
                 {
                     Position = go.transform.position,
                     Rotation = go.transform.rotation
