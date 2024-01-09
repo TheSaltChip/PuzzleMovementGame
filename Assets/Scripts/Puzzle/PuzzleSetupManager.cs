@@ -34,6 +34,7 @@ public class PuzzleSetupManager : MonoBehaviour
         bSize.y = bSize.x;
         ppSize.y = ppSize.x;
         ppSize *= 7.46f;
+        SetUp();
     }
 
     public void SetUp()
@@ -143,9 +144,6 @@ public class PuzzleSetupManager : MonoBehaviour
                 piece.GetComponent<Renderer>().materials[0].SetTexture(BaseMap,sliced);
             }
         }
-        
-        
-        
     }
 
     private void GoalSprite()
