@@ -21,9 +21,12 @@ public class PuzzleSetupManager : MonoBehaviour
 
     [SerializeField] private UnityEvent changedImage;
 
+    private Vector3 scale;
     private Vector3 ppSize;
     private GameObject[] points;
+    private GameObject[] pieces;
     private int available;
+    private int av;
     private Vector3 bSize;
     private static readonly int BaseMap = Shader.PropertyToID("_BaseMap");
 
@@ -34,7 +37,7 @@ public class PuzzleSetupManager : MonoBehaviour
         bSize.y = bSize.x;
         ppSize.y = ppSize.x;
         ppSize *= 7.46f;
-        SetUp();
+        scale = board.transform.localScale;
     }
 
     public void SetUp()
@@ -47,17 +50,20 @@ public class PuzzleSetupManager : MonoBehaviour
 
     private void PlacePoints()
     {
-        points ??= new GameObject[height * width];
+        
         var trpp = placePoint.transform;
         var pos = trpp.localPosition;
         var amount = height * width;
         var grid = new Vector3[height,width];
-        var posY = -height/2;
-        var posX = -width/2;
-        foreach (var point in points)
+        if (points != null)
         {
-            Destroy(point);
+            foreach (var point in points)
+            {
+                Destroy(point);
+            }
         }
+        
+        points = new GameObject[height * width];
 
         var originVector = new Vector3();
         available = 0;
@@ -94,7 +100,6 @@ public class PuzzleSetupManager : MonoBehaviour
         {
             for (var j = 0; j < width; j++)
             {
-                //right = up, up = right x swapped with y
                 var obj = Instantiate(placePoint);
                 points[available] = obj;
                 obj.SetActive(true);
@@ -112,17 +117,26 @@ public class PuzzleSetupManager : MonoBehaviour
 
     private void ScaleBoard()
     {
+        var y = (height - 1) * scale.y;
+        var x = (width - 1) * scale.x;
         
-        var scale = board.transform.localScale;
-        scale.y += (height - 1) * scale.y;
-        scale.x += (width - 1) * scale.x;
-        
-        board.transform.localScale = scale;
+        board.transform.localScale = new Vector3(scale.x+x,scale.y+y,scale.z);
     }
 
     private void SetUpPieces()
     {
+
         var texture = selectedImage.currentSelected;
+        av = 0;
+        if (pieces != null)
+        {
+            foreach (var piece in pieces)
+            {
+                Destroy(piece);
+            }
+        }
+        
+        pieces = new GameObject[height * width];
         for (var i = 0; i < height; i++)
         {
             for (int j = 0; j < width; j++)
@@ -130,6 +144,8 @@ public class PuzzleSetupManager : MonoBehaviour
                 var rect = new Rect(j*(texture.width/(width * 1f)),i*(texture.height/(height * 1f)),texture.width/(width * 1f),texture.height/(height * 1f));
                 //var sprite = Sprite.Create(texture, rect, new Vector2(.5f, .5f));
                 var piece = Instantiate(puzzlePiece);
+                pieces[av] = piece;
+                av++;
                 var tr = piece.transform;
                 tr.parent = gameObject.transform;
                 tr.position = new Vector3(1+i, 1, j);
