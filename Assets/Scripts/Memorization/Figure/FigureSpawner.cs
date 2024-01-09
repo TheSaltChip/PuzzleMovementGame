@@ -7,20 +7,26 @@ namespace Memorization.Figure
 {
     public class FigureSpawner : MonoBehaviour
     {
-        [SerializeField] private Transform spawnPoint;
+        private Transform _spawnPoint;
 
         [SerializeField] private FigureMatchingRules rules;
 
         [SerializeField] private Figures figures;
         [SerializeField] private FigureMaterials materials;
         [SerializeField] private FigurePositions positions;
-        
+
         private readonly Vector3 _adjustToNeckHeight = new(0, 0.15f, 0);
-        
+
         public void Spawn()
         {
-            transform.position =
-                spawnPoint == null ? Vector3.zero : spawnPoint.transform.position - _adjustToNeckHeight;
+            if (_spawnPoint == null)
+            {
+                var mainCamera = GameObject.FindWithTag("MainCamera");
+
+                _spawnPoint = mainCamera == null ? transform : mainCamera.transform;
+            }
+
+            transform.position = _spawnPoint.transform.position - _adjustToNeckHeight;
 
             var posCopy = positions.Copy();
             posCopy.Shuffle();

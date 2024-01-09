@@ -1,35 +1,42 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using Variables;
 
 namespace SceneTransition
 {
     public class FaderScreen : MonoBehaviour
     {
         private static readonly int Color1 = Shader.PropertyToID("_Color");
-        
-        [SerializeField] private float animationTime = 0.5f;
-        [SerializeField] private Renderer _renderer;
-        
+
+        [SerializeField] private FloatVariable animationTime;
+        [SerializeField] private Image image;
+
+        private void Awake()
+        {
+            image.material.SetColor(Color1, Color.clear);
+        }
+
         public void FadeIn()
         {
-            StartCoroutine(FadeRoutine(new Color(0, 0, 0, 0), Color.black));
+            StartCoroutine(FadeRoutine(Color.clear, Color.black, animationTime.value));
         }
 
         public void FadeOut()
         {
-            StartCoroutine(FadeRoutine(Color.black, new Color(0, 0, 0, 0)));
+            StartCoroutine(FadeRoutine(Color.black, Color.clear, animationTime.value * 1.5f));
         }
 
-        private IEnumerator FadeRoutine(Color from, Color to)
+        private IEnumerator FadeRoutine(Color from, Color to, float animTime)
         {
             var time = 0f;
 
-            while (time <= animationTime)
+            while (time <= animTime)
             {
-                _renderer.material.SetColor(Color1, Color.Lerp(
+                image.material.SetColor(Color1, Color.Lerp(
                     from,
                     to,
-                    time / animationTime
+                    time / animTime
                 ));
 
                 time += Time.deltaTime;
@@ -37,7 +44,7 @@ namespace SceneTransition
                 yield return null;
             }
 
-            _renderer.material.SetColor(Color1, to);
+            image.material.SetColor(Color1, to);
         }
     }
 }

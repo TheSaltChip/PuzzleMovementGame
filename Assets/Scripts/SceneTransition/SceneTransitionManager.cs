@@ -1,7 +1,10 @@
-﻿using Autohand;
+﻿using System.Collections;
+using Autohand;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
+using FloatVariable = Variables.FloatVariable;
 
 namespace SceneTransition
 {
@@ -19,6 +22,8 @@ namespace SceneTransition
             Position = new Vector3(0, 0.5f, 0),
             Rotation = Quaternion.identity
         };
+
+        [SerializeField] private FloatVariable timeToWaitBeforeActivatingScene;
 
         private AsyncOperation _loadLevelOperation;
 
@@ -46,14 +51,22 @@ namespace SceneTransition
 
         public void LoadScene(string sceneName)
         {
-            _loadLevelOperation = SceneManager.LoadSceneAsync(sceneName);
-            _loadLevelOperation.allowSceneActivation = false;
-
+            if(_loadLevelOperation != null) return;
+            
+            StartCoroutine(FadeOut());
             onSceneExit?.Invoke();
 
-            _loadLevelOperation.allowSceneActivation = true;
+            _loadLevelOperation = SceneManager.LoadSceneAsync(sceneName);
+            _loadLevelOperation.allowSceneActivation = false;
         }
 
+        private IEnumerator FadeOut()
+        {
+            yield return new WaitForSeconds(timeToWaitBeforeActivatingScene.value);
+            yield return new WaitUntil(() => _loadLevelOperation != null);
+            
+            _loadLevelOperation.allowSceneActivation = true;
+        }
 
         private void SetStartPositionAndRotation()
         {
@@ -61,7 +74,7 @@ namespace SceneTransition
 
             if (go != null)
             {
-                _startingPosRot = new PosRot()
+                _startingPosRot = new PosRot
                 {
                     Position = go.transform.position,
                     Rotation = go.transform.rotation
