@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using Autohand;
+﻿using Autohand;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using FloatVariable = Variables.FloatVariable;
 
 namespace SceneTransition
 {
@@ -22,8 +19,6 @@ namespace SceneTransition
             Position = new Vector3(0, 0.5f, 0),
             Rotation = Quaternion.identity
         };
-
-        [SerializeField] private FloatVariable timeToWaitBeforeActivatingScene;
 
         private AsyncOperation _loadLevelOperation;
 
@@ -51,22 +46,15 @@ namespace SceneTransition
 
         public void LoadScene(string sceneName)
         {
-            if(_loadLevelOperation != null) return;
-            
-            StartCoroutine(FadeOut());
-            onSceneExit?.Invoke();
-
             _loadLevelOperation = SceneManager.LoadSceneAsync(sceneName);
             _loadLevelOperation.allowSceneActivation = false;
-        }
 
-        private IEnumerator FadeOut()
-        {
-            yield return new WaitForSeconds(timeToWaitBeforeActivatingScene.value);
-            yield return new WaitUntil(() => _loadLevelOperation != null);
-            
+            onSceneExit?.Invoke();
+
             _loadLevelOperation.allowSceneActivation = true;
         }
+        // Custom method for calling fader screen and letting it fade completely out before changing scene
+
 
         private void SetStartPositionAndRotation()
         {
@@ -74,7 +62,7 @@ namespace SceneTransition
 
             if (go != null)
             {
-                _startingPosRot = new PosRot
+                _startingPosRot = new PosRot()
                 {
                     Position = go.transform.position,
                     Rotation = go.transform.rotation

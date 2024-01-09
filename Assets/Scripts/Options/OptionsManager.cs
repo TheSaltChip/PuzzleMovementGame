@@ -6,7 +6,7 @@ namespace Options
 {
     public class OptionsManager : MonoBehaviour
     {
-        private void Awake()
+        private void Start()
         {
             if (PlayerPrefs.HasKey(PlayerPrefsNames.Turn))
                 AutoHandPlayer.Instance.rotationType = (RotationType)PlayerPrefs.GetInt(PlayerPrefsNames.Turn);
