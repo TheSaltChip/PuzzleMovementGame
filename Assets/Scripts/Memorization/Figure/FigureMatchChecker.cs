@@ -26,7 +26,8 @@ namespace Memorization.Figure
 
             _list.Add(item);
             onAddedToList?.Invoke();
-
+            item.Deactivate();
+            
             if (_list.Count == rules.NumToMatch)
             {
                 Matches();
@@ -41,7 +42,7 @@ namespace Memorization.Figure
             {
                 if (!item.Equals(_list[i]))
                 {
-                    ReenableColliderAndClear();
+                    ActivateAndClear();
                     onIncorrectMatch?.Invoke();
                     return;
                 }
@@ -64,8 +65,12 @@ namespace Memorization.Figure
             }
         }
 
-        private void ReenableColliderAndClear()
+        private void ActivateAndClear()
         {
+            foreach (var figureInfo in _list)
+            {
+                figureInfo.Activate();
+            }
             _list.Clear();
         }
     }
