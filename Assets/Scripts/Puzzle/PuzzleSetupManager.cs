@@ -7,11 +7,12 @@ using Unity.VisualScripting;
 using Unity.XR.PXR;
 using UnityEngine;
 using UnityEngine.Events;
+using Variables;
 
 public class PuzzleSetupManager : MonoBehaviour
 {
-    [SerializeField] private int height;
-    [SerializeField] private int width;
+    [SerializeField] private FloatVariable height;
+    [SerializeField] private FloatVariable width;
     
     [SerializeField] private GameObject puzzlePiece;
     [SerializeField] private GameObject board;
@@ -53,8 +54,7 @@ public class PuzzleSetupManager : MonoBehaviour
         
         var trpp = placePoint.transform;
         var pos = trpp.localPosition;
-        var amount = height * width;
-        var grid = new Vector3[height,width];
+        var grid = new Vector3[(int)height.value,(int)width.value];
         if (points != null)
         {
             foreach (var point in points)
@@ -63,42 +63,42 @@ public class PuzzleSetupManager : MonoBehaviour
             }
         }
         
-        points = new GameObject[height * width];
+        points = new GameObject[(int)height.value * (int)width.value];
 
         var originVector = new Vector3();
         available = 0;
         
-        if (height % 2 == 0)
+        if (height.value % 2 == 0)
         {
-            originVector.y = -ppSize.y * (height / 2f)+ppSize.y / 2f;
+            originVector.y = -ppSize.y * (height.value / 2f)+ppSize.y / 2f;
         }
         else
         {
-            originVector.y = - ppSize.y * (height / 2);
+            originVector.y = - ppSize.y * (height.value / 2);
         }
 
-        if (width % 2 == 0)
+        if (width.value % 2 == 0)
         {
-            originVector.x = -ppSize.x * (width / 2f)+ppSize.x / 2f;
+            originVector.x = -ppSize.x * (width.value / 2f)+ppSize.x / 2f;
         }
         else
         {
-            originVector.x = -ppSize.x * (width / 2);
+            originVector.x = -ppSize.x * (width.value / 2);
         }
         
         
         
-        for (var i = 0; i < height; i++)
+        for (var i = 0; i < height.value; i++)
         {
-            for (var j = 0; j < width; j++)
+            for (var j = 0; j < width.value; j++)
             {
                 grid[i, j] = new Vector3(originVector.x + j*ppSize.x,originVector.y + i*ppSize.y,pos.z);
             }
         }
 
-        for (var i = 0; i < height; i++)
+        for (var i = 0; i < height.value; i++)
         {
-            for (var j = 0; j < width; j++)
+            for (var j = 0; j < width.value; j++)
             {
                 var obj = Instantiate(placePoint);
                 points[available] = obj;
@@ -117,8 +117,8 @@ public class PuzzleSetupManager : MonoBehaviour
 
     private void ScaleBoard()
     {
-        var y = (height - 1) * scale.y;
-        var x = (width - 1) * scale.x;
+        var y = (height.value - 1) * scale.y;
+        var x = (width.value - 1) * scale.x;
         
         board.transform.localScale = new Vector3(scale.x+x,scale.y+y,scale.z);
     }
@@ -136,12 +136,12 @@ public class PuzzleSetupManager : MonoBehaviour
             }
         }
         
-        pieces = new GameObject[height * width];
-        for (var i = 0; i < height; i++)
+        pieces = new GameObject[(int)height.value * (int)width.value];
+        for (var i = 0; i < height.value; i++)
         {
-            for (int j = 0; j < width; j++)
+            for (int j = 0; j < width.value; j++)
             {
-                var rect = new Rect(j*(texture.width/(width * 1f)),i*(texture.height/(height * 1f)),texture.width/(width * 1f),texture.height/(height * 1f));
+                var rect = new Rect(j*(texture.width/(width.value * 1f)),i*(texture.height/(height.value * 1f)),texture.width/(width.value * 1f),texture.height/(height.value * 1f));
                 //var sprite = Sprite.Create(texture, rect, new Vector2(.5f, .5f));
                 var piece = Instantiate(puzzlePiece);
                 pieces[av] = piece;
@@ -174,8 +174,9 @@ public class PuzzleSetupManager : MonoBehaviour
     public void SetParameters(string val)
     {
         var s = val.Split(',');
-        width = Int32.Parse(s[0]);
-        height = Int32.Parse(s[1]);
+        width.value = Int32.Parse(s[0]);
+        height.value = Int32.Parse(s[1]);
         SetUp();
     }
+
 }

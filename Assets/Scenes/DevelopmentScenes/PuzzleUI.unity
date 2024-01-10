@@ -4036,6 +4036,7 @@ GameObject:
   m_Component:
   - component: {fileID: 585065507}
   - component: {fileID: 585065508}
+  - component: {fileID: 585065509}
   m_Layer: 5
   m_Name: MinMax Slider
   m_TagString: Untagged
@@ -4118,9 +4119,37 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 69cc559811f1d2649aefa19a1df500d1, type: 2}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: 
+      - m_Target: {fileID: 585065509}
+        m_TargetAssemblyTypeName: Puzzle.FloatToSO, Assembly-CSharp
+        m_MethodName: Change
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &585065509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585065506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a30c3ed6378740d1ae6765f9a8a744a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  so: {fileID: 11400000, guid: 69cc559811f1d2649aefa19a1df500d1, type: 2}
+  onChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 0ca290d70bcf2af43938a8407e93dca8, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20780,6 +20809,8 @@ GameObject:
   - component: {fileID: 5645699968149533560}
   - component: {fileID: 5645699968149533559}
   - component: {fileID: 5645699968149533561}
+  - component: {fileID: 5645699968149533563}
+  - component: {fileID: 5645699968149533562}
   m_Layer: 0
   m_Name: SquarePuzzle
   m_TagString: Untagged
@@ -21546,8 +21577,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76309ddd86136841b357282e4621554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 2
-  width: 3
+  height: {fileID: 11400000, guid: 34051a84438d4f04bb72858aa06288bd, type: 2}
+  width: {fileID: 11400000, guid: 69cc559811f1d2649aefa19a1df500d1, type: 2}
   puzzlePiece: {fileID: 3495775919557069510}
   board: {fileID: 1523442110500619293}
   placePoint: {fileID: 1118977938}
@@ -21665,6 +21696,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Event: {fileID: 11400000, guid: 2e8fa6765b429694db6f23a49ff3dbeb, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5645699968149533557}
+        m_TargetAssemblyTypeName: PuzzleSetupManager, Assembly-CSharp
+        m_MethodName: SetUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5645699968149533562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4977144553435621838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0ca290d70bcf2af43938a8407e93dca8, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5645699968149533557}
+        m_TargetAssemblyTypeName: PuzzleSetupManager, Assembly-CSharp
+        m_MethodName: SetUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5645699968149533563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4977144553435621838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 7025e32279db9b945917ab89bcc1fd72, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
@@ -31611,9 +31698,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: SetSliderValue
+      - m_Target: {fileID: 8969571752396733176}
+        m_TargetAssemblyTypeName: Puzzle.FloatToSO, Assembly-CSharp
+        m_MethodName: Change
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -31633,6 +31720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8969571752396733172}
   - component: {fileID: 8969571752396733173}
+  - component: {fileID: 8969571752396733176}
   m_Layer: 5
   m_Name: MinMax Slider
   m_TagString: Untagged
@@ -31640,6 +31728,34 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8969571752396733176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8969571752396733175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a30c3ed6378740d1ae6765f9a8a744a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  so: {fileID: 11400000, guid: 34051a84438d4f04bb72858aa06288bd, type: 2}
+  onChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 7025e32279db9b945917ab89bcc1fd72, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8969571752430464858
 GameObject:
   m_ObjectHideFlags: 0
