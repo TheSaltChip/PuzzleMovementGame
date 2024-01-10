@@ -23,12 +23,6 @@ namespace UI.FigureMatching
 
         private Arguments _arguments;
 
-        
-        /*
-         * Find out why this component is one step behind when using difficulty buttons
-         * 
-         */
-        
         private void Start()
         {
             _arguments = new Arguments
@@ -38,14 +32,24 @@ namespace UI.FigureMatching
                 NumToMatch = rules.NumToMatch,
                 NumberOfFiguresLeft = figuresLeft.value
             };
-            
+
             localizeStringEvent.StringReference.Arguments = new object[]
             {
                 _arguments
             };
         }
 
-        public void OnUpdateString()
+        public void SetupString()
+        {
+            _arguments.NumberOfFiguresLeft = figuresLeft.value;
+            _arguments.MaxNumShapes = rules.MaxNumShapes;
+            _arguments.MaxNumColor = rules.MaxNumColor;
+            _arguments.NumToMatch = rules.NumToMatch;
+
+            localizeStringEvent.RefreshString();
+        }
+
+        public void UpdateString()
         {
             _arguments.NumberOfFiguresLeft = figuresLeft.value;
             localizeStringEvent.RefreshString();

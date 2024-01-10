@@ -1685,7 +1685,7 @@ GameObject:
   - component: {fileID: 2031339433036705441}
   - component: {fileID: 8821733201507469739}
   - component: {fileID: 2488117751562503911}
-  - component: {fileID: 694129611201903425}
+  - component: {fileID: 4280845845512459934}
   m_Layer: 0
   m_Name: GameScreenInfo
   m_TagString: Untagged
@@ -1891,7 +1891,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8821733201507469739}
         m_TargetAssemblyTypeName: UI.FigureMatching.FigureMatchingGameScreen, Assembly-CSharp
-        m_MethodName: OnUpdateString
+        m_MethodName: UpdateString
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1901,7 +1901,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &694129611201903425
+--- !u!114 &4280845845512459934
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1910,12 +1910,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 912208884070855929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 693b17f890a242978246cce7c9c8548f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEventListener: {fileID: 2488117751562503911}
-  additionalGameEvents:
-  - {fileID: 11400000, guid: 15a1e120f107d0846b301c0ef5f34c90, type: 2}
+  Event: {fileID: 11400000, guid: 15a1e120f107d0846b301c0ef5f34c90, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8821733201507469739}
+        m_TargetAssemblyTypeName: UI.FigureMatching.FigureMatchingGameScreen, Assembly-CSharp
+        m_MethodName: SetupString
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1263713117029214099
 GameObject:
   m_ObjectHideFlags: 0

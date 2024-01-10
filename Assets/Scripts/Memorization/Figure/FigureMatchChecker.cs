@@ -13,6 +13,7 @@ namespace Memorization.Figure
 
         public UnityEvent onCorrectMatch;
         public UnityEvent onIncorrectMatch;
+        public UnityEvent onAddedToList;
 
         private void Awake()
         {
@@ -24,6 +25,7 @@ namespace Memorization.Figure
             if (_list.Contains(item)) return;
 
             _list.Add(item);
+            onAddedToList?.Invoke();
 
             if (_list.Count == rules.NumToMatch)
             {

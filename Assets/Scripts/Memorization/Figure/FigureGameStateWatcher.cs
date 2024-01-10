@@ -11,7 +11,7 @@ namespace Memorization.Figure
         [SerializeField] private IntVariable figuresLeft;
 
         public UnityEvent levelDone;
-        
+
         public void Setup()
         {
             figuresLeft.value = rules.TotalTotalNumberOfFigures;
