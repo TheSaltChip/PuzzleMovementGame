@@ -73,5 +73,10 @@ namespace Memorization.Figure
             }
             _list.Clear();
         }
+
+        public void ClearList()
+        {
+            _list.Clear();
+        }
     }
 }

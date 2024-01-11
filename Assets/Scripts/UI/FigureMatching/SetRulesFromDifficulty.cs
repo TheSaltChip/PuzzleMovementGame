@@ -28,6 +28,7 @@ namespace UI.FigureMatching
                 default:
                     throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null);
             }
+
             onDifficultySet?.Invoke();
         }
 

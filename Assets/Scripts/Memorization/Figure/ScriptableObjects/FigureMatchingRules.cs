@@ -1,20 +1,22 @@
-﻿using UnityEngine;
+﻿using Unity.XR.CoreUtils;
+using UnityEngine;
 
 namespace Memorization.Figure.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "FigureMatchingRules", menuName = "Memorization/Figure/FigureMatchingRules")]
     public class FigureMatchingRules : ScriptableObject
     {
-        [field: SerializeField, Range(1, 10)]
-        public int MaxNumColor { get; set; }
+        [field: SerializeField, Range(1, 10)] public int MaxNumColor { get; set; }
 
-        [field: SerializeField, Range(1, 16)]
-        public int MaxNumShapes { get; set; }
+        [field: SerializeField, Range(1, 16)] public int MaxNumShapes { get; set; }
 
         [field: SerializeField, Range(2, 5)] public int NumToMatch { get; set; }
 
+        [field: SerializeField] public int NumFiguresLeft { get; set; }
+
         [SerializeField, Range(1, 96),
-         Tooltip("This number will be changed to fit the criteria: (this num) % numberOfFiguresToMatch == 0 && (this num) >= numberOfFiguresToMatch")]
+         Tooltip(
+             "This number will be changed to fit the criteria: (this num) % numberOfFiguresToMatch == 0 && (this num) >= numberOfFiguresToMatch")]
         private int totalNumberOfFigures;
 
         public int TotalTotalNumberOfFigures
@@ -26,7 +28,7 @@ namespace Memorization.Figure.ScriptableObjects
                     totalNumberOfFigures = NumToMatch;
                     return totalNumberOfFigures;
                 }
-                
+
                 if (totalNumberOfFigures % NumToMatch != 0)
                 {
                     totalNumberOfFigures -= totalNumberOfFigures % NumToMatch;
@@ -35,7 +37,22 @@ namespace Memorization.Figure.ScriptableObjects
                 return totalNumberOfFigures;
             }
 
-            set => totalNumberOfFigures = value;
+            set
+            {
+                totalNumberOfFigures = value; 
+                NumFiguresLeft = value;
+            }
+        }
+
+        /// <summary>
+        /// Subtracts NumToMatch from NumFiguresLeft
+        /// </summary>
+        /// <returns>True if number of figures left are &lt;= 0, false if not</returns>
+        public bool SubtractMatched()
+        {
+            NumFiguresLeft -= NumToMatch;
+
+            return NumFiguresLeft <= 0;
         }
     }
 }
