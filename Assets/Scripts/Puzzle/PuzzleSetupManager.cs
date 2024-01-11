@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Autohand;
 using Events;
 using Puzzle.Scriptables;
 using Unity.VisualScripting;
@@ -19,6 +20,8 @@ public class PuzzleSetupManager : MonoBehaviour
     [SerializeField] private GameObject placePoint;
     [SerializeField] private SelectedImage selectedImage;
     [SerializeField] private GoalSprite goalSprite;
+    
+    [SerializeField] private IntVariable placed;
 
     [SerializeField] private UnityEvent changedImage;
 
@@ -30,6 +33,7 @@ public class PuzzleSetupManager : MonoBehaviour
     private int av;
     private Vector3 bSize;
     private static readonly int BaseMap = Shader.PropertyToID("_BaseMap");
+    private Texture2D texture;
 
     private void Awake()
     {
@@ -70,20 +74,20 @@ public class PuzzleSetupManager : MonoBehaviour
         
         if (height.value % 2 == 0)
         {
-            originVector.y = -ppSize.y * (height.value / 2f)+ppSize.y / 2f;
+            originVector.y = -ppSize.y * (height.value / 2)+ppSize.y / 2;
         }
         else
         {
-            originVector.y = - ppSize.y * (height.value / 2);
+            originVector.y = - ppSize.y * ((int)height.value / 2);
         }
 
         if (width.value % 2 == 0)
         {
-            originVector.x = -ppSize.x * (width.value / 2f)+ppSize.x / 2f;
+            originVector.x = -ppSize.x * (width.value / 2)+ppSize.x / 2;
         }
         else
         {
-            originVector.x = -ppSize.x * (width.value / 2);
+            originVector.x = -ppSize.x * ((int)width.value / 2);
         }
         
         
@@ -162,9 +166,32 @@ public class PuzzleSetupManager : MonoBehaviour
         }
     }
 
+    public void CompareImage()
+    {
+        if (placed.value != (int)(height.value * width.value))
+            return;
+        var compTex = new Texture2D(texture.width,texture.height)
+        {
+            filterMode = texture.filterMode
+        };
+        for (var i = 0; i < height.value; i++)
+        {
+            for (int j = 0; j < width.value; j++)
+            {
+                var rect = new Rect(j*(texture.width/(width.value * 1f)),i*(texture.height/(height.value * 1f)),texture.width/(width.value * 1f),texture.height/(height.value * 1f));
+                
+                compTex.SetPixels(0,0,(int)rect.width,(int)rect.height,points[i].GetComponent<PlacePoint>().GetPlacedObject().GetComponent<Renderer>().materials[0].GetPixels((int)rect.x,(int)rect.y,(int)rect.width,(int)rect.height));
+                compTex.Apply();
+            }
+        }
+        
+        
+        
+    }
+
     private void GoalSprite()
     {
-        var texture = selectedImage.currentSelected;
+        texture = selectedImage.currentSelected;
         var sprite = Sprite.Create(texture, new Rect(0,0,texture.width,texture.height), new Vector2(.5f,.5f));
         goalSprite.image = sprite;
         changedImage.Invoke();
