@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Autohand;
 using Events;
 using Puzzle.Scriptables;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using Unity.XR.PXR;
 using UnityEngine;
@@ -12,6 +13,7 @@ using Variables;
 
 public class PuzzleSetupManager : MonoBehaviour
 {
+    [SerializeField] private ComputeShader comp;
     [SerializeField] private FloatVariable height;
     [SerializeField] private FloatVariable width;
     
@@ -34,6 +36,9 @@ public class PuzzleSetupManager : MonoBehaviour
     private Vector3 bSize;
     private static readonly int BaseMap = Shader.PropertyToID("_BaseMap");
     private Texture2D texture;
+    private static readonly int Image = Shader.PropertyToID("image");
+    private static readonly int Ri = Shader.PropertyToID("ri");
+    private static readonly int Result = Shader.PropertyToID("Result");
 
     private void Awake()
     {
@@ -43,6 +48,7 @@ public class PuzzleSetupManager : MonoBehaviour
         ppSize.y = ppSize.x;
         ppSize *= 7.46f;
         scale = board.transform.localScale;
+        SetUp();
     }
 
     public void SetUp()
@@ -169,24 +175,71 @@ public class PuzzleSetupManager : MonoBehaviour
     public void CompareImage()
     {
         if (placed.value != (int)(height.value * width.value))
+        {
+            print("not completed");
             return;
+        }
+            
         var compTex = new Texture2D(texture.width,texture.height)
         {
             filterMode = texture.filterMode
         };
+        var n = 0;//(int)(height.value*width.value-width.value);
+        
+        /*
         for (var i = 0; i < height.value; i++)
         {
-            for (int j = 0; j < width.value; j++)
+            var a = (int)(height.value*width.value-height.value);
+            for (var j = 0; j < width.value; j++)
             {
                 var rect = new Rect(j*(texture.width/(width.value * 1f)),i*(texture.height/(height.value * 1f)),texture.width/(width.value * 1f),texture.height/(height.value * 1f));
-                
-                compTex.SetPixels(0,0,(int)rect.width,(int)rect.height,points[i].GetComponent<PlacePoint>().GetPlacedObject().GetComponent<Renderer>().materials[0].GetPixels((int)rect.x,(int)rect.y,(int)rect.width,(int)rect.height));
+                var rt = new RenderTexture((int)rect.width,(int)rect.height,0);
+                Graphics.Blit(
+                    points[i+a].GetComponent<PlacePoint>().GetPlacedObject().GetComponent<Renderer>().materials[0]
+                        .mainTexture, rt);
+                var newT2d = new Texture2D((int)rect.width,(int)rect.height);
+                newT2d.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0);
+                newT2d.Apply();
+                compTex.SetPixels(i*(int)rect.width,j*(int)rect.height,(int)rect.width,(int)rect.height,newT2d.GetPixels(0,0,(int)rect.width,(int)rect.height));
                 compTex.Apply();
+                a -= (int)height.value;
             }
+
+            n ++;
         }
+        */
         
         
+        var sprite = Sprite.Create(compTex, new Rect(0,0,compTex.width,compTex.height), new Vector2(.5f,.5f));
+        goalSprite.image = sprite;
+        changedImage.Invoke();
         
+        print("ready");
+
+        var result = new int[texture.width * texture.height];
+        var buffer = new ComputeBuffer(texture.width*texture.height,sizeof(float));
+        
+        var rTex  = new RenderTexture(texture.width, texture.height, 0);
+        rTex.enableRandomWrite = true;
+        var rComp = new RenderTexture(compTex.width, compTex.height, 0);
+        rComp.enableRandomWrite = true;
+        Graphics.Blit(texture,rTex);
+        Graphics.Blit(compTex,rComp);
+
+        
+
+        comp.SetTexture(0,Image,rTex);
+        comp.SetTexture(0,Ri,rComp);
+        comp.SetBuffer(0,Result,buffer);
+
+        var k = new int();
+        comp.GetKernelThreadGroupSizes(k,out var x,out var y,out var z);
+        comp.Dispatch(k,Mathf.CeilToInt((float)texture.width/x),Mathf.CeilToInt((float)texture.height/y),(int)z);
+        buffer.GetData(result);
+        foreach (var res in result)
+        {
+            print(res);
+        }
     }
 
     private void GoalSprite()

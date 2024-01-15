@@ -2305,6 +2305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 399497922}
+  - component: {fileID: 399497923}
   m_Layer: 0
   m_Name: PuzzleUI
   m_TagString: Untagged
@@ -2332,6 +2333,20 @@ Transform:
   m_Father: {fileID: 903446134}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &399497923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399497921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04fc19556d624a78a66bba75deccc0ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventAudio: {fileID: 11400000, guid: 8c2a3a45e524dce448c44a9a5e953bc5, type: 2}
+  audioGameEvent: {fileID: 11400000, guid: b2ed59e4012bcb44e9c10d746897321a, type: 2}
 --- !u!1 &399840065
 GameObject:
   m_ObjectHideFlags: 0
@@ -6350,12 +6365,12 @@ PrefabInstance:
     - target: {fileID: 2829881134728359888, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
         type: 3}
       propertyPath: OnPlace.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2829881134728359888, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
         type: 3}
       propertyPath: OnRemove.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2829881134728359888, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
         type: 3}
@@ -6381,8 +6396,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OnPlace.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11400000, guid: a24661653ae4acc40a566b90cb5f473f,
-        type: 2}
+      objectReference: {fileID: 1118977943}
     - target: {fileID: 2829881134728359888, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
         type: 3}
       propertyPath: OnPlace.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -6393,8 +6407,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OnRemove.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11400000, guid: a24661653ae4acc40a566b90cb5f473f,
-        type: 2}
+      objectReference: {fileID: 1118977943}
     - target: {fileID: 2829881134728359888, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
         type: 3}
       propertyPath: OnRemove.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -6444,7 +6457,7 @@ PrefabInstance:
     - target: {fileID: 2829881134728359888, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
         type: 3}
       propertyPath: OnPlace.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Variables.IntVariable, Assembly-CSharp
+      value: intToSO, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2829881134728359888, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
         type: 3}
@@ -6454,7 +6467,7 @@ PrefabInstance:
     - target: {fileID: 2829881134728359888, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
         type: 3}
       propertyPath: OnRemove.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Variables.IntVariable, Assembly-CSharp
+      value: intToSO, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2829881134728359888, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
         type: 3}
@@ -7128,6 +7141,34 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 946883180}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1118977943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118977938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b086d7045277379498f9a21c1105d6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  var: {fileID: 11400000, guid: a24661653ae4acc40a566b90cb5f473f, type: 2}
+  ev:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: cc03283f607755c4fae3dda5b3b7f51c, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1125098688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21809,6 +21850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76309ddd86136841b357282e4621554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  comp: {fileID: 7200000, guid: bd10d5b4ee930604e8c828328e3493f7, type: 3}
   height: {fileID: 11400000, guid: 34051a84438d4f04bb72858aa06288bd, type: 2}
   width: {fileID: 11400000, guid: 69cc559811f1d2649aefa19a1df500d1, type: 2}
   puzzlePiece: {fileID: 3495775919557069510}
@@ -21956,10 +21998,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 0}
+  Event: {fileID: 11400000, guid: cc03283f607755c4fae3dda5b3b7f51c, type: 2}
   response:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5645699968149533557}
+        m_TargetAssemblyTypeName: PuzzleSetupManager, Assembly-CSharp
+        m_MethodName: CompareImage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5688113877589796123
 GameObject:
   m_ObjectHideFlags: 0
