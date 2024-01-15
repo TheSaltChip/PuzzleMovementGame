@@ -1,9 +1,5 @@
-using NaughtyAttributes;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using Autohand;
 
 namespace Autohand.Demo {
     public class AutoBow : MonoBehaviour

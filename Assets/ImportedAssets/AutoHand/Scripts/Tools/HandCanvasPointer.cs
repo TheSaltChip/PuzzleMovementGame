@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using SceneTransition;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -96,9 +93,6 @@ namespace Autohand
         void OnDisable()
         {
             if (inputModule) inputModule.Instance?.RemovePointer(this);
-            
-            SceneTransitionManager.Instance.OnSceneExit.RemoveListener(HideRay);
-            SceneTransitionManager.Instance.OnSceneChanged.RemoveListener(OnNewScene);
         }
 
         public void SetIndex(int index)
@@ -186,12 +180,6 @@ namespace Autohand
                     inputModule.transform.parent = AutoHandExtensions.transformParent;
                 }
             }
-        }
-
-        private void Start()
-        {
-            SceneTransitionManager.Instance.OnSceneExit.AddListener(HideRay);
-            SceneTransitionManager.Instance.OnSceneChanged.AddListener(OnNewScene);
         }
 
         private void Update()
@@ -287,7 +275,7 @@ namespace Autohand
             lineRenderer.enabled = show;
         }
 
-        private void HideRay()
+        public void HideRay()
         {
             ShowRay(false);
         }

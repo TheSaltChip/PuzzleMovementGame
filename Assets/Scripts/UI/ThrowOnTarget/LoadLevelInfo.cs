@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using ThrowingOnTargets.Saveable;
 using ThrowingOnTargets.ScriptableObjects;
 using TMPro;

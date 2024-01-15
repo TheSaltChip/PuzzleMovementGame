@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 //This is a script applied to tmp demo text because of a bug where the letters scales are not saved because tmp is not imported

@@ -1,9 +1,10 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using JetBrains.Annotations;
 using SceneTransition;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace UI
@@ -13,6 +14,8 @@ namespace UI
         [SerializeField] private GameObject canvas;
         [SerializeField] private TMP_Dropdown dropdown;
 
+        public UnityEvent<string> changeScene;
+        
         private void Start()
         {
             ListScenes();
@@ -25,7 +28,7 @@ namespace UI
 
         public void ChangeScene()
         {
-            SceneTransitionManager.Instance.LoadScene(dropdown.options[dropdown.value].text);
+            changeScene?.Invoke(dropdown.options[dropdown.value].text);
         }
 
         private void ListScenes()

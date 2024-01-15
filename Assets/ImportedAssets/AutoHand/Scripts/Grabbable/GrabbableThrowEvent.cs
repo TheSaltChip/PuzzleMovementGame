@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
-using System.Collections.Generic;
 
 namespace Autohand{
     [RequireComponent(typeof(Rigidbody), typeof(Grabbable))]

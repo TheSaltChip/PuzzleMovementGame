@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Unity.XR.CoreUtils;
 using UnityEngine;
 
 namespace Painting
