@@ -5508,6 +5508,21 @@ MonoBehaviour:
   quitButton: {fileID: 1388023535}
   returnButtons:
   - {fileID: 1066059348}
+  onGameStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 281a8351868310f4bbe50b52c9075128, type: 2}
+        m_TargetAssemblyTypeName: Events.String.StringGameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: PuzzleWorld
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1212402848
 MonoBehaviour:
   m_ObjectHideFlags: 0

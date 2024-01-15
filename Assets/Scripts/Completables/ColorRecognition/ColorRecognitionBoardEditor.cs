@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using Unity.XR.CoreUtils.Bindings.Variables;
 using UnityEngine;
 using UnityEngine.Events;
 

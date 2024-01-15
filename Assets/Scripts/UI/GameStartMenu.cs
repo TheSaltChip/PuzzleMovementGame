@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using SceneTransition;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace UI
@@ -17,6 +18,8 @@ namespace UI
         public Button quitButton;
 
         public List<Button> returnButtons;
+
+        public UnityEvent onGameStart; 
 
         // Start is called before the first frame update
         private void Start()
@@ -39,7 +42,7 @@ namespace UI
         public void StartGame()
         {
             HideAll();
-            SceneTransitionManager.Instance.LoadScene("PuzzleWorld");
+            onGameStart?.Invoke();
         }
 
         public void HideAll()

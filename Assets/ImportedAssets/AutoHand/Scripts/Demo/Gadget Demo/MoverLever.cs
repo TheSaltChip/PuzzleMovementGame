@@ -1,5 +1,4 @@
 using UnityEngine;
-using Autohand;
 
 namespace Autohand.Demo{
     public class MoverLever : PhysicsGadgetHingeAngleReader{

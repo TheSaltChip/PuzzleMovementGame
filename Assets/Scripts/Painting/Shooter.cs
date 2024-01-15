@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using CardMemorization;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 using Util;

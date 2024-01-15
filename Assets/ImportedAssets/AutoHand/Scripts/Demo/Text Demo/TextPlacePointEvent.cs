@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Autohand;
 
 namespace Autohand.Demo{
     public class TextPlacePointEvent : MonoBehaviour{

@@ -1,6 +1,8 @@
+using System;
 using NaughtyAttributes;
 using SceneTransition;
 using UnityEngine;
+using UnityEngine.Events;
 using Variables;
 
 namespace Lobby
@@ -15,12 +17,14 @@ namespace Lobby
         private bool _active;
         private bool _collided;
 
+        public UnityEvent<string> sceneNameToTeleportTo; 
+
         private void OnCollisionEnter()
         {
             if (_collided || (!_active && !staticGate)) return;
             
             _collided = true;
-            SceneTransitionManager.Instance.LoadScene(staticGate ? targetSceneName.value : sceneInfo.sceneName);
+            sceneNameToTeleportTo?.Invoke(staticGate ? targetSceneName.value : sceneInfo.sceneName);
         }
 
         public void ActivateGate()

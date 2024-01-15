@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI.ThrowOnTarget
 {
