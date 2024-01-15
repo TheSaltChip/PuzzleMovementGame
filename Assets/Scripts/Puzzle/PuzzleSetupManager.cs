@@ -14,8 +14,8 @@ using Variables;
 public class PuzzleSetupManager : MonoBehaviour
 {
     [SerializeField] private ComputeShader comp;
-    [SerializeField] private FloatVariable height;
-    [SerializeField] private FloatVariable width;
+    [SerializeField] private IntVariable height;
+    [SerializeField] private IntVariable width;
     
     [SerializeField] private GameObject puzzlePiece;
     [SerializeField] private GameObject board;
@@ -48,7 +48,6 @@ public class PuzzleSetupManager : MonoBehaviour
         ppSize.y = ppSize.x;
         ppSize *= 7.46f;
         scale = board.transform.localScale;
-        SetUp();
     }
 
     public void SetUp()
@@ -64,7 +63,7 @@ public class PuzzleSetupManager : MonoBehaviour
         
         var trpp = placePoint.transform;
         var pos = trpp.localPosition;
-        var grid = new Vector3[(int)height.value,(int)width.value];
+        var grid = new Vector3[height.value,width.value];
         if (points != null)
         {
             foreach (var point in points)
@@ -73,7 +72,7 @@ public class PuzzleSetupManager : MonoBehaviour
             }
         }
         
-        points = new GameObject[(int)height.value * (int)width.value];
+        points = new GameObject[height.value * width.value];
 
         var originVector = new Vector3();
         available = 0;
@@ -84,7 +83,7 @@ public class PuzzleSetupManager : MonoBehaviour
         }
         else
         {
-            originVector.y = - ppSize.y * ((int)height.value / 2);
+            originVector.y = - ppSize.y * (height.value / 2);
         }
 
         if (width.value % 2 == 0)
@@ -93,7 +92,7 @@ public class PuzzleSetupManager : MonoBehaviour
         }
         else
         {
-            originVector.x = -ppSize.x * ((int)width.value / 2);
+            originVector.x = -ppSize.x * (width.value / 2);
         }
         
         
@@ -146,13 +145,12 @@ public class PuzzleSetupManager : MonoBehaviour
             }
         }
         
-        pieces = new GameObject[(int)height.value * (int)width.value];
+        pieces = new GameObject[height.value * width.value];
         for (var i = 0; i < height.value; i++)
         {
             for (int j = 0; j < width.value; j++)
             {
                 var rect = new Rect(j*(texture.width/(width.value * 1f)),i*(texture.height/(height.value * 1f)),texture.width/(width.value * 1f),texture.height/(height.value * 1f));
-                //var sprite = Sprite.Create(texture, rect, new Vector2(.5f, .5f));
                 var piece = Instantiate(puzzlePiece);
                 pieces[av] = piece;
                 av++;
@@ -161,6 +159,7 @@ public class PuzzleSetupManager : MonoBehaviour
                 tr.position = new Vector3(1+i, 1, j);
                 tr.localScale = puzzlePiece.transform.localScale;
                 piece.SetActive(true);
+                
                 var sliced = new Texture2D((int)rect.width, (int)rect.height)
                 {
                     filterMode = texture.filterMode
@@ -174,7 +173,7 @@ public class PuzzleSetupManager : MonoBehaviour
 
     public void CompareImage()
     {
-        if (placed.value != (int)(height.value * width.value))
+        if (placed.value != (height.value * width.value))
         {
             print("not completed");
             return;
@@ -208,7 +207,19 @@ public class PuzzleSetupManager : MonoBehaviour
             n ++;
         }
         */
+
+        //var i = available - width.value;
+        //var j = 0; // j++ while < width;
         
+        //var squares = new GraphicsBuffer(,height.value*width.value,)
+        
+        for (var i = available - width.value; i >= 0; i -= width.value)
+        {
+            for (var j = 0; j < width.value; j++)
+            {
+                
+            }
+        }
         
         var sprite = Sprite.Create(compTex, new Rect(0,0,compTex.width,compTex.height), new Vector2(.5f,.5f));
         goalSprite.image = sprite;
@@ -217,7 +228,7 @@ public class PuzzleSetupManager : MonoBehaviour
         print("ready");
 
         var result = new int[texture.width * texture.height];
-        var buffer = new ComputeBuffer(texture.width*texture.height,sizeof(float));
+        var buffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured,texture.width*texture.height,sizeof(float));
         
         var rTex  = new RenderTexture(texture.width, texture.height, 0);
         rTex.enableRandomWrite = true;
