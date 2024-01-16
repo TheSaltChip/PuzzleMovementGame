@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: 544228c2ee3c7274296ec8fa4c55c921, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 8916555888699899904
   m_TableData:
   - m_Id: 42310897664
     m_Localized: Pattern Recognition
@@ -35,6 +36,33 @@ MonoBehaviour:
     m_Localized: 'Board size:'
     m_Metadata:
       m_Items: []
+  - m_Id: 366729266794496
+    m_Localized: Create Pattern
+    m_Metadata:
+      m_Items: []
+  - m_Id: 366824498466816
+    m_Localized: Show Pattern
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373213933408256
+    m_Localized: 'Repeat buttons in pattern:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 374586297094144
+    m_Localized: 'Current pattern size: {currentPatternSize}
+
+      Button number
+      {currentButtonNum} of {currentPatternSize}
+
+      Best score with this pattern:
+      {bestScore}'
+    m_Metadata:
+      m_Items:
+      - rid: 8916555888699899904
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 8916555888699899904
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00102d2baf540100

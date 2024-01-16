@@ -16,5 +16,10 @@ namespace Variables
         {
             --value;
         }
+
+        public void Set(int i)
+        {
+            value = i;
+        }
     }
 }

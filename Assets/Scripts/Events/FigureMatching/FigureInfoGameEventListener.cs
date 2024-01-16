@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Events.Memorization
+namespace Events.FigureMatching
 {
     public class FigureInfoGameEventListener : MonoBehaviour
     {

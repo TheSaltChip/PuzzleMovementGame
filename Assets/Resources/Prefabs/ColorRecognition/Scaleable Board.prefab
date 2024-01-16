@@ -15,6 +15,10 @@ GameObject:
   - component: {fileID: 4636577624453923164}
   - component: {fileID: 4636577624453923165}
   - component: {fileID: 2921203861184022286}
+  - component: {fileID: 3409135022945328364}
+  - component: {fileID: 2530776438705302240}
+  - component: {fileID: 3376655999471950358}
+  - component: {fileID: 5037157595202019501}
   m_Layer: 0
   m_Name: Scaleable Board
   m_TagString: Untagged
@@ -52,18 +56,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnDone:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 70aa94698abd2cd43aee966e0f2c4fef, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnIncompleteCheck:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 70aa94698abd2cd43aee966e0f2c4fef, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnFailedCheck:
     m_PersistentCalls:
       m_Calls: []
   OnResetState:
     m_PersistentCalls:
       m_Calls: []
-  <CanRepeat>k__BackingField: 0
-  patternLength: 5
+  canRepeat: {fileID: 11400000, guid: da29b6881b3b5e64ba13da43973a20ac, type: 2}
+  patternLength: {fileID: 11400000, guid: b1400e2ff5a00f44ba35ec30d9dbd3cd, type: 2}
+  patternIndex: {fileID: 11400000, guid: 6b0bd3d0450a3d44c9e0b7870238a330, type: 2}
+  bestScore: {fileID: 11400000, guid: ba77dac8ea5d2c947b63cc3669403dd9, type: 2}
   blinkDuration: 0.5
 --- !u!114 &4636577624453923166
 MonoBehaviour:
@@ -337,6 +367,122 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Level.Completables.ColorRecognition.ColorRecognitionBoardCompletable,
           Assembly-CSharp
         m_MethodName: ResetValues
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3409135022945328364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636577624453923154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2db799b5d744a36a4fa544fd8dda5aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 74c305786556fe243b430da72a0748c4, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2921203861184022286}
+        m_TargetAssemblyTypeName: Completables.ColorRecognition.ColorRecognitionBoardEditor,
+          Assembly-CSharp
+        m_MethodName: ScaleBoard
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2530776438705302240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636577624453923154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 172b7c5210c6a8549ba0ad0e0ea0cf41, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4636577624453923153}
+        m_TargetAssemblyTypeName: Completables.ColorRecognition.ColorRecognitionBoardCompletable,
+          Assembly-CSharp
+        m_MethodName: BlinkPattern
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3376655999471950358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636577624453923154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: fb29d14a46c75684a9ed4cfa1826e299, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4636577624453923153}
+        m_TargetAssemblyTypeName: Completables.ColorRecognition.ColorRecognitionBoardCompletable,
+          Assembly-CSharp
+        m_MethodName: CreatePattern
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5037157595202019501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636577624453923154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: d09b945e817275947bee9e991f6f3e9c, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4636577624453923153}
+        m_TargetAssemblyTypeName: Completables.ColorRecognition.ColorRecognitionBoardCompletable,
+          Assembly-CSharp
+        m_MethodName: CheckCompletion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
