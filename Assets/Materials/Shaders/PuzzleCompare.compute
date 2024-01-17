@@ -5,10 +5,9 @@
 // with cs.SetTexture
 RWBuffer<int> Result;
 RWTexture2D<float4> image;
-RWTexture2D<float4> ri;
 
-int height;
-int width;
+RWStructuredBuffer<int> quads;
+RWStructuredBuffer<int> rearrangedQuads;
 
 [numthreads(8,8,1)]
 void CSMain (uint2 id : SV_DispatchThreadID)
@@ -16,7 +15,7 @@ void CSMain (uint2 id : SV_DispatchThreadID)
     if(id.x < width && id.y < height)
     {
         bool b = false;
-        if (length(ri[id.xy])<=length(image[id.xy])*1.008 && length(ri[id.xy])>=length(image[id.xy])*0.992)
+        if (length(image[rearrangedQuads[id.xy]])<=length(image[quads[id.xy]])*1.008 && length(image[rearrangedQuads[id.xy]])>=length(image[quads[id.xy]])*0.992)
             b = true;
 
         if(b)
