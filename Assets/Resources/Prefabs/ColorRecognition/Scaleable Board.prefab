@@ -95,6 +95,21 @@ MonoBehaviour:
   patternIndex: {fileID: 11400000, guid: 6b0bd3d0450a3d44c9e0b7870238a330, type: 2}
   bestScore: {fileID: 11400000, guid: ba77dac8ea5d2c947b63cc3669403dd9, type: 2}
   blinkDuration: 0.5
+  onPatternCreated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 70aa94698abd2cd43aee966e0f2c4fef, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4636577624453923166
 MonoBehaviour:
   m_ObjectHideFlags: 0

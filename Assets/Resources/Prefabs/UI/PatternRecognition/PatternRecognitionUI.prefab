@@ -506,6 +506,7 @@ GameObject:
   - component: {fileID: 429063958983603267}
   - component: {fileID: 429063958983603266}
   - component: {fileID: 2835138067756329305}
+  - component: {fileID: 781638237778793296}
   m_Layer: 5
   m_Name: MinMaxSlider
   m_TagString: Untagged
@@ -626,6 +627,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &781638237778793296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429063958983603264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3a0d5042504784946cd79c32241df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  variable: {fileID: 11400000, guid: b1400e2ff5a00f44ba35ec30d9dbd3cd, type: 2}
+  slider: {fileID: 429063958983603266}
 --- !u!1 &429063959867058850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,6 +1488,8 @@ GameObject:
   - component: {fileID: 1432458549711544029}
   - component: {fileID: 1432458549711544028}
   - component: {fileID: 2567335316325935159}
+  - component: {fileID: 3639736327863334630}
+  - component: {fileID: 9075827840391358269}
   m_Layer: 5
   m_Name: TextButton (2)
   m_TagString: Untagged
@@ -1615,6 +1632,64 @@ MonoBehaviour:
       - m_Target: {fileID: 11400000, guid: 74c305786556fe243b430da72a0748c4, type: 2}
         m_TargetAssemblyTypeName: Events.Vec2IntGameEvent.Vector2IntGameEvent, Assembly-CSharp
         m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3639736327863334630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432458549711544030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973502b0b39c4fb4b77385d4d6d50232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1432458549711544028}
+  group: {fileID: 11400000, guid: a77de11475d7cfa4fae2f7d65384792f, type: 2}
+  id: 3
+  onCheckState:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 0d994be6b73d57142a382da251ce2d85, type: 2}
+        m_TargetAssemblyTypeName: Events.StringString.StringStringGameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &9075827840391358269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432458549711544030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 191205cfc7f041199af23b28ae8602b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0d994be6b73d57142a382da251ce2d85, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3639736327863334630}
+        m_TargetAssemblyTypeName: UI.HighlightButtonIfSelected, Assembly-CSharp
+        m_MethodName: CheckState
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2439,6 +2514,8 @@ GameObject:
   - component: {fileID: 3452538995181081028}
   - component: {fileID: 3452538995181081029}
   - component: {fileID: 2933165496321426599}
+  - component: {fileID: 598113083600847918}
+  - component: {fileID: 2619738334385544187}
   m_Layer: 5
   m_Name: TextButton (1)
   m_TagString: Untagged
@@ -2562,6 +2639,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 598113083600847918}
+        m_TargetAssemblyTypeName: UI.HighlightButtonIfSelected, Assembly-CSharp
+        m_MethodName: Check
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2933165496321426599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2581,6 +2670,64 @@ MonoBehaviour:
       - m_Target: {fileID: 11400000, guid: 74c305786556fe243b430da72a0748c4, type: 2}
         m_TargetAssemblyTypeName: Events.Vec2IntGameEvent.Vector2IntGameEvent, Assembly-CSharp
         m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &598113083600847918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3452538995181081031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973502b0b39c4fb4b77385d4d6d50232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 3452538995181081029}
+  group: {fileID: 11400000, guid: a77de11475d7cfa4fae2f7d65384792f, type: 2}
+  id: 2
+  onCheckState:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 0d994be6b73d57142a382da251ce2d85, type: 2}
+        m_TargetAssemblyTypeName: Events.StringString.StringStringGameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2619738334385544187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3452538995181081031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 191205cfc7f041199af23b28ae8602b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0d994be6b73d57142a382da251ce2d85, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 598113083600847918}
+        m_TargetAssemblyTypeName: UI.HighlightButtonIfSelected, Assembly-CSharp
+        m_MethodName: CheckState
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3167,6 +3314,8 @@ GameObject:
   - component: {fileID: 4327633336359077652}
   - component: {fileID: 4327633336359077653}
   - component: {fileID: 7189809574544355765}
+  - component: {fileID: 1147180459286635019}
+  - component: {fileID: 9057492444546101912}
   m_Layer: 5
   m_Name: TextButton
   m_TagString: Untagged
@@ -3309,6 +3458,64 @@ MonoBehaviour:
       - m_Target: {fileID: 11400000, guid: 74c305786556fe243b430da72a0748c4, type: 2}
         m_TargetAssemblyTypeName: Events.Vec2IntGameEvent.Vector2IntGameEvent, Assembly-CSharp
         m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1147180459286635019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4327633336359077655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973502b0b39c4fb4b77385d4d6d50232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 4327633336359077653}
+  group: {fileID: 11400000, guid: a77de11475d7cfa4fae2f7d65384792f, type: 2}
+  id: 1
+  onCheckState:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 0d994be6b73d57142a382da251ce2d85, type: 2}
+        m_TargetAssemblyTypeName: Events.StringString.StringStringGameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &9057492444546101912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4327633336359077655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 191205cfc7f041199af23b28ae8602b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0d994be6b73d57142a382da251ce2d85, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1147180459286635019}
+        m_TargetAssemblyTypeName: UI.HighlightButtonIfSelected, Assembly-CSharp
+        m_MethodName: CheckState
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

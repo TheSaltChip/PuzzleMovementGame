@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Variables;
 
 namespace Completables.ColorRecognition
@@ -12,6 +13,8 @@ namespace Completables.ColorRecognition
         [SerializeField] private IntVariable patternIndex;
         [SerializeField] private IntVariable bestScore;
         [SerializeField] private float blinkDuration;
+
+        public UnityEvent onPatternCreated;
 
         private ColorButtonCompletable[] _buttons;
         private List<int> _pattern;
@@ -32,7 +35,7 @@ namespace Completables.ColorRecognition
         public void ResetValues()
         {
             _pattern?.Clear();
-            
+
             _buttons = GetComponentsInChildren<ColorButtonCompletable>();
             patternIndex.value = 0;
             bestScore.value = 0;
@@ -43,14 +46,17 @@ namespace Completables.ColorRecognition
             _pattern.Clear();
             patternIndex.value = 0;
             bestScore.value = 0;
-            
+
             if (canRepeat.value)
             {
                 CreateRepeatingPattern();
-                return;
             }
-
-            CreateNonRepeatingPattern();
+            else
+            {
+                CreateNonRepeatingPattern();
+            }
+            
+            onPatternCreated?.Invoke();
         }
 
         private void CreateRepeatingPattern()
@@ -107,7 +113,7 @@ namespace Completables.ColorRecognition
 
                 if (bestScore.value < patternIndex.value + 1)
                 {
-                    bestScore.value = patternIndex.value+1;
+                    bestScore.value = patternIndex.value + 1;
                 }
 
                 var patternIsNotDone = patternIndex.value != _pattern.Count;
@@ -134,11 +140,6 @@ namespace Completables.ColorRecognition
             BlinkIncorrectButtons();
             OnFailedCheck.Invoke();
             ResetState();
-        }
-
-        public void SetPatternLength(float val)
-        {
-            patternLength.value = canRepeat.value ? (int)val : (int)Mathf.Min(val, _buttons.Length);
         }
 
         public void BlinkPattern()
