@@ -246,6 +246,7 @@ public class PuzzleSetupManager : MonoBehaviour
         print(placed.number);
         var pos = Int32.Parse(placed.number);
         var point = points[pos];
+        //TODO get a hold of the piece
         var child = point.transform.GetChild(0);
         var pieceQuad = Int32.Parse(child.name);
         var quad = indPos[pos];
