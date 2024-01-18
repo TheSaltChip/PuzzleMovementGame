@@ -150,11 +150,13 @@ public class PuzzleSetupManager : MonoBehaviour
         {
             for (var j = 0; j < width.value; j++)
             {
-                var obj = Instantiate(placePoint,gameObject.transform);
+                var obj = Instantiate(placePoint);
                 points[available] = obj;
                 obj.SetActive(true);
                 obj.name = available + "";
                 var tr = obj.transform;
+                tr.SetParent(gameObject.transform);
+                tr = obj.transform;
                 tr.localScale = trpp.localScale;
                 var p = tr.up * grid[i, j].y;
                 tr.localPosition = p + (tr.right * grid[i, j].x);
@@ -186,82 +188,69 @@ public class PuzzleSetupManager : MonoBehaviour
         }
 
         quads = new Quad[height.value * width.value];
+        rearrangedQuads = new Quad[height.value * width.value];
         var k = 0;
-        
         pieces = new GameObject[height.value * width.value];
+        var ppcb = tex.width / width.value;
+        var ppch = tex.height / height.value;
+        var col = 0;
+
         for (var i = 0; i < height.value; i++)
         {
+            var row = 0;
             for (int j = 0; j < width.value; j++)
             {
                 var q = new Quad();
-                q.rows = new int[tex.height/height.value, tex.width/width.value];
+                q.rows = new int[ppch, ppcb];
                 quads[k] = q;
-                for (var l = 0; l < tex.height/height.value; l++)
+                var p = ppch * tex.width * col + row * ppcb;
+                for (var l = 0; l < ppch; l++)
                 {
-                    var p = k * width.value + tex.width * (k / width.value) + l*tex.width;
-                    for (var m = 0; m < tex.width/width.value; m++)
+                    var x = p + l * tex.width;
+                    for (var m = 0; m < ppcb; m++)
                     {
-                        q.rows[l, m] = p+m;
+                        q.rows[l, m] = x + m;
                     }
                 }
+
+                row++;
                 k++;
-                var rect = new Rect(j*(tex.width/(width.value * 1f)),i*(tex.height/(height.value * 1f)),tex.width/(width.value * 1f),tex.height/(height.value * 1f));
+                var rect = new Rect(j * (tex.width / (width.value * 1f)), i * (tex.height / (height.value * 1f)),
+                    tex.width / (width.value * 1f), tex.height / (height.value * 1f));
                 var piece = Instantiate(puzzlePiece);
-                piece.name = av+"";
+                piece.name = av + "";
                 pieces[av] = piece;
                 av++;
                 var tr = piece.transform;
                 tr.parent = gameObject.transform;
-                tr.position = new Vector3(1+i, 1, j);
+                tr.position = new Vector3(1 + i, 1, j);
                 tr.localScale = puzzlePiece.transform.localScale;
                 piece.SetActive(true);
-                
+
                 var sliced = new Texture2D((int)rect.width, (int)rect.height)
                 {
                     filterMode = tex.filterMode
                 };
-                sliced.SetPixels(0,0,(int)rect.width,(int)rect.height,tex.GetPixels((int)rect.x,(int)rect.y,(int)rect.width,(int)rect.height));
+                sliced.SetPixels(0, 0, (int)rect.width, (int)rect.height,
+                    tex.GetPixels((int)rect.x, (int)rect.y, (int)rect.width, (int)rect.height));
                 sliced.Apply();
-                piece.GetComponent<Renderer>().materials[0].SetTexture(BaseMap,sliced);
+                piece.GetComponent<Renderer>().materials[0].SetTexture(BaseMap, sliced);
             }
+
+            col++;
         }
-        
-        var squares = new GraphicsBuffer(GraphicsBuffer.Target.Structured, tex.height * tex.width,sizeof(float));
-        var array = new int[tex.height,tex.width];
-        var hei = 0;
-        var wid = 0;
-        
-        foreach (var quad in quads)
-        {
-            var str = "";
-            for (var j = 0; j < tex.height/height.value; j++)
-            {
-                for (var l = 0; l < tex.width/width.value; l++)
-                {
-                    array[j,l] = quad.rows[j, l];
-                    str += array[j, l] + " ";
-                } //Todo fix quad extraction
-            }
-            print(str);
-        }
-        squares.SetData(array);
-        squares.GetData(array);
-        
-        /*foreach (var val in array)
-        {
-            print(val);
-        }*/
-        squares.Release();
     }
 
     private void ShuffleIndex()
     {
+        print(placed.number);
         var pos = Int32.Parse(placed.number);
         var point = points[pos];
         var child = point.transform.GetChild(0);
         var pieceQuad = Int32.Parse(child.name);
         var quad = indPos[pos];
         rearrangedQuads[quad] = quads[pieceQuad];
+        print("shuffle completed");
     }
 
     public void CompareImage()
@@ -276,12 +265,29 @@ public class PuzzleSetupManager : MonoBehaviour
         {
             filterMode = tex.filterMode
         };
+        
+        var quadsFlat = new int[tex.height * tex.width];
+        var rQuadsFlat = new int[tex.height * tex.width];
+        var pos = 0;
+
+        for (var i = 0; i < quads.Length; i++)
+        {
+            for (var j = 0; j < tex.height/height.value; j++)
+            {
+                for (var l = 0; l < tex.width/width.value; l++)
+                {
+                    quadsFlat[pos] = quads[i].rows[j,l];
+                    rQuadsFlat[pos] = rearrangedQuads[i].rows[j,l];
+                    pos++;
+                }
+            }
+        }
 
         var squares = new GraphicsBuffer(GraphicsBuffer.Target.Structured, height.value * width.value,sizeof(float));
-        squares.SetData(quads);
+        squares.SetData(quadsFlat);
         
         var rearrangedSquares = new GraphicsBuffer(GraphicsBuffer.Target.Structured,height.value*width.value,sizeof(float));
-        rearrangedSquares.SetData(rearrangedQuads);
+        rearrangedSquares.SetData(rQuadsFlat);
         
         var sprite = Sprite.Create(compTex, new Rect(0,0,compTex.width,compTex.height), new Vector2(.5f,.5f));
         goalSprite.image = sprite;
@@ -306,6 +312,10 @@ public class PuzzleSetupManager : MonoBehaviour
         comp.GetKernelThreadGroupSizes(k,out var x,out var y,out var z);
         comp.Dispatch(k,Mathf.CeilToInt((float)tex.width/x),Mathf.CeilToInt((float)tex.height/y),(int)z);
         buffer.GetData(result);
+        
+        buffer.Release();
+        squares.Release();
+        rearrangedSquares.Release();
         foreach (var res in result)
         {
             print(res);
@@ -318,11 +328,6 @@ public class PuzzleSetupManager : MonoBehaviour
         var sprite = Sprite.Create(tex, new Rect(0,0,tex.width,tex.height), new Vector2(.5f,.5f));
         goalSprite.image = sprite;
         changedImage.Invoke();
-    }
-
-    public void MovedPieces()
-    {
-        
     }
 
     [Tooltip("width,height")]

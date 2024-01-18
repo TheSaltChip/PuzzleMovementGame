@@ -8,18 +8,17 @@ namespace Puzzle.PuzzleUI
     {
         [SerializeField] private Placed var;
         public UnityEvent placed;
-        public UnityEvent removed;
 
         public void Increment()
         {
             var.amount++;
+            var.number = gameObject.name;
             placed.Invoke();
         }
 
         public void Decrement()
         {
             var.amount--;
-            removed.Invoke();
         }
     }
 }

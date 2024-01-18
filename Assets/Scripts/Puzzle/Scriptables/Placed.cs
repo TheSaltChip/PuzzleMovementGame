@@ -7,5 +7,6 @@ namespace Puzzle.Scriptables
     {
         public int amount;
         public string number;
+        public GameObject piece;
     }
 }
