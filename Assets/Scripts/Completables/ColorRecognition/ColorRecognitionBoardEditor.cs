@@ -61,7 +61,7 @@ namespace Completables.ColorRecognition
             var scale = _buttonScale + _padding;
 
             const int gridMaxSquared = GridMax * GridMax;
-            
+
             for (var i = 0; i < gridMaxSquared; i++)
             {
                 var button = Instantiate(buttonPrefab, transform, true);
@@ -69,7 +69,7 @@ namespace Completables.ColorRecognition
 
                 var rb = button.GetComponent<Rigidbody>();
                 rb.isKinematic = true;
-                
+
                 button.transform.SetLocalPositionAndRotation(
                     new Vector3(x * scale, _gridSize.y - 0.005f, z * scale),
                     Quaternion.identity);
@@ -91,6 +91,17 @@ namespace Completables.ColorRecognition
                 z += dz;
             }
 
+            ScaleBoard();
+        }
+
+        public void ScaleBoard(Vector2Int dim)
+        {
+            gridDimensionX = Mathf.Clamp(dim.x, 1, GridMax);
+            _gridSize.x = gridDimensionX * _buttonScale + (gridDimensionX + 1) * _padding;
+
+            gridDimensionZ = Mathf.Clamp(dim.y, 1, GridMax);
+            _gridSize.z = gridDimensionZ * _buttonScale + (gridDimensionZ + 1) * _padding;
+            
             ScaleBoard();
         }
 
@@ -135,9 +146,9 @@ namespace Completables.ColorRecognition
 
             for (var i = 0; i < gridMaxSquared; i++)
             {
-                _buttonsPool[i].SetActive(-halfDimensionX <= x 
-                                          && x <= halfDimensionX 
-                                          && -halfDimensionZ <= z 
+                _buttonsPool[i].SetActive(-halfDimensionX <= x
+                                          && x <= halfDimensionX
+                                          && -halfDimensionZ <= z
                                           && z <= halfDimensionZ);
 
                 if (Math.Abs(x - z) < 0.001f

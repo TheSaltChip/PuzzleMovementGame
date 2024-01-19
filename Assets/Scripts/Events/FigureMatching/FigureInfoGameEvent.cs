@@ -2,7 +2,7 @@
 using Memorization.Figure;
 using UnityEngine;
 
-namespace Events.Memorization
+namespace Events.FigureMatching
 {
     [CreateAssetMenu(fileName = "FigureInfoGameEvent", menuName = "Events/FigureInfoGameEvent")]
     public class FigureInfoGameEvent : ScriptableObject
