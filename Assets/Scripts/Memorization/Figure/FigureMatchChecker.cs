@@ -17,7 +17,7 @@ namespace Memorization.Figure
 
         private void Awake()
         {
-            _list = new List<FigureInfo>(rules.NumToMatch);
+            _list = new List<FigureInfo>(5);
         }
 
         public void Add(FigureInfo item)
@@ -28,7 +28,7 @@ namespace Memorization.Figure
             onAddedToList?.Invoke();
             item.Deactivate();
             
-            if (_list.Count == rules.NumToMatch)
+            if (_list.Count > 1)
             {
                 Matches();
             }
@@ -49,6 +49,8 @@ namespace Memorization.Figure
 
                 item = _list[i];
             }
+            
+            if(_list.Count < rules.NumToMatch) return;
 
             DeleteAndClear();
             onCorrectMatch?.Invoke();

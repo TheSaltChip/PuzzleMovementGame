@@ -13,6 +13,7 @@ namespace UI.PatternRecognition
         [SerializeField] private IntVariable bestScore;
         [SerializeField] private IntVariable patternIndex;
         [SerializeField] private IntVariable patternLength;
+        [SerializeField] private BoolVariable isPatternCreated;
 
         [Serializable]
         private class PatRecArguments
@@ -20,6 +21,7 @@ namespace UI.PatternRecognition
             public int currentPatternSize;
             public int currentButtonNum;
             public int bestScore;
+            public bool isPatternCreated;
         }
 
         private PatRecArguments _arguments;
@@ -31,6 +33,7 @@ namespace UI.PatternRecognition
                 currentPatternSize = patternLength.value,
                 currentButtonNum = patternIndex.value+1,
                 bestScore = bestScore.value,
+                isPatternCreated = isPatternCreated.value
             };
 
             localizeStringEvent.StringReference.Arguments = new object[]
@@ -44,7 +47,8 @@ namespace UI.PatternRecognition
             _arguments.currentPatternSize = patternLength.value;
             _arguments.currentButtonNum = patternIndex.value + 1;
             _arguments.bestScore = bestScore.value;
-
+            _arguments.isPatternCreated = isPatternCreated.value;
+            
             localizeStringEvent.RefreshString();
         }
 
@@ -52,6 +56,8 @@ namespace UI.PatternRecognition
         {
             _arguments.currentButtonNum = patternIndex.value + 1;
             _arguments.bestScore = bestScore.value;
+            _arguments.isPatternCreated = isPatternCreated.value;
+            
             localizeStringEvent.RefreshString();
         }
     }

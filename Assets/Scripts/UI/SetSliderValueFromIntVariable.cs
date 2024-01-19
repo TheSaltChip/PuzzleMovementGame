@@ -13,5 +13,10 @@ namespace UI
         {
             slider.value = variable.value;
         }
+
+        public void SetValue()
+        {
+            slider.value = variable.value;
+        }
     }
 }

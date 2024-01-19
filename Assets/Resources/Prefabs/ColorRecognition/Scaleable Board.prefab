@@ -86,16 +86,56 @@ MonoBehaviour:
         m_CallState: 2
   OnFailedCheck:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 70aa94698abd2cd43aee966e0f2c4fef, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnResetState:
     m_PersistentCalls:
       m_Calls: []
   canRepeat: {fileID: 11400000, guid: da29b6881b3b5e64ba13da43973a20ac, type: 2}
+  isPatternCreated: {fileID: 11400000, guid: f9423f9525af0b84fb330b4e02a34b40, type: 2}
   patternLength: {fileID: 11400000, guid: b1400e2ff5a00f44ba35ec30d9dbd3cd, type: 2}
   patternIndex: {fileID: 11400000, guid: 6b0bd3d0450a3d44c9e0b7870238a330, type: 2}
   bestScore: {fileID: 11400000, guid: ba77dac8ea5d2c947b63cc3669403dd9, type: 2}
   blinkDuration: 0.5
   onPatternCreated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 70aa94698abd2cd43aee966e0f2c4fef, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 7bbe19bba355eeb4a9b8943e8d492fde, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onResetValues:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 70aa94698abd2cd43aee966e0f2c4fef, type: 2}

@@ -49,13 +49,16 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 374586297094144
-    m_Localized: 'Current pattern size: {currentPatternSize}
+    m_Localized: '{isPatternCreated:choose(True|False):Pattern is created|Pattern
+      is not created}
 
-      Button number
-      {currentButtonNum} of {currentPatternSize}
+      Current pattern size: {currentPatternSize}
 
-      Best score with this pattern:
-      {bestScore}'
+      Button
+      number {currentButtonNum} of {currentPatternSize}
+
+      Best score with this
+      pattern: {bestScore}'
     m_Metadata:
       m_Items:
       - rid: 8916555888699899904

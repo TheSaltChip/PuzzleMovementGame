@@ -11,9 +11,10 @@ namespace UI
         [SerializeField] private Button button;
         [SerializeField] private StringVariable group;
         [SerializeField] private string id;
+        [SerializeField] private bool startSelected;
 
         public UnityEvent<string, string> onCheckState;
-        
+
         private Color _normalColor;
         private Color _selectedColor;
 
@@ -21,6 +22,15 @@ namespace UI
         {
             _normalColor = button.colors.normalColor;
             _selectedColor = button.colors.selectedColor;
+
+            if (!startSelected)
+                return;
+
+            var cb = button.colors;
+            
+            cb.normalColor = _selectedColor;
+
+            button.colors = cb;
         }
 
         public void Check()
@@ -30,7 +40,7 @@ namespace UI
 
         public void CheckState(string groupName, string idName)
         {
-            if (group.value != (groupName))
+            if (group.value != groupName)
             {
                 return;
             }
