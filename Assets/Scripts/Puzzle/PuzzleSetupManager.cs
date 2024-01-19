@@ -9,6 +9,7 @@ using Unity.VisualScripting;
 using Unity.XR.PXR;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 using Variables;
 
 public class PuzzleSetupManager : MonoBehaviour
@@ -52,6 +53,8 @@ public class PuzzleSetupManager : MonoBehaviour
     private static readonly int Result = Shader.PropertyToID("Result");
     private static readonly int Quads = Shader.PropertyToID("quads");
     private static readonly int RearrangedQuads = Shader.PropertyToID("rearrangedQuads");
+    private static readonly int Width = Shader.PropertyToID("width");
+    private static readonly int Height = Shader.PropertyToID("height");
 
     private void Awake()
     {
@@ -124,25 +127,11 @@ public class PuzzleSetupManager : MonoBehaviour
             originVector.x = -ppSize.x * (width.value / 2);
         }
         
-        
-        
         for (var i = 0; i < height.value; i++)
         {
             for (var j = 0; j < width.value; j++)
             {
                 grid[i, j] = new Vector3(originVector.x + j*ppSize.x,originVector.y + i*ppSize.y,pos.z);
-            }
-        }
-
-        var a = 0;
-        indPos = new int[width.value * height.value];
-        
-        for (var i = available - width.value; i >= 0; i -= width.value)
-        {
-            for (var j = 0; j < width.value; j++)
-            {
-                indPos[a] = i + j;
-                a++;
             }
         }
         
@@ -164,6 +153,20 @@ public class PuzzleSetupManager : MonoBehaviour
                 available++;
             }
         }
+        
+        var a = 0;
+        indPos = new int[width.value * height.value];
+        
+        for (var i = available - width.value; i >= 0; i -= width.value)
+        {
+            for (var j = 0; j < width.value; j++)
+            {
+                indPos[a] = i + j;
+                print(indPos[a]);
+                a++;
+            }
+        }
+        
     }
 
     private void ScaleBoard()
@@ -223,7 +226,7 @@ public class PuzzleSetupManager : MonoBehaviour
                 av++;
                 var tr = piece.transform;
                 tr.parent = gameObject.transform;
-                tr.position = new Vector3(1 + i, 1, j);
+                tr.position = new Vector3(0.5f, 4, 1);
                 tr.localScale = puzzlePiece.transform.localScale;
                 piece.SetActive(true);
 
@@ -243,15 +246,12 @@ public class PuzzleSetupManager : MonoBehaviour
 
     private void ShuffleIndex()
     {
-        print(placed.number);
         var pos = Int32.Parse(placed.number);
         var point = points[pos];
-        //TODO get a hold of the piece
-        var child = point.transform.GetChild(0);
+        var child = point.GetComponent<PlacePoint>().GetPlacedObject();
         var pieceQuad = Int32.Parse(child.name);
         var quad = indPos[pos];
         rearrangedQuads[quad] = quads[pieceQuad];
-        print("shuffle completed");
     }
 
     public void CompareImage()
@@ -261,6 +261,8 @@ public class PuzzleSetupManager : MonoBehaviour
             ShuffleIndex();
             return;
         }
+        
+        ShuffleIndex();
             
         var compTex = new Texture2D(tex.width,tex.height)
         {
@@ -278,16 +280,24 @@ public class PuzzleSetupManager : MonoBehaviour
                 for (var l = 0; l < tex.width/width.value; l++)
                 {
                     quadsFlat[pos] = quads[i].rows[j,l];
-                    rQuadsFlat[pos] = rearrangedQuads[i].rows[j,l];
+                    rQuadsFlat[pos] = rearrangedQuads[i].rows[j, l];
                     pos++;
                 }
             }
         }
 
-        var squares = new GraphicsBuffer(GraphicsBuffer.Target.Structured, height.value * width.value,sizeof(float));
+        var array = new Color[tex.height*tex.width];
+        var f = 0;
+        foreach (var pixel in tex.GetPixels())
+        {
+            array[f] = pixel;
+            f++;
+        }
+
+        var squares = new GraphicsBuffer(GraphicsBuffer.Target.Structured, tex.height*tex.width,sizeof(float));
         squares.SetData(quadsFlat);
         
-        var rearrangedSquares = new GraphicsBuffer(GraphicsBuffer.Target.Structured,height.value*width.value,sizeof(float));
+        var rearrangedSquares = new GraphicsBuffer(GraphicsBuffer.Target.Structured,tex.height*tex.width,sizeof(float));
         rearrangedSquares.SetData(rQuadsFlat);
         
         var sprite = Sprite.Create(compTex, new Rect(0,0,compTex.width,compTex.height), new Vector2(.5f,.5f));
@@ -296,18 +306,22 @@ public class PuzzleSetupManager : MonoBehaviour
 
         var result = new int[tex.width * tex.height];
         var buffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured,tex.width*tex.height,sizeof(float));
+        var texBuffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured, tex.height * tex.width,sizeof(float));
         
-        var rTex  = new RenderTexture(tex.width, tex.height, 0)
+        /*var rTex  = new RenderTexture(tex.width, tex.height, 0)
         {
             enableRandomWrite = true
         };
         
-        Graphics.Blit(tex,rTex);
+        Graphics.Blit(tex,rTex);*/
 
-        comp.SetTexture(0,Image,rTex);
+        comp.SetBuffer(0,Image,texBuffer);
         comp.SetBuffer(0,Result,buffer);
         comp.SetBuffer(0,Quads,squares);
         comp.SetBuffer(0,RearrangedQuads,rearrangedSquares);
+        
+        comp.SetInt(Height,tex.height);
+        comp.SetInt(Width,tex.width);
 
         var k = new int();
         comp.GetKernelThreadGroupSizes(k,out var x,out var y,out var z);

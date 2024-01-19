@@ -4,18 +4,21 @@
 // Create a RenderTexture with enableRandomWrite flag and set it
 // with cs.SetTexture
 RWBuffer<int> Result;
-RWTexture2D<float4> image;
+RWStructuredBuffer<float4> image;
 
 RWStructuredBuffer<int> quads;
 RWStructuredBuffer<int> rearrangedQuads;
 
+int height;
+int width;
+
 [numthreads(8,8,1)]
-void CSMain (uint2 id : SV_DispatchThreadID)
+void CSMain (uint1 id : SV_DispatchThreadID)
 {
-    if(id.x < width && id.y < height)
+    if(id.x < height * width)
     {
         bool b = false;
-        if (length(image[rearrangedQuads[id.xy]])<=length(image[quads[id.xy]])*1.008 && length(image[rearrangedQuads[id.xy]])>=length(image[quads[id.xy]])*0.992)
+        if (length(image[rearrangedQuads[id.x]]) <= length(image[quads[id.x]])*1.008 && length(image[rearrangedQuads[id.x]]) >= length(image[quads[id.x]])*0.992)
             b = true;
 
         if(b)
