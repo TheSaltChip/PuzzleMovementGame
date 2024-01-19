@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Completables.ColorRecognition
+namespace Completables.PatternRecognition
 {
-    public class ColorRecognitionBoardEditor : MonoBehaviour
+    public class PatternRecognitionBoardEditor : MonoBehaviour
     {
         private const int GridMax = 5;
 

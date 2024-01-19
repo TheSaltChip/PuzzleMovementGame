@@ -4,17 +4,19 @@ using UnityEngine;
 using UnityEngine.Events;
 using Variables;
 
-namespace Completables.ColorRecognition
+namespace Completables.PatternRecognition
 {
-    public class ColorRecognitionBoardCompletable : Completable
+    public class PatternRecognitionBoardCompletable : Completable
     {
         [SerializeField] private BoolVariable canRepeat;
+        [SerializeField] private BoolVariable isPatternCreated;
         [SerializeField] private IntVariable patternLength;
         [SerializeField] private IntVariable patternIndex;
         [SerializeField] private IntVariable bestScore;
         [SerializeField] private float blinkDuration;
 
         public UnityEvent onPatternCreated;
+        public UnityEvent onResetValues;
 
         private ColorButtonCompletable[] _buttons;
         private List<int> _pattern;
@@ -30,6 +32,7 @@ namespace Completables.ColorRecognition
             _pattern = new List<int>();
             _buttons = GetComponentsInChildren<ColorButtonCompletable>();
             _co = null;
+            isPatternCreated.value = false;
         }
 
         public void ResetValues()
@@ -39,6 +42,9 @@ namespace Completables.ColorRecognition
             _buttons = GetComponentsInChildren<ColorButtonCompletable>();
             patternIndex.value = 0;
             bestScore.value = 0;
+            isPatternCreated.value = false;
+
+            onResetValues?.Invoke();
         }
 
         public void CreatePattern()
@@ -46,6 +52,7 @@ namespace Completables.ColorRecognition
             _pattern.Clear();
             patternIndex.value = 0;
             bestScore.value = 0;
+            isPatternCreated.value = true;
 
             if (canRepeat.value)
             {
@@ -55,7 +62,7 @@ namespace Completables.ColorRecognition
             {
                 CreateNonRepeatingPattern();
             }
-            
+
             onPatternCreated?.Invoke();
         }
 
@@ -73,6 +80,8 @@ namespace Completables.ColorRecognition
         private void CreateNonRepeatingPattern()
         {
             var count = _buttons.Length;
+            if (patternLength.value > count)
+                patternLength.value = count;
 
             for (var i = 0; i < patternLength.value; i++)
             {
@@ -111,9 +120,9 @@ namespace Completables.ColorRecognition
                 currentButton.ResetState();
                 patternIndex.Increment();
 
-                if (bestScore.value < patternIndex.value + 1)
+                if (bestScore.value < patternIndex.value)
                 {
-                    bestScore.value = patternIndex.value + 1;
+                    bestScore.value = patternIndex.value;
                 }
 
                 var patternIsNotDone = patternIndex.value != _pattern.Count;
@@ -138,8 +147,8 @@ namespace Completables.ColorRecognition
         private void Failed()
         {
             BlinkIncorrectButtons();
-            OnFailedCheck.Invoke();
             ResetState();
+            OnFailedCheck.Invoke();
         }
 
         public void BlinkPattern()

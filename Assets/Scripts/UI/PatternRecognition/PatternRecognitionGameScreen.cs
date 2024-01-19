@@ -26,7 +26,7 @@ namespace UI.PatternRecognition
 
         private PatRecArguments _arguments;
 
-        private void Start()
+        private void Awake()
         {
             _arguments = new PatRecArguments
             {
