@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Autohand;
 using Events;
 using Puzzle.Scriptables;
@@ -162,7 +163,6 @@ public class PuzzleSetupManager : MonoBehaviour
             for (var j = 0; j < width.value; j++)
             {
                 indPos[a] = i + j;
-                print(indPos[a]);
                 a++;
             }
         }
@@ -263,11 +263,6 @@ public class PuzzleSetupManager : MonoBehaviour
         }
         
         ShuffleIndex();
-            
-        var compTex = new Texture2D(tex.width,tex.height)
-        {
-            filterMode = tex.filterMode
-        };
         
         var quadsFlat = new int[tex.height * tex.width];
         var rQuadsFlat = new int[tex.height * tex.width];
@@ -299,10 +294,6 @@ public class PuzzleSetupManager : MonoBehaviour
         
         var rearrangedSquares = new GraphicsBuffer(GraphicsBuffer.Target.Structured,tex.height*tex.width,sizeof(float));
         rearrangedSquares.SetData(rQuadsFlat);
-        
-        var sprite = Sprite.Create(compTex, new Rect(0,0,compTex.width,compTex.height), new Vector2(.5f,.5f));
-        goalSprite.image = sprite;
-        changedImage.Invoke();
 
         var result = new int[tex.width * tex.height];
         
@@ -320,18 +311,26 @@ public class PuzzleSetupManager : MonoBehaviour
 
         var k = new int();
         comp.GetKernelThreadGroupSizes(k,out var x,out var y,out var z);
-        comp.Dispatch(k,Mathf.CeilToInt((float)tex.width/x),Mathf.CeilToInt((float)tex.height/y),(int)z);
+        comp.Dispatch(k,Mathf.CeilToInt((float)tex.width*tex.height/x),(int)y,(int)z);
         buffer.GetData(result);
         
         buffer.Release();
         squares.Release();
         rearrangedSquares.Release();
         texBuffer.Release();
-        
-        foreach (var res in result)
+
+        foreach (var i in result)
         {
-            print(res);
+            print(i);
         }
+        
+        if (result.Any(t => t == 0))
+        {
+            print("Incorrect");
+            return;
+        }
+        
+        print("Correct");
     }
 
     private void GoalSprite()
