@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Audio
 {
-    [RequireComponent(typeof(Completable), typeof(AudioSource))]
     public class CompletableAudioPlayer : MonoBehaviour
     {
         [SerializeField] private AudioSource source;
@@ -19,14 +18,12 @@ namespace Audio
 
         private void PlayOnDoneSound()
         {
-            source.clip = doneClip;
-            source.Play();
+            source.PlayOneShot(doneClip);
         }
         
         private void PlayOnFailedSound()
         {
-            source.clip = failedClip;
-            source.Play();
+            source.PlayOneShot(failedClip);
         }
     }
 }

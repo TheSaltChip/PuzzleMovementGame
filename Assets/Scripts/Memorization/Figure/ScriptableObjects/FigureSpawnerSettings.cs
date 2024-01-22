@@ -2,7 +2,7 @@
 
 namespace Memorization.Figure.ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "FigureSpawnerSettings", menuName = "Memorization/Figure/FigureSpawnerSettings")]
+    [CreateAssetMenu(fileName = "FigureSpawnerSettings", menuName = "FigureMatching/FigureSpawnerSettings")]
     public class FigureSpawnerSettings : ScriptableObject
     {
         public float deltaThetaDeg;
