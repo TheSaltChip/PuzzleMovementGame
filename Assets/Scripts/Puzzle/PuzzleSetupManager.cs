@@ -305,15 +305,10 @@ public class PuzzleSetupManager : MonoBehaviour
         changedImage.Invoke();
 
         var result = new int[tex.width * tex.height];
+        
         var buffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured,tex.width*tex.height,sizeof(float));
+        buffer.SetData(result);
         var texBuffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured, tex.height * tex.width,sizeof(float));
-        
-        /*var rTex  = new RenderTexture(tex.width, tex.height, 0)
-        {
-            enableRandomWrite = true
-        };
-        
-        Graphics.Blit(tex,rTex);*/
 
         comp.SetBuffer(0,Image,texBuffer);
         comp.SetBuffer(0,Result,buffer);
@@ -331,6 +326,8 @@ public class PuzzleSetupManager : MonoBehaviour
         buffer.Release();
         squares.Release();
         rearrangedSquares.Release();
+        texBuffer.Release();
+        
         foreach (var res in result)
         {
             print(res);

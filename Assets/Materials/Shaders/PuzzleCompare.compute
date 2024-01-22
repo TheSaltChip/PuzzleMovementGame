@@ -9,22 +9,16 @@ RWStructuredBuffer<float4> image;
 RWStructuredBuffer<int> quads;
 RWStructuredBuffer<int> rearrangedQuads;
 
-int height;
-int width;
+uint height;
+uint width;
 
-[numthreads(8,8,1)]
-void CSMain (uint1 id : SV_DispatchThreadID)
+[numthreads(16,16,1)]
+void CSMain (uint2 id : SV_DispatchThreadID)
 {
-    if(id.x < height * width)
+    if (length(image[rearrangedQuads[id.x*id.y]]) <= length(image[quads[id.x*id.y]])*1.8 && length(image[rearrangedQuads[id.x*id.y]]) >= length(image[quads[id.x*id.y]])*0.2)
     {
-        bool b = false;
-        if (length(image[rearrangedQuads[id.x]]) <= length(image[quads[id.x]])*1.008 && length(image[rearrangedQuads[id.x]]) >= length(image[quads[id.x]])*0.992)
-            b = true;
-
-        if(b)
-            Result[id.x] = 1;
-        else
-            Result[id.x] = 0;
+        Result[id.x * id.y] = 1;
+    }else{
+        Result[id.x * id.y] = 0;
     }
-    
 }
