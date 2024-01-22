@@ -62,24 +62,13 @@ MonoBehaviour:
     m_Localized: Tilpass
     m_Metadata:
       m_Items: []
-  - m_Id: 14731012235264
-    m_Localized: Hvor mange forskjellige farger?
+  - m_Id: 12995286575558656
+    m_Localized: Sammenlign
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 8039006019240853523
   - m_Id: 15298551898112
-    m_Localized: Farger
-    m_Metadata:
-      m_Items: []
-  - m_Id: 16176449085440
-    m_Localized: Hvor mange skal sammenlignes?
-    m_Metadata:
-      m_Items: []
-  - m_Id: 17672486019072
-    m_Localized: Hvor mange forskjellige former?
-    m_Metadata:
-      m_Items: []
-  - m_Id: 17746775531520
-    m_Localized: Hvor mange figurer skal spilles med?
+    m_Localized: Maks Farger
     m_Metadata:
       m_Items: []
   - m_Id: 20772441579520
@@ -87,11 +76,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 21158049112064
-    m_Localized: Former
+    m_Localized: Maks Former
     m_Metadata:
       m_Items: []
   - m_Id: 22837083529216
-    m_Localized: Antall
+    m_Localized: Antall figurer
     m_Metadata:
       m_Items: []
   - m_Id: 320683242446848
@@ -107,14 +96,18 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 340104199561216
-    m_Localized: "Maks antall former: {MaxNumShapes}\nMaks antall farger: {MaxNumColor}\nFigurer
-      \xE5 sammenligne: {NumToMatch}\nTotalt antall figurer: {TotalNumberOfFigures}"
+    m_Localized: "Din tid ble {TimeSpent}\nMaks {MaxNumShapes} former\nMaks {MaxNumColor}
+      farger \n{NumToMatch} figurer \xE5 sammenligne\n{TotalNumberOfFigures} figurer"
     m_Metadata:
       m_Items:
       - rid: 8039006019240853523
   - m_Id: 365453088153600
-    m_Localized: "Maks antall former: {MaxNumShapes}\nMaks antall farger: {MaxNumColor}\nFigurer
-      \xE5 sammenligne: {NumToMatch}\nAntall figurer igjen: {NumberOfFiguresLeft}"
+    m_Localized: 'Sammenlign {NumToMatch} figurer
+
+      {NumberOfFiguresLeft} figurer
+      igjen
+
+      Tid: {TimeSpent}'
     m_Metadata:
       m_Items:
       - rid: 8039006019240853523
@@ -123,36 +116,36 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8180592020361216
-    m_Localized: 'Maks 3 forskjellige farger
+    m_Localized: 'Maks 3 farger
 
-      Maks 4 forskjellige former
+      Maks 4 former
 
-      Sammenlign
-      2 figurer
+      Sammenlign 2 figurer
 
-      12 totale figurer'
+      12
+      figurer'
     m_Metadata:
       m_Items: []
   - m_Id: 8183801698914304
-    m_Localized: 'Maks 6 forskjellige farger
+    m_Localized: 'Maks 6 farger
 
-      Maks 10 forskjellige former
+      Maks 10 former
 
-      Sammenlign
-      2 figurer
+      Sammenlign 2 figurer
 
-      30 totale figurer'
+      30
+      figurer'
     m_Metadata:
       m_Items: []
   - m_Id: 8183803368247296
-    m_Localized: 'Maks 10 forskjellige farger
+    m_Localized: 'Maks 10 farger
 
-      Maks 16 forskjellige former
+      Maks 16 former
 
-      Sammenlign
-      3 figurer
+      Sammenlign 3 figurer
 
-      96 totale figurer'
+      96
+      figurer'
     m_Metadata:
       m_Items: []
   references:
@@ -161,4 +154,4 @@ MonoBehaviour:
     - rid: 8039006019240853523
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 006000ae52350100006080ad604c0100
+        m_Entries: 006000ae52350100006080ad604c0100003017f0242b2e00

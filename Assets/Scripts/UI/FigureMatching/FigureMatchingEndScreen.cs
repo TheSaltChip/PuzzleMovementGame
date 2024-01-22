@@ -2,6 +2,7 @@
 using Memorization.Figure.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Localization.Components;
+using Variables;
 
 namespace UI.FigureMatching
 {
@@ -9,6 +10,7 @@ namespace UI.FigureMatching
     {
         [SerializeField] private LocalizeStringEvent localizeStringEvent;
         [SerializeField] private FigureMatchingRules rules;
+        [SerializeField] private FloatVariable timeSpent;
 
         [Serializable]
         private class Arguments
@@ -17,6 +19,7 @@ namespace UI.FigureMatching
             public int MaxNumColor;
             public int NumToMatch;
             public int TotalNumberOfFigures;
+            public string TimeSpent;
         }
 
         private Arguments _arguments;
@@ -28,7 +31,8 @@ namespace UI.FigureMatching
                 MaxNumShapes = rules.MaxNumShapes,
                 MaxNumColor = rules.MaxNumColor,
                 NumToMatch = rules.NumToMatch,
-                TotalNumberOfFigures = rules.TotalTotalNumberOfFigures
+                TotalNumberOfFigures = rules.TotalTotalNumberOfFigures,
+                TimeSpent = TimeSpan.FromSeconds(timeSpent.value).ToString(@"mm\:ss\.ff")
             };
 
             localizeStringEvent.StringReference.Arguments = new object[]
@@ -41,6 +45,7 @@ namespace UI.FigureMatching
             _arguments.MaxNumColor = rules.MaxNumColor;
             _arguments.NumToMatch = rules.NumToMatch;
             _arguments.TotalNumberOfFigures = rules.TotalTotalNumberOfFigures;
+            _arguments.TimeSpent = TimeSpan.FromSeconds(timeSpent.value).ToString(@"mm\:ss\.ff");
             
             localizeStringEvent.RefreshString();
         }

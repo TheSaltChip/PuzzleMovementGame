@@ -15,7 +15,7 @@ namespace Memorization.Figure
         [SerializeField] private FigureMaterials materials;
         [SerializeField] private FigurePositions positions;
 
-        private readonly Vector3 _adjustToNeckHeight = new(0, 0.15f, 0);
+        private readonly Vector3 _adjustToNeckHeight = new(0, 0.20f, 0);
 
         public void Spawn()
         {
