@@ -78,7 +78,7 @@ public class PuzzleSetupManager : MonoBehaviour
     {
         squares = new GraphicsBuffer(GraphicsBuffer.Target.Structured, tex.height*tex.width,sizeof(float));
         rearrangedSquares = new GraphicsBuffer(GraphicsBuffer.Target.Structured,tex.height*tex.width,sizeof(float));
-        buffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured,tex.width*tex.height,sizeof(float));
+        buffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured,tex.width*tex.height,sizeof(float)*3);
     }
 
     private void OnDisable()
@@ -304,7 +304,7 @@ public class PuzzleSetupManager : MonoBehaviour
 
         squares.SetData(quadsFlat);
         rearrangedSquares.SetData(rQuadsFlat);
-        var result = new int[tex.width * tex.height];
+        var result = new float3[tex.width * tex.height];
         buffer.SetData(result);
 
         comp.SetTexture(0,Image,tex);
@@ -320,12 +320,17 @@ public class PuzzleSetupManager : MonoBehaviour
         comp.Dispatch(k,Mathf.CeilToInt((float)tex.width*tex.height/x),(int)y,(int)z);
         
         buffer.GetData(result);
+
+        foreach (var i in result)
+        {
+            print(i);
+        }
         
-        if (result.Any(t => t == 0))
+        /*if (result.Any(t => t == 0))
         {
             print("Incorrect");
             return;
-        }
+        }*/
         
         print("Correct");
     }

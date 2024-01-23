@@ -3,7 +3,7 @@
 
 // Create a RenderTexture with enableRandomWrite flag and set it
 // with cs.SetTexture
-RWBuffer<int> Result;
+RWBuffer<float3> Result;
 Texture2D<float4> image;
 
 RWStructuredBuffer<int> quads;
@@ -30,6 +30,6 @@ void CSMain (uint id : SV_DispatchThreadID)
     {
         Result[id.x] = 1;
     }else{
-        Result[id.x] = 0;
+        Result[id.x] = diff.xyz;
     }
 }
