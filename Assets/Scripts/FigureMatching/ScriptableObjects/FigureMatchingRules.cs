@@ -1,7 +1,6 @@
-﻿using Unity.XR.CoreUtils;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Memorization.Figure.ScriptableObjects
+namespace FigureMatching.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "FigureMatchingRules", menuName = "FigureMatching/FigureMatchingRules")]
     public class FigureMatchingRules : ScriptableObject

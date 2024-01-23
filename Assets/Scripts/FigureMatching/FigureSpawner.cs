@@ -1,9 +1,9 @@
-﻿using Memorization.Figure.ScriptableObjects;
+﻿using FigureMatching.ScriptableObjects;
 using UnityEngine;
 using Util;
 using Random = UnityEngine.Random;
 
-namespace Memorization.Figure
+namespace FigureMatching
 {
     public class FigureSpawner : MonoBehaviour
     {

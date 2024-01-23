@@ -1,10 +1,9 @@
-﻿using System;
-using Memorization.Figure.ScriptableObjects;
+﻿using FigureMatching.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 using Variables;
 
-namespace Memorization.Figure
+namespace FigureMatching
 {
     public class FigureGameStateWatcher : MonoBehaviour
     {

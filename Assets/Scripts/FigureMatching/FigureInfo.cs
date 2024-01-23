@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Memorization.Figure
+namespace FigureMatching
 {
     public class FigureInfo : MonoBehaviour
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Memorization.Figure.ScriptableObjects;
+using FigureMatching.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Memorization.Figure
+namespace FigureMatching
 {
     public class FigureMatchChecker : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using Difficulty;
-using Memorization.Figure.ScriptableObjects;
+using FigureMatching.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 

@@ -1,7 +1,7 @@
-﻿using Memorization.Figure.ScriptableObjects;
+﻿using FigureMatching.ScriptableObjects;
 using UnityEngine;
 
-namespace Memorization.Figure
+namespace FigureMatching
 {
     public class FigurePositionsCreator : MonoBehaviour
     {

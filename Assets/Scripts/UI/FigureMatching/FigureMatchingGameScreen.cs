@@ -1,5 +1,5 @@
 ﻿using System;
-using Memorization.Figure.ScriptableObjects;
+using FigureMatching.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using Variables;
