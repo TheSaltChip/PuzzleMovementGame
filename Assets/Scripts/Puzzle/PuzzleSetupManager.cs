@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Autohand;
 using Events;
@@ -43,6 +44,11 @@ public class PuzzleSetupManager : MonoBehaviour
     private int[] indPos;
     private Quad[] rearrangedQuads;
     private Quad[] quads;
+    
+    private GraphicsBuffer squares;
+    private GraphicsBuffer rearrangedSquares;
+    private GraphicsBuffer buffer;
+    
     private struct Quad
     {
         public int[,] rows;
@@ -68,6 +74,20 @@ public class PuzzleSetupManager : MonoBehaviour
         SetUp();
     }
 
+    private void OnEnable()
+    {
+        squares = new GraphicsBuffer(GraphicsBuffer.Target.Structured, tex.height*tex.width,sizeof(float));
+        rearrangedSquares = new GraphicsBuffer(GraphicsBuffer.Target.Structured,tex.height*tex.width,sizeof(float));
+        buffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured,tex.width*tex.height,sizeof(float));
+    }
+
+    private void OnDisable()
+    {
+        buffer.Release();
+        squares.Release();
+        rearrangedSquares.Release();
+    }
+
     public void SetUp()
     {
         IndexArray();
@@ -75,6 +95,7 @@ public class PuzzleSetupManager : MonoBehaviour
         PlacePoints();
         SetUpPieces();
         GoalSprite();
+        OnEnable();
     }
 
     private void IndexArray()
@@ -281,27 +302,12 @@ public class PuzzleSetupManager : MonoBehaviour
             }
         }
 
-        var array = new Color[tex.height*tex.width];
-        var f = 0;
-        foreach (var pixel in tex.GetPixels())
-        {
-            array[f] = pixel;
-            f++;
-        }
-
-        var squares = new GraphicsBuffer(GraphicsBuffer.Target.Structured, tex.height*tex.width,sizeof(float));
         squares.SetData(quadsFlat);
-        
-        var rearrangedSquares = new GraphicsBuffer(GraphicsBuffer.Target.Structured,tex.height*tex.width,sizeof(float));
         rearrangedSquares.SetData(rQuadsFlat);
-
         var result = new int[tex.width * tex.height];
-        
-        var buffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured,tex.width*tex.height,sizeof(float));
         buffer.SetData(result);
-        var texBuffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured, tex.height * tex.width,sizeof(float));
 
-        comp.SetBuffer(0,Image,texBuffer);
+        comp.SetTexture(0,Image,tex);
         comp.SetBuffer(0,Result,buffer);
         comp.SetBuffer(0,Quads,squares);
         comp.SetBuffer(0,RearrangedQuads,rearrangedSquares);
@@ -312,17 +318,8 @@ public class PuzzleSetupManager : MonoBehaviour
         var k = new int();
         comp.GetKernelThreadGroupSizes(k,out var x,out var y,out var z);
         comp.Dispatch(k,Mathf.CeilToInt((float)tex.width*tex.height/x),(int)y,(int)z);
-        buffer.GetData(result);
         
-        buffer.Release();
-        squares.Release();
-        rearrangedSquares.Release();
-        texBuffer.Release();
-
-        foreach (var i in result)
-        {
-            print(i);
-        }
+        buffer.GetData(result);
         
         if (result.Any(t => t == 0))
         {
