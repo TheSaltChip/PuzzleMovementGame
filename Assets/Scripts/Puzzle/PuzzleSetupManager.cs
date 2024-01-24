@@ -44,6 +44,9 @@ public class PuzzleSetupManager : MonoBehaviour
     private int[] indPos;
     private Quad[] rearrangedQuads;
     private Quad[] quads;
+
+    private int hei;
+    private int wid;
     
     private GraphicsBuffer squares;
     private GraphicsBuffer rearrangedSquares;
@@ -101,6 +104,13 @@ public class PuzzleSetupManager : MonoBehaviour
     private void IndexArray()
     {
         tex = selectedImage.currentSelected;
+        
+        /*foreach (var pixel in tex.GetPixels())
+        {
+            if(pixel != Color.black)
+                print(pixel);
+        }*/
+        
         indexes = new int[tex.height,tex.width];
         var a = 0;
         for (var i = 0; i < tex.height; i++)
@@ -239,8 +249,30 @@ public class PuzzleSetupManager : MonoBehaviour
 
                 row++;
                 k++;
-                var rect = new Rect(j * (tex.width / (width.value * 1f)), i * (tex.height / (height.value * 1f)),
-                    tex.width / (width.value * 1f), tex.height / (height.value * 1f));
+
+                wid = tex.width/width.value;
+                var rest = tex.width % width.value;
+                if (rest != 0)
+                {
+                    
+                    if (rest%2 == 0)
+                    {
+                        wid += rest / width.value;
+                    }
+                }
+
+                hei = tex.height / height.value;
+                rest = tex.height % height.value;
+                if (rest != 0)
+                {
+                    
+                    if (rest%2 == 0)
+                    {
+                        hei += rest/height.value;
+                    }
+                }
+                
+                var rect = new Rect(j * wid, i * hei, wid, hei);
                 var piece = Instantiate(puzzlePiece);
                 piece.name = av + "";
                 pieces[av] = piece;
@@ -250,6 +282,8 @@ public class PuzzleSetupManager : MonoBehaviour
                 tr.position = new Vector3(0.5f, 4, 1);
                 tr.localScale = puzzlePiece.transform.localScale;
                 piece.SetActive(true);
+
+                
 
                 var sliced = new Texture2D((int)rect.width, (int)rect.height)
                 {
@@ -288,19 +322,25 @@ public class PuzzleSetupManager : MonoBehaviour
         var quadsFlat = new int[tex.height * tex.width];
         var rQuadsFlat = new int[tex.height * tex.width];
         var pos = 0;
-
+        
         for (var i = 0; i < quads.Length; i++)
         {
-            for (var j = 0; j < tex.height/height.value; j++)
+            for (var j = 0; j < hei; j++)
             {
-                for (var l = 0; l < tex.width/width.value; l++)
+                for (var l = 0; l < wid; l++)
                 {
+                    print(quads[i].rows[j,l]);
                     quadsFlat[pos] = quads[i].rows[j,l];
                     rQuadsFlat[pos] = rearrangedQuads[i].rows[j, l];
                     pos++;
                 }
             }
         }
+
+        /*foreach (var ind in quadsFlat)
+        {
+            print(ind);
+        }*/
 
         squares.SetData(quadsFlat);
         rearrangedSquares.SetData(rQuadsFlat);
@@ -320,11 +360,23 @@ public class PuzzleSetupManager : MonoBehaviour
         comp.Dispatch(k,Mathf.CeilToInt((float)tex.width*tex.height/x),(int)y,(int)z);
         
         buffer.GetData(result);
-
-        foreach (var i in result)
+        
+        /*var f = new float3(0, 0, 0);
+        for (var h = 0; h < height.value*width.value; h++)
         {
-            print(i);
-        }
+            var str = "";
+            for (var i = 0; i < tex.height/height.value; i++)
+            {
+                var ind = h*(tex.width/(tex.width/width.value))+i*tex.width;
+                for (var j = 0; j < tex.width/width.value; j++)
+                {
+                    //if (!result[ind].Equals(f))
+                        str += quadsFlat[ind] + " ";
+                    ind++;
+                }
+            }
+            print(str);
+        }*/
         
         /*if (result.Any(t => t == 0))
         {
@@ -332,7 +384,7 @@ public class PuzzleSetupManager : MonoBehaviour
             return;
         }*/
         
-        print("Correct");
+        //print("Correct");
     }
 
     private void GoalSprite()

@@ -26,9 +26,9 @@ void CSMain (uint id : SV_DispatchThreadID)
 
     float4 diff = image[int2(rx,ry)] - image[int2(qx,qy)];
     
-    if (all(diff.xyz <= float3(0.019,0.019,0.019)) && all(diff.xyz >= float3(-0.019,-0.019,-0.019)))
+    if (all(diff.xyz <= float3(0.1,0.1,0.1)) && all(diff.xyz >= float3(-0.1,-0.1,-0.1)))
     {
-        Result[id.x] = 1;
+        //Result[id.x] = 1;
     }else{
         Result[id.x] = diff.xyz;
     }
