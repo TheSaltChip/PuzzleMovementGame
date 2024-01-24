@@ -9,9 +9,9 @@ namespace UI
     {
         [SerializeField] private Slider slider;
         [SerializeField] private TMP_Text text;
-        [SerializeField] private float constant = 1f;
+        [SerializeField, Tooltip("text.text = (inputText * constant).ToString(CultureInfo.InvariantCulture);")] private float constant = 1f;
 
-        private void Start()
+        private void OnEnable()
         {
             slider.onValueChanged.AddListener(ChangeText);
             ChangeText(slider.value);

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Paintable : MonoBehaviour
@@ -40,7 +38,15 @@ public class Paintable : MonoBehaviour
         rend = GetComponent<Renderer>();
         rend.material.SetTexture(maskTextureID,maskRenderTexture);
 
-        PaintManager.Instance.initTextures(this);
+        try
+        {
+            PaintManager.Instance.initTextures(this);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     private void OnDisable()

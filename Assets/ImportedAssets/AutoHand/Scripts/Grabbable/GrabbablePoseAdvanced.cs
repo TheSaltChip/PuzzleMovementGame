@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif

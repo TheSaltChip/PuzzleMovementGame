@@ -1,60 +1,42 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using Variables;
 
 namespace SceneTransition
 {
-    [RequireComponent(typeof(Renderer))]
     public class FaderScreen : MonoBehaviour
     {
         private static readonly int Color1 = Shader.PropertyToID("_Color");
-        public float animationTime = 0.5f;
 
-        private Renderer _renderer;
+        [SerializeField] private FloatVariable animationTime;
+        [SerializeField] private Image image;
 
         private void Awake()
         {
-            _renderer = GetComponent<Renderer>();
+            image.material.SetColor(Color1, Color.clear);
         }
 
-        private void OnEnable()
+        public void FadeIn()
         {
-            StartCoroutine(Init());
+            StartCoroutine(FadeRoutine(Color.clear, Color.black, animationTime.value));
         }
 
-        private void OnDisable()
+        public void FadeOut()
         {
-            SceneTransitionManager.Instance.OnSceneExitCoroutine -= FadeIn;
-            SceneTransitionManager.Instance.OnSceneEnterCoroutine -= FadeOut;
+            StartCoroutine(FadeRoutine(Color.black, Color.clear, animationTime.value * 1.5f));
         }
 
-        private IEnumerator Init()
-        {
-            yield return new WaitUntil(() => SceneTransitionManager.Instance != null);
-
-            SceneTransitionManager.Instance.OnSceneExitCoroutine += FadeIn;
-            SceneTransitionManager.Instance.OnSceneEnterCoroutine += FadeOut;
-        }
-
-        private IEnumerator FadeIn()
-        {
-            yield return StartCoroutine(FadeRoutine(new Color(0, 0, 0, 0), Color.black));
-        }
-
-        private IEnumerator FadeOut()
-        {
-            yield return StartCoroutine(FadeRoutine(Color.black, new Color(0, 0, 0, 0)));
-        }
-
-        private IEnumerator FadeRoutine(Color from, Color to)
+        private IEnumerator FadeRoutine(Color from, Color to, float animTime)
         {
             var time = 0f;
 
-            while (time <= animationTime)
+            while (time <= animTime)
             {
-                _renderer.material.SetColor(Color1, Color.Lerp(
+                image.material.SetColor(Color1, Color.Lerp(
                     from,
                     to,
-                    time / animationTime
+                    time / animTime
                 ));
 
                 time += Time.deltaTime;
@@ -62,7 +44,7 @@ namespace SceneTransition
                 yield return null;
             }
 
-            _renderer.material.SetColor(Color1, to);
+            image.material.SetColor(Color1, to);
         }
     }
 }

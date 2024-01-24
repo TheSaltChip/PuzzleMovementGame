@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using SceneTransition;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR;
 
 namespace UI
 {
@@ -11,9 +14,20 @@ namespace UI
     {
         [SerializeField] private GameObject canvas;
         [SerializeField] private TMP_Dropdown dropdown;
+        [SerializeField] private TMP_Text deviceName;
 
+        public UnityEvent<string> changeScene;
+        
         private void Start()
         {
+            List<InputDevice> devices = new List<InputDevice>();
+            InputDevices.GetDevices(devices);
+
+            foreach (var device in devices)
+            {
+                deviceName.text += device.name + "\n";
+            }
+            
             ListScenes();
         }
 
@@ -24,7 +38,7 @@ namespace UI
 
         public void ChangeScene()
         {
-            SceneTransitionManager.Instance.LoadScene(dropdown.options[dropdown.value].text);
+            changeScene?.Invoke(dropdown.options[dropdown.value].text);
         }
 
         private void ListScenes()
