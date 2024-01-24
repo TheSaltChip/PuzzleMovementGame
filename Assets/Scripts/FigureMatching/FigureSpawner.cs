@@ -1,9 +1,6 @@
-﻿using System;
-using FigureMatching.ScriptableObjects;
+﻿using FigureMatching.ScriptableObjects;
 using UnityEngine;
 using Util;
-using Variables;
-using Random = UnityEngine.Random;
 
 namespace FigureMatching
 {
@@ -16,7 +13,6 @@ namespace FigureMatching
         [SerializeField] private Figures figures;
         [SerializeField] private FigureMaterials materials;
         [SerializeField] private FigurePositions positions;
-        [SerializeField] private BoolVariable canSpawn;
 
         private readonly Vector3 _adjustToNeckHeight = new(0, 0.20f, 0);
 

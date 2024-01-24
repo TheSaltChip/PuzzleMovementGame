@@ -37,9 +37,9 @@ namespace UI.FigureMatching
             
             while (_num > 0)
             {
+                tick?.Invoke();
                 yield return _oneSecond;
                 --_num;
-                tick?.Invoke();
                 text.text = _num.ToString();
             }
 
