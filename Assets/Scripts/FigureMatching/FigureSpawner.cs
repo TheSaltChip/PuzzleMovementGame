@@ -1,6 +1,8 @@
-﻿using FigureMatching.ScriptableObjects;
+﻿using System;
+using FigureMatching.ScriptableObjects;
 using UnityEngine;
 using Util;
+using Variables;
 using Random = UnityEngine.Random;
 
 namespace FigureMatching
@@ -14,10 +16,11 @@ namespace FigureMatching
         [SerializeField] private Figures figures;
         [SerializeField] private FigureMaterials materials;
         [SerializeField] private FigurePositions positions;
+        [SerializeField] private BoolVariable canSpawn;
 
         private readonly Vector3 _adjustToNeckHeight = new(0, 0.20f, 0);
 
-        public void Spawn()
+        public void SetSpawnPosition()
         {
             if (_spawnPoint == null)
             {
@@ -27,7 +30,10 @@ namespace FigureMatching
             }
 
             transform.position = _spawnPoint.transform.position - _adjustToNeckHeight;
+        }
 
+        public void Spawn()
+        {
             var posCopy = positions.Copy();
             posCopy.Shuffle();
 

@@ -27,6 +27,7 @@ namespace UI.FigureMatching
         public void StartCountdown()
         {
             _num = startNumber;
+            text.text = _num.ToString();
             StartCoroutine(StartCountdownCoroutine());
         }
 
