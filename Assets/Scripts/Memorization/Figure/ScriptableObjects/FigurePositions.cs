@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Memorization.Figure.ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "FigurePositions", menuName = "Memorization/Figure/FigurePositions", order = 0)]
+    [CreateAssetMenu(fileName = "FigurePositions", menuName = "FigureMatching/FigurePositions", order = 0)]
     public class FigurePositions : ScriptableObject
     {
         public List<Vector3> list;

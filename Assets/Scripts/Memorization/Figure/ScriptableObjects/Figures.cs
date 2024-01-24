@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Memorization.Figure.ScriptableObjects
 {
-    [CreateAssetMenu(menuName = "Memorization/Figure/Figures", fileName = "Figures", order = 0)]
+    [CreateAssetMenu(menuName = "FigureMatching/Figures", fileName = "Figures", order = 0)]
     public class Figures : ScriptableObject
     {
         public List<GameObject> list;

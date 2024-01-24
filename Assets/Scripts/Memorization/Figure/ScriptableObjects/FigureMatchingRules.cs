@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Memorization.Figure.ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "FigureMatchingRules", menuName = "Memorization/Figure/FigureMatchingRules")]
+    [CreateAssetMenu(fileName = "FigureMatchingRules", menuName = "FigureMatching/FigureMatchingRules")]
     public class FigureMatchingRules : ScriptableObject
     {
         [field: SerializeField, Range(1, 10)] public int MaxNumColor { get; set; }
@@ -34,13 +34,25 @@ namespace Memorization.Figure.ScriptableObjects
                     totalNumberOfFigures -= totalNumberOfFigures % NumToMatch;
                 }
 
+                NumFiguresLeft = totalNumberOfFigures;
                 return totalNumberOfFigures;
             }
 
             set
             {
-                totalNumberOfFigures = value; 
-                NumFiguresLeft = value;
+                totalNumberOfFigures = value;
+
+                if (totalNumberOfFigures < NumToMatch)
+                {
+                    totalNumberOfFigures = NumToMatch;
+                }
+
+                if (totalNumberOfFigures % NumToMatch != 0)
+                {
+                    totalNumberOfFigures -= totalNumberOfFigures % NumToMatch;
+                }
+
+                NumFiguresLeft = totalNumberOfFigures;
             }
         }
 
