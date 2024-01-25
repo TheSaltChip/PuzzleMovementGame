@@ -19,6 +19,7 @@ public class PuzzleSetupManager : MonoBehaviour
     [SerializeField] private ComputeShader comp;
     [SerializeField] private IntVariable height;
     [SerializeField] private IntVariable width;
+    [SerializeField] private BoolVariable state;
     
     [SerializeField] private GameObject puzzlePiece;
     [SerializeField] private GameObject board;
@@ -29,6 +30,7 @@ public class PuzzleSetupManager : MonoBehaviour
     [SerializeField] private Placed placed;
 
     [SerializeField] private UnityEvent changedImage;
+    [SerializeField] private UnityEvent completed;
 
     
     private Vector3 scale;
@@ -44,9 +46,6 @@ public class PuzzleSetupManager : MonoBehaviour
     private int[] indPos;
     private Quad[] rearrangedQuads;
     private Quad[] quads;
-
-    private int hei;
-    private int wid;
     
     private GraphicsBuffer squares;
     private GraphicsBuffer rearrangedSquares;
@@ -81,7 +80,7 @@ public class PuzzleSetupManager : MonoBehaviour
     {
         squares = new GraphicsBuffer(GraphicsBuffer.Target.Structured, tex.height*tex.width,sizeof(float));
         rearrangedSquares = new GraphicsBuffer(GraphicsBuffer.Target.Structured,tex.height*tex.width,sizeof(float));
-        buffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured,tex.width*tex.height,sizeof(float)*3);
+        buffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured,tex.width*tex.height,sizeof(float));
     }
 
     private void OnDisable()
@@ -104,12 +103,6 @@ public class PuzzleSetupManager : MonoBehaviour
     private void IndexArray()
     {
         tex = selectedImage.currentSelected;
-        
-        /*foreach (var pixel in tex.GetPixels())
-        {
-            if(pixel != Color.black)
-                print(pixel);
-        }*/
         
         indexes = new int[tex.height,tex.width];
         var a = 0;
@@ -249,30 +242,8 @@ public class PuzzleSetupManager : MonoBehaviour
 
                 row++;
                 k++;
-
-                wid = tex.width/width.value;
-                var rest = tex.width % width.value;
-                if (rest != 0)
-                {
-                    
-                    if (rest%2 == 0)
-                    {
-                        wid += rest / width.value;
-                    }
-                }
-
-                hei = tex.height / height.value;
-                rest = tex.height % height.value;
-                if (rest != 0)
-                {
-                    
-                    if (rest%2 == 0)
-                    {
-                        hei += rest/height.value;
-                    }
-                }
                 
-                var rect = new Rect(j * wid, i * hei, wid, hei);
+                var rect = new Rect(j * (tex.width/width.value), i * (tex.height / height.value), tex.width/width.value, tex.height / height.value);
                 var piece = Instantiate(puzzlePiece);
                 piece.name = av + "";
                 pieces[av] = piece;
@@ -325,11 +296,10 @@ public class PuzzleSetupManager : MonoBehaviour
         
         for (var i = 0; i < quads.Length; i++)
         {
-            for (var j = 0; j < hei; j++)
+            for (var j = 0; j < tex.height / height.value; j++)
             {
-                for (var l = 0; l < wid; l++)
+                for (var l = 0; l < tex.width/width.value; l++)
                 {
-                    print(quads[i].rows[j,l]);
                     quadsFlat[pos] = quads[i].rows[j,l];
                     rQuadsFlat[pos] = rearrangedQuads[i].rows[j, l];
                     pos++;
@@ -337,14 +307,9 @@ public class PuzzleSetupManager : MonoBehaviour
             }
         }
 
-        /*foreach (var ind in quadsFlat)
-        {
-            print(ind);
-        }*/
-
         squares.SetData(quadsFlat);
         rearrangedSquares.SetData(rQuadsFlat);
-        var result = new float3[tex.width * tex.height];
+        var result = new int[tex.width * tex.height];
         buffer.SetData(result);
 
         comp.SetTexture(0,Image,tex);
@@ -361,30 +326,15 @@ public class PuzzleSetupManager : MonoBehaviour
         
         buffer.GetData(result);
         
-        /*var f = new float3(0, 0, 0);
-        for (var h = 0; h < height.value*width.value; h++)
+        if (result.Any(t => t == 0))
         {
-            var str = "";
-            for (var i = 0; i < tex.height/height.value; i++)
-            {
-                var ind = h*(tex.width/(tex.width/width.value))+i*tex.width;
-                for (var j = 0; j < tex.width/width.value; j++)
-                {
-                    //if (!result[ind].Equals(f))
-                        str += quadsFlat[ind] + " ";
-                    ind++;
-                }
-            }
-            print(str);
-        }*/
-        
-        /*if (result.Any(t => t == 0))
-        {
-            print("Incorrect");
+            state.value = false;
+            completed.Invoke();
             return;
-        }*/
-        
-        //print("Correct");
+        }
+
+        state.value = true;
+        completed.Invoke();
     }
 
     private void GoalSprite()
