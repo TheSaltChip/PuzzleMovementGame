@@ -1,4 +1,4 @@
-﻿using Memorization.Figure;
+﻿using FigureMatching;
 using UnityEngine;
 using UnityEngine.Events;
 

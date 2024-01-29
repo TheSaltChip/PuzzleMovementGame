@@ -28,8 +28,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1433885761536
-    m_Localized: "Find figures that match, either by color, shape, or both. \nYou
-      select figures by touching them."
+    m_Localized: "Find figures that match and pick them.\nShape and color must match.
+      \nYou select figures by touching them."
     m_Metadata:
       m_Items: []
   - m_Id: 3081412567040
@@ -62,24 +62,13 @@ MonoBehaviour:
     m_Localized: Customize
     m_Metadata:
       m_Items: []
-  - m_Id: 14731012235264
-    m_Localized: How many different colors?
+  - m_Id: 12995286575558656
+    m_Localized: Match
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 8039006019240853522
   - m_Id: 15298551898112
-    m_Localized: Colors
-    m_Metadata:
-      m_Items: []
-  - m_Id: 16176449085440
-    m_Localized: How many to match?
-    m_Metadata:
-      m_Items: []
-  - m_Id: 17672486019072
-    m_Localized: How many different shapes?
-    m_Metadata:
-      m_Items: []
-  - m_Id: 17746775531520
-    m_Localized: How many figures to play with?
+    m_Localized: Max Colors
     m_Metadata:
       m_Items: []
   - m_Id: 20772441579520
@@ -87,11 +76,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 21158049112064
-    m_Localized: Shapes
+    m_Localized: Max Shapes
     m_Metadata:
       m_Items: []
   - m_Id: 22837083529216
-    m_Localized: Amount
+    m_Localized: Amount of figures
     m_Metadata:
       m_Items: []
   - m_Id: 320683242446848
@@ -107,28 +96,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 340104199561216
-    m_Localized: 'Max number of shapes: {MaxNumShapes}
+    m_Localized: 'Your time was {TimeSpent}
 
-      Max number of colors:
-      {MaxNumColor}
+      Max {MaxNumShapes} shapes
 
-      Figures to match: {NumToMatch}
+      Max
+      {MaxNumColor} colors
 
-      Total amout of figures:
-      {TotalNumberOfFigures}'
+      {NumToMatch} figures to match
+
+      {TotalNumberOfFigures}
+      figures '
     m_Metadata:
       m_Items:
       - rid: 8039006019240853522
   - m_Id: 365453088153600
-    m_Localized: 'Max number of shapes: {MaxNumShapes}
+    m_Localized: 'Match {NumToMatch} figures
 
-      Max number of colors:
-      {MaxNumColor}
+      {NumberOfFiguresLeft} figures
+      left
 
-      Figures to match: {NumToMatch}
-
-      Amout of figures
-      left: {NumberOfFiguresLeft}'
+      Time: {TimeSpent}'
     m_Metadata:
       m_Items:
       - rid: 8039006019240853522
@@ -137,18 +125,31 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8180592020361216
-    m_Localized: "Max 3 different colors \nMax 4 different shapes\nMatch 2 figures\n12
-      total figures "
+    m_Localized: "Max 3 colors \nMax 4 shapes\nMatch 2 figures\n12 figures "
     m_Metadata:
       m_Items: []
   - m_Id: 8183801698914304
-    m_Localized: "Max 6 different colors \nMax 10 different shapes\nMatch 2 figures\n30
-      total figures "
+    m_Localized: "Max 6 colors \nMax 10 shapes\nMatch 2 figures\n30 figures "
     m_Metadata:
       m_Items: []
   - m_Id: 8183803368247296
-    m_Localized: "Max 10 different colors \nMax 16 different shapes\nMatch 3 figures\n96
-      total figures "
+    m_Localized: "Max 10 colors \nMax 16  shapes\nMatch 3 figures\n96 figures "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13301083861225472
+    m_Localized: Please go to the red pad on the floor to start the game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13731077002047488
+    m_Localized: Choose difficulty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13735046529101824
+    m_Localized: Choose between 3 difficulties
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13734992842010624
+    m_Localized: Customize the rules you play with
     m_Metadata:
       m_Items: []
   references:
@@ -157,4 +158,4 @@ MonoBehaviour:
     - rid: 8039006019240853522
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 006000ae52350100006080ad604c0100
+        m_Entries: 006000ae52350100006080ad604c0100003017f0242b2e00

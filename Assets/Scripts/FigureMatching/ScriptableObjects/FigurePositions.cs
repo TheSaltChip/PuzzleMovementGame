@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Memorization.Figure.ScriptableObjects
+namespace FigureMatching.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "FigurePositions", menuName = "FigureMatching/FigurePositions", order = 0)]
     public class FigurePositions : ScriptableObject

@@ -1,34 +1,34 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Memorization.Figure.ScriptableObjects
+namespace FigureMatching.ScriptableObjects
 {
-    [CreateAssetMenu(menuName = "FigureMatching/FigureMaterials", fileName = "FigureMaterials")]
-    public class FigureMaterials : ScriptableObject
+    [CreateAssetMenu(menuName = "FigureMatching/Figures", fileName = "Figures", order = 0)]
+    public class Figures : ScriptableObject
     {
-        public List<Material> list;
+        public List<GameObject> list;
 
-        public Material RandomObject()
+        public GameObject RandomObject()
         {
             return list[Random.Range(0, list.Count)];
         }
 
-        public List<Material> RandomMaterials(int num)
+        public List<GameObject> RandomFigures(int num)
         {
             if (num >= list.Count) return list;
 
-            var l = new List<Material>(num);
+            var l = new List<GameObject>(num);
 
             var usedNumbers = new List<int>(num);
             var index = -1;
             usedNumbers.Add(index);
+            
             for (var i = 0; i < num; i++)
             {
                 while (usedNumbers.Contains(index))
                 {
                     index = Random.Range(0, num);
                 }
-
                 usedNumbers.Add(index);
 
                 l.Add(list[index]);
@@ -36,5 +36,7 @@ namespace Memorization.Figure.ScriptableObjects
 
             return l;
         }
+
+        public GameObject this[int i] => list[i];
     }
 }

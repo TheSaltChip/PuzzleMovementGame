@@ -1,5 +1,4 @@
 ﻿using System;
-using Memorization.Figure.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.Serialization;
