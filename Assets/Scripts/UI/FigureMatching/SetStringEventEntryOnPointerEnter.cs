@@ -5,7 +5,7 @@ using UnityEngine.Localization.Components;
 
 namespace UI.FigureMatching
 {
-    public class DifficultyInfoSetterOnHover : MonoBehaviour, IPointerEnterHandler
+    public class SetStringEventEntryOnPointerEnter : MonoBehaviour, IPointerEnterHandler
     {
         [SerializeField] private LocalizeStringEvent stringEvent;
         [SerializeField] private string tableEntry;

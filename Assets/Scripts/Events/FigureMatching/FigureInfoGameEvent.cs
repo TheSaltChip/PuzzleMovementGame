@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Memorization.Figure;
+using FigureMatching;
 using UnityEngine;
 
 namespace Events.FigureMatching

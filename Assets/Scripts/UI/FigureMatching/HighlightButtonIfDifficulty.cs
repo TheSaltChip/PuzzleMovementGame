@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Difficulty;
-using Memorization.Figure.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;

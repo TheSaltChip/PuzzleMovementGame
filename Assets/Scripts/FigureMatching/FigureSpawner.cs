@@ -1,9 +1,8 @@
-﻿using Memorization.Figure.ScriptableObjects;
+﻿using FigureMatching.ScriptableObjects;
 using UnityEngine;
 using Util;
-using Random = UnityEngine.Random;
 
-namespace Memorization.Figure
+namespace FigureMatching
 {
     public class FigureSpawner : MonoBehaviour
     {
@@ -15,9 +14,9 @@ namespace Memorization.Figure
         [SerializeField] private FigureMaterials materials;
         [SerializeField] private FigurePositions positions;
 
-        private readonly Vector3 _adjustToNeckHeight = new(0, 0.15f, 0);
+        private readonly Vector3 _adjustToNeckHeight = new(0, 0.20f, 0);
 
-        public void Spawn()
+        public void SetSpawnPosition()
         {
             if (_spawnPoint == null)
             {
@@ -27,7 +26,10 @@ namespace Memorization.Figure
             }
 
             transform.position = _spawnPoint.transform.position - _adjustToNeckHeight;
+        }
 
+        public void Spawn()
+        {
             var posCopy = positions.Copy();
             posCopy.Shuffle();
 
