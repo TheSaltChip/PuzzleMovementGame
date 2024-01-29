@@ -1,6 +1,4 @@
-using Autohand;
 using Puzzle.Scriptables;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.Events;
 
