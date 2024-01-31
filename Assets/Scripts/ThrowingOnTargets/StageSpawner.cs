@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Pool;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 using Util;
 using Variables;
 
@@ -99,75 +100,130 @@ namespace ThrowingOnTargets
 
             var posRotScls = new List<PosRotScl>();
             var usedIndices = new List<int>();
+            var upperIndexCountLimit = throwLevelRules.xSize * throwLevelRules.ySize;
 
+
+            Random.InitState(1337);
             for (var i = 0; i < throwLevelRules.stages; i++)
             {
                 var plane = _spawnablePositions.Planes[i];
+                usedIndices.Clear();
 
                 for (var j = 0; j < throwLevelRules.targetsPerStage; j++)
                 {
                     var isBig = Random.value < throwLevelRules.chanceBigTarget;
-                    int index;
-                    bool newLoop;
 
-                    do
+                    var index = -1;
+                    var numTargets = 0;
+                    var scale = 1f;
+
+                    while (numTargets < throwLevelRules.targetsPerStage &&
+                           usedIndices.Count < upperIndexCountLimit)
                     {
-                        newLoop = false;
                         var x = Random.Range(0, throwLevelRules.xSize);
                         var y = Random.Range(0, throwLevelRules.ySize);
 
                         index = plane.XYIndices[x][y];
-                        
-                        // TODO - Check if a big target can be placed, turn into not big if true
-                        if (!isBig) continue;
+
+                        if (usedIndices.Contains(index)) continue;
+
+                        if (!isBig)
+                        {
+                            scale = 1f;
+                            usedIndices.Add(index);
+                            ++numTargets;
+                            break;
+                        }
+
+                        if (!IsTherePlaceForBig(plane, usedIndices))
+                        {
+                            var sb = new StringBuilder();
+
+                            foreach (var yIndices in plane.XYIndices)
+                            {
+                                foreach (var ind in yIndices)
+                                {
+                                    sb.Append(usedIndices.Contains(ind) ? 1 : 0);
+                                }
+
+                                sb.AppendLine();
+                            }
+
+                            sb.AppendLine();
+                            print($"No space\n{(usedIndices.Count,i)}\n{sb}");
+                            isBig = false;
+                            continue;
+                        }
 
                         var isLegalBigStartIndex =
-                            index >= throwLevelRules.xSize - 1 || index >= throwLevelRules.ySize - 1;
+                            x >= throwLevelRules.xSize - 1 ||
+                            y >= throwLevelRules.ySize - 1;
 
                         if (isLegalBigStartIndex)
                         {
-                            newLoop = true;
                             continue;
                         }
 
-                        var isAnIndexTaken =
-                            usedIndices.Contains(index)
-                            || usedIndices.Contains(plane.XYIndices[x + 1][y])
+                        var isTheRestOfIndicesTaken =
+                            usedIndices.Contains(plane.XYIndices[x + 1][y])
                             || usedIndices.Contains(plane.XYIndices[x][y + 1])
                             || usedIndices.Contains(plane.XYIndices[x + 1][y + 1]);
 
-                        if (isAnIndexTaken)
+                        if (isTheRestOfIndicesTaken)
                         {
-                            newLoop = true;
                             continue;
                         }
 
+                        scale = 1.5f;
                         usedIndices.AddRange(new[]
                         {
+                            index,
                             plane.XYIndices[x + 1][y],
                             plane.XYIndices[x][y + 1],
                             plane.XYIndices[x + 1][y + 1]
                         });
-                        break;
-                    } while (usedIndices.Contains(index) || newLoop);
+                        ++numTargets;
+                    }
 
-                    usedIndices.Add(index);
+                    if (index == -1)
+                        return;
 
                     posRotScls.Add(new PosRotScl
                     {
                         // ReSharper disable once PossibleLossOfFraction
                         location = new Vector3(
-                            (index / throwLevelRules.xSize) * 0.75f - throwLevelRules.xSize * 0.75f / 2 + 0.75f * 0.5f,
-                            (index % throwLevelRules.ySize) * 0.75f - throwLevelRules.ySize * 0.75f / 2 + 0.75f * 0.5f,
+                            (index / throwLevelRules.xSize) * 0.75f - throwLevelRules.xSize * 0.75f / 2 + 0.75f * 0.5f +
+                            (isBig ? 0.75f / 2 : 0),
+                            (index % throwLevelRules.ySize) * 0.75f - throwLevelRules.ySize * 0.75f / 2 + 0.75f * 0.5f +
+                            (isBig ? 0.75f / 2 : 0),
                             i * throwLevelRules.distBetweenStages),
-                        rotation = new Vector3(-90, 0, 0)
+                        rotation = new Vector3(-90, 0, 0),
+                        scale = new Vector3(scale, 1, scale)
                     });
                 }
             }
 
             StartCoroutine(SetStageCoroutine(posRotScls));
-
             onStageReady?.Invoke();
+        }
+
+        private static bool IsTherePlaceForBig(Plane plane, ICollection<int> usedIndices)
+        {
+            for (var x = 0; x < plane.XYIndices.Length - 1; x++)
+            {
+                for (var y = 0; y < plane.XYIndices[x].Length - 1; y++)
+                {
+                    if (!usedIndices.Contains(plane.XYIndices[x][y])
+                        && !usedIndices.Contains(plane.XYIndices[x + 1][y])
+                        && !usedIndices.Contains(plane.XYIndices[x][y + 1])
+                        && !usedIndices.Contains(plane.XYIndices[x + 1][y + 1]))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         private IEnumerator SetStageCoroutine(IList<PosRotScl> posRotScl)
@@ -180,6 +236,7 @@ namespace ThrowingOnTargets
                 t.transform.SetLocalPositionAndRotation(
                     posRotScl[i].location,
                     Quaternion.Euler(posRotScl[i].rotation));
+                t.transform.localScale = posRotScl[i].scale;
             }
         }
     }
