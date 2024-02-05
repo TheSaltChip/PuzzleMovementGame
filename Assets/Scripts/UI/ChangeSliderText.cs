@@ -9,7 +9,12 @@ namespace UI
     {
         [SerializeField] private Slider slider;
         [SerializeField] private TMP_Text text;
-        [SerializeField, Tooltip("text.text = (inputText * constant).ToString(CultureInfo.InvariantCulture);")] private float constant = 1f;
+
+        [SerializeField, Tooltip("text.text = (inputText * constant).ToString(format, CultureInfo.InvariantCulture);")]
+        private float constant = 1f;
+
+        [SerializeField, Tooltip("text.text = (inputText * constant).ToString(format, CultureInfo.InvariantCulture);")]
+        private string format = "";
 
         private void OnEnable()
         {
@@ -21,11 +26,10 @@ namespace UI
         {
             slider.onValueChanged?.RemoveListener(ChangeText);
         }
-        
+
         private void ChangeText(float inputText)
         {
-            text.text = (inputText * constant)
-                .ToString(CultureInfo.InvariantCulture);
+            text.text = (inputText * constant).ToString(format, CultureInfo.InvariantCulture);
         }
     }
 }

@@ -1,19 +1,16 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using Variables;
 
 namespace UI
 {
     public class HighlightButtonIfSelected : MonoBehaviour
     {
         [SerializeField] private Button button;
-        [SerializeField] private StringVariable group;
         [SerializeField] private string id;
         [SerializeField] private bool startSelected;
 
-        public UnityEvent<string, string> onCheckState;
+        public UnityEvent<string> onCheckState;
 
         private Color _normalColor;
         private Color _selectedColor;
@@ -35,16 +32,11 @@ namespace UI
 
         public void Check()
         {
-            onCheckState?.Invoke(group.value, id);
+            onCheckState?.Invoke(id);
         }
 
-        public void CheckState(string groupName, string idName)
+        public void CheckState(string idName)
         {
-            if (group.value != groupName)
-            {
-                return;
-            }
-
             var cb = button.colors;
 
             cb.normalColor = _normalColor;

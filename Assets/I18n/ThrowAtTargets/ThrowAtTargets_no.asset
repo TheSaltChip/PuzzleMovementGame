@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: no
   m_SharedData: {fileID: 11400000, guid: c34ebafce212a554e88cd16d5673ebcf, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 1413895044333568010
   m_TableData:
   - m_Id: 1594551504896
     m_Localized: Ball kasting
@@ -31,8 +32,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2737805529088
-    m_Localized: "Oppgaven din er \xE5 fullf\xF8re hvert niv\xE5 i en level. Hvert
-      niv\xE5 best\xE5r av et bestemt antall blinker som du skal treffe."
+    m_Localized: "Oppgaven din er \xE5 treffe alle blinkene som kommer opp med ballen
+      foran deg. \nGrip ballen med gripeknappen (lang fingeren). Ballene kommer alltid
+      tilbake p\xE5 samme plass."
     m_Metadata:
       m_Items: []
   - m_Id: 3308683857920
@@ -43,8 +45,8 @@ MonoBehaviour:
     m_Localized: Tilbake
     m_Metadata:
       m_Items: []
-  - m_Id: 3754416738304
-    m_Localized: Ikke implementert enda
+  - m_Id: 18962642288193536
+    m_Localized: "Blinker p\xE5 hvert niv\xE5"
     m_Metadata:
       m_Items: []
   - m_Id: 4324225519616
@@ -64,15 +66,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5513159708672
-    m_Localized: "3 niv\xE5er\n4-6 blinker per niv\xE5"
+    m_Localized: "1 niv\xE5\n4 blinker per niv\xE5"
     m_Metadata:
       m_Items: []
   - m_Id: 5599121969152
-    m_Localized: "5 niv\xE5er\n6-10 blinker per niv\xE5"
+    m_Localized: "2 niv\xE5er med 2m mellomrom\n6 blinker per niv\xE5"
     m_Metadata:
       m_Items: []
   - m_Id: 5757272395776
-    m_Localized: "7 niv\xE5er\n10-15 blinker per niv\xE5"
+    m_Localized: "3 niv\xE5er med 3m mellomrom\n10 blinker per niv\xE5"
     m_Metadata:
       m_Items: []
   - m_Id: 6430785343488
@@ -88,9 +90,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8066802978816
-    m_Localized: Blinker igjen
+    m_Localized: 'Blinker igjen {TargetsLeftInLevel}
+
+      Tid: {TimeSpent}'
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 1413895044333568010
   - m_Id: 8625039675392
     m_Localized: Tilbake Til Menyen
     m_Metadata:
@@ -107,6 +112,41 @@ MonoBehaviour:
     m_Localized: Start
     m_Metadata:
       m_Items: []
+  - m_Id: 17810155788636160
+    m_Localized: Velg mellom 3 vanskelighetsgrader
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17810181914955776
+    m_Localized: Tilpass reglene du vil spille med
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18899299071758336
+    m_Localized: "Niv\xE5"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18960671275692032
+    m_Localized: Dybde
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18964021182410752
+    m_Localized: Sjanse for stor blink
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19263594186616832
+    m_Localized: "Din tid ble {TimeSpent}\n{NumTargets} blinker p\xE5 hvert niv\xE5\n{NumStages}
+      niv\xE5\n{NumStages:cond:>1?{DistBetweenStages} distanse mellom niv\xE5ene|}\n{ChanceForBigTarget}
+      sjanse for \xE5 f\xE5 stor blink"
+    m_Metadata:
+      m_Items:
+      - rid: 1413895044333568010
+  - m_Id: 19284271153229824
+    m_Localized: "Distanse mellom niv\xE5"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 1413895044333568010
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0010ed32560700000030970823704400

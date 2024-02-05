@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Variables;
 
-public class intToSO : MonoBehaviour
+namespace Puzzle.PuzzleUI
 {
-    [SerializeField] private IntVariable var;
-    public UnityEvent ev;
-
-    public void Increment()
+    public class intToSO : MonoBehaviour
     {
-        var.value++;
-        ev.Invoke();
-    }
+        [SerializeField] private IntVariable var;
+        public UnityEvent ev;
 
-    public void Decrement()
-    {
-        var.value--;
+        public void Increment()
+        {
+            var.value++;
+            ev.Invoke();
+        }
+
+        public void Decrement()
+        {
+            var.value--;
+        }
     }
 }

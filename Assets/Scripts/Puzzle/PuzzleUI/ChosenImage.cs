@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using Puzzle.Scriptables;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ChosenImage : MonoBehaviour
+namespace Puzzle.PuzzleUI
 {
-    [SerializeField] private Texture2D image;
-    [SerializeField] private SelectedImage store;
-    public UnityEvent completed;
-
-    public void ChangeImage()
+    public class ChosenImage : MonoBehaviour
     {
-        store.currentSelected = image;
-        completed.Invoke();
+        [SerializeField] private Texture2D image;
+        [SerializeField] private SelectedImage store;
+        public UnityEvent completed;
+
+        public void ChangeImage()
+        {
+            store.currentSelected = image;
+            completed.Invoke();
+        }
     }
 }

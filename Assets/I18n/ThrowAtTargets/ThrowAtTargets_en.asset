@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: c34ebafce212a554e88cd16d5673ebcf, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 1413895026239602690
   m_TableData:
   - m_Id: 1594551504896
     m_Localized: Ball throwing
@@ -31,8 +32,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2737805529088
-    m_Localized: Your task is to complete each stage in a level. Each stage has a
-      set amount of targets to hit
+    m_Localized: "Your task is to hit all the targets with the ball in front of you.
+      \nGrab the ball with the grab button (middle finger). \nThe balls will always
+      return back to the initial position."
     m_Metadata:
       m_Items: []
   - m_Id: 3308683857920
@@ -43,8 +45,8 @@ MonoBehaviour:
     m_Localized: Return
     m_Metadata:
       m_Items: []
-  - m_Id: 3754416738304
-    m_Localized: Not yet implemented
+  - m_Id: 18962642288193536
+    m_Localized: Targets per stage
     m_Metadata:
       m_Items: []
   - m_Id: 4324225519616
@@ -64,21 +66,23 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5513159708672
-    m_Localized: '3 stages
+    m_Localized: '1 stage
 
-      4-6 targets per stage'
+      4 targets per stage
+
+'
     m_Metadata:
       m_Items: []
   - m_Id: 5599121969152
-    m_Localized: '5 stages
+    m_Localized: '2 stages with 2m spacing
 
-      6-10 targets per stage'
+      6 targets per stage'
     m_Metadata:
       m_Items: []
   - m_Id: 5757272395776
-    m_Localized: '7 stages
+    m_Localized: '3 stages with 3m spacing
 
-      10-15 targets per stage'
+      10 targets per stage'
     m_Metadata:
       m_Items: []
   - m_Id: 6430785343488
@@ -94,9 +98,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8066802978816
-    m_Localized: Targets left
+    m_Localized: 'Targets left {TargetsLeftInLevel}
+
+      Time: {TimeSpent}'
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 1413895026239602690
   - m_Id: 8625039675392
     m_Localized: Back To Menu
     m_Metadata:
@@ -113,6 +120,50 @@ MonoBehaviour:
     m_Localized: Start
     m_Metadata:
       m_Items: []
+  - m_Id: 17810155788636160
+    m_Localized: Choose between 3 difficulties
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17810181914955776
+    m_Localized: Customize the rules you play with
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18899299071758336
+    m_Localized: Stage{plural:s|}
+    m_Metadata:
+      m_Items:
+      - rid: 1413895026239602690
+  - m_Id: 18960671275692032
+    m_Localized: Depth
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18964021182410752
+    m_Localized: Chance for big target
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19263594186616832
+    m_Localized: 'Your time was {TimeSpent}
+
+      {NumTargets} targets per stage
+
+      {NumStages:plural:{}
+      stage|{} stages}
+
+      {NumStages:cond:>1?{DistBetweenStages} distance between
+      stages|}
+
+      {ChanceForBigTarget} chance for big target'
+    m_Metadata:
+      m_Items:
+      - rid: 1413895026239602690
+  - m_Id: 19284271153229824
+    m_Localized: Distance between stages
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 1413895026239602690
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0010adf7cf2443000010ed32560700000030970823704400
