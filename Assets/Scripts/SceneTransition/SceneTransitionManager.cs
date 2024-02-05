@@ -1,4 +1,5 @@
-﻿using Autohand;
+﻿using System.Collections;
+using Autohand;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -20,13 +21,15 @@ namespace SceneTransition
             Rotation = Quaternion.identity
         };
 
-        private AsyncOperation _loadLevelOperation;
+        [SerializeField] private FaderScreen faderScreen;
 
         public static SceneTransitionManager Instance { get; private set; }
 
         public UnityEvent onSceneChanged;
         public UnityEvent onSceneExit;
         public UnityEvent onSceneEnter;
+
+        private AsyncOperation _loadLevelOperation;
 
         private void Awake()
         {
@@ -46,8 +49,15 @@ namespace SceneTransition
 
         public void LoadScene(string sceneName)
         {
+            StartCoroutine(LoadSceneCoroutine(sceneName));
+        }
+
+        public IEnumerator LoadSceneCoroutine(string sceneName)
+        {
             _loadLevelOperation = SceneManager.LoadSceneAsync(sceneName);
             _loadLevelOperation.allowSceneActivation = false;
+
+            yield return StartCoroutine(faderScreen.FadeRoutine(Color.clear, Color.black));
 
             onSceneExit?.Invoke();
 
@@ -76,11 +86,18 @@ namespace SceneTransition
 
         private void HandleSceneChange(Scene oldScene, Scene newScene)
         {
+            StartCoroutine(HandleSceneChangeCoroutine(oldScene, newScene));
+        }
+
+        private IEnumerator HandleSceneChangeCoroutine(Scene oldScene, Scene newScene)
+        {
             onSceneChanged?.Invoke();
 
             SetStartPositionAndRotation();
-
+            
             onSceneEnter?.Invoke();
+            
+            yield return StartCoroutine(faderScreen.FadeRoutine(Color.black, Color.clear));
 
             _loadLevelOperation = null;
         }
