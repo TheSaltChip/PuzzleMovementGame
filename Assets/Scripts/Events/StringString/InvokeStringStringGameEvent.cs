@@ -14,3 +14,7 @@ namespace Events.StringString
         }
     }
 }
+
+namespace Events.String
+{
+}
