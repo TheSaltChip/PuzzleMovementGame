@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using ThrowingOnTargets.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Pool;
 using UnityEngine.Serialization;
-using UnityEngine.UIElements;
 using Util;
 using Variables;
-using Random = UnityEngine.Random;
 
 namespace ThrowingOnTargets
 {
-    public class StageSpawner : MonoBehaviour
+    public class LevelSpawner : MonoBehaviour
     {
-        [FormerlySerializedAs("throwLevel")] [SerializeField]
-        private ThrowLevelRules throwLevelRules;
+        [SerializeField] private ThrowLevelRules throwLevelRules;
+        [SerializeField] private IntVariable targetsInLevel;
 
         [SerializeField] private GameObject target;
-        [SerializeField] private IntVariable targetsInStage;
-        [SerializeField] private TargetInfo targetInfo;
 
-        public UnityEvent onStageReady;
+        public UnityEvent onLevelReady;
 
         private IObjectPool<GameObject> _targets;
         private Coroutine _setupCoroutine;
@@ -41,12 +35,8 @@ namespace ThrowingOnTargets
 
         private Depths _spawnablePositions;
 
-        private float _length = 0.5f + 1f;
-
         private void Awake()
         {
-            var t = transform;
-            targetInfo.spawnPoint = t.localPosition;
             _targets = new ObjectPool<GameObject>(() =>
             {
                 var go = Instantiate(target, transform, true);
@@ -59,7 +49,7 @@ namespace ThrowingOnTargets
             _waitFor100Milliseconds = new WaitForSeconds(0.1f);
         }
 
-        public void SetupStage()
+        public void SetupLevel()
         {
             _spawnablePositions = new Depths
             {
@@ -81,10 +71,10 @@ namespace ThrowingOnTargets
                 }
             }
 
-            var posRotScls = new List<PosRotScl>();
-            var usedIndices = new List<int>();
             var upperIndexCountLimit = throwLevelRules.XSize * throwLevelRules.YSize;
-            
+            var posRotScls = new List<PosRotScl>(upperIndexCountLimit * throwLevelRules.Stages);
+            var usedIndices = new List<int>();
+
             for (var i = 0; i < throwLevelRules.Stages; i++)
             {
                 var plane = _spawnablePositions.Planes[i];
@@ -110,15 +100,11 @@ namespace ThrowingOnTargets
                             {
                                 // ReSharper disable once PossibleLossOfFraction
                                 location = new Vector3(
-                                    x * 0.75f
-                                    - throwLevelRules.XSize * 0.75f / 2
-                                    + 0.75f * 0.5f,
-                                    y * 0.75f
-                                    - throwLevelRules.YSize * 0.75f / 2
-                                    + 0.75f * 0.5f,
+                                    x * 0.75f - throwLevelRules.XSize * 0.375f + 0.375f,
+                                    y * 0.75f - throwLevelRules.YSize * 0.375f + 0.375f,
                                     i * throwLevelRules.DistBetweenStages),
                                 rotation = new Vector3(-90, 0, 0),
-                                scale = new Vector3(1, 1, 1)
+                                scale = Vector3.one
                             });
                             break;
                         }
@@ -160,22 +146,20 @@ namespace ThrowingOnTargets
                         {
                             // ReSharper disable once PossibleLossOfFraction
                             location = new Vector3(
-                                x * 0.75f
-                                - throwLevelRules.XSize * 0.75f / 2
-                                + 0.75f * 0.5f + 0.75f * 0.5f,
-                                y * 0.75f
-                                - throwLevelRules.YSize * 0.75f / 2
-                                + 0.75f * 0.5f + 0.75f * 0.5f,
+                                x * 0.75f - throwLevelRules.XSize * 0.375f + 0.75f,
+                                y * 0.75f - throwLevelRules.YSize * 0.375f + 0.75f,
                                 i * throwLevelRules.DistBetweenStages),
                             rotation = new Vector3(-90, 0, 0),
                             scale = new Vector3(1.5f, 1, 1.5f)
                         });
+                        break;
                     }
                 }
             }
 
-            StartCoroutine(SetStageCoroutine(posRotScls));
-            onStageReady?.Invoke();
+            targetsInLevel.value = posRotScls.Count;
+
+            StartCoroutine(SetupLevelCoroutine(posRotScls));
         }
 
         private static bool IsTherePlaceForBig(Plane plane, ICollection<int> usedIndices)
@@ -197,7 +181,7 @@ namespace ThrowingOnTargets
             return false;
         }
 
-        private IEnumerator SetStageCoroutine(IList<PosRotScl> posRotScl)
+        private IEnumerator SetupLevelCoroutine(IList<PosRotScl> posRotScl)
         {
             for (var i = 0; i < posRotScl.Count; i++)
             {
@@ -209,22 +193,22 @@ namespace ThrowingOnTargets
                     Quaternion.Euler(posRotScl[i].rotation));
                 t.transform.localScale = posRotScl[i].scale;
             }
+            
+            onLevelReady?.Invoke();
         }
 
         private void OnDrawGizmos()
         {
+            var cubeSize = Vector3.one * 0.75f;
+
             for (var i = 0; i < throwLevelRules.Stages; i++)
+            for (var x = 0; x < throwLevelRules.XSize; x++)
+            for (var y = 0; y < throwLevelRules.YSize; y++)
             {
-                for (var x = 0; x < throwLevelRules.XSize; x++)
-                {
-                    for (var y = 0; y < throwLevelRules.YSize; y++)
-                    {
-                        Gizmos.DrawWireCube(transform.position + new Vector3(
-                            x * 0.75f - throwLevelRules.XSize * 0.75f / 2 + 0.75f * 0.5f,
-                            y * 0.75f - throwLevelRules.YSize * 0.75f / 2 + 0.75f * 0.5f,
-                            i * throwLevelRules.DistBetweenStages), Vector3.one * 0.75f);
-                    }
-                }
+                Gizmos.DrawWireCube(transform.position + new Vector3(
+                    x * 0.75f - throwLevelRules.XSize * 0.375f + 0.375f,
+                    y * 0.75f - throwLevelRules.YSize * 0.375f + 0.375f,
+                    i * throwLevelRules.DistBetweenStages), cubeSize);
             }
         }
     }

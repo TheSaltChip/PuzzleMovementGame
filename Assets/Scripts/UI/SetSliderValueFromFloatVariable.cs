@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Variables;
 
@@ -11,7 +9,7 @@ namespace UI
         [SerializeField] private FloatVariable variable;
         [SerializeField] private Slider slider;
 
-        private void Awake()
+        public void Set()
         {
             slider.value = variable.value;
         }

@@ -6,5 +6,10 @@ namespace Variables
     public class FloatVariable : ScriptableObject
     {
         public float value;
+
+        public void Set(float val)
+        {
+            value = val;
+        }
     }
 }

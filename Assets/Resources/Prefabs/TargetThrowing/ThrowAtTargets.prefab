@@ -136,22 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetsLeftInStage: {fileID: 11400000, guid: 33bfed20c3b262c42920e5f23c1e4a7b, type: 2}
-  currentLevel: {fileID: 11400000, guid: 0d66f0d5414b28f4fbe65c1e077af74b, type: 2}
-  onStageDone:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: d70b579659e90ff47bf60201c6701e79, type: 2}
-        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   onLevelDone:
     m_PersistentCalls:
       m_Calls:
@@ -229,6 +213,7 @@ Transform:
   - {fileID: 3395793949935153619}
   - {fileID: 3395793949795557580}
   - {fileID: 3395793950479264937}
+  - {fileID: 8648854042740708475}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -417,18 +402,6 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 711ca31a8cebb1c4f9e481a8c5cb73e7, type: 2}
-        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 11400000, guid: aad47779d3a39f54491350f02f8c719c, type: 2}
         m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
         m_MethodName: Raise
@@ -451,7 +424,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3395793951199132981}
   - component: {fileID: 3395793951199132980}
-  - component: {fileID: 3395793951199132982}
   - component: {fileID: 3395793951199132985}
   - component: {fileID: 3395793951199132987}
   - component: {fileID: 3395793951199132984}
@@ -490,43 +462,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwLevelRules: {fileID: 11400000, guid: 16cd08268a097ec4489a78c13e37845c, type: 2}
+  targetsInLevel: {fileID: 11400000, guid: 33bfed20c3b262c42920e5f23c1e4a7b, type: 2}
   target: {fileID: 1030394281429313644, guid: 0ef76ceb312eb2743ac618d2b4447ef4, type: 3}
-  targetsInStage: {fileID: 11400000, guid: 33bfed20c3b262c42920e5f23c1e4a7b, type: 2}
-  targetInfo: {fileID: 11400000, guid: 2d33d1322603f634bba28cd9e107e672, type: 2}
-  onStageReady:
+  onLevelReady:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 27c8a25522b2ed94aabae7657c208b29, type: 2}
         m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
         m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &3395793951199132982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3395793951199132978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: d70b579659e90ff47bf60201c6701e79, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3395793951199132980}
-        m_TargetAssemblyTypeName: ThrowingOnTargets.StageSpawner, Assembly-CSharp
-        m_MethodName: SetupStage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -554,7 +497,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3395793951199132980}
         m_TargetAssemblyTypeName: ThrowingOnTargets.StageSpawner, Assembly-CSharp
-        m_MethodName: SetupStage
+        m_MethodName: SetupLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -738,6 +681,138 @@ Transform:
   m_Father: {fileID: 3395793950408455393}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7893885240044308315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8648854042740708475}
+  - component: {fileID: 2052810702571899243}
+  - component: {fileID: 2040970959570654429}
+  - component: {fileID: 5383161357502051561}
+  - component: {fileID: 6262623875172904045}
+  m_Layer: 0
+  m_Name: Stopwatch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8648854042740708475
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7893885240044308315}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.3242939, y: -0.73642814, z: -1.5576931}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3395793950408455393}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2052810702571899243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7893885240044308315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79755514a7ff4927a57da80320cded06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeSpent: {fileID: 11400000, guid: 1f14580a5f4325644b0548186f752179, type: 2}
+--- !u!114 &2040970959570654429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7893885240044308315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 27c8a25522b2ed94aabae7657c208b29, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2052810702571899243}
+        m_TargetAssemblyTypeName: TimeTaking.Stopwatch, Assembly-CSharp
+        m_MethodName: StartTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5383161357502051561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7893885240044308315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: d9ef6efaf33428f4291f9fb173c906b8, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2052810702571899243}
+        m_TargetAssemblyTypeName: TimeTaking.Stopwatch, Assembly-CSharp
+        m_MethodName: ResetTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6262623875172904045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7893885240044308315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 3cec2ce2074757142934308ece0d1e54, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2052810702571899243}
+        m_TargetAssemblyTypeName: TimeTaking.Stopwatch, Assembly-CSharp
+        m_MethodName: StopTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &3395793949641989758
 PrefabInstance:
   m_ObjectHideFlags: 0
