@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Autohand;
 using Puzzle.Scriptables;
+using Unity.XR.PXR;
 using UnityEngine;
 using UnityEngine.Events;
 using Variables;
@@ -65,7 +66,7 @@ namespace Puzzle
             bSize = board.GetComponent<Renderer>().bounds.size;
             bSize.y = bSize.x;
             ppSize.y = ppSize.x;
-            ppSize *= 7.46f;
+            ppSize *= 14.1f;
             scale = board.transform.localScale;
             SetUp();
         }
@@ -128,7 +129,7 @@ namespace Puzzle
 
             var originVector = new Vector3();
             available = 0;
-
+            
             if (height.value % 2 == 0)
             {
                 originVector.y = -ppSize.y * (height.value / 2) + ppSize.y / 2;
@@ -140,7 +141,7 @@ namespace Puzzle
 
             if (width.value % 2 == 0)
             {
-                originVector.x = -ppSize.x * (width.value / 2) + ppSize.x / 2;
+                originVector.x =  -ppSize.x * (width.value / 2) + ppSize.x / 2;
             }
             else
             {
