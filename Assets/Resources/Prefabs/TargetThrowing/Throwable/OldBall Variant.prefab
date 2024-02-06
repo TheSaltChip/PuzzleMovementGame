@@ -1340,6 +1340,7 @@ GameObject:
   - component: {fileID: 6794104974425004840}
   - component: {fileID: 4792616719318406799}
   - component: {fileID: 5692556167551315145}
+  - component: {fileID: 7901529104230418229}
   m_Layer: 0
   m_Name: OldBall Variant
   m_TagString: Untagged
@@ -1418,14 +1419,14 @@ MonoBehaviour:
   CopySettings: {fileID: 0}
   grabType: 0
   handType: 0
-  singleHandOnly: 0
+  singleHandOnly: 1
   allowHeldSwapping: 1
-  instantGrab: 0
+  instantGrab: 1
   useGentleGrab: 0
   heldNoFriction: 1
   maintainGrabOffset: 0
   ignoreWeight: 0
-  parentOnGrab: 1
+  parentOnGrab: 0
   throwPower: 1
   jointBreakForce: 3500
   showAdvancedSettings: 1
@@ -1442,10 +1443,34 @@ MonoBehaviour:
   showEvents: 1
   onGrab:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7901529104230418229}
+        m_TargetAssemblyTypeName: Throwable, Assembly-CSharp
+        m_MethodName: Grabbed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onRelease:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7901529104230418229}
+        m_TargetAssemblyTypeName: Throwable, Assembly-CSharp
+        m_MethodName: Released
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onSqueeze:
     m_PersistentCalls:
       m_Calls: []
@@ -1469,12 +1494,24 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6192140635013454130}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 479698c6385d9244885db6a634635b6d, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.15
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7901529104230418229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6192140635013454130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4456f6f668512ba4f9900ac1201932f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6541149651115745460
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ namespace ThrowingOnTargets
 
         private IObjectPool<GameObject> _targets;
         private Coroutine _setupCoroutine;
-        private WaitForSeconds _waitFor100Milliseconds;
+        private WaitForSeconds _waitFor50Milliseconds;
 
         private struct Plane
         {
@@ -46,7 +46,7 @@ namespace ThrowingOnTargets
 
                 return go;
             }, o => o.SetActive(true), obj => obj.SetActive(false), Destroy);
-            _waitFor100Milliseconds = new WaitForSeconds(0.1f);
+            _waitFor50Milliseconds = new WaitForSeconds(0.05f);
         }
 
         public void SetupLevel()
@@ -185,7 +185,7 @@ namespace ThrowingOnTargets
         {
             for (var i = 0; i < posRotScl.Count; i++)
             {
-                yield return _waitFor100Milliseconds;
+                yield return _waitFor50Milliseconds;
                 var t = _targets.Get();
 
                 t.transform.SetLocalPositionAndRotation(
