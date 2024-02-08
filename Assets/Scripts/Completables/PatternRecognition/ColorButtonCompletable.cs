@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Autohand;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Completables.PatternRecognition
 {

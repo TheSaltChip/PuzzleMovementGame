@@ -246,7 +246,7 @@ namespace Puzzle
                     av++;
                     var tr = piece.transform;
                     tr.parent = gameObject.transform;
-                    tr.position = new Vector3(0, 1.1f + (j) * 0.1f, 0.25f - i * 0.15f);
+                    tr.position = new Vector3(0, 1.2f + j * 0.1f, 0.25f - i * 0.15f);
                     tr.localScale = puzzlePiece.transform.localScale;
                     piece.SetActive(true);
 
