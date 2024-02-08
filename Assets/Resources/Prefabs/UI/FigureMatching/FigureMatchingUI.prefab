@@ -6149,6 +6149,7 @@ MonoBehaviour:
   slider: {fileID: 2252815169748386957}
   text: {fileID: 4685201769244237554}
   constant: 1
+  format: 
 --- !u!1 &4553910180971849339
 GameObject:
   m_ObjectHideFlags: 0
@@ -8140,7 +8141,7 @@ GameObject:
   - component: {fileID: 2682234398805205273}
   - component: {fileID: 7789639208996259874}
   m_Layer: 5
-  m_Name: CustomizeSliders
+  m_Name: CustomizeGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8671,7 +8672,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6078665847601585319}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -8944,7 +8945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: ec66d0defda6ef0478213cd27dc57551, type: 2}
+  Event: {fileID: 11400000, guid: a9218bd0bc0f36a4aa215ff7b16e8982, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
@@ -9887,6 +9888,7 @@ MonoBehaviour:
   slider: {fileID: 1082274931280604051}
   text: {fileID: 8628449804974665267}
   constant: 1
+  format: 
 --- !u!1 &6566958033057231135
 GameObject:
   m_ObjectHideFlags: 0
@@ -9942,7 +9944,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6566958033057231135}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -10233,6 +10235,7 @@ MonoBehaviour:
   slider: {fileID: 7131922996524636424}
   text: {fileID: 4507521938377399449}
   constant: 1
+  format: 
 --- !u!1 &7154687146358586845
 GameObject:
   m_ObjectHideFlags: 0
@@ -12637,7 +12640,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: ec66d0defda6ef0478213cd27dc57551, type: 2}
+      - m_Target: {fileID: 11400000, guid: a9218bd0bc0f36a4aa215ff7b16e8982, type: 2}
         m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 1
