@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 
 namespace Util
 {
@@ -17,9 +16,9 @@ namespace Util
 
             Gizmos.color = Color.red;
             Gizmos.DrawLine(position - x, position + x);
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(position - y, position + y);
             Gizmos.color = Color.green;
+            Gizmos.DrawLine(position - y, position + y);
+            Gizmos.color = Color.blue;
             Gizmos.DrawLine(position - z, position + z);
 
             Gizmos.color = Color.white;

@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 2835138067756329305}
   - component: {fileID: 781638237778793296}
   - component: {fileID: 7942122793762744262}
-  - component: {fileID: 2022095194205376465}
+  - component: {fileID: 6207276193656625082}
   m_Layer: 5
   m_Name: MinMaxSlider
   m_TagString: Untagged
@@ -424,6 +424,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: fb29d14a46c75684a9ed4cfa1826e299, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2835138067756329305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,7 +505,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2022095194205376465
+--- !u!114 &6207276193656625082
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -507,7 +519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameEventListener: {fileID: 7942122793762744262}
   additionalGameEvents:
-  - {fileID: 11400000, guid: 9e1971ecf89484d4586d3d9d869d6e6c, type: 2}
+  - {fileID: 11400000, guid: 540d7235425248f46b870af3d4c15f2a, type: 2}
 --- !u!1 &429063959867058850
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,7 +666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4515086665993137765
 RectTransform:
   m_ObjectHideFlags: 0
@@ -671,10 +683,10 @@ RectTransform:
   m_Father: {fileID: 857145083139391357}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 800, y: -225}
+  m_SizeDelta: {x: 1500, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7684818303662261560
 CanvasRenderer:
@@ -1315,7 +1327,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 9e1971ecf89484d4586d3d9d869d6e6c, type: 2}
+      - m_Target: {fileID: 11400000, guid: 0b10cf0f1ada2c743a2100a3f5aa3cd6, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: fb29d14a46c75684a9ed4cfa1826e299, type: 2}
         m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 1
@@ -1343,9 +1367,9 @@ MonoBehaviour:
   onEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 74c305786556fe243b430da72a0748c4, type: 2}
-        m_TargetAssemblyTypeName: Events.Vec2IntGameEvent.Vector2IntGameEvent, Assembly-CSharp
-        m_MethodName: Raise
+      - m_Target: {fileID: 11400000, guid: c33bcadbf458e1a4f85a6ab6dda8c47f, type: 2}
+        m_TargetAssemblyTypeName: Variables.Vector2IntVariable, Assembly-CSharp
+        m_MethodName: Set
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2141,7 +2165,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 9e1971ecf89484d4586d3d9d869d6e6c, type: 2}
+      - m_Target: {fileID: 11400000, guid: 0b10cf0f1ada2c743a2100a3f5aa3cd6, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: fb29d14a46c75684a9ed4cfa1826e299, type: 2}
         m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 1
@@ -2169,9 +2205,9 @@ MonoBehaviour:
   onEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 74c305786556fe243b430da72a0748c4, type: 2}
-        m_TargetAssemblyTypeName: Events.Vec2IntGameEvent.Vector2IntGameEvent, Assembly-CSharp
-        m_MethodName: Raise
+      - m_Target: {fileID: 11400000, guid: c33bcadbf458e1a4f85a6ab6dda8c47f, type: 2}
+        m_TargetAssemblyTypeName: Variables.Vector2IntVariable, Assembly-CSharp
+        m_MethodName: Set
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2579,7 +2615,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7189809574544355765}
-        m_TargetAssemblyTypeName: UI.PatternRecognition.InvokeEventWithVector2Int,
+        m_TargetAssemblyTypeName: Events.Vec2IntGameEvent.InvokeVector2IntGameEvent,
           Assembly-CSharp
         m_MethodName: Invoke
         m_Mode: 1
@@ -2587,7 +2623,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 3
+          m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -2603,7 +2639,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 9e1971ecf89484d4586d3d9d869d6e6c, type: 2}
+      - m_Target: {fileID: 11400000, guid: 0b10cf0f1ada2c743a2100a3f5aa3cd6, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 3
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: fb29d14a46c75684a9ed4cfa1826e299, type: 2}
         m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 1
@@ -2631,9 +2679,9 @@ MonoBehaviour:
   onEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 74c305786556fe243b430da72a0748c4, type: 2}
-        m_TargetAssemblyTypeName: Events.Vec2IntGameEvent.Vector2IntGameEvent, Assembly-CSharp
-        m_MethodName: Raise
+      - m_Target: {fileID: 11400000, guid: c33bcadbf458e1a4f85a6ab6dda8c47f, type: 2}
+        m_TargetAssemblyTypeName: Variables.Vector2IntVariable, Assembly-CSharp
+        m_MethodName: Set
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3483,8 +3531,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6459794045528009674}
-  - component: {fileID: 4496447523977237926}
   - component: {fileID: 2702783884538488782}
+  - component: {fileID: 6791646778267457614}
+  - component: {fileID: 527946773156405079}
   m_Layer: 5
   m_Name: Pattern Size
   m_TagString: Untagged
@@ -3514,35 +3563,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4496447523977237926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7264698471305823770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2db799b5d744a36a4fa544fd8dda5aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 74c305786556fe243b430da72a0748c4, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2702783884538488782}
-        m_TargetAssemblyTypeName: UI.PatternRecognition.ScalePatternLengthIfLongerThanBoardSize,
-          Assembly-CSharp
-        m_MethodName: Check
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &2702783884538488782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3555,8 +3575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b560c2d4ef2472e8277a665960fbaf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patternLength: {fileID: 11400000, guid: b1400e2ff5a00f44ba35ec30d9dbd3cd, type: 2}
-  repeatButtons: {fileID: 11400000, guid: da29b6881b3b5e64ba13da43973a20ac, type: 2}
+  patternRecognitionRules: {fileID: 11400000, guid: e1455ce4d91bc3b4b91433ac6a28301a,
+    type: 2}
   onCheckSucceeded:
     m_PersistentCalls:
       m_Calls:
@@ -3572,6 +3592,50 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6791646778267457614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264698471305823770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0b10cf0f1ada2c743a2100a3f5aa3cd6, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2702783884538488782}
+        m_TargetAssemblyTypeName: UI.PatternRecognition.ScalePatternLengthIfLongerThanBoardSize,
+          Assembly-CSharp
+        m_MethodName: Check
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &527946773156405079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264698471305823770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693b17f890a242978246cce7c9c8548f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEventListener: {fileID: 6791646778267457614}
+  additionalGameEvents:
+  - {fileID: 11400000, guid: 6e5fb1a5892d6214193b593c236f3ee6, type: 2}
 --- !u!1 &7314768833092631064
 GameObject:
   m_ObjectHideFlags: 0
@@ -4393,6 +4457,30 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Variables.BoolVariable, Assembly-CSharp
         m_MethodName: Set
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 6e5fb1a5892d6214193b593c236f3ee6, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: fb29d14a46c75684a9ed4cfa1826e299, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

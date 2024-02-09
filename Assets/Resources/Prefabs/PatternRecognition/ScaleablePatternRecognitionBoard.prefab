@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 4636577624453923164}
   - component: {fileID: 4636577624453923165}
   - component: {fileID: 2921203861184022286}
-  - component: {fileID: 3409135022945328364}
   - component: {fileID: 2530776438705302240}
   - component: {fileID: 3376655999471950358}
   - component: {fileID: 5037157595202019501}
+  - component: {fileID: 3389445560862707941}
   m_Layer: 0
   m_Name: ScaleablePatternRecognitionBoard
   m_TagString: Untagged
@@ -102,11 +102,8 @@ MonoBehaviour:
   OnResetState:
     m_PersistentCalls:
       m_Calls: []
-  canRepeat: {fileID: 11400000, guid: da29b6881b3b5e64ba13da43973a20ac, type: 2}
-  isPatternCreated: {fileID: 11400000, guid: f9423f9525af0b84fb330b4e02a34b40, type: 2}
-  patternLength: {fileID: 11400000, guid: b1400e2ff5a00f44ba35ec30d9dbd3cd, type: 2}
-  patternIndex: {fileID: 11400000, guid: 6b0bd3d0450a3d44c9e0b7870238a330, type: 2}
-  bestScore: {fileID: 11400000, guid: ba77dac8ea5d2c947b63cc3669403dd9, type: 2}
+  patternRecognitionRules: {fileID: 11400000, guid: e1455ce4d91bc3b4b91433ac6a28301a,
+    type: 2}
   blinkDuration: 0.5
   onPatternCreated:
     m_PersistentCalls:
@@ -406,8 +403,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardPlate: {fileID: 4636577625771362803}
-  gridDimensionX: 3
-  gridDimensionZ: 3
+  patternRecognitionRules: {fileID: 11400000, guid: e1455ce4d91bc3b4b91433ac6a28301a,
+    type: 2}
   buttonPrefab: {fileID: 2213294441689331794, guid: 3f440b50537819a4a80cab4674180e01,
     type: 3}
   baseRigidbody: {fileID: 4636577625771362812}
@@ -423,35 +420,6 @@ MonoBehaviour:
           Assembly-CSharp
         m_MethodName: ResetValues
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &3409135022945328364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4636577624453923154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2db799b5d744a36a4fa544fd8dda5aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 74c305786556fe243b430da72a0748c4, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2921203861184022286}
-        m_TargetAssemblyTypeName: Completables.ColorRecognition.ColorRecognitionBoardEditor,
-          Assembly-CSharp
-        m_MethodName: ScaleBoard
-        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -538,6 +506,35 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Completables.ColorRecognition.ColorRecognitionBoardCompletable,
           Assembly-CSharp
         m_MethodName: CheckCompletion
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3389445560862707941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636577624453923154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0b10cf0f1ada2c743a2100a3f5aa3cd6, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2921203861184022286}
+        m_TargetAssemblyTypeName: PatternRecognition.PatternRecognitionBoardEditor,
+          Assembly-CSharp
+        m_MethodName: ScaleBoard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

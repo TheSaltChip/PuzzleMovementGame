@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using Autohand;
+using Completables;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-namespace Completables.PatternRecognition
+namespace PatternRecognition
 {
     [RequireComponent(typeof(PhysicsGadgetButton), typeof(MeshRenderer))]
     public class ColorButtonCompletable : Completable

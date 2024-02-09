@@ -1,18 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Completables;
+using PatternRecognition.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
-using Variables;
 
-namespace Completables.PatternRecognition
+namespace PatternRecognition
 {
     public class PatternRecognitionBoardCompletable : Completable
     {
-        [SerializeField] private BoolVariable canRepeat;
-        [SerializeField] private BoolVariable isPatternCreated;
-        [SerializeField] private IntVariable patternLength;
-        [SerializeField] private IntVariable patternIndex;
-        [SerializeField] private IntVariable bestScore;
+        [SerializeField] private PatternRecognitionRules patternRecognitionRules;
         [SerializeField] private float blinkDuration;
 
         public UnityEvent onPatternCreated;
@@ -32,7 +29,7 @@ namespace Completables.PatternRecognition
             _pattern = new List<int>();
             _buttons = GetComponentsInChildren<ColorButtonCompletable>();
             _co = null;
-            isPatternCreated.value = false;
+            patternRecognitionRules.IsPatternCreated = false;
         }
 
         public void ResetValues()
@@ -40,9 +37,9 @@ namespace Completables.PatternRecognition
             _pattern?.Clear();
 
             _buttons = GetComponentsInChildren<ColorButtonCompletable>();
-            patternIndex.value = 0;
-            bestScore.value = 0;
-            isPatternCreated.value = false;
+            patternRecognitionRules.PatternIndex = 0;
+            patternRecognitionRules.BestScore = 0;
+            patternRecognitionRules.IsPatternCreated = false;
 
             onResetValues?.Invoke();
         }
@@ -50,11 +47,11 @@ namespace Completables.PatternRecognition
         public void CreatePattern()
         {
             _pattern.Clear();
-            patternIndex.value = 0;
-            bestScore.value = 0;
-            isPatternCreated.value = true;
+            patternRecognitionRules.PatternIndex = 0;
+            patternRecognitionRules.BestScore = 0;
+            patternRecognitionRules.IsPatternCreated = true;
 
-            if (canRepeat.value)
+            if (patternRecognitionRules.CanRepeat)
             {
                 CreateRepeatingPattern();
             }
@@ -70,7 +67,7 @@ namespace Completables.PatternRecognition
         {
             var count = _buttons.Length;
 
-            for (var i = 0; i < patternLength.value; i++)
+            for (var i = 0; i < patternRecognitionRules.PatternLength; i++)
             {
                 var num = Random.Range(0, count);
                 _pattern.Add(num);
@@ -80,10 +77,10 @@ namespace Completables.PatternRecognition
         private void CreateNonRepeatingPattern()
         {
             var count = _buttons.Length;
-            if (patternLength.value > count)
-                patternLength.value = count;
+            if (patternRecognitionRules.PatternLength > count)
+                patternRecognitionRules.PatternLength = count;
 
-            for (var i = 0; i < patternLength.value; i++)
+            for (var i = 0; i < patternRecognitionRules.PatternLength; i++)
             {
                 if (_pattern.Count == _buttons.Length) return;
 
@@ -103,13 +100,15 @@ namespace Completables.PatternRecognition
         {
             if (_pattern.Count == 0) return;
 
+            var patternIndex = patternRecognitionRules.PatternIndex;
+            
             for (var buttonIndex = 0; buttonIndex < _buttons.Length; buttonIndex++)
             {
                 var currentButton = _buttons[buttonIndex];
 
                 if (!currentButton.IsDone) continue;
 
-                var nextButtonIndexInPattern = _pattern[patternIndex.value];
+                var nextButtonIndexInPattern = _pattern[patternIndex];
 
                 if (buttonIndex != nextButtonIndexInPattern)
                 {
@@ -118,14 +117,14 @@ namespace Completables.PatternRecognition
                 }
 
                 currentButton.ResetState();
-                patternIndex.Increment();
+                patternRecognitionRules.patternIndex.Increment();
 
-                if (bestScore.value < patternIndex.value)
+                if (patternRecognitionRules.BestScore < patternIndex)
                 {
-                    bestScore.value = patternIndex.value;
+                    patternRecognitionRules.BestScore = patternIndex;
                 }
 
-                var patternIsNotDone = patternIndex.value != _pattern.Count;
+                var patternIsNotDone = patternIndex != _pattern.Count;
 
                 if (patternIsNotDone) break;
 
@@ -138,7 +137,7 @@ namespace Completables.PatternRecognition
 
         private void CompletedPattern()
         {
-            patternIndex.value = 0;
+            patternRecognitionRules.PatternIndex = 0;
             BlinkCorrectButtons();
 
             Completed();
@@ -187,7 +186,7 @@ namespace Completables.PatternRecognition
 
             foreach (var button in _buttons) button.ResetState();
 
-            patternIndex.value = 0;
+            patternRecognitionRules.PatternIndex = 0;
         }
     }
 }

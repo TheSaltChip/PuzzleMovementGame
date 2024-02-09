@@ -1,22 +1,24 @@
-﻿using UnityEngine;
+﻿using PatternRecognition.ScriptableObjects;
+using UnityEngine;
 using UnityEngine.Events;
-using Variables;
 
 namespace UI.PatternRecognition
 {
     public class ScalePatternLengthIfLongerThanBoardSize : MonoBehaviour
     {
-        [SerializeField] private IntVariable patternLength;
-        [SerializeField] private BoolVariable repeatButtons;
+        [SerializeField] private PatternRecognitionRules patternRecognitionRules;
 
         public UnityEvent onCheckSucceeded;
 
-        public void Check(Vector2Int dim)
+        public void Check()
         {
-            if (repeatButtons.value) return;
-            if (patternLength.value <= dim.x * dim.y) return;
+            if (patternRecognitionRules.CanRepeat) return;
+
+            var dim = patternRecognitionRules.GridDimension;
             
-            patternLength.value = dim.x * dim.y;
+            if (patternRecognitionRules.patternLength.value <= dim.x * dim.y) return;
+            
+            patternRecognitionRules.PatternLength = dim.x * dim.y;
             onCheckSucceeded?.Invoke();
         }
     }

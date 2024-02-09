@@ -1,16 +1,16 @@
 ﻿using System;
+using PatternRecognition.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Completables.PatternRecognition
+namespace PatternRecognition
 {
     public class PatternRecognitionBoardEditor : MonoBehaviour
     {
         private const int GridMax = 5;
 
         [SerializeField] private GameObject boardPlate;
-        [SerializeField] private int gridDimensionX = 1;
-        [SerializeField] private int gridDimensionZ = 1;
+        [SerializeField] private PatternRecognitionRules patternRecognitionRules;
         [SerializeField] private GameObject buttonPrefab;
 
         [SerializeField] private Rigidbody baseRigidbody;
@@ -18,7 +18,6 @@ namespace Completables.PatternRecognition
 
         public UnityEvent beforeResize;
         public UnityEvent afterResize;
-
 
         private readonly float _buttonScale = 0.05f;
         private readonly float _padding = 0.0125f;
@@ -34,9 +33,11 @@ namespace Completables.PatternRecognition
 
         private void Awake()
         {
-            _gridSize = new Vector3(gridDimensionX * _buttonScale + (gridDimensionX + 1) * _padding,
+            var gridDimension = patternRecognitionRules.GridDimension;
+
+            _gridSize = new Vector3(gridDimension.x * _buttonScale + (gridDimension.x + 1) * _padding,
                 boardPlate.transform.localScale.y,
-                gridDimensionZ * _buttonScale + (gridDimensionZ + 1) * _padding);
+                gridDimension.y * _buttonScale + (gridDimension.y + 1) * _padding);
 
             _buttonsPool = new GameObject[25];
         }
@@ -94,35 +95,13 @@ namespace Completables.PatternRecognition
             ScaleBoard();
         }
 
-        public void ScaleBoard(Vector2Int dim)
+        public void ScaleBoard()
         {
-            gridDimensionX = Mathf.Clamp(dim.x, 1, GridMax);
-            _gridSize.x = gridDimensionX * _buttonScale + (gridDimensionX + 1) * _padding;
+            var dim = patternRecognitionRules.GridDimension;
+            _gridSize.x = dim.x * _buttonScale + (dim.x  + 1) * _padding;
 
-            gridDimensionZ = Mathf.Clamp(dim.y, 1, GridMax);
-            _gridSize.z = gridDimensionZ * _buttonScale + (gridDimensionZ + 1) * _padding;
-            
-            ScaleBoard();
-        }
+            _gridSize.z = dim.y * _buttonScale + (dim.y + 1) * _padding;
 
-        public void ScaleBoardX(float x)
-        {
-            gridDimensionX = Mathf.Clamp(Mathf.RoundToInt(x), 1, GridMax);
-            _gridSize.x = gridDimensionX * _buttonScale + (gridDimensionX + 1) * _padding;
-
-            ScaleBoard();
-        }
-
-        public void ScaleBoardZ(float z)
-        {
-            gridDimensionZ = Mathf.Clamp(Mathf.RoundToInt(z), 1, GridMax);
-            _gridSize.z = gridDimensionZ * _buttonScale + (gridDimensionZ + 1) * _padding;
-
-            ScaleBoard();
-        }
-
-        private void ScaleBoard()
-        {
             beforeResize?.Invoke();
 
             var colSize = poseCollider.size;
@@ -141,8 +120,8 @@ namespace Completables.PatternRecognition
             var dz = -1f;
 
             const int gridMaxSquared = GridMax * GridMax;
-            var halfDimensionX = gridDimensionX / 2f;
-            var halfDimensionZ = gridDimensionZ / 2f;
+            var halfDimensionX = dim.x / 2f;
+            var halfDimensionZ = dim.y / 2f;
 
             for (var i = 0; i < gridMaxSquared; i++)
             {

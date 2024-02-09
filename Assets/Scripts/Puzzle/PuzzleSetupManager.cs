@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using Autohand;
 using Puzzle.Scriptables;
-using Unity.XR.PXR;
 using UnityEngine;
 using UnityEngine.Events;
 using Variables;
@@ -16,17 +15,16 @@ namespace Puzzle
         [SerializeField] private IntVariable width;
         [SerializeField] private BoolVariable state;
 
-        [SerializeField] private GameObject puzzlePiece;
+        [SerializeField, Space] private GameObject puzzlePiece;
         [SerializeField] private GameObject board;
         [SerializeField] private GameObject placePoint;
-        [SerializeField] private SelectedImage selectedImage;
+        
+        [SerializeField, Space] private SelectedImage selectedImage;
         [SerializeField] private GoalSprite goalSprite;
-
         [SerializeField] private Placed placed;
 
-        [SerializeField] private UnityEvent changedImage;
-        [SerializeField] private UnityEvent completed;
-
+        public UnityEvent changedImage; 
+        public UnityEvent completed;
 
         private Vector3 scale;
         private Vector3 ppSize; //place point size
@@ -68,7 +66,6 @@ namespace Puzzle
             ppSize.y = ppSize.x;
             ppSize *= 14.1f;
             scale = board.transform.localScale;
-            SetUp();
         }
 
         private void OnEnable()
@@ -129,7 +126,7 @@ namespace Puzzle
 
             var originVector = new Vector3();
             available = 0;
-            
+
             if (height.value % 2 == 0)
             {
                 originVector.y = -ppSize.y * (height.value / 2) + ppSize.y / 2;
@@ -141,7 +138,7 @@ namespace Puzzle
 
             if (width.value % 2 == 0)
             {
-                originVector.x =  -ppSize.x * (width.value / 2) + ppSize.x / 2;
+                originVector.x = -ppSize.x * (width.value / 2) + ppSize.x / 2;
             }
             else
             {
@@ -247,7 +244,6 @@ namespace Puzzle
                     var tr = piece.transform;
                     tr.parent = gameObject.transform;
                     tr.position = new Vector3(0, 1.2f + j * 0.1f, 0.25f - i * 0.15f);
-                    tr.localScale = puzzlePiece.transform.localScale;
                     piece.SetActive(true);
 
 
