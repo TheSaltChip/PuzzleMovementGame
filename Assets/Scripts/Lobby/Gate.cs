@@ -17,7 +17,7 @@ namespace Lobby
         private bool _active;
         private bool _collided;
 
-        public UnityEvent<string> sceneNameToTeleportTo; 
+        public UnityEvent<string> sceneNameToTeleportTo;
 
         private void OnCollisionEnter()
         {
@@ -30,11 +30,6 @@ namespace Lobby
         public void ActivateGate()
         {
             _active = true;
-        }
-
-        public void DeactivateGate()
-        {
-            _active = false;
         }
     }
 }
