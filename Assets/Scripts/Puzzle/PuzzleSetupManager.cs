@@ -1,10 +1,8 @@
-using System;
 using System.Linq;
 using Autohand;
 using Puzzle.Scriptables;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using Variables;
 
 namespace Puzzle
@@ -12,8 +10,7 @@ namespace Puzzle
     public class PuzzleSetupManager : MonoBehaviour
     {
         [SerializeField] private ComputeShader comp;
-        [SerializeField] private IntVariable height;
-        [SerializeField] private IntVariable width;
+        [SerializeField] private PuzzleBoardDimensions boardDimensions;
         [SerializeField] private BoolVariable state;
 
         [SerializeField] private PuzzleImageQuads puzzleImageQuads;
@@ -33,7 +30,6 @@ namespace Puzzle
         private Vector3 ppSize; //place point size
         private GameObject[] points;
         private GameObject[] pieces;
-        private int available;
         private int av;
         private Vector3 bSize; //board size
         private Texture2D tex;
@@ -45,6 +41,8 @@ namespace Puzzle
         private GraphicsBuffer rearrangedSquares;
         private GraphicsBuffer buffer;
 
+        private int _compareImageKernelIndex;
+
         private void Awake()
         {
             ppSize = placePoint.GetComponent<Renderer>().bounds.size;
@@ -53,9 +51,12 @@ namespace Puzzle
             ppSize.y = ppSize.x;
             ppSize *= 14.1f;
             scale = board.transform.localScale;
+            placed.amount = 0;
+
+            _compareImageKernelIndex = comp.FindKernel("CompareImages");
         }
 
-        private void OnEnable()
+        private void SetupBuffers()
         {
             squares = new GraphicsBuffer(GraphicsBuffer.Target.Structured, tex.height * tex.width, sizeof(float));
             rearrangedSquares =
@@ -73,34 +74,45 @@ namespace Puzzle
         public void SetUp()
         {
             OnDisable();
+            SetTexture();
             IndexArray();
             ScaleBoard();
             PlacePoints();
-            SetUpPieces();
-            GoalSprite();
-            OnEnable();
+            SetupBuffers();
+        }
+
+        private void SetTexture()
+        {
+            tex = selectedImage.currentSelected;
+
+            comp.SetTexture(_compareImageKernelIndex, PuzzleShaderVariables.Image, tex);
+            comp.SetInt(PuzzleShaderVariables.Height, tex.height);
+            comp.SetInt(PuzzleShaderVariables.Width, tex.width);
+            comp.SetInt(PuzzleShaderVariables.PixelCount, tex.width * tex.height);
         }
 
         private void IndexArray()
         {
-            tex = selectedImage.currentSelected;
-
             indexes = new int[tex.height, tex.width];
             var a = 0;
+
             for (var i = 0; i < tex.height; i++)
+            for (var j = 0; j < tex.width; j++)
             {
-                for (var j = 0; j < tex.width; j++)
-                {
-                    indexes[i, j] = a++;
-                }
+                indexes[i, j] = a++;
             }
+        }
+
+        private void ScaleBoard()
+        {
+            board.transform.localScale = new Vector3(
+                boardDimensions.Width * scale.x,
+                boardDimensions.Height * scale.y,
+                scale.z);
         }
 
         private void PlacePoints()
         {
-            var trpp = placePoint.transform; //transform place point
-            var pos = trpp.localPosition;
-            var grid = new Vector3[height.value, width.value];
             if (points != null)
             {
                 foreach (var point in points)
@@ -109,62 +121,57 @@ namespace Puzzle
                 }
             }
 
-            points = new GameObject[height.value * width.value];
+            var boardHeight = boardDimensions.Height;
+            var boardWidth = boardDimensions.Width;
 
-            var originVector = new Vector3();
-            available = 0;
+            points = new GameObject[boardHeight * boardWidth];
 
-            if (height.value % 2 == 0)
-            {
-                originVector.y = -ppSize.y * (height.value / 2) + ppSize.y / 2;
-            }
-            else
-            {
-                originVector.y = -ppSize.y * (height.value / 2);
-            }
+            var trpp = placePoint.transform; //transform place point
+            var grid = new Vector3[boardHeight, boardWidth];
 
-            if (width.value % 2 == 0)
-            {
-                originVector.x = -ppSize.x * (width.value / 2) + ppSize.x / 2;
-            }
-            else
-            {
-                originVector.x = -ppSize.x * (width.value / 2);
-            }
+            var originVectorX = -ppSize.x * (boardWidth / 2) + (1 - boardWidth % 2) * ppSize.x / 2f;
+            var originVectorY = -ppSize.y * (boardHeight / 2) + (1 - boardHeight % 2) * ppSize.y / 2f;
 
-            for (var i = 0; i < height.value; i++)
+            for (var i = 0; i < boardHeight; i++)
             {
-                for (var j = 0; j < width.value; j++)
+                for (var j = 0; j < boardWidth; j++)
                 {
-                    grid[i, j] = new Vector3(originVector.x + j * ppSize.x, originVector.y + i * ppSize.y, pos.z);
+                    grid[i, j] = new Vector3(
+                        originVectorX + j * ppSize.x,
+                        originVectorY + i * ppSize.y,
+                        trpp.localPosition.z);
                 }
             }
 
-            for (var i = 0; i < height.value; i++)
+            var available = 0;
+            for (var i = 0; i < boardHeight; i++)
             {
-                for (var j = 0; j < width.value; j++)
+                for (var j = 0; j < boardWidth; j++)
                 {
                     var obj = Instantiate(placePoint);
                     points[available] = obj;
                     obj.SetActive(true);
                     obj.name = available + "";
+
                     var tr = obj.transform;
                     tr.SetParent(gameObject.transform);
                     tr = obj.transform;
-                    tr.localScale = trpp.localScale;
-                    var p = tr.up * grid[i, j].y;
-                    tr.localPosition = p + (tr.right * grid[i, j].x);
+
+                    var s = Quaternion.AngleAxis(-60, Vector3.forward) * tr.up;
+
+                    var p = s * grid[i, j].y;
+                    tr.localPosition = p + tr.right * grid[i, j].x;
                     tr.rotation = trpp.rotation;
                     available++;
                 }
             }
 
             var a = 0;
-            indPos = new int[width.value * height.value];
+            indPos = new int[boardWidth * boardHeight];
 
-            for (var i = available - width.value; i >= 0; i -= width.value)
+            for (var i = available - boardWidth; i >= 0; i -= boardWidth)
             {
-                for (var j = 0; j < width.value; j++)
+                for (var j = 0; j < boardWidth; j++)
                 {
                     indPos[a] = i + j;
                     a++;
@@ -172,87 +179,12 @@ namespace Puzzle
             }
         }
 
-        private void ScaleBoard()
-        {
-            var y = (height.value - 1) * scale.y;
-            var x = (width.value - 1) * scale.x;
-
-            board.transform.localScale = new Vector3(scale.x + x, scale.y + y, scale.z);
-        }
-
-        private void SetUpPieces()
-        {
-            IndexArray();
-            tex = selectedImage.currentSelected;
-            av = 0;
-            if (pieces != null)
-            {
-                foreach (var piece in pieces)
-                {
-                    Destroy(piece);
-                }
-            }
-
-            puzzleImageQuads.quads = new Quad[height.value * width.value];
-            puzzleImageQuads.rearrangedQuads = new Quad[height.value * width.value];
-            var k = 0;
-            pieces = new GameObject[height.value * width.value];
-            var ppcb = tex.width / width.value;
-            var ppch = tex.height / height.value;
-            var col = 0;
-
-            for (var i = 0; i < height.value; i++)
-            {
-                var row = 0;
-                for (int j = 0; j < width.value; j++)
-                {
-                    var q = new Quad();
-                    q.rows = new int[ppch, ppcb];
-                    puzzleImageQuads.quads[k] = q;
-                    var p = ppch * tex.width * col + row * ppcb;
-                    for (var l = 0; l < ppch; l++)
-                    {
-                        var x = p + l * tex.width;
-                        for (var m = 0; m < ppcb; m++)
-                        {
-                            q.rows[l, m] = x + m;
-                        }
-                    }
-
-                    row++;
-                    k++;
-
-                    var rect = new Rect(j * (tex.width / width.value), i * (tex.height / height.value),
-                        tex.width / width.value, tex.height / height.value);
-                    var piece = Instantiate(puzzlePiece);
-                    piece.name = av + "";
-                    pieces[av] = piece;
-                    av++;
-                    var tr = piece.transform;
-                    tr.parent = gameObject.transform;
-                    tr.position = new Vector3(0, 1.2f + j * 0.1f, 0.25f - i * 0.15f);
-                    piece.SetActive(true);
-
-                    var sliced = new Texture2D((int)rect.width, (int)rect.height)
-                    {
-                        filterMode = tex.filterMode
-                    };
-                    sliced.SetPixels(0, 0, (int)rect.width, (int)rect.height,
-                        tex.GetPixels((int)rect.x, (int)rect.y, (int)rect.width, (int)rect.height));
-                    sliced.Apply();
-                    piece.GetComponent<Renderer>().materials[0].SetTexture(PuzzleShaderVariables.BaseMap, sliced);
-                }
-
-                col++;
-            }
-        }
-
         private void ShuffleIndex()
         {
-            var pos = Int32.Parse(placed.number);
+            var pos = int.Parse(placed.number);
             var point = points[pos];
             var child = point.GetComponent<PlacePoint>().GetPlacedObject();
-            var pieceQuad = Int32.Parse(child.name);
+            var pieceQuad = int.Parse(child.name);
             var quad = indPos[pos];
             puzzleImageQuads.rearrangedQuads[quad] = puzzleImageQuads.quads[pieceQuad];
         }
@@ -260,46 +192,40 @@ namespace Puzzle
         public void CompareImage()
         {
             ShuffleIndex();
-            
-            if (placed.amount != (height.value * width.value))
+
+            var height = boardDimensions.Height;
+            var width = boardDimensions.Width;
+
+            if (placed.amount != height * width)
             {
                 return;
             }
 
-            var quadsFlat = new int[tex.height * tex.width];
-            var rQuadsFlat = new int[tex.height * tex.width];
+            var texDim = tex.height * tex.width;
+            var quadsFlat = new int[texDim];
+            var rQuadsFlat = new int[texDim];
             var pos = 0;
 
-            for (var i = 0; i < puzzleImageQuads.quads.Length; i++)
+            for (var quadIndex = 0; quadIndex < puzzleImageQuads.quads.Length; quadIndex++)
+            for (var h = 0; h < tex.height / height; h++)
+            for (var w = 0; w < tex.width / width; w++)
             {
-                for (var j = 0; j < tex.height / height.value; j++)
-                {
-                    for (var l = 0; l < tex.width / width.value; l++)
-                    {
-                        quadsFlat[pos] = puzzleImageQuads.quads[i].rows[j, l];
-                        rQuadsFlat[pos] = puzzleImageQuads.rearrangedQuads[i].rows[j, l];
-                        pos++;
-                    }
-                }
+                quadsFlat[pos] = puzzleImageQuads.quads[quadIndex].rows[h, w];
+                rQuadsFlat[pos] = puzzleImageQuads.rearrangedQuads[quadIndex].rows[h, w];
+                pos++;
             }
 
             squares.SetData(quadsFlat);
             rearrangedSquares.SetData(rQuadsFlat);
-            var result = new int[tex.width * tex.height];
-            buffer.SetData(result);
+            
+            comp.SetBuffer(_compareImageKernelIndex, PuzzleShaderVariables.Result, buffer);
+            comp.SetBuffer(_compareImageKernelIndex, PuzzleShaderVariables.Quads, squares);
+            comp.SetBuffer(_compareImageKernelIndex, PuzzleShaderVariables.RearrangedQuads, rearrangedSquares);
 
-            comp.SetTexture(0, PuzzleShaderVariables.Image, tex);
-            comp.SetBuffer(0, PuzzleShaderVariables.Result, buffer);
-            comp.SetBuffer(0, PuzzleShaderVariables.Quads, squares);
-            comp.SetBuffer(0, PuzzleShaderVariables.RearrangedQuads, rearrangedSquares);
-
-            comp.SetInt(PuzzleShaderVariables.Height, tex.height);
-            comp.SetInt(PuzzleShaderVariables.Width, tex.width);
-
-            var k = new int();
-            comp.GetKernelThreadGroupSizes(k, out var x, out var y, out var z);
-            comp.Dispatch(k, Mathf.CeilToInt((float)tex.width * tex.height / x), (int)y, (int)z);
-
+            comp.GetKernelThreadGroupSizes(_compareImageKernelIndex, out var x, out var y , out var z);
+            comp.Dispatch(_compareImageKernelIndex, Mathf.CeilToInt((float)texDim / x), (int)y, (int)z);
+            
+            var result = new int[texDim];
             buffer.GetData(result);
 
             if (result.Any(t => t == 0))
@@ -311,23 +237,6 @@ namespace Puzzle
 
             state.value = true;
             completed.Invoke();
-        }
-
-        private void GoalSprite()
-        {
-            tex = selectedImage.currentSelected;
-            var sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(.5f, .5f));
-            goalSprite.image = sprite;
-            changedImage.Invoke();
-        }
-
-        [Tooltip("width,height")]
-        public void SetParameters(string val)
-        {
-            var s = val.Split(',');
-            width.value = Int32.Parse(s[0]);
-            height.value = Int32.Parse(s[1]);
-            SetUp();
         }
     }
 }

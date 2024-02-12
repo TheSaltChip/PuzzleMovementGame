@@ -1,35 +1,28 @@
 // Each #kernel tells which function to compile; you can have many kernels
-#pragma kernel CSMain
+#pragma kernel CompareImages
 
 // Create a RenderTexture with enableRandomWrite flag and set it
 // with cs.SetTexture
 RWBuffer<int> Result;
-Texture2D<float4> image;
+Texture2D image;
 
 RWStructuredBuffer<int> quads;
 RWStructuredBuffer<int> rearrangedQuads;
 
+uint pixelCount;
 uint height;
 uint width;
 
 [numthreads(64,1,1)]
-void CSMain (uint id : SV_DispatchThreadID)
+void CompareImages(const uint id : SV_DispatchThreadID)
 {
-    int r = rearrangedQuads[id.x];
-    int q = quads[id.x];
-    
-    int rx = r/width;
-    int ry = r%width;
+    if (id > pixelCount) return;
 
-    int qx = q/width;
-    int qy = q%width;
+    const int r = rearrangedQuads[id];
+    const int q = quads[id];
 
-    float4 diff = image[int2(rx,ry)] - image[int2(qx,qy)];
-    
-    if (all(diff.xyz <= float3(0.1,0.1,0.1)) && all(diff.xyz >= float3(-0.1,-0.1,-0.1)))
-    {
-        Result[id.x] = 1;
-    }else{
-        Result[id.x] = 0;
-    }
+    float4 diff = image[int2(r / width, r % width)] - image[int2(q / width, q % width)];
+
+    if (all(diff.xyz <= float3(0.1, 0.1, 0.1)) && all(diff.xyz >= float3(-0.1, -0.1, -0.1)))
+        Result[id] = 1;
 }

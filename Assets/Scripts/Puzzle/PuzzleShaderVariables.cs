@@ -12,5 +12,6 @@ namespace Puzzle
         public static readonly int RearrangedQuads = Shader.PropertyToID("rearrangedQuads");
         public static readonly int Width = Shader.PropertyToID("width");
         public static readonly int Height = Shader.PropertyToID("height");
+        public static readonly int PixelCount = Shader.PropertyToID("pixelCount");
     }
 }

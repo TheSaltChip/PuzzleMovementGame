@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Variables;
 
-namespace TimeTaking
+namespace TimeMeasurement
 {
     public class Stopwatch : MonoBehaviour
     {

@@ -598,18 +598,6 @@ Transform:
   m_Father: {fileID: 1526300987}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &142164650 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2829881134728359890, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-    type: 3}
-  m_PrefabInstance: {fileID: 7774755802133824417}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &142164655 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2829881134728359889, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-    type: 3}
-  m_PrefabInstance: {fileID: 7774755802133824417}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &152437453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3752,6 +3740,207 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 831709066}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &834830770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 834830771}
+  - component: {fileID: 834830775}
+  - component: {fileID: 834830774}
+  - component: {fileID: 834830773}
+  - component: {fileID: 834830772}
+  m_Layer: 0
+  m_Name: DifficultySetter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &834830771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834830770}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2719317659200322233}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &834830772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834830770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f486336f79fe9db468df609fd7afb2c4, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 4ba983be8b8a44348b26482a0c4760fc, type: 2}
+        m_TargetAssemblyTypeName: Puzzle.Difficulty.PuzzleDifficultySetter, Assembly-CSharp
+        m_MethodName: SetDifficultyStrategy
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 2b91e5a5eeb693243aea35656fa0fbf2,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: Puzzle.Difficulty.PuzzleBoardDifficultyStrategy,
+            Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 2,2
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 9baa3fa675c2c694a958ae08856ccac6, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &834830773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834830770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0223724529dfbac4fbdc3b5f6798dfbb, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 4ba983be8b8a44348b26482a0c4760fc, type: 2}
+        m_TargetAssemblyTypeName: Puzzle.Difficulty.PuzzleDifficultySetter, Assembly-CSharp
+        m_MethodName: SetDifficultyStrategy
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 3f79555aa2aa03f499e24e8bfff9fb29,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: Puzzle.Difficulty.PuzzleBoardDifficultyStrategy,
+            Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 3,2
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 9baa3fa675c2c694a958ae08856ccac6, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &834830774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834830770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: e299042f4cc21b24ea702075a314e9dc, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 4ba983be8b8a44348b26482a0c4760fc, type: 2}
+        m_TargetAssemblyTypeName: Puzzle.Difficulty.PuzzleDifficultySetter, Assembly-CSharp
+        m_MethodName: SetDifficultyStrategy
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 4eed776d8c430b74bbb7704676b17ef1,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: Puzzle.Difficulty.PuzzleBoardDifficultyStrategy,
+            Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 4,3
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 9baa3fa675c2c694a958ae08856ccac6, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &834830775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834830770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 9baa3fa675c2c694a958ae08856ccac6, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 4ba983be8b8a44348b26482a0c4760fc, type: 2}
+        m_TargetAssemblyTypeName: Difficulty.PuzzleDifficultySetter, Assembly-CSharp
+        m_MethodName: Set
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 7025e32279db9b945917ab89bcc1fd72, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &835986185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3963,7 +4152,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2719317659200322233}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &913624488
 MonoBehaviour:
@@ -3980,7 +4169,7 @@ MonoBehaviour:
   selectedImage: {fileID: 11400000, guid: 33f23f7245f93934bbd2bdeff902fe3a, type: 2}
   goalSprite: {fileID: 11400000, guid: 5ebd8173a668ffb45a13d10638eb34a0, type: 2}
   spawnPoints: {fileID: 11400000, guid: fda5f5d59661ec549ad61b05b1f37352, type: 2}
-  puzzlePiecePrefab: {fileID: 2069265184465711283, guid: cd0dbac0075891e4e885facff508642f,
+  puzzlePiecePrefab: {fileID: 2069265184465711283, guid: 2b9b927168fbb6f488159c20e4ca4e92,
     type: 3}
   puzzleBoardDimensions: {fileID: 11400000, guid: 5943fef3899b9ae4884ff17abd5789a4,
     type: 2}
@@ -4007,7 +4196,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913624486}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
   m_Name: 
@@ -5559,7 +5748,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1526300987
 Transform:
   m_ObjectHideFlags: 0
@@ -8253,46 +8442,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2719317659200322229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3384215067781537795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 0223724529dfbac4fbdc3b5f6798dfbb, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2719317659200322232}
-        m_TargetAssemblyTypeName: PuzzleSetupManager, Assembly-CSharp
-        m_MethodName: SetParameters
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 3,2
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 7025e32279db9b945917ab89bcc1fd72, type: 2}
-        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &2719317659200322230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8341,7 +8490,8 @@ MonoBehaviour:
   puzzlePiece: {fileID: 2069265184465711283, guid: cd0dbac0075891e4e885facff508642f,
     type: 3}
   board: {fileID: 9133618570786934224}
-  placePoint: {fileID: 142164650}
+  placePoint: {fileID: 6086890470661347111, guid: 9430d5b8d03c96e4a86cad27d6a21d22,
+    type: 3}
   selectedImage: {fileID: 11400000, guid: 33f23f7245f93934bbd2bdeff902fe3a, type: 2}
   goalSprite: {fileID: 11400000, guid: 5ebd8173a668ffb45a13d10638eb34a0, type: 2}
   placed: {fileID: 11400000, guid: 2cc00cac446f9ea4c94bf57ad65e88c4, type: 2}
@@ -8388,91 +8538,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 108744446914722244}
-  - {fileID: 142164655}
   - {fileID: 913624487}
+  - {fileID: 834830771}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 60}
---- !u!114 &2719317659200322234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3384215067781537795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: f486336f79fe9db468df609fd7afb2c4, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2719317659200322232}
-        m_TargetAssemblyTypeName: PuzzleSetupManager, Assembly-CSharp
-        m_MethodName: SetParameters
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 2,2
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 7025e32279db9b945917ab89bcc1fd72, type: 2}
-        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2719317659200322235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3384215067781537795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: e299042f4cc21b24ea702075a314e9dc, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2719317659200322232}
-        m_TargetAssemblyTypeName: PuzzleSetupManager, Assembly-CSharp
-        m_MethodName: SetParameters
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 4,3
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: 7025e32279db9b945917ab89bcc1fd72, type: 2}
-        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!23 &2928120650344895065
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8533,9 +8603,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2719317659200322233}
   - component: {fileID: 2719317659200322232}
-  - component: {fileID: 2719317659200322235}
-  - component: {fileID: 2719317659200322229}
-  - component: {fileID: 2719317659200322234}
   - component: {fileID: 2719317659200322230}
   - component: {fileID: 2719317659200322225}
   m_Layer: 0
@@ -8619,85 +8686,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34527ec1014fa6f4ab1b90827189804f, type: 3}
---- !u!1001 &7774755802133824417
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 2719317659200322233}
-    m_Modifications:
-    - target: {fileID: 2829881134728359889, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829881134728359889, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829881134728359889, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829881134728359889, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829881134728359889, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829881134728359889, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829881134728359889, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829881134728359889, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829881134728359889, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829881134728359889, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829881134728359889, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -270
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829881134728359890, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-        type: 3}
-      propertyPath: m_Name
-      value: PlacePointPrefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829881134728359890, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2829881134728359895, guid: 40accca1089e6da4ab6c0cbb4ba913a7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 40accca1089e6da4ab6c0cbb4ba913a7, type: 3}
 --- !u!1 &9133618570786934224
 GameObject:
   m_ObjectHideFlags: 0

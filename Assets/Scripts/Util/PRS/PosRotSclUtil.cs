@@ -13,5 +13,12 @@ namespace Util.PRS
                 scale = transform.localScale
             };
         }
+
+        public static void SetFromPosRotScl(this Transform transform, PosRotScl posRotScl)
+        {
+            transform.position = posRotScl.position;
+            transform.localEulerAngles = posRotScl.rotation;
+            transform.localScale = posRotScl.scale;
+        }
     }
 }
