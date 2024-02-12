@@ -1,11 +1,19 @@
+using System;
 using UnityEngine;
+using Variables;
 
 namespace Tutorial
 {
     public class TutorialList : MonoBehaviour
     {
         [SerializeField] private TutorialStep[] tutorialSteps;
+        [SerializeField] private IntVariable length;
         private int _current;
+
+        private void Start()
+        {
+            length.value = tutorialSteps.Length;
+        }
 
         public void NextStep()
         {

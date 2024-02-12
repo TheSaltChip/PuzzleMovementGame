@@ -1,13 +1,16 @@
+using Events;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
+using Variables;
 
 namespace Tutorial
 {
     public class TutorialText : MonoBehaviour
     {
+        [SerializeField] private IntVariable length;
         [SerializeField] private UnityEvent first;
         [SerializeField] private UnityEvent last;
         [SerializeField] private UnityEvent middle;
@@ -27,7 +30,7 @@ namespace Tutorial
 
         private void Start()
         {
-            _end = _strings.SharedData.Entries.Count - 1;
+            _end = length.value-1;
             _start = 2; //First 2 entries in the table are next and previous
             _current = _start;
             _text = gameObject.GetComponent<LocalizeStringEvent>();
@@ -70,6 +73,12 @@ namespace Tutorial
             _current--;
             _text.StringReference.TableEntryReference = _strings.SharedData.Entries[_current].Key;
             ActiveButtons();
+        }
+
+        public void End()
+        {
+            var end = _strings.SharedData.Entries.Count;
+            _text.StringReference.TableEntryReference = _strings.SharedData.Entries[end].Key;
         }
     }
 }
