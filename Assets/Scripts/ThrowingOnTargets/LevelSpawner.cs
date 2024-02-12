@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.Pool;
 using UnityEngine.Serialization;
 using Util;
+using Util.PRS;
 using Variables;
 
 namespace ThrowingOnTargets
@@ -99,7 +100,7 @@ namespace ThrowingOnTargets
                             posRotScls.Add(new PosRotScl
                             {
                                 // ReSharper disable once PossibleLossOfFraction
-                                location = new Vector3(
+                                position = new Vector3(
                                     x * 0.75f - throwLevelRules.XSize * 0.375f + 0.375f,
                                     y * 0.75f - throwLevelRules.YSize * 0.375f + 0.375f,
                                     i * throwLevelRules.DistBetweenStages),
@@ -145,7 +146,7 @@ namespace ThrowingOnTargets
                         posRotScls.Add(new PosRotScl
                         {
                             // ReSharper disable once PossibleLossOfFraction
-                            location = new Vector3(
+                            position = new Vector3(
                                 x * 0.75f - throwLevelRules.XSize * 0.375f + 0.75f,
                                 y * 0.75f - throwLevelRules.YSize * 0.375f + 0.75f,
                                 i * throwLevelRules.DistBetweenStages),
@@ -189,7 +190,7 @@ namespace ThrowingOnTargets
                 var t = _targets.Get();
 
                 t.transform.SetLocalPositionAndRotation(
-                    posRotScl[i].location,
+                    posRotScl[i].position,
                     Quaternion.Euler(posRotScl[i].rotation));
                 t.transform.localScale = posRotScl[i].scale;
             }

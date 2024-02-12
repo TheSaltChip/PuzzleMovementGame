@@ -4,6 +4,7 @@ using Autohand;
 using Puzzle.Scriptables;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Variables;
 
 namespace Puzzle
@@ -15,15 +16,17 @@ namespace Puzzle
         [SerializeField] private IntVariable width;
         [SerializeField] private BoolVariable state;
 
+        [SerializeField] private PuzzleImageQuads puzzleImageQuads;
+
         [SerializeField, Space] private GameObject puzzlePiece;
         [SerializeField] private GameObject board;
         [SerializeField] private GameObject placePoint;
-        
+
         [SerializeField, Space] private SelectedImage selectedImage;
         [SerializeField] private GoalSprite goalSprite;
         [SerializeField] private Placed placed;
 
-        public UnityEvent changedImage; 
+        public UnityEvent changedImage;
         public UnityEvent completed;
 
         private Vector3 scale;
@@ -37,26 +40,10 @@ namespace Puzzle
         private int prevPlaced;
         private int[,] indexes;
         private int[] indPos;
-        private Quad[] rearrangedQuads;
-        private Quad[] quads;
 
         private GraphicsBuffer squares;
         private GraphicsBuffer rearrangedSquares;
         private GraphicsBuffer buffer;
-
-        private struct Quad
-        {
-            public int[,] rows;
-        }
-
-        private static readonly int BaseMap = Shader.PropertyToID("_BaseMap");
-        private static readonly int Image = Shader.PropertyToID("image");
-        private static readonly int Ri = Shader.PropertyToID("ri"); //render image in compute shader
-        private static readonly int Result = Shader.PropertyToID("Result");
-        private static readonly int Quads = Shader.PropertyToID("quads");
-        private static readonly int RearrangedQuads = Shader.PropertyToID("rearrangedQuads");
-        private static readonly int Width = Shader.PropertyToID("width");
-        private static readonly int Height = Shader.PropertyToID("height");
 
         private void Awake()
         {
@@ -78,13 +65,14 @@ namespace Puzzle
 
         private void OnDisable()
         {
-            buffer.Release();
-            squares.Release();
-            rearrangedSquares.Release();
+            buffer?.Dispose();
+            squares?.Dispose();
+            rearrangedSquares?.Dispose();
         }
 
         public void SetUp()
         {
+            OnDisable();
             IndexArray();
             ScaleBoard();
             PlacePoints();
@@ -103,8 +91,7 @@ namespace Puzzle
             {
                 for (var j = 0; j < tex.width; j++)
                 {
-                    indexes[i, j] = a;
-                    a++;
+                    indexes[i, j] = a++;
                 }
             }
         }
@@ -206,8 +193,8 @@ namespace Puzzle
                 }
             }
 
-            quads = new Quad[height.value * width.value];
-            rearrangedQuads = new Quad[height.value * width.value];
+            puzzleImageQuads.quads = new Quad[height.value * width.value];
+            puzzleImageQuads.rearrangedQuads = new Quad[height.value * width.value];
             var k = 0;
             pieces = new GameObject[height.value * width.value];
             var ppcb = tex.width / width.value;
@@ -221,7 +208,7 @@ namespace Puzzle
                 {
                     var q = new Quad();
                     q.rows = new int[ppch, ppcb];
-                    quads[k] = q;
+                    puzzleImageQuads.quads[k] = q;
                     var p = ppch * tex.width * col + row * ppcb;
                     for (var l = 0; l < ppch; l++)
                     {
@@ -246,7 +233,6 @@ namespace Puzzle
                     tr.position = new Vector3(0, 1.2f + j * 0.1f, 0.25f - i * 0.15f);
                     piece.SetActive(true);
 
-
                     var sliced = new Texture2D((int)rect.width, (int)rect.height)
                     {
                         filterMode = tex.filterMode
@@ -254,7 +240,7 @@ namespace Puzzle
                     sliced.SetPixels(0, 0, (int)rect.width, (int)rect.height,
                         tex.GetPixels((int)rect.x, (int)rect.y, (int)rect.width, (int)rect.height));
                     sliced.Apply();
-                    piece.GetComponent<Renderer>().materials[0].SetTexture(BaseMap, sliced);
+                    piece.GetComponent<Renderer>().materials[0].SetTexture(PuzzleShaderVariables.BaseMap, sliced);
                 }
 
                 col++;
@@ -268,31 +254,30 @@ namespace Puzzle
             var child = point.GetComponent<PlacePoint>().GetPlacedObject();
             var pieceQuad = Int32.Parse(child.name);
             var quad = indPos[pos];
-            rearrangedQuads[quad] = quads[pieceQuad];
+            puzzleImageQuads.rearrangedQuads[quad] = puzzleImageQuads.quads[pieceQuad];
         }
 
         public void CompareImage()
         {
+            ShuffleIndex();
+            
             if (placed.amount != (height.value * width.value))
             {
-                ShuffleIndex();
                 return;
             }
-
-            ShuffleIndex();
 
             var quadsFlat = new int[tex.height * tex.width];
             var rQuadsFlat = new int[tex.height * tex.width];
             var pos = 0;
 
-            for (var i = 0; i < quads.Length; i++)
+            for (var i = 0; i < puzzleImageQuads.quads.Length; i++)
             {
                 for (var j = 0; j < tex.height / height.value; j++)
                 {
                     for (var l = 0; l < tex.width / width.value; l++)
                     {
-                        quadsFlat[pos] = quads[i].rows[j, l];
-                        rQuadsFlat[pos] = rearrangedQuads[i].rows[j, l];
+                        quadsFlat[pos] = puzzleImageQuads.quads[i].rows[j, l];
+                        rQuadsFlat[pos] = puzzleImageQuads.rearrangedQuads[i].rows[j, l];
                         pos++;
                     }
                 }
@@ -303,13 +288,13 @@ namespace Puzzle
             var result = new int[tex.width * tex.height];
             buffer.SetData(result);
 
-            comp.SetTexture(0, Image, tex);
-            comp.SetBuffer(0, Result, buffer);
-            comp.SetBuffer(0, Quads, squares);
-            comp.SetBuffer(0, RearrangedQuads, rearrangedSquares);
+            comp.SetTexture(0, PuzzleShaderVariables.Image, tex);
+            comp.SetBuffer(0, PuzzleShaderVariables.Result, buffer);
+            comp.SetBuffer(0, PuzzleShaderVariables.Quads, squares);
+            comp.SetBuffer(0, PuzzleShaderVariables.RearrangedQuads, rearrangedSquares);
 
-            comp.SetInt(Height, tex.height);
-            comp.SetInt(Width, tex.width);
+            comp.SetInt(PuzzleShaderVariables.Height, tex.height);
+            comp.SetInt(PuzzleShaderVariables.Width, tex.width);
 
             var k = new int();
             comp.GetKernelThreadGroupSizes(k, out var x, out var y, out var z);

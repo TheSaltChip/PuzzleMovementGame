@@ -5,6 +5,8 @@ using ThrowingOnTargets.Saveable;
 using ThrowingOnTargets.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
+using Util;
+using Util.PRS;
 using Variables;
 
 namespace ThrowingOnTargets
@@ -46,7 +48,7 @@ namespace ThrowingOnTargets
             for (var i = 1; i < pointTransforms.Length; i++)
             {
                 var t = pointTransforms[i];
-                stage.posRots[i - 1].location = t.localPosition;
+                stage.posRots[i - 1].position = t.localPosition;
                 stage.posRots[i - 1].rotation = t.localRotation.eulerAngles;
                 stage.posRots[i - 1].scale = t.localScale;
             }
