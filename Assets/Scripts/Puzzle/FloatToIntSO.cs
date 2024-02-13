@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Localization.SmartFormat.PersistentVariables;
-using FloatVariable = Variables.FloatVariable;
-using IntVariable = Variables.IntVariable;
+using Variables;
 
 namespace Puzzle
 {
