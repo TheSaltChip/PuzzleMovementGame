@@ -30,7 +30,7 @@ namespace Tutorial
 
         private void Start()
         {
-            _end = length.value-1;
+            _end = length.value+1;
             _start = 2; //First 2 entries in the table are next and previous
             _current = _start;
             _text = gameObject.GetComponent<LocalizeStringEvent>();
@@ -40,6 +40,7 @@ namespace Tutorial
 
         private void ActiveButtons()
         {
+            print(_current);
             if (_current == _start)
             {
                 first.Invoke();
@@ -59,7 +60,7 @@ namespace Tutorial
 
         public void NextText()
         {
-            if (_current == _end)
+            if (_current > _end)
                 return;
             _current++;
             _text.StringReference.TableEntryReference = _strings.SharedData.Entries[_current].Key;
@@ -68,7 +69,7 @@ namespace Tutorial
 
         public void PreviousText()
         {
-            if (_current == _start)
+            if (_current <= _start)
                 return;
             _current--;
             _text.StringReference.TableEntryReference = _strings.SharedData.Entries[_current].Key;
@@ -77,7 +78,7 @@ namespace Tutorial
 
         public void End()
         {
-            var end = _strings.SharedData.Entries.Count;
+            var end = _strings.SharedData.Entries.Count-1;
             _text.StringReference.TableEntryReference = _strings.SharedData.Entries[end].Key;
         }
     }

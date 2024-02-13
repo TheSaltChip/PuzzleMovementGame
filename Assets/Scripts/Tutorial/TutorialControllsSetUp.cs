@@ -11,27 +11,24 @@ namespace Lobby
         [SerializeField] private SkinnedMeshRenderer handRInner;
         [SerializeField] private SkinnedMeshRenderer handROuter;
 
-        private bool tutorial = true;
-
         public void StartTutorial()
         {
-            controllerL.SetActive(tutorial);
-            controllerR.SetActive(tutorial);
-            handLInner.enabled = !tutorial;
-            handLOuter.enabled = !tutorial;
-            handRInner.enabled = !tutorial;
-            handROuter.enabled = !tutorial;
-            tutorial = false;
+            controllerL.SetActive(true);
+            controllerR.SetActive(true);
+            handLInner.enabled = false;
+            handLOuter.enabled = false;
+            handRInner.enabled = false;
+            handROuter.enabled = false;
         }
 
         public void EndTutorial()
         {
-            controllerL.SetActive(tutorial);
-            controllerR.SetActive(tutorial);
-            handLInner.enabled = !tutorial;
-            handLOuter.enabled = !tutorial;
-            handRInner.enabled = !tutorial;
-            handROuter.enabled = !tutorial;
+            controllerL.SetActive(false);
+            controllerR.SetActive(false);
+            handLInner.enabled = true;
+            handLOuter.enabled = true;
+            handRInner.enabled = true;
+            handROuter.enabled = true;
         }
     }
 }
