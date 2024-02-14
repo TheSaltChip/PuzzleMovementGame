@@ -20,7 +20,6 @@ namespace Puzzle.PuzzleUI
                     TableEntryReference = "Correct"
                 };
                 local.StringReference = loc;
-                print("Correct");
             }
             else
             {
@@ -29,7 +28,6 @@ namespace Puzzle.PuzzleUI
                 TableReference = "PuzzleUI",
                 TableEntryReference = "Incorrect"
             };*/
-                print("Incorrect");
                 local.SetEntry("Incorrect");
                 //local.StringReference = loc;
             }

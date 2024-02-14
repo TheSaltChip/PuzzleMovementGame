@@ -34,12 +34,14 @@ namespace Puzzle
         private Vector3 bSize; //board size
         private Texture2D tex;
         private int prevPlaced;
-        private int[,] indexes;
+        //private int[,] indexes;
         private int[] indPos;
 
-        private GraphicsBuffer squares;
+        private bool[] correct;
+
+        /*private GraphicsBuffer squares;
         private GraphicsBuffer rearrangedSquares;
-        private GraphicsBuffer buffer;
+        private GraphicsBuffer buffer;*/
 
         private int _compareImageKernelIndex;
 
@@ -56,29 +58,29 @@ namespace Puzzle
             _compareImageKernelIndex = comp.FindKernel("CompareImages");
         }
 
-        private void SetupBuffers()
+        /*private void SetupBuffers()
         {
             squares = new GraphicsBuffer(GraphicsBuffer.Target.Structured, tex.height * tex.width, sizeof(float));
             rearrangedSquares =
                 new GraphicsBuffer(GraphicsBuffer.Target.Structured, tex.height * tex.width, sizeof(float));
             buffer = new GraphicsBuffer(GraphicsBuffer.Target.Structured, tex.width * tex.height, sizeof(float));
-        }
+        }*/
 
-        private void OnDisable()
+        /*private void OnDisable()
         {
             buffer?.Dispose();
             squares?.Dispose();
             rearrangedSquares?.Dispose();
-        }
+        }*/
 
         public void SetUp()
         {
-            OnDisable();
+            //OnDisable();
             SetTexture();
-            IndexArray();
+            //IndexArray();
             ScaleBoard();
             PlacePoints();
-            SetupBuffers();
+            //SetupBuffers();
         }
 
         private void SetTexture()
@@ -91,7 +93,7 @@ namespace Puzzle
             comp.SetInt(PuzzleShaderVariables.PixelCount, tex.width * tex.height);
         }
 
-        private void IndexArray()
+        /*private void IndexArray()
         {
             indexes = new int[tex.height, tex.width];
             var a = 0;
@@ -101,7 +103,7 @@ namespace Puzzle
             {
                 indexes[i, j] = a++;
             }
-        }
+        }*/
 
         private void ScaleBoard()
         {
@@ -144,6 +146,9 @@ namespace Puzzle
             }
 
             var available = 0;
+            indPos = new int[boardHeight*boardWidth];
+            correct = new bool[boardHeight*boardWidth];
+            
             for (var i = 0; i < boardHeight; i++)
             {
                 for (var j = 0; j < boardWidth; j++)
@@ -162,11 +167,12 @@ namespace Puzzle
                     var p = s * grid[i, j].y;
                     tr.localPosition = p + tr.right * grid[i, j].x;
                     tr.rotation = trpp.rotation;
+                    indPos[available] = boardWidth + j - i*boardWidth;
                     available++;
                 }
             }
 
-            var a = 0;
+            /*var a = 0;
             indPos = new int[boardWidth * boardHeight];
 
             for (var i = available - boardWidth; i >= 0; i -= boardWidth)
@@ -176,10 +182,10 @@ namespace Puzzle
                     indPos[a] = i + j;
                     a++;
                 }
-            }
+            }*/
         }
 
-        private void ShuffleIndex()
+        /*private void ShuffleIndex()
         {
             var pos = int.Parse(placed.number);
             var point = points[pos];
@@ -187,11 +193,22 @@ namespace Puzzle
             var pieceQuad = int.Parse(child.name);
             var quad = indPos[pos];
             puzzleImageQuads.rearrangedQuads[quad] = puzzleImageQuads.quads[pieceQuad];
+        }*/
+
+        private void CheckPiecePos()
+        {
+            var pos = int.Parse(placed.number);
+            var point = points[pos];
+            var pointN = indPos[pos];
+            var child = point.GetComponent<PlacePoint>().GetPlacedObject();
+            var pieceN = int.Parse(child.name);
+            correct[pieceN] = pointN == pieceN;
         }
 
         public void CompareImage()
         {
-            ShuffleIndex();
+            //ShuffleIndex();
+            CheckPiecePos();
 
             var height = boardDimensions.Height;
             var width = boardDimensions.Width;
@@ -201,7 +218,7 @@ namespace Puzzle
                 return;
             }
 
-            var texDim = tex.height * tex.width;
+            /*var texDim = tex.height * tex.width;
             var quadsFlat = new int[texDim];
             var rQuadsFlat = new int[texDim];
             var pos = 0;
@@ -226,9 +243,11 @@ namespace Puzzle
             comp.Dispatch(_compareImageKernelIndex, Mathf.CeilToInt((float)texDim / x), (int)y, (int)z);
             
             var result = new int[texDim];
-            buffer.GetData(result);
+            buffer.GetData(result);*/
+            
+            
 
-            if (result.Any(t => t == 0))
+            if (correct.Any(val => val != true))
             {
                 state.value = false;
                 completed.Invoke();
