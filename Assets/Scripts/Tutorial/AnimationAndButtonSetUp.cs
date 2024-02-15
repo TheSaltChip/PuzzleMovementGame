@@ -11,58 +11,14 @@ public class AnimationAndButtonSetUp : MonoBehaviour
 
     private void Start()
     {
-        try
-        {
-                
-            ControllerL.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();
-            ControllerR.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();
-        }
-        catch (Exception e)
-        {
-                
-            ControllerL.GetComponent<ControllerButton>().ActivateAnimationAndGlow();
-            ControllerR.GetComponent<ControllerButton>().ActivateAnimationAndGlow();
-        }
+        ControllerL.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();
+        ControllerR.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();
     }
 
     public void Activate()
     {
-        if (tutorialData.selectedHand == SelectedHand.Both)
-        {
-            try
-            {
-                
-                ControllerL.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();
-                ControllerR.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();
-            }
-            catch (Exception e)
-            {
-                
-                ControllerL.GetComponent<ControllerButton>().ActivateAnimationAndGlow();
-                ControllerR.GetComponent<ControllerButton>().ActivateAnimationAndGlow();
-            }
-        }else if (tutorialData.selectedHand == SelectedHand.Right)
-        {
-            try
-            {
-                ControllerR.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();
-            }
-            catch (Exception e)
-            {
-                ControllerR.GetComponent<ControllerButton>().ActivateAnimationAndGlow();
-            }
-        }
-        else if (tutorialData.selectedHand == SelectedHand.Left)
-        {
-            try
-            {
-                ControllerL.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();
-            }
-            catch (Exception e)
-            {
-                ControllerL.GetComponent<ControllerButton>().ActivateAnimationAndGlow();
-            }
-        }
+        ControllerL.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();
+        ControllerR.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();
     }
 
     public void End()

@@ -43,17 +43,17 @@ namespace Tutorial
             print(_current);
             if (_current == _start)
             {
-                first.Invoke();
+                first?.Invoke();
                 _firstInLine = true;
             }
             else if (_current == _end)
             {
-                last.Invoke();
+                last?.Invoke();
                 _firstInLine = true;
             }
             else if (_firstInLine)
             {
-                middle.Invoke();
+                middle?.Invoke();
                 _firstInLine = false;
             }
         }

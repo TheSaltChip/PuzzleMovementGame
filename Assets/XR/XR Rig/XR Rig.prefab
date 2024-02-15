@@ -9081,7 +9081,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1a4e7f5b038932b4c89617d5114acd6e,
         type: 3}
       propertyPath: m_Name
-      value: oculusControllerR
+      value: controllerR
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1a4e7f5b038932b4c89617d5114acd6e,
         type: 3}
@@ -9101,21 +9101,15 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2223639932434330405, guid: 1a4e7f5b038932b4c89617d5114acd6e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1a4e7f5b038932b4c89617d5114acd6e, type: 3}
---- !u!1 &1094559836431072255 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -2710625071132649123, guid: 1a4e7f5b038932b4c89617d5114acd6e,
+--- !u!23 &3640602439319320855 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1740852199066395723, guid: 1a4e7f5b038932b4c89617d5114acd6e,
     type: 3}
   m_PrefabInstance: {fileID: 6147770303289025186}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2753778705276667330 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -907994703797819552, guid: 1a4e7f5b038932b4c89617d5114acd6e,
-    type: 3}
-  m_PrefabInstance: {fileID: 6147770303289025186}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4947583113209229009 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -7928556202912232333, guid: 1a4e7f5b038932b4c89617d5114acd6e,
+--- !u!23 &4842351351162891195 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7610458430443189991, guid: 1a4e7f5b038932b4c89617d5114acd6e,
     type: 3}
   m_PrefabInstance: {fileID: 6147770303289025186}
   m_PrefabAsset: {fileID: 0}
@@ -9146,6 +9140,12 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!23 &6339499697041819823 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -9031078559272982003, guid: 1a4e7f5b038932b4c89617d5114acd6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6147770303289025186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6453708109724639219 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1a4e7f5b038932b4c89617d5114acd6e,
@@ -9171,7 +9171,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &6410706904760581151
+--- !u!114 &3002110402572462249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9180,33 +9180,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 6453708109724639219}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8be2912105f4d56a375e40a6b10f08f, type: 3}
+  m_Script: {fileID: 11500000, guid: 667c29443dd908e46ba5f49cc9495937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialData: {fileID: 11400000, guid: a42d00259eedbfb439223387aa935794, type: 2}
-  trigger: {fileID: 6835662728049119430}
-  grip: {fileID: 8571435711818713139}
-  a: {fileID: 9041673818264929135}
-  b: {fileID: 2753778705276667330}
-  joystick: {fileID: 4947583113209229009}
-  menu: {fileID: 1094559836431072255}
+  trigger: {fileID: 7660912210721223789}
+  grip: {fileID: 8427529024650308435}
+  a: {fileID: 6339499697041819823}
+  b: {fileID: 7799351419648929280}
+  joystick: {fileID: 3640602439319320855}
+  menu: {fileID: 4842351351162891195}
   materialContainer: {fileID: 11400000, guid: 836e7d055b9dbb84483e7b6b094ba12d, type: 2}
+  lookAt: {fileID: 4841829846070458746}
+  useLookAt: 0
   animator: {fileID: 5094775227136968881}
---- !u!1 &6835662728049119430 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 1a4e7f5b038932b4c89617d5114acd6e,
+  side: 1
+--- !u!114 &4841829846070458746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6453708109724639219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58febea3ca76bec40a488c6d0e6426eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationForFace: {x: 0, y: 0, z: 0}
+--- !u!23 &7660912210721223789 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -4683669308469848369, guid: 1a4e7f5b038932b4c89617d5114acd6e,
     type: 3}
   m_PrefabInstance: {fileID: 6147770303289025186}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8571435711818713139 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2567790492216568465, guid: 1a4e7f5b038932b4c89617d5114acd6e,
+--- !u!23 &7799351419648929280 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4138131101428223138, guid: 1a4e7f5b038932b4c89617d5114acd6e,
     type: 3}
   m_PrefabInstance: {fileID: 6147770303289025186}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &9041673818264929135 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2894476360537694669, guid: 1a4e7f5b038932b4c89617d5114acd6e,
+--- !u!23 &8427529024650308435 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2424586399420221937, guid: 1a4e7f5b038932b4c89617d5114acd6e,
     type: 3}
   m_PrefabInstance: {fileID: 6147770303289025186}
   m_PrefabAsset: {fileID: 0}
@@ -9320,7 +9336,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 48f8998958e02e944b815bc012c53d73,
         type: 3}
       propertyPath: m_Name
-      value: oculusControllerL
+      value: controllerL
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 48f8998958e02e944b815bc012c53d73,
         type: 3}
@@ -9340,39 +9356,39 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2223639932434330405, guid: 48f8998958e02e944b815bc012c53d73, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 48f8998958e02e944b815bc012c53d73, type: 3}
---- !u!1 &6596330133979485 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -907994703797819552, guid: 48f8998958e02e944b815bc012c53d73,
+--- !u!23 &1487886444666322312 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1740852199066395723, guid: 48f8998958e02e944b815bc012c53d73,
     type: 3}
   m_PrefabInstance: {fileID: 8318510196926506557}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2959045449565749088 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -2710625071132649123, guid: 48f8998958e02e944b815bc012c53d73,
+--- !u!23 &5340372767162559135 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4138131101428223138, guid: 48f8998958e02e944b815bc012c53d73,
     type: 3}
   m_PrefabInstance: {fileID: 8318510196926506557}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5824235320496180396 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2567790492216568465, guid: 48f8998958e02e944b815bc012c53d73,
+--- !u!23 &5508196357787463922 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -4683669308469848369, guid: 48f8998958e02e944b815bc012c53d73,
     type: 3}
   m_PrefabInstance: {fileID: 8318510196926506557}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6582703657062074352 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2894476360537694669, guid: 48f8998958e02e944b815bc012c53d73,
+--- !u!23 &5968558720641888204 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2424586399420221937, guid: 48f8998958e02e944b815bc012c53d73,
     type: 3}
   m_PrefabInstance: {fileID: 8318510196926506557}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7100299571598109262 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -7928556202912232333, guid: 48f8998958e02e944b815bc012c53d73,
+--- !u!23 &7283288795960209188 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7610458430443189991, guid: 48f8998958e02e944b815bc012c53d73,
     type: 3}
   m_PrefabInstance: {fileID: 8318510196926506557}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8718172279760409689 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 48f8998958e02e944b815bc012c53d73,
+--- !u!23 &8203976415166057520 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -9031078559272982003, guid: 48f8998958e02e944b815bc012c53d73,
     type: 3}
   m_PrefabInstance: {fileID: 8318510196926506557}
   m_PrefabAsset: {fileID: 0}
@@ -9401,7 +9417,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &592077331779557092
+--- !u!114 &6721529625840638339
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9410,15 +9426,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 9200890470782851948}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8be2912105f4d56a375e40a6b10f08f, type: 3}
+  m_Script: {fileID: 11500000, guid: 58febea3ca76bec40a488c6d0e6426eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationForFace: {x: 0, y: 0, z: 0}
+--- !u!114 &9015116576872905994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9200890470782851948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667c29443dd908e46ba5f49cc9495937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialData: {fileID: 11400000, guid: a42d00259eedbfb439223387aa935794, type: 2}
-  trigger: {fileID: 8718172279760409689}
-  grip: {fileID: 5824235320496180396}
-  a: {fileID: 6582703657062074352}
-  b: {fileID: 6596330133979485}
-  joystick: {fileID: 7100299571598109262}
-  menu: {fileID: 2959045449565749088}
+  trigger: {fileID: 5508196357787463922}
+  grip: {fileID: 5968558720641888204}
+  a: {fileID: 8203976415166057520}
+  b: {fileID: 5340372767162559135}
+  joystick: {fileID: 1487886444666322312}
+  menu: {fileID: 7283288795960209188}
   materialContainer: {fileID: 11400000, guid: 836e7d055b9dbb84483e7b6b094ba12d, type: 2}
+  lookAt: {fileID: 6721529625840638339}
+  useLookAt: 0
   animator: {fileID: 4105719893399168620}
+  side: 2

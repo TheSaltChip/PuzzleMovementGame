@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Tutorial
@@ -5,15 +6,17 @@ namespace Tutorial
     public class ControllerButtonSetUp : MonoBehaviour
     {
         [SerializeField] private TutorialData tutorialData;
-        [SerializeField] private GameObject trigger;
-        [SerializeField] private GameObject grip;
-        [SerializeField] private GameObject a;
-        [SerializeField] private GameObject b;
-        [SerializeField] private GameObject joystick;
-        [SerializeField] private GameObject menu;
+        [SerializeField] private MeshRenderer trigger;
+        [SerializeField] private MeshRenderer grip;
+        [SerializeField] private MeshRenderer a;
+        [SerializeField] private MeshRenderer b;
+        [SerializeField] private MeshRenderer joystick;
+        [SerializeField] private MeshRenderer menu;
         [SerializeField] private MaterialContainer materialContainer;
         [SerializeField] private ControllerLookAtHandler lookAt;
+        [SerializeField] private bool useLookAt;
         [SerializeField] private Animation animator;
+        [SerializeField] private SelectedHand side;
 
         private Material _ogTrigger;
         private Material _ogGrip;
@@ -22,77 +25,101 @@ namespace Tutorial
         private Material _ogJoystick;
         private Material _ogMenu;
 
+        private VRControllerButtons prev;
+        private MeshRenderer[] buttons;
+        private Material[] materials;
+
         private int _i;
 
-        private void Awake()
+
+        private void  OnEnable()
         {
-            _ogA = a.GetComponent<MeshRenderer>().material;
-            _ogB = b.GetComponent<MeshRenderer>().material;
-            _ogTrigger = trigger.GetComponent<MeshRenderer>().material;
-            _ogGrip = grip.GetComponent<MeshRenderer>().material;
-            _ogJoystick = joystick.GetComponent<MeshRenderer>().material;
-            _ogMenu = menu.GetComponent<MeshRenderer>().material;
+            buttons = new[] {trigger,grip,a,b,joystick,menu};
+            
+            /*_ogA = a.material;
+            _ogB = b.material;
+            _ogTrigger = trigger.material;
+            _ogGrip = grip.material;
+            _ogJoystick = joystick.material;
+            _ogMenu = menu.material;*/
+            materials = new[] { trigger.material, grip.material, a.material, b.material, joystick.material, menu.material };
+            prev = VRControllerButtons.Trigger;
         }
 
         public void ActivateAnimationAndGlow()
         {
-            a.GetComponent<MeshRenderer>().material = _ogA;
-            b.GetComponent<MeshRenderer>().material = _ogB;
-            trigger.GetComponent<MeshRenderer>().material = _ogTrigger;
-            grip.GetComponent<MeshRenderer>().material = _ogGrip;
-            joystick.GetComponent<MeshRenderer>().material = _ogJoystick;
-            menu.GetComponent<MeshRenderer>().material = _ogMenu;
+            if (!gameObject.activeSelf)
+            {
+                return;
+            }
+            var mat = materials[(int)prev];
+            buttons[(int)prev].material = mat;
+            animator.Stop();
+
+            if (side != tutorialData.selectedHand)
+            {
+                return;
+            }
+
+            if (useLookAt)
+            {
+                if (tutorialData.button is VRControllerButtons.Trigger or VRControllerButtons.Grip)
+                {
+                    lookAt.SideView();
+                }
+                else
+                {
+                    lookAt.TopView();
+                }
+            }
+            
+            
             switch (tutorialData.button)
             {
                 case VRControllerButtons.Trigger:
-                    trigger.GetComponent<MeshRenderer>().material = materialContainer.material;
+                    trigger.material = materialContainer.material;
                     animator.Play("CubeAction");
-                    lookAt.SideView();
                     break;
                 case VRControllerButtons.Grip:
-                    grip.GetComponent<MeshRenderer>().material = materialContainer.material;
+                    grip.material = materialContainer.material;
                     animator.Play("SideButtonAction");
-                    lookAt.SideView();
                     break;
                 case VRControllerButtons.A:
-                    a.GetComponent<MeshRenderer>().material = materialContainer.material;
-                    lookAt.TopView();
+                    a.material = materialContainer.material;
                     break;
                 case VRControllerButtons.B:
-                    b.GetComponent<MeshRenderer>().material = materialContainer.material;
-                    lookAt.TopView();
+                    b.material = materialContainer.material;
                     break;
                 case VRControllerButtons.Joystick:
-                    joystick.GetComponent<MeshRenderer>().material = materialContainer.material;
-                    lookAt.TopView();
-                    if (tutorialData.selectedHand == SelectedHand.Right)
+                    joystick.material = materialContainer.material;
+                    switch (tutorialData.selectedHand)
                     {
-                        if (_i == 0)
-                        {
+                        case SelectedHand.Right when _i == 0:
                             animator.Play("JoystickAction");
                             _i++;
-                        }
-                        else
-                        {
+                            break;
+                        case SelectedHand.Right:
                             animator.Play("Action");
                             _i--;
-                        }
-                    
-                    }else if (tutorialData.selectedHand == SelectedHand.Left)
-                    {
-                        animator.Play(("JoystickAction.001"));
+                            break;
+                        case SelectedHand.Left:
+                            animator.Play(("JoystickAction.001"));
+                            break;
+                        case SelectedHand.Both:
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
                     }
-                    lookAt.TopView();
                     break;
                 case VRControllerButtons.Menu:
-                    menu.GetComponent<MeshRenderer>().material = materialContainer.material;
-                    lookAt.TopView();
+                    menu.material = materialContainer.material;
                     animator.Play("MenuAction");
                     break;
                 default:
                     print("How did you get here?");
                     break;
             }
+            prev = tutorialData.button;
         }
     }
 }
