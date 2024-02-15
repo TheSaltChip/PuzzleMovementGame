@@ -8,18 +8,23 @@ namespace UI.PatternRecognition
     {
         [SerializeField] private PatternRecognitionRules patternRecognitionRules;
 
-        public UnityEvent onCheckSucceeded;
+        public UnityEvent<int> patternMaxLength;
 
         public void Check()
         {
-            if (patternRecognitionRules.CanRepeat) return;
-
             var dim = patternRecognitionRules.GridDimension;
-            
-            if (patternRecognitionRules.patternLength.value <= dim.x * dim.y) return;
-            
-            patternRecognitionRules.PatternLength = dim.x * dim.y;
-            onCheckSucceeded?.Invoke();
+
+            if (patternRecognitionRules.CanRepeat)
+            {
+                patternMaxLength?.Invoke(patternRecognitionRules.MaxPatternLength);
+                return;
+            }
+
+            if (patternRecognitionRules.patternLength.value > dim.x * dim.y)
+                patternRecognitionRules.PatternLength = dim.x * dim.y;
+
+
+            patternMaxLength?.Invoke(dim.x * dim.y);
         }
     }
 }

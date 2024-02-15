@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Autohand;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Variables;
 
 namespace SceneTransition
 {
@@ -22,8 +24,7 @@ namespace SceneTransition
         };
 
         [SerializeField] private FaderScreen faderScreen;
-
-        public static SceneTransitionManager Instance { get; private set; }
+        [SerializeField] private BoolVariable sceneChanged;
 
         public UnityEvent onSceneChanged;
         public UnityEvent onSceneExit;
@@ -31,20 +32,12 @@ namespace SceneTransition
 
         private AsyncOperation _loadLevelOperation;
 
-        private void Awake()
+        private void Start()
         {
-            if (Instance != null)
-            {
-                Debug.LogWarning(
-                    $"Invalid configuration. Duplicate Instances found! First one: {Instance.name} Second one: {name}. Destroying second one.");
-                Destroy(gameObject);
-                return;
-            }
+            if(!sceneChanged.value) return;
 
-            SceneManager.activeSceneChanged += HandleSceneChange;
-
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            sceneChanged.value = false;
+            HandleSceneChange();
         }
 
         public void LoadScene(string sceneName)
@@ -62,6 +55,7 @@ namespace SceneTransition
             onSceneExit?.Invoke();
 
             _loadLevelOperation.allowSceneActivation = true;
+            sceneChanged.value = true;
         }
         // Custom method for calling fader screen and letting it fade completely out before changing scene
 
@@ -84,12 +78,12 @@ namespace SceneTransition
                 _startingPosRot.Rotation);
         }
 
-        private void HandleSceneChange(Scene oldScene, Scene newScene)
+        private void HandleSceneChange()
         {
-            StartCoroutine(HandleSceneChangeCoroutine(oldScene, newScene));
+            StartCoroutine(HandleSceneChangeCoroutine());
         }
 
-        private IEnumerator HandleSceneChangeCoroutine(Scene oldScene, Scene newScene)
+        private IEnumerator HandleSceneChangeCoroutine()
         {
             onSceneChanged?.Invoke();
 

@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Completables;
 using PatternRecognition.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace PatternRecognition
 {
@@ -30,6 +32,11 @@ namespace PatternRecognition
             _buttons = GetComponentsInChildren<ColorButtonCompletable>();
             _co = null;
             patternRecognitionRules.IsPatternCreated = false;
+        }
+
+        private void Start()
+        {
+            CreatePattern();
         }
 
         public void ResetValues()
@@ -101,7 +108,7 @@ namespace PatternRecognition
             if (_pattern.Count == 0) return;
 
             var patternIndex = patternRecognitionRules.PatternIndex;
-            
+
             for (var buttonIndex = 0; buttonIndex < _buttons.Length; buttonIndex++)
             {
                 var currentButton = _buttons[buttonIndex];
@@ -118,13 +125,14 @@ namespace PatternRecognition
 
                 currentButton.ResetState();
                 patternRecognitionRules.patternIndex.Increment();
+                ++patternIndex;
 
                 if (patternRecognitionRules.BestScore < patternIndex)
                 {
                     patternRecognitionRules.BestScore = patternIndex;
                 }
 
-                var patternIsNotDone = patternIndex != _pattern.Count;
+                var patternIsNotDone = patternIndex < _pattern.Count;
 
                 if (patternIsNotDone) break;
 

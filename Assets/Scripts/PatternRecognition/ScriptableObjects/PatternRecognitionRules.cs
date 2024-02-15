@@ -10,6 +10,7 @@ namespace PatternRecognition.ScriptableObjects
         public Vector2IntVariable gridDimension;
         public IntVariable patternLength;
         public IntVariable patternIndex;
+        public IntVariable maxPatternLength;
         public IntVariable bestScore;
         public BoolVariable canRepeat;
         public BoolVariable isPatternCreated;
@@ -30,6 +31,12 @@ namespace PatternRecognition.ScriptableObjects
         {
             get => patternIndex.value;
             set => patternIndex.value = value;
+        }
+        
+        public int MaxPatternLength
+        {
+            get => maxPatternLength.value;
+            set => maxPatternLength.value = value;
         }
 
         public int BestScore
