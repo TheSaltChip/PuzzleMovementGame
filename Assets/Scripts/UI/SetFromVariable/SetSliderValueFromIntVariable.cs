@@ -2,21 +2,22 @@
 using UnityEngine.UI;
 using Variables;
 
-namespace UI
+namespace UI.SetFromVariable
 {
     public class SetSliderValueFromIntVariable : MonoBehaviour
     {
         [SerializeField] private IntVariable variable;
         [SerializeField] private Slider slider;
+        [SerializeField] private float factor = 1f;
 
         private void Awake()
         {
-            slider.value = variable.value;
+            slider.value = variable.value * factor;
         }
 
         public void SetValue()
         {
-            slider.value = variable.value;
+            slider.value = variable.value * factor;
         }
     }
 }

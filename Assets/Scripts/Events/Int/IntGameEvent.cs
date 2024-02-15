@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Events.Int
 {
-    [CreateAssetMenu(fileName = "GameEvent", menuName = "Events/IntGameEvent")]
+    [CreateAssetMenu(fileName = "IntGameEvent", menuName = "Events/IntGameEvent")]
     public class IntGameEvent : ScriptableObject
     {
         private List<IntGameEventListener> _listeners = new();

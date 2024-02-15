@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using Variables;
 
-namespace UI
+namespace UI.SetFromVariable
 {
     public class SetToggleValueFromBoolVariable : MonoBehaviour
     {
