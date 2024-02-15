@@ -70,7 +70,7 @@ namespace UI
             var sceneCount = SceneManager.sceneCountInBuildSettings;
             var optionDataList = new List<TMP_Dropdown.OptionData>();
 
-            for (var i = 1; i < sceneCount; i++)
+            for (var i = 0; i < sceneCount; i++)
             {
                 var sceneName = SceneUtility.GetScenePathByBuildIndex(i)
                     .Split('/')

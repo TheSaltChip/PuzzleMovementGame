@@ -18,7 +18,7 @@ namespace Lobby
         {
             var sceneCount = SceneManager.sceneCountInBuildSettings;
 
-            for (var i = 2; i < sceneCount; i++)
+            for (var i = 1; i < sceneCount; i++)
             {
                 var sceneName = SceneUtility.GetScenePathByBuildIndex(i)
                     .Split('/')
