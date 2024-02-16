@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 using Variables;
 
 namespace PatternRecognition.ScriptableObjects
@@ -14,6 +13,17 @@ namespace PatternRecognition.ScriptableObjects
         public IntVariable bestScore;
         public BoolVariable canRepeat;
         public BoolVariable isPatternCreated;
+
+        public void SetDefaultValues()
+        {
+            gridDimension.value = new Vector2Int(3, 3);
+            patternLength.value = 0;
+            patternIndex.value = 0;
+            maxPatternLength.value = 20;
+            bestScore.value = 0;
+            canRepeat.value = true;
+            isPatternCreated.value = false;
+        }
 
         public Vector2Int GridDimension
         {
@@ -32,7 +42,7 @@ namespace PatternRecognition.ScriptableObjects
             get => patternIndex.value;
             set => patternIndex.value = value;
         }
-        
+
         public int MaxPatternLength
         {
             get => maxPatternLength.value;

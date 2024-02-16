@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Localization.Components;
-using UnityEngine.Serialization;
 using Variables;
 
 namespace UI.PatternRecognition

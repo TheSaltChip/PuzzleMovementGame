@@ -1,8 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using Util;
-
 namespace CardMemorization.Strategies
 {
     public class AllNumberCompare : IRuleCompare

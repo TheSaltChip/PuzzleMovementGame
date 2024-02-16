@@ -6671,8 +6671,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9170111042147800859}
   - component: {fileID: 9188313607493997593}
-  - component: {fileID: 3872354606423164437}
-  - component: {fileID: 4450379740873857266}
+  - component: {fileID: 6768789777992919907}
+  - component: {fileID: 4283554874965695892}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -6730,7 +6730,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &3872354606423164437
+--- !u!114 &6768789777992919907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6746,10 +6746,10 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4450379740873857266}
-        m_TargetAssemblyTypeName: UI.ThrowOnTarget.SetSelectedButtonFromDistanceBetweenStages,
+      - m_Target: {fileID: 4283554874965695892}
+        m_TargetAssemblyTypeName: UI.ThrowOnTarget.SetSelectedButtonFromIntVariable,
           Assembly-CSharp
-        m_MethodName: Set
+        m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6759,7 +6759,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4450379740873857266
+--- !u!114 &4283554874965695892
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6768,12 +6768,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4009139119245602789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b890094c67a249b580619e960b32f297, type: 3}
+  m_Script: {fileID: 11500000, guid: 962c35f98ce84f809657c13d7ed316ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceBetweenStages: {fileID: 11400000, guid: def7d79df9b0a0e4d9df1684bce99afd,
-    type: 2}
-  buttonSelectedEvent: {fileID: 11400000, guid: cfdb6a8183e714243a97c9458bb9a7dd,
+  id: {fileID: 11400000, guid: afb3b4b1ddb0973409347fc27f01d50e, type: 2}
+  buttonGroupGameEvent: {fileID: 11400000, guid: cfdb6a8183e714243a97c9458bb9a7dd,
     type: 2}
 --- !u!1 &4079047563157911477
 GameObject:
@@ -9899,6 +9898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a414ebcc3440778b6f1f1352beca3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  factor: 1
   onConverted:
     m_PersistentCalls:
       m_Calls:
@@ -9928,6 +9928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   variable: {fileID: 11400000, guid: 0e7dc66a46976cd4089a75aa1d8efc4a, type: 2}
   slider: {fileID: 397712123569966353}
+  factor: 1
 --- !u!114 &1942611377631281847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11526,6 +11527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   variable: {fileID: 11400000, guid: 10215c79204f2dd49895f2b26f8f42fe, type: 2}
   slider: {fileID: 1474682759213143315}
+  factor: 1
 --- !u!114 &8237766035632592556
 MonoBehaviour:
   m_ObjectHideFlags: 0

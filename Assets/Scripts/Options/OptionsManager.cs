@@ -2,8 +2,6 @@
 using Constants;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
-using Variables;
 
 namespace Options
 {

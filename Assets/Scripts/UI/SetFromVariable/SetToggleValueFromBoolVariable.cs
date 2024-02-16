@@ -9,7 +9,7 @@ namespace UI.SetFromVariable
         [SerializeField] private BoolVariable variable;
         [SerializeField] private Toggle slider;
 
-        private void Awake()
+        private void Start()
         {
             slider.isOn = variable.value;
         }

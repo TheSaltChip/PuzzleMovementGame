@@ -326,7 +326,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4948373825488484663}
   - component: {fileID: 1857484476}
-  - component: {fileID: 1857484480}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -369,7 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 909ae4a22c694c9448b23384a84e390c, type: 2}
+  Event: {fileID: 11400000, guid: 46a0558606d94ea44a10a25e12a18925, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
@@ -385,21 +384,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1857484480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 129985275379117884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 693b17f890a242978246cce7c9c8548f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEventListener: {fileID: 1857484476}
-  additionalGameEvents:
-  - {fileID: 11400000, guid: 46a0558606d94ea44a10a25e12a18925, type: 2}
 --- !u!1 &185228428234308313
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,7 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 88f8cb261442f7146ae1d189cd1d05c9, type: 2}
+  Event: {fileID: 11400000, guid: a9218bd0bc0f36a4aa215ff7b16e8982, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
@@ -1503,7 +1487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 409226b0e15293b47bb0e7bcff68ee6b, type: 2}
+  Event: {fileID: 11400000, guid: 7486ee723e1b3854498c40939774017f, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
@@ -9503,7 +9487,7 @@ Canvas:
   m_GameObject: {fileID: 6418350994228278499}
   m_Enabled: 0
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -10533,6 +10517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a414ebcc3440778b6f1f1352beca3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  factor: 1
   onConverted:
     m_PersistentCalls:
       m_Calls:
@@ -12627,6 +12612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a414ebcc3440778b6f1f1352beca3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  factor: 1
   onConverted:
     m_PersistentCalls:
       m_Calls:
@@ -12804,6 +12790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a414ebcc3440778b6f1f1352beca3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  factor: 1
   onConverted:
     m_PersistentCalls:
       m_Calls:

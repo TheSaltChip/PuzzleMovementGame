@@ -1,7 +1,9 @@
-﻿using Puzzle.Scriptables;
+﻿using System;
+using Puzzle.Scriptables;
 using UnityEngine;
 using UnityEngine.Events;
 using Util.PRS;
+using Random = UnityEngine.Random;
 
 namespace Puzzle.SpawnPos
 {
@@ -18,24 +20,35 @@ namespace Puzzle.SpawnPos
         public UnityEvent changedImage;
 
         private GameObject[] pieces;
+        private int nextPieceIndex;
+
+        private void Awake()
+        {
+            pieces = new GameObject[25];
+            nextPieceIndex = 0;
+
+            for (var i = 0; i < 25; i++)
+            {
+                var piece = Instantiate(puzzlePiecePrefab);
+                piece.SetActive(false);
+                pieces[i] = piece;
+            }
+        }
 
         public void SetUpPieces()
         {
-            if (pieces != null)
+            foreach (var piece in pieces)
             {
-                foreach (var piece in pieces)
-                {
-                    Destroy(piece);
-                }
+                piece.SetActive(false);
             }
+
+            nextPieceIndex = 0;
 
             var height = puzzleBoardDimensions.Height;
             var width = puzzleBoardDimensions.Width;
 
             puzzleImageQuads.quads = new Quad[height * width];
             puzzleImageQuads.rearrangedQuads = new Quad[height * width];
-
-            pieces = new GameObject[height * width];
 
             var tex = selectedImage.currentSelected;
 
@@ -48,8 +61,6 @@ namespace Puzzle.SpawnPos
                 spawnPoints.GetLayerCopy(1),
                 spawnPoints.GetLayerCopy(2),
             };
-
-            var av = 0;
 
             for (var col = 0; col < height; col++)
             for (var row = 0; row < width; row++)
@@ -75,25 +86,26 @@ namespace Puzzle.SpawnPos
                 var rect = new Rect(row * (tex.width / width), col * (tex.height / height),
                     tex.width / width, tex.height / height);
 
-                var piece = Instantiate(puzzlePiecePrefab);
-                piece.name = av.ToString();
-                pieces[av++] = piece;
+                var piece = pieces[nextPieceIndex];
+                piece.name = nextPieceIndex.ToString();
+                piece.SetActive(true);
+                ++nextPieceIndex;
 
                 var tr = piece.transform;
 
-                if (false)
+                if (true)
                 {
                     var randomLayer = Random.Range(0, 3);
                     var spawnLayer = spawnLayers[randomLayer];
                     var randomPos = Random.Range(0, spawnLayer.Count);
-                    
+
                     var posRotScl = spawnLayer[randomPos];
                     var randomAngleOffset = Random.Range(0, 4);
 
                     posRotScl.rotation.z *= randomAngleOffset;
-
+                    tr.SetParent(null);
                     tr.SetFromPosRotScl(posRotScl);
-                    tr.parent = gameObject.transform;
+                    tr.SetParent(gameObject.transform);
                     spawnLayer.RemoveAt(randomPos);
                 }
                 else

@@ -1,6 +1,4 @@
-using System;
 using NaughtyAttributes;
-using SceneTransition;
 using UnityEngine;
 using UnityEngine.Events;
 using Variables;

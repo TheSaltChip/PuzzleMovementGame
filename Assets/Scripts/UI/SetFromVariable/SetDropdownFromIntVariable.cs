@@ -9,6 +9,11 @@ namespace UI.SetFromVariable
         [SerializeField] private TMP_Dropdown turnDropdown;
         [SerializeField] private IntVariable variable;
 
+        private void Start()
+        {
+            Set();
+        }
+
         public void Set()
         {
             turnDropdown.SetValueWithoutNotify(variable.value);
