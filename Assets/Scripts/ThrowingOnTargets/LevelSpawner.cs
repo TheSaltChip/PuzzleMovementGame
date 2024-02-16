@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.Pool;
 using UnityEngine.Serialization;
 using Util;
+using Util.PRS;
 using Variables;
 
 namespace ThrowingOnTargets
@@ -21,7 +22,7 @@ namespace ThrowingOnTargets
 
         private IObjectPool<GameObject> _targets;
         private Coroutine _setupCoroutine;
-        private WaitForSeconds _waitFor100Milliseconds;
+        private WaitForSeconds _waitFor50Milliseconds;
 
         private struct Plane
         {
@@ -46,7 +47,7 @@ namespace ThrowingOnTargets
 
                 return go;
             }, o => o.SetActive(true), obj => obj.SetActive(false), Destroy);
-            _waitFor100Milliseconds = new WaitForSeconds(0.1f);
+            _waitFor50Milliseconds = new WaitForSeconds(0.05f);
         }
 
         public void SetupLevel()
@@ -99,7 +100,7 @@ namespace ThrowingOnTargets
                             posRotScls.Add(new PosRotScl
                             {
                                 // ReSharper disable once PossibleLossOfFraction
-                                location = new Vector3(
+                                position = new Vector3(
                                     x * 0.75f - throwLevelRules.XSize * 0.375f + 0.375f,
                                     y * 0.75f - throwLevelRules.YSize * 0.375f + 0.375f,
                                     i * throwLevelRules.DistBetweenStages),
@@ -145,7 +146,7 @@ namespace ThrowingOnTargets
                         posRotScls.Add(new PosRotScl
                         {
                             // ReSharper disable once PossibleLossOfFraction
-                            location = new Vector3(
+                            position = new Vector3(
                                 x * 0.75f - throwLevelRules.XSize * 0.375f + 0.75f,
                                 y * 0.75f - throwLevelRules.YSize * 0.375f + 0.75f,
                                 i * throwLevelRules.DistBetweenStages),
@@ -185,11 +186,11 @@ namespace ThrowingOnTargets
         {
             for (var i = 0; i < posRotScl.Count; i++)
             {
-                yield return _waitFor100Milliseconds;
+                yield return _waitFor50Milliseconds;
                 var t = _targets.Get();
 
                 t.transform.SetLocalPositionAndRotation(
-                    posRotScl[i].location,
+                    posRotScl[i].position,
                     Quaternion.Euler(posRotScl[i].rotation));
                 t.transform.localScale = posRotScl[i].scale;
             }

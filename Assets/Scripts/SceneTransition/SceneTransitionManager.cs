@@ -1,50 +1,30 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Autohand;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Variables;
 
 namespace SceneTransition
 {
     [DisallowMultipleComponent]
     public class SceneTransitionManager : MonoBehaviour
     {
-        private struct PosRot
-        {
-            public Vector3 Position;
-            public Quaternion Rotation;
-        }
-
-        private PosRot _startingPosRot = new()
-        {
-            Position = new Vector3(0, 0.5f, 0),
-            Rotation = Quaternion.identity
-        };
-
         [SerializeField] private FaderScreen faderScreen;
-
-        public static SceneTransitionManager Instance { get; private set; }
-
-        public UnityEvent onSceneChanged;
-        public UnityEvent onSceneExit;
+        [SerializeField] private BoolVariable sceneChanged;
+ 
         public UnityEvent onSceneEnter;
+        public UnityEvent onSceneExit;
 
         private AsyncOperation _loadLevelOperation;
 
-        private void Awake()
+        private void Start()
         {
-            if (Instance != null)
-            {
-                Debug.LogWarning(
-                    $"Invalid configuration. Duplicate Instances found! First one: {Instance.name} Second one: {name}. Destroying second one.");
-                Destroy(gameObject);
-                return;
-            }
+            if (!sceneChanged.value) return;
 
-            SceneManager.activeSceneChanged += HandleSceneChange;
-
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            sceneChanged.value = false;
+            HandleSceneChange();
         }
 
         public void LoadScene(string sceneName)
@@ -62,41 +42,18 @@ namespace SceneTransition
             onSceneExit?.Invoke();
 
             _loadLevelOperation.allowSceneActivation = true;
-        }
-        // Custom method for calling fader screen and letting it fade completely out before changing scene
-
-
-        private void SetStartPositionAndRotation()
-        {
-            var go = GameObject.FindWithTag("SpawnPoint");
-
-            if (go != null)
-            {
-                _startingPosRot = new PosRot
-                {
-                    Position = go.transform.position,
-                    Rotation = go.transform.rotation
-                };
-            }
-
-            AutoHandPlayer.Instance.SetPosition(
-                _startingPosRot.Position,
-                _startingPosRot.Rotation);
+            sceneChanged.value = true;
         }
 
-        private void HandleSceneChange(Scene oldScene, Scene newScene)
+        private void HandleSceneChange()
         {
-            StartCoroutine(HandleSceneChangeCoroutine(oldScene, newScene));
+            StartCoroutine(HandleSceneChangeCoroutine());
         }
 
-        private IEnumerator HandleSceneChangeCoroutine(Scene oldScene, Scene newScene)
+        private IEnumerator HandleSceneChangeCoroutine()
         {
-            onSceneChanged?.Invoke();
-
-            SetStartPositionAndRotation();
-            
             onSceneEnter?.Invoke();
-            
+
             yield return StartCoroutine(faderScreen.FadeRoutine(Color.black, Color.clear));
 
             _loadLevelOperation = null;

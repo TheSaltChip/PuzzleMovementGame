@@ -7052,6 +7052,81 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &3087137167709181450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4679374957979600054}
+  - component: {fileID: 5389807557159463039}
+  - component: {fileID: 8634027073990368664}
+  m_Layer: 0
+  m_Name: SetOptions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4679374957979600054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3087137167709181450}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6202875569655291958}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5389807557159463039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3087137167709181450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eef02797b2b843439942a224faaed3b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOptions: {fileID: 11400000, guid: aea3eb7c852951544983ad3d0a2f40ad, type: 2}
+  autoHandPlayer: {fileID: 6202875569655291961}
+--- !u!114 &8634027073990368664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3087137167709181450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ed662b9d538248946bef581aa77f57f7, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5389807557159463039}
+        m_TargetAssemblyTypeName: Options.SetOptionsOnXRRig, Assembly-CSharp
+        m_MethodName: Set
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4592518573342421562
 GameObject:
   m_ObjectHideFlags: 0
@@ -7867,7 +7942,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7292963240484694954}
   - component: {fileID: 7916534086470339118}
-  - component: {fileID: 5452786011085727098}
   m_Layer: 0
   m_Name: XR Rig
   m_TagString: Untagged
@@ -7932,18 +8006,6 @@ MonoBehaviour:
     - PICO
     position: {x: 0.005, y: -0.016, z: 0.014}
     rotation: {x: -5, y: -2, z: 15}
---- !u!114 &5452786011085727098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7292963240484694957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71bbf794b87de544b9645fd47638a24a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3210158274575397289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8496,7 +8558,7 @@ PrefabInstance:
     - target: {fileID: 8588214066681098085, guid: 464eed047f51b0440a6b0e54f305d77d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8976515794174344927, guid: 464eed047f51b0440a6b0e54f305d77d,
         type: 3}

@@ -17,8 +17,8 @@ namespace UI.PatternRecognition
         [Serializable]
         private class PatRecArguments
         {
-            public int currentPatternSize;
-            public int currentButtonNum;
+            public int currentPatternLength;
+            public int buttonsLeft;
             public int bestScore;
             public bool isPatternCreated;
         }
@@ -29,8 +29,8 @@ namespace UI.PatternRecognition
         {
             _arguments = new PatRecArguments
             {
-                currentPatternSize = patternLength.value,
-                currentButtonNum = patternIndex.value+1,
+                currentPatternLength = patternLength.value,
+                buttonsLeft = patternLength.value - patternIndex.value,
                 bestScore = bestScore.value,
                 isPatternCreated = isPatternCreated.value
             };
@@ -43,20 +43,27 @@ namespace UI.PatternRecognition
 
         public void SetupString()
         {
-            _arguments.currentPatternSize = patternLength.value;
-            _arguments.currentButtonNum = patternIndex.value + 1;
+            _arguments.currentPatternLength = patternLength.value;
+            _arguments.buttonsLeft = patternLength.value - patternIndex.value;
             _arguments.bestScore = bestScore.value;
             _arguments.isPatternCreated = isPatternCreated.value;
-            
+
             localizeStringEvent.RefreshString();
         }
 
         public void UpdateString()
         {
-            _arguments.currentButtonNum = patternIndex.value + 1;
+            _arguments.buttonsLeft = patternLength.value - patternIndex.value;
             _arguments.bestScore = bestScore.value;
             _arguments.isPatternCreated = isPatternCreated.value;
-            
+
+            localizeStringEvent.RefreshString();
+        }
+
+        public void UpdatePatternLength()
+        {
+            _arguments.currentPatternLength = patternLength.value;
+            _arguments.buttonsLeft = patternLength.value - patternIndex.value;
             localizeStringEvent.RefreshString();
         }
     }

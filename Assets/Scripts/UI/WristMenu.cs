@@ -1,12 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
-using SceneTransition;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using UnityEngine.XR;
 
 namespace UI
 {
@@ -14,20 +13,45 @@ namespace UI
     {
         [SerializeField] private GameObject canvas;
         [SerializeField] private TMP_Dropdown dropdown;
-        [SerializeField] private TMP_Text deviceName;
+        [SerializeField] private TMP_Text debugText;
+
+        private Dictionary<string, string> debugLogs = new();
 
         public UnityEvent<string> changeScene;
-        
+
+        private void OnEnable()
+        {
+            Application.logMessageReceived += HandleException;
+        }
+
+        private void OnDisable()
+        {
+            Application.logMessageReceived -= HandleException;
+        }
+
+        private void HandleException(string condition, string stacktrace, LogType type)
+        {
+            if (type is LogType.Exception)
+            {
+                var splitString = condition.Split(':');
+                var debugKey = splitString[0];
+                var debugValue = splitString.Length > 1 ? splitString[1] + "\n" + stacktrace : "";
+
+                debugLogs[debugKey] = debugValue;
+            }
+
+            var sb = new StringBuilder();
+
+            foreach (var log in debugLogs)
+            {
+                sb.AppendLine(log.Value == "" ? log.Key : $"{log.Key}: {log.Value}");
+            }
+
+            debugText.text = sb.ToString();
+        }
+
         private void Start()
         {
-            List<InputDevice> devices = new List<InputDevice>();
-            InputDevices.GetDevices(devices);
-
-            foreach (var device in devices)
-            {
-                deviceName.text += device.name + "\n";
-            }
-            
             ListScenes();
         }
 
@@ -46,13 +70,13 @@ namespace UI
             var sceneCount = SceneManager.sceneCountInBuildSettings;
             var optionDataList = new List<TMP_Dropdown.OptionData>();
 
-            for (var i = 1; i < sceneCount; i++)
+            for (var i = 0; i < sceneCount; i++)
             {
                 var sceneName = SceneUtility.GetScenePathByBuildIndex(i)
                     .Split('/')
                     .Last()
                     .Split('.')[0];
-            
+
                 optionDataList.Add(new TMP_Dropdown.OptionData(sceneName));
             }
 

@@ -1,6 +1,8 @@
 ﻿using ThrowingOnTargets.Saveable;
 using ThrowingOnTargets.ScriptableObjects;
 using UnityEngine;
+using Util;
+using Util.PRS;
 
 namespace ThrowingOnTargets
 {
@@ -59,7 +61,7 @@ namespace ThrowingOnTargets
             {
                 stage.posRots[i] = new PosRotScl()
                 {
-                    location = places[i],
+                    position = places[i],
                     rotation = new Vector3(90, 0, 180),
                     scale = Vector3.one
                 };
