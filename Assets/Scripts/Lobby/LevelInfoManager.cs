@@ -37,6 +37,9 @@ namespace Lobby
 
                 var hoverActions = button.GetComponentInChildren<LevelButtonHoverActions>();
                 hoverActions.SetStringEntry(sceneName + "Info");
+                
+                var sceneInfo = button.GetComponentInChildren<SceneName>();
+                sceneInfo.sceneName = sceneName;
             }
         }
     }
