@@ -2232,6 +2232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 630040447}
   - component: {fileID: 630040446}
+  - component: {fileID: 630040448}
   m_Layer: 0
   m_Name: MenuActions
   m_TagString: Untagged
@@ -2282,6 +2283,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &630040448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630040445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6ca6fa11d5c4e6db7f8218b26c3ef49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 0
+  activate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 2b2cbe28ca043ac4f9be71c1e4b1289b, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &679671610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2775,6 +2804,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f8dd01318b4710540b08ddf16d9200df, type: 2}
+    - target: {fileID: 2615502882285641251, guid: d5009ccc8dc1db54086659e31e724240,
+        type: 3}
+      propertyPath: lookAt.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615502882285641251, guid: d5009ccc8dc1db54086659e31e724240,
+        type: 3}
+      propertyPath: lookAt.z
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 2615502882389060096, guid: d5009ccc8dc1db54086659e31e724240,
         type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
@@ -2852,6 +2891,16 @@ PrefabInstance:
       propertyPath: first.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2615502882805499993, guid: d5009ccc8dc1db54086659e31e724240,
+        type: 3}
+      propertyPath: lookAt.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615502882805499993, guid: d5009ccc8dc1db54086659e31e724240,
+        type: 3}
+      propertyPath: lookAt.z
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 2615502883842786026, guid: d5009ccc8dc1db54086659e31e724240,
         type: 3}
       propertyPath: selectedHand
@@ -2887,7 +2936,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f8dd01318b4710540b08ddf16d9200df, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2615502882805500004, guid: d5009ccc8dc1db54086659e31e724240, type: 3}
+    - {fileID: 2615502882805499994, guid: d5009ccc8dc1db54086659e31e724240, type: 3}
+    - {fileID: 2615502882805499995, guid: d5009ccc8dc1db54086659e31e724240, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d5009ccc8dc1db54086659e31e724240, type: 3}
 --- !u!1 &853263642
 GameObject:

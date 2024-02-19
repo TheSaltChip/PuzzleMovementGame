@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Tutorial
@@ -13,17 +12,14 @@ namespace Tutorial
         [SerializeField] private MeshRenderer joystick;
         [SerializeField] private MeshRenderer menu;
         [SerializeField] private MaterialContainer materialContainer;
-        [SerializeField] private ControllerLookAtHandler lookAt;
+        [SerializeField] private Vector3 lookAt;
         [SerializeField] private bool useLookAt;
         [SerializeField] private Animation animator;
         [SerializeField] private SelectedHand side;
 
-        private Material _ogTrigger;
-        private Material _ogGrip;
-        private Material _ogA;
-        private Material _ogB;
-        private Material _ogJoystick;
-        private Material _ogMenu;
+        private Quaternion ogRotation;
+        private Transform tr;
+        private bool started;
 
         private VRControllerButtons prev;
         private MeshRenderer[] buttons;
@@ -32,11 +28,14 @@ namespace Tutorial
         private int _i;
 
 
-        private void  OnEnable()
+        private void  SetUpMaterials()
         {
+            tr = gameObject.transform;
+            ogRotation = tr.rotation;
             buttons = new[] {trigger,grip,a,b,joystick,menu};
             materials = new[] { trigger.material, grip.material, a.material, b.material, joystick.material, menu.material };
             prev = VRControllerButtons.Trigger;
+            started = true;
         }
 
         public void ActivateAnimationAndGlow()
@@ -45,25 +44,28 @@ namespace Tutorial
             {
                 return;
             }
+
+            if (!started)
+            {
+                SetUpMaterials();
+            }
             var mat = materials[(int)prev];
             buttons[(int)prev].material = mat;
             animator.Stop();
+            
+            print(side);
 
             if (side != tutorialData.selectedHand)
             {
-                return;
+                if (tutorialData.selectedHand != SelectedHand.Both)
+                {
+                    return;
+                }
             }
 
             if (useLookAt)
             {
-                if (tutorialData.button is VRControllerButtons.Trigger or VRControllerButtons.Grip)
-                {
-                    lookAt.SideView();
-                }
-                else
-                {
-                    lookAt.TopView();
-                }
+                tr.rotation = tutorialData.button is VRControllerButtons.Trigger or VRControllerButtons.Grip ? ogRotation : Quaternion.Euler(lookAt);
             }
             
             print(tutorialData.button);
@@ -104,7 +106,8 @@ namespace Tutorial
                         case SelectedHand.Both:
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException();
+                            print("You should not be here");
+                            break;
                     }
                     break;
                 case VRControllerButtons.Menu:
