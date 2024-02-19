@@ -16,79 +16,51 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: c2cb86e0e860e064b89695e1c83454a2, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 1413895435646926852
   m_TableData:
   - m_Id: 8000290816
     m_Localized: A hub for traveling to other scenes.
     m_Metadata:
       m_Items: []
   - m_Id: 11657723904
-    m_Localized: This scene contains a walkthrough of the Oculus controller functions.
+    m_Localized: Find and match figures that have the same shape and color in the
+      fastest time possible.
     m_Metadata:
       m_Items: []
   - m_Id: 14476296192
-    m_Localized: This scene was used in order to test how throwing worked during
-      attempts at improving this feature.
+    m_Localized: Hit all the targets that spawn in the shortest time possible.
     m_Metadata:
       m_Items: []
   - m_Id: 17127096320
-    m_Localized: This scene was used during the production of the throwing at targets
-      activity.
+    m_Localized: Collect jigsaw pieces and put them together to create a picture.
     m_Metadata:
       m_Items: []
   - m_Id: 21430452224
-    m_Localized: A small area containing a recognition board and a puzzling are.
-      This is a demo scene.
+    m_Localized: Memorize a sequence a set of buttons are lit up in, and then press
+      the same sequence of buttons.
     m_Metadata:
       m_Items: []
   - m_Id: 26203570176
-    m_Localized: This is a forest containing a puzzle bord and hidden pieces. This
-      is a demonstration of a potential level solution.
+    m_Localized: Pattern{var:\n| }Recognition
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 1413895435646926852
   - m_Id: 32323059712
-    m_Localized: Scene used during production of painting functionality.
+    m_Localized: Jigsaw{var:\n| }Puzzle
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 1413895435646926852
   - m_Id: 36106321920
-    m_Localized: This is a climbable map used as a test for light baking and climbing.
+    m_Localized: Figure{var:\n| }Matching
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 1413895435646926852
   - m_Id: 39881195520
-    m_Localized: Sets up a singleton of the VR rig (No content).
+    m_Localized: Ball{var:\n| }Throwing
     m_Metadata:
-      m_Items: []
-  - m_Id: 7277437960192
-    m_Localized: Scene containing a single grenade making noise untill it is picked
-      up. NB! It is not recomended to enter this scene due to constant annoying sound.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8015190867968
-    m_Localized: This is a preview of the intended artstyle for the game.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8382934859776
-    m_Localized: Auto Hand demo scene.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8645074665472
-    m_Localized: Scene used while making framework for completing tasks.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8899392094208
-    m_Localized: Level with pattern recognition. The name stems from an earlier version
-      with colors.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 9435583528960
-    m_Localized: Scene with card matching game. NB! contains a bugg where the player
-      can suddenly be turned around.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 10192500211712
-    m_Localized: Start Menu.
-    m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 1413895435646926852
   - m_Id: 1496339810271232
     m_Localized: Select the next world
     m_Metadata:
@@ -99,4 +71,8 @@ MonoBehaviour:
       m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 1413895435646926852
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00c09a860700000000c0da190600000000c01a680800000000c01a4909000000

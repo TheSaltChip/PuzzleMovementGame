@@ -1,11 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using CardMemorization.Enums;
 using CardMemorization.Strategies;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace CardMemorization
 {

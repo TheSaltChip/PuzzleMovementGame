@@ -4,7 +4,6 @@ using ThrowingOnTargets.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Pool;
-using UnityEngine.Serialization;
 using Util;
 using Util.PRS;
 using Variables;

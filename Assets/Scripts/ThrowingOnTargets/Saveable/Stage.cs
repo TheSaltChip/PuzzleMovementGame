@@ -1,6 +1,4 @@
 ﻿using System;
-using ThrowingOnTargets.ScriptableObjects;
-using Util;
 using Util.PRS;
 
 namespace ThrowingOnTargets.Saveable

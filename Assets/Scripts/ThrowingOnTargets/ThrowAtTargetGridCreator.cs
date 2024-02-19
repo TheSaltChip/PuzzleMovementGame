@@ -1,7 +1,6 @@
 ﻿using ThrowingOnTargets.Saveable;
 using ThrowingOnTargets.ScriptableObjects;
 using UnityEngine;
-using Util;
 using Util.PRS;
 
 namespace ThrowingOnTargets

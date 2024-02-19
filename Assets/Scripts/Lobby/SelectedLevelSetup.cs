@@ -1,4 +1,4 @@
-using TMPro;
+using UI.Lobby;
 using UnityEngine;
 
 namespace Lobby
@@ -7,10 +7,9 @@ namespace Lobby
     {
         [SerializeField] private SceneInfo sceneInfo;
 
-        // Sets scene information on interactive UI button
         public void SetSceneName()
         {
-            sceneInfo.sceneName = gameObject.GetComponentInChildren<TMP_Text>().text;
+            sceneInfo.sceneName = gameObject.GetComponentInChildren<SceneName>().sceneName;
         }
     }
 }

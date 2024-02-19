@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using SceneTransition;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;

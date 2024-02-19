@@ -349,7 +349,6 @@ GameObject:
   - component: {fileID: 2626148472099397918}
   - component: {fileID: 2626148472099397917}
   - component: {fileID: 3899418222635699970}
-  - component: {fileID: 5199603208597737949}
   - component: {fileID: 7519448342851784180}
   m_Layer: 0
   m_Name: Portal
@@ -466,34 +465,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5199603208597737949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2626148472099397916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: ecd7bd45cc67daf4db90a3bc139979a9, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3899418222635699970}
-        m_TargetAssemblyTypeName: Gate, Assembly-CSharp
-        m_MethodName: DeactivateGate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &7519448342851784180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,7 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: ba840275324bc534c991aecd26d1eb25, type: 2}
+  Event: {fileID: 11400000, guid: a4b26f8f2cde45842adccaeff039c573, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:

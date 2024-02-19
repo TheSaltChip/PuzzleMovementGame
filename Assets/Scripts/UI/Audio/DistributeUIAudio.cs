@@ -10,13 +10,17 @@ namespace UI.Audio
     {
         [SerializeField] private EventAudio eventAudio;
         [SerializeField] private AudioGameEvent audioGameEvent;
-        private void Awake() {
+
+        private void Start()
+        {
             var gameObjects = new List<GameObject>();
-            gameObjects.AddRange(gameObject.GetComponentsInChildren<Button>().Select(x => x.gameObject));
-            gameObjects.AddRange(gameObject.GetComponentsInChildren<Slider>().Select(x => x.gameObject));
-            gameObjects.AddRange(gameObject.GetComponentsInChildren<Dropdown>().Select(x => x.gameObject));
- 
-            foreach (var item in gameObjects) {
+            gameObjects.AddRange(gameObject.GetComponentsInChildren<Button>(true).Select(x => x.gameObject));
+            gameObjects.AddRange(gameObject.GetComponentsInChildren<Slider>(true).Select(x => x.gameObject));
+            gameObjects.AddRange(gameObject.GetComponentsInChildren<Dropdown>(true).Select(x => x.gameObject));
+            gameObjects.AddRange(gameObject.GetComponentsInChildren<Toggle>(true).Select(x => x.gameObject));
+
+            foreach (var item in gameObjects)
+            {
                 var trigger = item.AddComponent<UIAudio>();
                 trigger.EventAudio = eventAudio;
                 trigger.AudioGameEvent = audioGameEvent;

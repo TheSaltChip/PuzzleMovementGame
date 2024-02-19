@@ -10,7 +10,7 @@ namespace UI.SetFromVariable
         [SerializeField] private Slider slider;
         [SerializeField] private float factor = 1f;
 
-        private void Awake()
+        private void Start()
         {
             slider.value = variable.value * factor;
         }

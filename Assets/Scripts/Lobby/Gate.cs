@@ -1,6 +1,4 @@
-using System;
 using NaughtyAttributes;
-using SceneTransition;
 using UnityEngine;
 using UnityEngine.Events;
 using Variables;
@@ -17,7 +15,7 @@ namespace Lobby
         private bool _active;
         private bool _collided;
 
-        public UnityEvent<string> sceneNameToTeleportTo; 
+        public UnityEvent<string> sceneNameToTeleportTo;
 
         private void OnCollisionEnter()
         {
@@ -30,11 +28,6 @@ namespace Lobby
         public void ActivateGate()
         {
             _active = true;
-        }
-
-        public void DeactivateGate()
-        {
-            _active = false;
         }
     }
 }

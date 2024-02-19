@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Completables;
 using PatternRecognition.ScriptableObjects;
@@ -31,7 +30,7 @@ namespace PatternRecognition
             _pattern = new List<int>();
             _buttons = GetComponentsInChildren<ColorButtonCompletable>();
             _co = null;
-            patternRecognitionRules.IsPatternCreated = false;
+            patternRecognitionRules.SetDefaultValues();
         }
 
         private void Start()
