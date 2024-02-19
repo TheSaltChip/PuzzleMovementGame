@@ -35,13 +35,6 @@ namespace Tutorial
         private void  OnEnable()
         {
             buttons = new[] {trigger,grip,a,b,joystick,menu};
-            
-            /*_ogA = a.material;
-            _ogB = b.material;
-            _ogTrigger = trigger.material;
-            _ogGrip = grip.material;
-            _ogJoystick = joystick.material;
-            _ogMenu = menu.material;*/
             materials = new[] { trigger.material, grip.material, a.material, b.material, joystick.material, menu.material };
             prev = VRControllerButtons.Trigger;
         }
@@ -73,14 +66,17 @@ namespace Tutorial
                 }
             }
             
+            print(tutorialData.button);
             
             switch (tutorialData.button)
             {
                 case VRControllerButtons.Trigger:
+                    print("Trigger");
                     trigger.material = materialContainer.material;
                     animator.Play("CubeAction");
                     break;
                 case VRControllerButtons.Grip:
+                    print("Grip");
                     grip.material = materialContainer.material;
                     animator.Play("SideButtonAction");
                     break;

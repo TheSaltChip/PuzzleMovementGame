@@ -7,6 +7,10 @@ namespace Lobby
 {
     public class DebugLogg : MonoBehaviour
     {
+        [SerializeField] private TMP_Text debugText;
+
+        private Dictionary<string, string> debugLogs = new();
+        
         private void OnEnable()
         {
             Application.logMessageReceived += HandleException;
@@ -36,9 +40,6 @@ namespace Lobby
             }
 
             debugText.text = sb.ToString();
-        } 
-        [SerializeField] private TMP_Text debugText;
-
-        private Dictionary<string, string> debugLogs = new();
+        }
     }
 }

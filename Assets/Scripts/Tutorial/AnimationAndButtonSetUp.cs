@@ -9,7 +9,7 @@ public class AnimationAndButtonSetUp : MonoBehaviour
     [SerializeField] private GameObject ControllerR;
     [SerializeField] private TutorialData tutorialData;
 
-    private void Start()
+    private void Awake()
     {
         ControllerL.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();
         ControllerR.GetComponent<ControllerButtonSetUp>().ActivateAnimationAndGlow();

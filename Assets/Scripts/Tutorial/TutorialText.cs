@@ -26,10 +26,6 @@ namespace Tutorial
         private void Awake()
         {
             _strings = LocalizationSettings.StringDatabase.GetTable("Tutorial");
-        }
-
-        private void Start()
-        {
             _end = length.value+1;
             _start = 2; //First 2 entries in the table are next and previous
             _current = _start;
@@ -40,7 +36,6 @@ namespace Tutorial
 
         private void ActiveButtons()
         {
-            print(_current);
             if (_current == _start)
             {
                 first?.Invoke();

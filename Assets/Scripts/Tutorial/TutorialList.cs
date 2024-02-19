@@ -18,7 +18,9 @@ namespace Tutorial
         public void NextStep()
         {
             if (_current >= tutorialSteps.Length)
+            {
                 return;
+            }
             _current++;
             tutorialSteps[_current].SetUpHighlightAndAnimation();
         }
@@ -26,7 +28,9 @@ namespace Tutorial
         public void PreviousStep()
         {
             if (_current < 0)
+            {
                 return;
+            }
             _current--;
             tutorialSteps[_current].SetUpHighlightAndAnimation();
         }
