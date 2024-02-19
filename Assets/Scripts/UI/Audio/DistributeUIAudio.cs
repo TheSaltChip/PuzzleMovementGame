@@ -11,7 +11,7 @@ namespace UI.Audio
         [SerializeField] private EventAudio eventAudio;
         [SerializeField] private AudioGameEvent audioGameEvent;
 
-        private void Awake()
+        private void Start()
         {
             var gameObjects = new List<GameObject>();
             gameObjects.AddRange(gameObject.GetComponentsInChildren<Button>(true).Select(x => x.gameObject));

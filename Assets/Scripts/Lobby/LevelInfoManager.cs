@@ -1,6 +1,8 @@
 using System.Linq;
-using TMPro;
+using UI;
+using UI.Lobby;
 using UnityEngine;
+using UnityEngine.Localization.Components;
 using UnityEngine.SceneManagement;
 
 namespace Lobby
@@ -17,7 +19,6 @@ namespace Lobby
         public void LoadLevelNames()
         {
             var sceneCount = SceneManager.sceneCountInBuildSettings;
-
             for (var i = 1; i < sceneCount; i++)
             {
                 var sceneName = SceneUtility.GetScenePathByBuildIndex(i)
@@ -27,7 +28,15 @@ namespace Lobby
 
                 var button = Instantiate(buttonPrefab, gameObject.transform);
                 button.SetActive(true);
-                button.GetComponentInChildren<TMP_Text>().text = sceneName;
+                var localizeStringEvent = button.GetComponentInChildren<LocalizeStringEvent>();
+                localizeStringEvent.SetTable("Lobby");
+                localizeStringEvent.SetEntry(sceneName);
+                
+                var highlightButton = button.GetComponentInChildren<HighlightButtonIfSelected>();
+                highlightButton.SetId(i.ToString());
+
+                var hoverActions = button.GetComponentInChildren<LevelButtonHoverActions>();
+                hoverActions.SetStringEntry(sceneName + "Info");
             }
         }
     }

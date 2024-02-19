@@ -14,7 +14,7 @@ namespace UI
 
         private Color _normalColor;
         private Color _selectedColor;
-
+        
         private void Awake()
         {
             _normalColor = button.colors.normalColor;
@@ -47,6 +47,11 @@ namespace UI
             }
 
             button.colors = cb;
+        }
+        
+        public void SetId(string newId)
+        {
+            id = newId;
         }
     }
 }

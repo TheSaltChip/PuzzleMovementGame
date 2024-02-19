@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 
@@ -7,10 +8,16 @@ namespace Lobby
     {
         [SerializeField] private SceneInfo sceneInfo;
 
-        // Sets scene information on interactive UI button
+        private readonly Regex _pattern = new("[\n ]");
+
         public void SetSceneName()
         {
-            sceneInfo.sceneName = gameObject.GetComponentInChildren<TMP_Text>().text;
+            var text = gameObject.GetComponentInChildren<TMP_Text>().text;
+
+            text = _pattern.Replace(text, "");
+            
+            print(text);
+            sceneInfo.sceneName = text;
         }
     }
 }
