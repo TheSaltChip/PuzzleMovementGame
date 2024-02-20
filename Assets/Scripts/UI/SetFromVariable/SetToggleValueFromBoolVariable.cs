@@ -7,16 +7,16 @@ namespace UI.SetFromVariable
     public class SetToggleValueFromBoolVariable : MonoBehaviour
     {
         [SerializeField] private BoolVariable variable;
-        [SerializeField] private Toggle slider;
+        [SerializeField] private Toggle toggle;
 
         private void Start()
         {
-            slider.isOn = variable.value;
+            toggle.isOn = variable.value;
         }
 
-        public void SetValue()
+        public void SetValueWithoutNotify()
         {
-            slider.isOn = variable.value;
+            toggle.SetIsOnWithoutNotify(variable.value);
         }
     }
 }
