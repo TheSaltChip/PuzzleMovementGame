@@ -14,7 +14,7 @@ namespace UI
 
         private Color _normalColor;
         private Color _selectedColor;
-        
+
         private void Awake()
         {
             _normalColor = button.colors.normalColor;
@@ -24,7 +24,7 @@ namespace UI
                 return;
 
             var cb = button.colors;
-            
+
             cb.normalColor = _selectedColor;
 
             button.colors = cb;
@@ -48,7 +48,14 @@ namespace UI
 
             button.colors = cb;
         }
-        
+
+        public void Deselect()
+        {
+            var cb = button.colors;
+            cb.normalColor = _normalColor;
+            button.colors = cb;
+        }
+
         public void SetId(string newId)
         {
             id = newId;

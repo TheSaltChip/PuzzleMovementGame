@@ -13,16 +13,18 @@ namespace PatternRecognition.ScriptableObjects
         public IntVariable bestScore;
         public BoolVariable canRepeat;
         public BoolVariable isPatternCreated;
+        public BoolVariable continuousMode;
 
         public void SetDefaultValues()
         {
             gridDimension.value = new Vector2Int(3, 3);
-            patternLength.value = 0;
+            patternLength.value = 6;
             patternIndex.value = 0;
             maxPatternLength.value = 20;
             bestScore.value = 0;
             canRepeat.value = true;
             isPatternCreated.value = false;
+            continuousMode.value = true;
         }
 
         public Vector2Int GridDimension
@@ -65,6 +67,12 @@ namespace PatternRecognition.ScriptableObjects
         {
             get => isPatternCreated.value;
             set => isPatternCreated.value = value;
+        }
+        
+        public bool ContinuousMode
+        {
+            get => continuousMode.value;
+            set => continuousMode.value = value;
         }
     }
 }

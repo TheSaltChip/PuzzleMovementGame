@@ -1,17 +1,14 @@
 ﻿using System;
+using PatternRecognition.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Localization.Components;
-using Variables;
 
 namespace UI.PatternRecognition
 {
     public class PatternRecognitionGameScreen : MonoBehaviour
     {
         [SerializeField] private LocalizeStringEvent localizeStringEvent;
-        [SerializeField] private IntVariable bestScore;
-        [SerializeField] private IntVariable patternIndex;
-        [SerializeField] private IntVariable patternLength;
-        [SerializeField] private BoolVariable isPatternCreated;
+        [SerializeField] private PatternRecognitionRules rules;
 
         [Serializable]
         private class PatRecArguments
@@ -19,7 +16,7 @@ namespace UI.PatternRecognition
             public int currentPatternLength;
             public int buttonsLeft;
             public int bestScore;
-            public bool isPatternCreated;
+            public bool continuousMode;
         }
 
         private PatRecArguments _arguments;
@@ -28,10 +25,10 @@ namespace UI.PatternRecognition
         {
             _arguments = new PatRecArguments
             {
-                currentPatternLength = patternLength.value,
-                buttonsLeft = patternLength.value - patternIndex.value,
-                bestScore = bestScore.value,
-                isPatternCreated = isPatternCreated.value
+                currentPatternLength = rules.PatternLength,
+                buttonsLeft = rules.PatternLength - rules.PatternIndex,
+                bestScore = rules.BestScore,
+                continuousMode = rules.ContinuousMode
             };
 
             localizeStringEvent.StringReference.Arguments = new object[]
@@ -42,27 +39,27 @@ namespace UI.PatternRecognition
 
         public void SetupString()
         {
-            _arguments.currentPatternLength = patternLength.value;
-            _arguments.buttonsLeft = patternLength.value - patternIndex.value;
-            _arguments.bestScore = bestScore.value;
-            _arguments.isPatternCreated = isPatternCreated.value;
+            _arguments.currentPatternLength = rules.PatternLength;
+            _arguments.buttonsLeft = rules.PatternLength - rules.PatternIndex;
+            _arguments.bestScore = rules.BestScore;
+            _arguments.continuousMode = rules.ContinuousMode;
 
             localizeStringEvent.RefreshString();
         }
 
         public void UpdateString()
         {
-            _arguments.buttonsLeft = patternLength.value - patternIndex.value;
-            _arguments.bestScore = bestScore.value;
-            _arguments.isPatternCreated = isPatternCreated.value;
+            _arguments.buttonsLeft = rules.PatternLength - rules.PatternIndex;
+            _arguments.bestScore = rules.BestScore;
+            _arguments.continuousMode = rules.ContinuousMode;
 
             localizeStringEvent.RefreshString();
         }
 
         public void UpdatePatternLength()
         {
-            _arguments.currentPatternLength = patternLength.value;
-            _arguments.buttonsLeft = patternLength.value - patternIndex.value;
+            _arguments.currentPatternLength = rules.PatternLength;
+            _arguments.buttonsLeft = rules.PatternLength - rules.PatternIndex;
             localizeStringEvent.RefreshString();
         }
     }

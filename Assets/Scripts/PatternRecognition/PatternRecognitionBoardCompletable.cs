@@ -147,6 +147,11 @@ namespace PatternRecognition
             patternRecognitionRules.PatternIndex = 0;
             BlinkCorrectButtons();
 
+            if (patternRecognitionRules.ContinuousMode)
+            {
+                CreatePattern();
+            }
+            
             Completed();
         }
 

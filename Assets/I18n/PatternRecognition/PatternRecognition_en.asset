@@ -49,16 +49,20 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 374586297094144
-    m_Localized: '{isPatternCreated:choose(True|False):Pattern is created|Pattern
-      is not created}
+    m_Localized: '{continuousMode:A new pattern will be created on completion|A new
+      pattern will not be created upon completion}
 
-      {buttonsLeft:plural:{} button|{} buttons} left
+      {buttonsLeft:plural:{}
+      button|{} buttons} left
 
-      High
-      score: {bestScore}'
+      High score: {bestScore}'
     m_Metadata:
       m_Items:
       - rid: 8916555888699899904
+  - m_Id: 13109800440639488
+    m_Localized: Continuous
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
