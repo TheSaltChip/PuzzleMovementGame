@@ -55,12 +55,9 @@ namespace Tutorial
             
             print(side);
 
-            if (side != tutorialData.selectedHand)
+            if (side != tutorialData.selectedHand && tutorialData.selectedHand != SelectedHand.Both)
             {
-                if (tutorialData.selectedHand != SelectedHand.Both)
-                {
-                    return;
-                }
+                return;
             }
 
             if (useLookAt)
