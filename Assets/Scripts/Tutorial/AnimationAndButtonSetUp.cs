@@ -1,6 +1,4 @@
-using System;
 using Tutorial;
-using Unity.XR.PXR;
 using UnityEngine;
 
 public class AnimationAndButtonSetUp : MonoBehaviour
