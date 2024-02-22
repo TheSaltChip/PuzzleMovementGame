@@ -1,3 +1,4 @@
+using Events;
 using UnityEngine;
 
 namespace Tutorial
@@ -16,6 +17,8 @@ namespace Tutorial
         [SerializeField] private bool useLookAt;
         [SerializeField] private Animation animator;
         [SerializeField] private SelectedHand side;
+
+        [SerializeField] private GameEvent ready;
 
         private Quaternion ogRotation;
         private Transform tr;
@@ -52,8 +55,6 @@ namespace Tutorial
             var mat = materials[(int)prev];
             buttons[(int)prev].material = mat;
             animator.Stop();
-            
-            print(side);
 
             if (side != tutorialData.selectedHand)
             {
@@ -68,17 +69,17 @@ namespace Tutorial
                 tr.rotation = tutorialData.button is VRControllerButtons.Trigger or VRControllerButtons.Grip ? ogRotation : Quaternion.Euler(lookAt);
             }
             
-            print(tutorialData.button);
-            
             switch (tutorialData.button)
             {
                 case VRControllerButtons.Trigger:
-                    print("Trigger");
                     trigger.material = materialContainer.material;
                     animator.Play("CubeAction");
                     break;
                 case VRControllerButtons.Grip:
-                    print("Grip");
+                    if (!grip.gameObject.activeSelf)
+                    {
+                        ready.Raise();
+                    }
                     grip.material = materialContainer.material;
                     animator.Play("SideButtonAction");
                     break;

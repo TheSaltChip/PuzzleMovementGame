@@ -177,6 +177,80 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!1 &2417482085550490121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4718219168138075000}
+  - component: {fileID: 3717054881118170616}
+  - component: {fileID: 2675675746462146301}
+  m_Layer: 0
+  m_Name: DoNotRemove
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4718219168138075000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417482085550490121}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.55786, y: -17.971916, z: 71.175354}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1378716222573743782}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3717054881118170616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417482085550490121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0620b1cfbc316964ca534fd0880ea21a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: Next fired
+--- !u!114 &2675675746462146301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417482085550490121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: afa749d98fa0fc54fbf284fac34d2a5a, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3717054881118170616}
+        m_TargetAssemblyTypeName: EmptyPrint, Assembly-CSharp
+        m_MethodName: Printing
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2615502882195964384
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +703,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "The buttons mentioned in this tutorial will be highlighted in orange.
+    \n\nSelect"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -785,18 +860,6 @@ MonoBehaviour:
       - m_Target: {fileID: 2615502882389060101}
         m_TargetAssemblyTypeName: DefaultNamespace.TutorialText, Assembly-CSharp
         m_MethodName: NextText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: EmptyPrint, Assembly-CSharp
-        m_MethodName: Printing
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1952,6 +2015,7 @@ Transform:
   - {fileID: 2615502883842786030}
   - {fileID: 2615502883141903160}
   - {fileID: 2615502883475773025}
+  - {fileID: 4718219168138075000}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2499,6 +2563,36 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 843c97cfaee93aa41af88d6f0fd45b80, type: 2}
+    - target: {fileID: -5477749408508380018, guid: 48f8998958e02e944b815bc012c53d73,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.03151554
+      objectReference: {fileID: 0}
+    - target: {fileID: -5477749408508380018, guid: 48f8998958e02e944b815bc012c53d73,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5477749408508380018, guid: 48f8998958e02e944b815bc012c53d73,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5477749408508380018, guid: 48f8998958e02e944b815bc012c53d73,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.9995033
+      objectReference: {fileID: 0}
+    - target: {fileID: -5477749408508380018, guid: 48f8998958e02e944b815bc012c53d73,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5477749408508380018, guid: 48f8998958e02e944b815bc012c53d73,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -176.388
+      objectReference: {fileID: 0}
     - target: {fileID: -4683669308469848369, guid: 48f8998958e02e944b815bc012c53d73,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2615,6 +2709,7 @@ MonoBehaviour:
   useLookAt: 1
   animator: {fileID: 2615502883749342495}
   side: 2
+  ready: {fileID: 11400000, guid: 41113b2856c383d4faeb7464cd9defc1, type: 2}
 --- !u!23 &3615856561922758450 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7610458430443189991, guid: 48f8998958e02e944b815bc012c53d73,
@@ -2835,6 +2930,7 @@ MonoBehaviour:
   useLookAt: 1
   animator: {fileID: 2615502882805500005}
   side: 1
+  ready: {fileID: 11400000, guid: 41113b2856c383d4faeb7464cd9defc1, type: 2}
 --- !u!23 &3615856562339600055 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7610458430443189991, guid: 1a4e7f5b038932b4c89617d5114acd6e,
