@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace Utilities.Localization
+namespace I18N
 {
     public class LocalizeDropdown : MonoBehaviour
     {
