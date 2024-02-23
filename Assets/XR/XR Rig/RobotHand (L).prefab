@@ -1652,8 +1652,6 @@ GameObject:
   - component: {fileID: 6504571138417324053}
   - component: {fileID: 1004264030283113470}
   - component: {fileID: 7819500428449130600}
-  - component: {fileID: 912377165286569301}
-  - component: {fileID: 4400744956291979762}
   m_Layer: 0
   m_Name: UIPointer
   m_TagString: Untagged
@@ -1892,62 +1890,6 @@ MonoBehaviour:
       - m_Target: {fileID: 6504571138417324053}
         m_TargetAssemblyTypeName: HandCanvasPointer, Assembly-CSharp
         m_MethodName: Release
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &912377165286569301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5098081652777931618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: ed662b9d538248946bef581aa77f57f7, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6504571138417324053}
-        m_TargetAssemblyTypeName: Autohand.HandCanvasPointer, Assembly-CSharp
-        m_MethodName: OnNewScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &4400744956291979762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5098081652777931618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 9d05de4981b1e5c419c3abe56022e129, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6504571138417324053}
-        m_TargetAssemblyTypeName: Autohand.HandCanvasPointer, Assembly-CSharp
-        m_MethodName: HideRay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
