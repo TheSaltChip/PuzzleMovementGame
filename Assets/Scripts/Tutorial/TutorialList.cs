@@ -11,7 +11,7 @@ namespace Tutorial
         [SerializeField] private TutorialData data;
         private int _current;
 
-        private void Start()
+        private void Awake()
         {
             length.value = tutorialSteps.Length;
             data.selectedHand = SelectedHand.Both;
