@@ -1641,12 +1641,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2615502883842786030}
   - component: {fileID: 2615502883842786031}
-  - component: {fileID: 2615502883842786024}
-  - component: {fileID: 2615502883842786025}
-  - component: {fileID: 2615502883842786026}
-  - component: {fileID: 2615502883842786027}
-  - component: {fileID: 2615502883842786036}
-  - component: {fileID: 2615502883842786037}
   - component: {fileID: 2615502883842786038}
   - component: {fileID: 2615502883842786039}
   m_Layer: 0
@@ -1654,7 +1648,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2615502883842786030
 Transform:
@@ -1684,194 +1678,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialSteps:
-  - {fileID: 2615502883842786024}
-  - {fileID: 2615502883842786025}
-  - {fileID: 2615502883842786026}
-  - {fileID: 2615502883842786027}
-  - {fileID: 2615502883842786036}
-  - {fileID: 2615502883842786037}
+  - {fileID: 11400000, guid: 5b7501e94f88012469ff2598a65038de, type: 2}
+  - {fileID: 11400000, guid: a3fa50749d0373c48a6be2c9e5fe3903, type: 2}
+  - {fileID: 11400000, guid: 501e3907d43e8f144b2e41965afa7ef5, type: 2}
+  - {fileID: 11400000, guid: 501e3907d43e8f144b2e41965afa7ef5, type: 2}
+  - {fileID: 11400000, guid: e798ae59b8b8d3449a82b0798c4cf5ad, type: 2}
+  - {fileID: 11400000, guid: 8e5f920e150040748b213f9e114da0b5, type: 2}
   length: {fileID: 11400000, guid: 8810315866e52b342ae2315542066918, type: 2}
   data: {fileID: 11400000, guid: a42d00259eedbfb439223387aa935794, type: 2}
---- !u!114 &2615502883842786024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615502883842786032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18d34de2d1cb4511acfaa970f521f81a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: 0
-  selectedHand: 0
-  tutorialData: {fileID: 11400000, guid: a42d00259eedbfb439223387aa935794, type: 2}
-  tutorialSetUp:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 41113b2856c383d4faeb7464cd9defc1, type: 2}
-        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2615502883842786025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615502883842786032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18d34de2d1cb4511acfaa970f521f81a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: 1
-  selectedHand: 0
-  tutorialData: {fileID: 11400000, guid: a42d00259eedbfb439223387aa935794, type: 2}
-  tutorialSetUp:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 41113b2856c383d4faeb7464cd9defc1, type: 2}
-        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2615502883842786026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615502883842786032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18d34de2d1cb4511acfaa970f521f81a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: 4
-  selectedHand: 0
-  tutorialData: {fileID: 11400000, guid: a42d00259eedbfb439223387aa935794, type: 2}
-  tutorialSetUp:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 41113b2856c383d4faeb7464cd9defc1, type: 2}
-        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2615502883842786027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615502883842786032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18d34de2d1cb4511acfaa970f521f81a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: 4
-  selectedHand: 0
-  tutorialData: {fileID: 11400000, guid: a42d00259eedbfb439223387aa935794, type: 2}
-  tutorialSetUp:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 41113b2856c383d4faeb7464cd9defc1, type: 2}
-        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2615502883842786036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615502883842786032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18d34de2d1cb4511acfaa970f521f81a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: 4
-  selectedHand: 0
-  tutorialData: {fileID: 11400000, guid: a42d00259eedbfb439223387aa935794, type: 2}
-  tutorialSetUp:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 41113b2856c383d4faeb7464cd9defc1, type: 2}
-        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2615502883842786037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615502883842786032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18d34de2d1cb4511acfaa970f521f81a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: 5
-  selectedHand: 0
-  tutorialData: {fileID: 11400000, guid: a42d00259eedbfb439223387aa935794, type: 2}
-  tutorialSetUp:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 41113b2856c383d4faeb7464cd9defc1, type: 2}
-        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &2615502883842786038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1928,80 +1742,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1 &2945551719599676087
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2380113811262083160}
-  - component: {fileID: 5744629465142207068}
-  - component: {fileID: 4677555849010489162}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2380113811262083160
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2945551719599676087}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.1187315, y: -12.7317295, z: 76.406784}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1378716222573743782}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5744629465142207068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2945551719599676087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0620b1cfbc316964ca534fd0880ea21a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  message: 
---- !u!114 &4677555849010489162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2945551719599676087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: afa749d98fa0fc54fbf284fac34d2a5a, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5744629465142207068}
-        m_TargetAssemblyTypeName: EmptyPrint, Assembly-CSharp
-        m_MethodName: Printing
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &4183954801944214789
 GameObject:
   m_ObjectHideFlags: 0
@@ -2033,7 +1773,6 @@ Transform:
   - {fileID: 2615502883842786030}
   - {fileID: 2615502883141903160}
   - {fileID: 2615502883475773025}
-  - {fileID: 2380113811262083160}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

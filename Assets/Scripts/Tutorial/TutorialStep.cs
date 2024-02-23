@@ -3,7 +3,8 @@ using UnityEngine.Events;
 
 namespace Tutorial
 {
-    public class TutorialStep : MonoBehaviour
+    [CreateAssetMenu(menuName = "Tutorial/TutorialStep", fileName = "TutorialStep")]
+    public class TutorialStep : ScriptableObject
     {
         [SerializeField] private VRControllerButtons button;
         [SerializeField] private SelectedHand selectedHand;
