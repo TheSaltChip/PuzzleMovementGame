@@ -1,3 +1,4 @@
+using System;
 using Events;
 using UnityEngine;
 
@@ -16,9 +17,6 @@ namespace Tutorial
         [SerializeField] private Vector3 lookAt;
         [SerializeField] private bool useLookAt;
         [SerializeField] private Animation animator;
-        [SerializeField] private SelectedHand side;
-
-        [SerializeField] private GameEvent ready;
 
         private Quaternion ogRotation;
         private Transform tr;
@@ -41,6 +39,23 @@ namespace Tutorial
             started = true;
         }
 
+        private void OnEnable()
+        {
+            SetUpMaterials();
+            ActivateAnimationAndGlow();
+        }
+
+        public void ResetAnimationAndMaterial()
+        {
+            if (!gameObject.activeSelf)
+            {
+                return;
+            }
+            var mat = materials[(int)prev];
+            buttons[(int)prev].material = mat;
+            animator.Stop();
+        }
+
         public void ActivateAnimationAndGlow()
         {
             if (!gameObject.activeSelf)
@@ -51,17 +66,6 @@ namespace Tutorial
             if (!started)
             {
                 SetUpMaterials();
-            }
-            var mat = materials[(int)prev];
-            buttons[(int)prev].material = mat;
-            animator.Stop();
-
-            if (side != tutorialData.selectedHand)
-            {
-                if (tutorialData.selectedHand != SelectedHand.Both)
-                {
-                    return;
-                }
             }
 
             if (useLookAt)
@@ -76,10 +80,6 @@ namespace Tutorial
                     animator.Play("CubeAction");
                     break;
                 case VRControllerButtons.Grip:
-                    if (!grip.gameObject.activeSelf)
-                    {
-                        ready.Raise();
-                    }
                     grip.material = materialContainer.material;
                     animator.Play("SideButtonAction");
                     break;
