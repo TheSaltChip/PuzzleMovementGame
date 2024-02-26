@@ -17,8 +17,7 @@ namespace Audio
 
         private void PlayRandomClickSound()
         {
-            source.clip = clips[Random.Range(0, clips.Length)];
-            source.Play();
+            source.PlayOneShot(clips[Random.Range(0, clips.Length)]);
         }
     }
 }

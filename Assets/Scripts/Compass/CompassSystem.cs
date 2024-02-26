@@ -19,7 +19,6 @@ namespace Compass
             }
 
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
 
         public void SetTarget(Transform target)
