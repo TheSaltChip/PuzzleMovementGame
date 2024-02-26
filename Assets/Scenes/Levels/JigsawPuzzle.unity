@@ -3094,7 +3094,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Rig
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4180119036236611775, guid: 838cedad75eab554b8a177b7ca90e98d, type: 3}
+    - {fileID: 5667915429577128988, guid: 838cedad75eab554b8a177b7ca90e98d, type: 3}
+    - {fileID: 844768080256969752, guid: 838cedad75eab554b8a177b7ca90e98d, type: 3}
+    - {fileID: 369742436239554649, guid: 838cedad75eab554b8a177b7ca90e98d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 838cedad75eab554b8a177b7ca90e98d, type: 3}
 --- !u!1001 &665785028
 PrefabInstance:
@@ -5779,7 +5783,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1526300986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.803, y: 1.265, z: -3.058}
+  m_LocalPosition: {x: -0.803, y: 1.2119999, z: -3.058}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8174,10 +8178,20 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 65
       objectReference: {fileID: 0}
+    - target: {fileID: 2909433161262955516, guid: f6fee37f328c8db4cabeed754b16aa69,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.051
+      objectReference: {fileID: 0}
     - target: {fileID: 3048447012059522250, guid: f6fee37f328c8db4cabeed754b16aa69,
         type: 3}
       propertyPath: body
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111823310408594243, guid: f6fee37f328c8db4cabeed754b16aa69,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.821
       objectReference: {fileID: 0}
     - target: {fileID: 3235784292815925681, guid: f6fee37f328c8db4cabeed754b16aa69,
         type: 3}
