@@ -13,7 +13,7 @@ namespace Puzzle.PuzzleUI
         {
             ++var.amount;
             var.number = -1;
-            if (int.TryParse(gameObject.name, out var res)) ;
+            if (int.TryParse(gameObject.name, out var res))
             {
                 var.number = res;
             }

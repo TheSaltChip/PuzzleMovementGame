@@ -19,9 +19,9 @@ namespace Puzzle.PuzzleUI
             return GetEnumerator();
         }
 
-        public Texture2D GetRandomTexture2D()
+        public Sprite GetRandomImage()
         {
-            return images[Random.Range(0, images.Count)].texture;
+            return images[Random.Range(0, images.Count)];
         }
     }
 }

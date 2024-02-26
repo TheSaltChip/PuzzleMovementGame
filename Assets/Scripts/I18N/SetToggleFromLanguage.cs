@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ namespace I18N
     public class SetToggleFromLanguage : MonoBehaviour
     {
         [SerializeField] private Toggle toggle;
+        [SerializeField] private SystemLanguage systemLanguage;
 
         private void Start()
         {
@@ -16,7 +18,8 @@ namespace I18N
         public void Set()
         {
             toggle.SetIsOnWithoutNotify(LocalizationSettings.SelectedLocale ==
-                                        LocalizationSettings.AvailableLocales.Locales[0]);
+                                        LocalizationSettings.AvailableLocales.GetLocale(
+                                            new LocaleIdentifier(systemLanguage)));
         }
     }
 }

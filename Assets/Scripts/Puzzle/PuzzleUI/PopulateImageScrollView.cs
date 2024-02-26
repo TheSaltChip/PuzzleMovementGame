@@ -16,7 +16,7 @@ namespace Puzzle.PuzzleUI
                 var g = Instantiate(buttonPrefab, transform);
 
                 g.GetComponent<Image>().sprite = image;
-                g.GetComponent<ChosenImage>().SetImage(image.texture);
+                g.GetComponent<ChosenImage>().SetImage(image);
             }
         }
     }

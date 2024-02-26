@@ -2,6 +2,7 @@
 using Puzzle.Scriptables;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Util.PRS;
 using Random = UnityEngine.Random;
 
@@ -9,13 +10,12 @@ namespace Puzzle.SpawnPos
 {
     public class SpawnPuzzlePieces : MonoBehaviour
     {
-        [SerializeField] private SelectedImage selectedImage;
+        [FormerlySerializedAs("selectedImage")] [SerializeField] private SelectedSprite selectedSprite;
         [SerializeField] private GoalSprite goalSprite;
         [SerializeField] private PuzzlePiecesSpawnPoints spawnPoints;
         [SerializeField] private GameObject puzzlePiecePrefab;
 
         [SerializeField] private PuzzleBoardDimensions puzzleBoardDimensions;
-        [SerializeField] private PuzzleImageQuads puzzleImageQuads;
 
         public UnityEvent changedImage;
 
@@ -47,13 +47,7 @@ namespace Puzzle.SpawnPos
             var height = puzzleBoardDimensions.Height;
             var width = puzzleBoardDimensions.Width;
 
-            puzzleImageQuads.quads = new Quad[height * width];
-            puzzleImageQuads.rearrangedQuads = new Quad[height * width];
-
-            var tex = selectedImage.currentSelected;
-
-            var ppcb = tex.width / width;
-            var ppch = tex.height / height;
+            var tex = selectedSprite.GetTexture2D();
 
             var spawnLayers = new[]
             {
@@ -65,24 +59,6 @@ namespace Puzzle.SpawnPos
             for (var col = 0; col < height; col++)
             for (var row = 0; row < width; row++)
             {
-                var q = new Quad
-                {
-                    rows = new int[ppch, ppcb]
-                };
-
-                puzzleImageQuads.quads[row + col * width] = q;
-
-                var p = ppch * tex.width * col + row * ppcb;
-
-                for (var l = 0; l < ppch; l++)
-                {
-                    var x = p + l * tex.width;
-                    for (var m = 0; m < ppcb; m++)
-                    {
-                        q.rows[l, m] = x + m;
-                    }
-                }
-
                 var rect = new Rect(row * (tex.width / width), col * (tex.height / height),
                     tex.width / width, tex.height / height);
 
@@ -93,27 +69,20 @@ namespace Puzzle.SpawnPos
 
                 var tr = piece.transform;
 
-                if (true)
-                {
-                    var randomLayer = Random.Range(0, 3);
-                    var spawnLayer = spawnLayers[randomLayer];
-                    var randomPos = Random.Range(0, spawnLayer.Count);
 
-                    var posRotScl = spawnLayer[randomPos];
-                    var randomAngleOffset = Random.Range(0, 4);
+                var randomLayer = Random.Range(0, 3);
+                var spawnLayer = spawnLayers[randomLayer];
+                var randomPos = Random.Range(0, spawnLayer.Count);
 
-                    posRotScl.rotation.z *= randomAngleOffset;
-                    tr.SetParent(null);
-                    tr.SetFromPosRotScl(posRotScl);
-                    tr.SetParent(gameObject.transform);
-                    spawnLayer.RemoveAt(randomPos);
-                }
-                else
-                {
-                    tr.localScale = spawnLayers[0][0].scale;
-                    tr.parent = gameObject.transform;
-                    tr.position = new Vector3(0, 1.2f + row * 0.1f, 0.25f - col * 0.15f);
-                }
+                var posRotScl = spawnLayer[randomPos];
+                var randomAngleOffset = Random.Range(0, 4);
+
+                posRotScl.rotation.z *= randomAngleOffset;
+                tr.SetParent(null);
+                tr.SetFromPosRotScl(posRotScl);
+                tr.SetParent(gameObject.transform);
+                spawnLayer.RemoveAt(randomPos);
+
 
                 var sliced = new Texture2D((int)rect.width, (int)rect.height)
                 {
@@ -128,8 +97,7 @@ namespace Puzzle.SpawnPos
             }
 
 
-            var sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(.5f, .5f));
-            goalSprite.image = sprite;
+            goalSprite.image = selectedSprite.sprite;
             changedImage.Invoke();
         }
     }
