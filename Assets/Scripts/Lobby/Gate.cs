@@ -1,3 +1,4 @@
+using System;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,7 +18,7 @@ namespace Lobby
 
         public UnityEvent<string> sceneNameToTeleportTo;
 
-        private void OnCollisionEnter()
+        private void OnTriggerEnter(Collider other)
         {
             if (_collided || (!_active && !staticGate)) return;
             
