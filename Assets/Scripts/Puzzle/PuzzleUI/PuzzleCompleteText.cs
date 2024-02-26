@@ -23,13 +23,7 @@ namespace Puzzle.PuzzleUI
             }
             else
             {
-                /*var loc = new LocalizedString
-            {
-                TableReference = "PuzzleUI",
-                TableEntryReference = "Incorrect"
-            };*/
                 local.SetEntry("Incorrect");
-                //local.StringReference = loc;
             }
         
         }
