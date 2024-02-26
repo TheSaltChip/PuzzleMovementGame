@@ -53,6 +53,11 @@ namespace Tutorial
             }
         }
 
+        public void SphereGrabbed()
+        {
+            _text.StringReference.TableEntryReference = _strings.SharedData.Entries[11].Key;
+        }
+
         public void NextText()
         {
             if (_current > _end)
@@ -69,12 +74,6 @@ namespace Tutorial
             _current--;
             _text.StringReference.TableEntryReference = _strings.SharedData.Entries[_current].Key;
             ActiveButtons();
-        }
-
-        public void End()
-        {
-            var end = _strings.SharedData.Entries.Count-1;
-            _text.StringReference.TableEntryReference = _strings.SharedData.Entries[end].Key;
         }
     }
 }

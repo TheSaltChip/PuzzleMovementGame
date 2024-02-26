@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EmptyPrint : MonoBehaviour
+namespace Tutorial
 {
-    [SerializeField] private string message;
-
-    public void Printing()
+    public class EmptyPrint : MonoBehaviour
     {
-        print(message);
+        [SerializeField] private string message;
+
+        public void Printing()
+        {
+            var i = 2 + 2;
+        }
     }
 }

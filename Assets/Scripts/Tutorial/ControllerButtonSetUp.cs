@@ -1,3 +1,5 @@
+using System;
+using Events;
 using UnityEngine;
 
 namespace Tutorial
@@ -15,7 +17,6 @@ namespace Tutorial
         [SerializeField] private Vector3 lookAt;
         [SerializeField] private bool useLookAt;
         [SerializeField] private Animation animator;
-        [SerializeField] private SelectedHand side;
 
         private Quaternion ogRotation;
         private Transform tr;
@@ -38,6 +39,23 @@ namespace Tutorial
             started = true;
         }
 
+        private void OnEnable()
+        {
+            SetUpMaterials();
+            ActivateAnimationAndGlow();
+        }
+
+        public void ResetAnimationAndMaterial()
+        {
+            if (!gameObject.activeSelf)
+            {
+                return;
+            }
+            var mat = materials[(int)prev];
+            buttons[(int)prev].material = mat;
+            animator.Stop();
+        }
+
         public void ActivateAnimationAndGlow()
         {
             if (!gameObject.activeSelf)
@@ -49,33 +67,19 @@ namespace Tutorial
             {
                 SetUpMaterials();
             }
-            var mat = materials[(int)prev];
-            buttons[(int)prev].material = mat;
-            animator.Stop();
-            
-            print(side);
-
-            if (side != tutorialData.selectedHand && tutorialData.selectedHand != SelectedHand.Both)
-            {
-                return;
-            }
 
             if (useLookAt)
             {
                 tr.rotation = tutorialData.button is VRControllerButtons.Trigger or VRControllerButtons.Grip ? ogRotation : Quaternion.Euler(lookAt);
             }
             
-            print(tutorialData.button);
-            
             switch (tutorialData.button)
             {
                 case VRControllerButtons.Trigger:
-                    print("Trigger");
                     trigger.material = materialContainer.material;
                     animator.Play("CubeAction");
                     break;
                 case VRControllerButtons.Grip:
-                    print("Grip");
                     grip.material = materialContainer.material;
                     animator.Play("SideButtonAction");
                     break;

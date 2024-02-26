@@ -12,7 +12,6 @@ namespace UI.Options
 
         public void Change()
         {
-            print($"{rotationType} {currentRotationType.value}");
             canvas.enabled = rotationType == (RotationType)currentRotationType.value;
         }
     }

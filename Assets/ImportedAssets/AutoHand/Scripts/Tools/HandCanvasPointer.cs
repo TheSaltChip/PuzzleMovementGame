@@ -147,14 +147,7 @@ namespace Autohand
                 StopSelect?.Invoke(transform.position + (transform.forward * targetLength), null);
             }
         }
-
-        public void OnNewScene()
-        {
-            Awake();
-            Preprocess();
-            OnEnable();
-        }
-
+        
         private void Awake()
         {
             if (lineRenderer == null)
@@ -272,11 +265,6 @@ namespace Autohand
         {
             hitPointMarker.SetActive(show);
             lineRenderer.enabled = show;
-        }
-
-        public void HideRay()
-        {
-            ShowRay(false);
         }
     }
 }

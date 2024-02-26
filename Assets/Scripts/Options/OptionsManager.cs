@@ -65,7 +65,8 @@ namespace Options
             SaveOptions();
         }
 
-        private void SaveOptions(){
+        private void SaveOptions()
+        {
             PlayerPrefs.Save();
             onOptionsChanged?.Invoke();
         }

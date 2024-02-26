@@ -8,11 +8,14 @@ namespace Tutorial
     {
         [SerializeField] private TutorialStep[] tutorialSteps;
         [SerializeField] private IntVariable length;
+        [SerializeField] private TutorialData data;
         private int _current;
 
-        private void Start()
+        private void Awake()
         {
             length.value = tutorialSteps.Length;
+            data.selectedHand = SelectedHand.Both;
+            data.button = VRControllerButtons.Trigger;
         }
 
         public void NextStep()
