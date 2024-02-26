@@ -98,7 +98,7 @@ namespace Puzzle
                     var obj = Instantiate(placePoint);
                     _points[available] = obj;
                     obj.SetActive(true);
-                    obj.name = available + "";
+                    obj.name = available.ToString();
 
                     var tr = obj.transform;
                     tr.SetParent(gameObject.transform);
@@ -110,7 +110,6 @@ namespace Puzzle
                     tr.localPosition = p + tr.right * grid[i, j].x;
                     tr.rotation = trpp.rotation;
                     
-                    // x + y * width
                     _indPos[available] = boardWidth * (boardHeight-i-1) + j;
                     
                     available++;
