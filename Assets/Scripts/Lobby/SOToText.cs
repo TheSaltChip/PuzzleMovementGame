@@ -14,7 +14,6 @@ namespace Lobby
         {
             var strings = LocalizationSettings.StringDatabase.GetTable("Lobby");
             text.StringReference.TableEntryReference = info.sceneName;
-            //text.StringReference.TableEntryReference = strings.SharedData.GetEntry(info.sceneName).Key;
         }
     }
 }
