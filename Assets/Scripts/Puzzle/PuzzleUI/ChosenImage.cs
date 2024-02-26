@@ -10,6 +10,11 @@ namespace Puzzle.PuzzleUI
         [SerializeField] private SelectedImage store;
         public UnityEvent completed;
 
+        public void SetImage(Texture2D texture)
+        {
+            image = texture;
+        }
+        
         public void ChangeImage()
         {
             store.currentSelected = image;

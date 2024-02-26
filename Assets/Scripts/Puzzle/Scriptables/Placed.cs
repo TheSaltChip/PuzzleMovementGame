@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace Puzzle.Scriptables
 {
-    [CreateAssetMenu(fileName = "Placed", menuName = "Puzzle/Placed", order = 0)]
+    [CreateAssetMenu(fileName = "Placed", menuName = "Puzzle/Placed")]
     public class Placed : ScriptableObject
     {
         public int amount;
-        public string number;
+        public int number;
         public GameObject piece;
     }
 }
