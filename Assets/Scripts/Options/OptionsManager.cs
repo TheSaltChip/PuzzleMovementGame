@@ -63,13 +63,8 @@ namespace Options
 
         public void SetSnapTurnAngle(float snapTurnAngle)
         {
-            print(
-                $"Before ; AutohandPlayer {AutoHandPlayer.Instance.snapTurnAngle}\nBefore ; Gameoptions {gameOptions.SnapTurnAngle}\nBefore ; SnapTurnAngle {snapTurnAngle}");
-            print("==============");
             PlayerPrefs.SetFloat(PlayerPrefsNames.SnapTurnAngle, snapTurnAngle);
             gameOptions.SnapTurnAngle = snapTurnAngle;
-            print($"After ; AutohandPlayer {AutoHandPlayer.Instance.snapTurnAngle}\nAfter ; Gameoptions {gameOptions.SnapTurnAngle}\nAfter ; SnapTurnAngle {snapTurnAngle}");
-            print("==============");
             SaveOptions();
         }
 

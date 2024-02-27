@@ -15,7 +15,7 @@ namespace Tutorial
         {
             tutorialData.button = button;
             tutorialData.selectedHand = selectedHand;
-            tutorialSetUp.Invoke();
+            tutorialSetUp?.Invoke();
         }
     }
 }
