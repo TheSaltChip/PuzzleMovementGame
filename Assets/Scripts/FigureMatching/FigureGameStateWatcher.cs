@@ -1,7 +1,6 @@
 ﻿using FigureMatching.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace FigureMatching
 {

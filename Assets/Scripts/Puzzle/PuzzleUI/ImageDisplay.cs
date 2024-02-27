@@ -1,6 +1,5 @@
 using Puzzle.Scriptables;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Puzzle.PuzzleUI

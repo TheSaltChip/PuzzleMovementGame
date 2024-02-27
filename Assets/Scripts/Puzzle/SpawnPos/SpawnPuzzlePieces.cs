@@ -1,5 +1,4 @@
-﻿using System;
-using Puzzle.Scriptables;
+﻿using Puzzle.Scriptables;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;

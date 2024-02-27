@@ -1,10 +1,7 @@
 ﻿
 using Puzzle.PuzzleUI;
 using Puzzle.Scriptables;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Variables;
 
 namespace Puzzle.Difficulty
 {
