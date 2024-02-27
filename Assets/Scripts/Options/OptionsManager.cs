@@ -22,7 +22,6 @@ namespace Options
             if (PlayerPrefs.HasKey(PlayerPrefsNames.Turn))
             {
                 var rotType = PlayerPrefs.GetInt(PlayerPrefsNames.Turn);
-                AutoHandPlayer.Instance.rotationType = (RotationType)rotType;
                 gameOptions.RotationType = rotType;
                 changed = true;
             }
@@ -30,19 +29,13 @@ namespace Options
             if (PlayerPrefs.HasKey(PlayerPrefsNames.TurnSpeed))
             {
                 var smoothTurnSpeed = PlayerPrefs.GetFloat(PlayerPrefsNames.TurnSpeed);
-                AutoHandPlayer.Instance.smoothTurnSpeed = smoothTurnSpeed;
                 gameOptions.SmoothTurnSpeed = smoothTurnSpeed;
                 changed = true;
             }
 
             if (PlayerPrefs.HasKey(PlayerPrefsNames.SnapTurnAngle))
             {
-                print("SNAP Turn");
                 var snapTurnAngle = PlayerPrefs.GetFloat(PlayerPrefsNames.SnapTurnAngle);
-                print(AutoHandPlayer.Instance.snapTurnAngle);
-                print(gameOptions.SnapTurnAngle);
-                print(snapTurnAngle);
-                AutoHandPlayer.Instance.snapTurnAngle = snapTurnAngle;
                 gameOptions.SnapTurnAngle = snapTurnAngle;
                 changed = true;
             }
@@ -55,23 +48,14 @@ namespace Options
 
         public void SetTurnOption(int value)
         {
-            print(AutoHandPlayer.Instance.snapTurnAngle);
-            print(gameOptions.SnapTurnAngle);
-            print(value); 
-            
-            AutoHandPlayer.Instance.rotationType = (RotationType)value;
             PlayerPrefs.SetInt(PlayerPrefsNames.Turn, value);
             gameOptions.RotationType = value;
-            
-            print(AutoHandPlayer.Instance.snapTurnAngle);
-            print(gameOptions.SnapTurnAngle);
-            print(value);
+
             SaveOptions();
         }
 
         public void SetTurnSpeed(float smoothTurnSpeed)
         {
-            AutoHandPlayer.Instance.smoothTurnSpeed = smoothTurnSpeed;
             PlayerPrefs.SetFloat(PlayerPrefsNames.TurnSpeed, smoothTurnSpeed);
             gameOptions.SmoothTurnSpeed = smoothTurnSpeed;
             SaveOptions();
@@ -79,9 +63,13 @@ namespace Options
 
         public void SetSnapTurnAngle(float snapTurnAngle)
         {
-            AutoHandPlayer.Instance.snapTurnAngle = snapTurnAngle;
+            print(
+                $"Before ; AutohandPlayer {AutoHandPlayer.Instance.snapTurnAngle}\nBefore ; Gameoptions {gameOptions.SnapTurnAngle}\nBefore ; SnapTurnAngle {snapTurnAngle}");
+            print("==============");
             PlayerPrefs.SetFloat(PlayerPrefsNames.SnapTurnAngle, snapTurnAngle);
             gameOptions.SnapTurnAngle = snapTurnAngle;
+            print($"After ; AutohandPlayer {AutoHandPlayer.Instance.snapTurnAngle}\nAfter ; Gameoptions {gameOptions.SnapTurnAngle}\nAfter ; SnapTurnAngle {snapTurnAngle}");
+            print("==============");
             SaveOptions();
         }
 
