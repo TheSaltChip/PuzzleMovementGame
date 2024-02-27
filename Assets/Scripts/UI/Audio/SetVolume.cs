@@ -18,6 +18,7 @@ namespace UI.Audio
         {
             AudioListener.volume = sliderValue;
             PlayerPrefs.SetFloat("MasterVolume", sliderValue);
+            PlayerPrefs.Save();
         }
     }
 }
