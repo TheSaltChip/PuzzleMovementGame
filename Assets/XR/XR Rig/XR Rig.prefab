@@ -8050,7 +8050,6 @@ GameObject:
   - component: {fileID: 9120618032572862784}
   - component: {fileID: 4253189793063219838}
   - component: {fileID: 4087474039579645004}
-  - component: {fileID: 3152296622234285600}
   m_Layer: 0
   m_Name: XR Rig
   m_TagString: Untagged
@@ -8190,18 +8189,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3152296622234285600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7292963240484694957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fedab07b003f4ccd8fa574bd37bdcedc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2200524830567370298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8594,6 +8581,19 @@ MonoBehaviour:
   player: {fileID: 6202875569655291961}
   moveAxis: 0
   turnAxis: 0
+--- !u!114 &7661556819512575399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6202875569655291963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fedab07b003f4ccd8fa574bd37bdcedc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 6202875569655291961}
 --- !u!1001 &3506155474906801709
 PrefabInstance:
   m_ObjectHideFlags: 0
