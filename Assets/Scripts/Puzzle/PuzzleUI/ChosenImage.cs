@@ -6,13 +6,18 @@ namespace Puzzle.PuzzleUI
 {
     public class ChosenImage : MonoBehaviour
     {
-        [SerializeField] private Texture2D image;
-        [SerializeField] private SelectedImage store;
+        [SerializeField] private Sprite image;
+        [SerializeField] private SelectedSprite store;
         public UnityEvent completed;
 
+        public void SetImage(Sprite sprite)
+        {
+            image = sprite;
+        }
+        
         public void ChangeImage()
         {
-            store.currentSelected = image;
+            store.sprite = image;
             completed.Invoke();
         }
     }

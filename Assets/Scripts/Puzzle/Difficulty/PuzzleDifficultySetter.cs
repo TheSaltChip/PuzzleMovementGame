@@ -1,4 +1,5 @@
 ﻿
+using Puzzle.PuzzleUI;
 using Puzzle.Scriptables;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ namespace Puzzle.Difficulty
     {
         [SerializeField] private PuzzleBoardDimensions puzzleBoardDimensions;
         [SerializeField] private PuzzleBoardDifficultyStrategy puzzleBoardDifficultyStrategy;
+        [SerializeField] private JigsawImages images;
+        [SerializeField] private SelectedSprite chosenSprite;
 
         public void SetDifficultyStrategy(PuzzleBoardDifficultyStrategy strategy)
         {
@@ -20,6 +23,11 @@ namespace Puzzle.Difficulty
         {
             puzzleBoardDimensions.Width = puzzleBoardDifficultyStrategy.dimensions.x;
             puzzleBoardDimensions.Height = puzzleBoardDifficultyStrategy.dimensions.y;
+
+            if (puzzleBoardDifficultyStrategy.spawnRandomImage)
+            {
+                chosenSprite.sprite = images.GetRandomImage();
+            }
         }
     }
 }

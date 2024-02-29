@@ -30,11 +30,20 @@ namespace UI
 
         private void HandleException(string condition, string stacktrace, LogType type)
         {
-            if (type is LogType.Exception or LogType.Log)
+            if (type is LogType.Exception)
             {
                 var splitString = condition.Split(':');
                 var debugKey = splitString[0];
                 var debugValue = splitString.Length > 1 ? splitString[1] + "\n" + stacktrace : "";
+
+                debugLogs[debugKey] = debugValue;
+            }
+
+            if (type is LogType.Log)
+            {
+                var splitString = condition.Split(':');
+                var debugKey = splitString[0];
+                var debugValue = splitString.Length > 1 ? splitString[1] : "";
 
                 debugLogs[debugKey] = debugValue;
             }

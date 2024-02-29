@@ -11,7 +11,6 @@ namespace Tutorial
         public void ShowSphere()
         {
             sphere.SetActive(data.button == VRControllerButtons.Grip);
-            print("Active");
         }
     }
 }

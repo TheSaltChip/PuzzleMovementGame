@@ -1,4 +1,4 @@
-using Events;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Localization.Components;
@@ -10,7 +10,7 @@ namespace Tutorial
 {
     public class TutorialText : MonoBehaviour
     {
-        [SerializeField] private IntVariable length;
+        [SerializeField] private GameObject[] txtElements;
         [SerializeField] private UnityEvent first;
         [SerializeField] private UnityEvent last;
         [SerializeField] private UnityEvent middle;
@@ -22,15 +22,14 @@ namespace Tutorial
         private int _end;
         private int _current;
         private LocalizeStringEvent _text;
+        private int _sphereText;
 
         private void Awake()
         {
             _strings = LocalizationSettings.StringDatabase.GetTable("Tutorial");
-            _end = length.value+1;
-            _start = 2; //First 2 entries in the table are next and previous
+            _end = txtElements.Length-2;//Not counting ball grabbed
             _current = _start;
-            _text = gameObject.GetComponent<LocalizeStringEvent>();
-            _text.StringReference.TableEntryReference = _strings.SharedData.Entries[_current].Key;
+            _sphereText = 6;//Change if BallGrabbedText is moved in the list
             _firstInLine = true;
         }
 
@@ -53,17 +52,26 @@ namespace Tutorial
             }
         }
 
+        public void DeactivateCurrent()
+        {
+            txtElements[_current].SetActive(false);
+        }
+
         public void SphereGrabbed()
         {
-            _text.StringReference.TableEntryReference = _strings.SharedData.Entries[11].Key;
+            DeactivateCurrent();
+            _current++;
+            txtElements[_sphereText].SetActive(true);
         }
 
         public void NextText()
         {
             if (_current > _end)
                 return;
+            DeactivateCurrent();
             _current++;
-            _text.StringReference.TableEntryReference = _strings.SharedData.Entries[_current].Key;
+            txtElements[_current].SetActive(true);
+            print(txtElements[_current].name);
             ActiveButtons();
         }
 
@@ -71,8 +79,9 @@ namespace Tutorial
         {
             if (_current <= _start)
                 return;
+            DeactivateCurrent();
             _current--;
-            _text.StringReference.TableEntryReference = _strings.SharedData.Entries[_current].Key;
+            txtElements[_current].SetActive(true);
             ActiveButtons();
         }
     }

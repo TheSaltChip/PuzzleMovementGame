@@ -11,14 +11,18 @@ namespace Puzzle.PuzzleUI
 
         public void Increment()
         {
-            var.amount++;
-            var.number = gameObject.name;
+            ++var.amount;
+            var.number = -1;
+            if (int.TryParse(gameObject.name, out var res))
+            {
+                var.number = res;
+            }
             placed.Invoke();
         }
 
         public void Decrement()
         {
-            var.amount--;
+            --var.amount;
         }
     }
 }
