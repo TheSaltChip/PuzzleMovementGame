@@ -16,6 +16,7 @@ namespace Puzzle
         [SerializeField] private GameObject placePoint;
         [SerializeField] private Placed placed;
 
+        public UnityEvent SpawnedPieces;
         public UnityEvent completed;
 
         private Vector3 _scale;
@@ -44,6 +45,7 @@ namespace Puzzle
         {
             ScaleBoard();
             PlacePoints();
+            SpawnedPieces.Invoke();
         }
 
         private void ScaleBoard()
