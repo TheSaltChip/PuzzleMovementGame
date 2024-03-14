@@ -45,14 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b15b6d25bf74c539ed980aab9e83d70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedImage: {fileID: 11400000, guid: 33f23f7245f93934bbd2bdeff902fe3a, type: 2}
+  selectedSprite: {fileID: 11400000, guid: 33f23f7245f93934bbd2bdeff902fe3a, type: 2}
   goalSprite: {fileID: 11400000, guid: 5ebd8173a668ffb45a13d10638eb34a0, type: 2}
   spawnPoints: {fileID: 11400000, guid: fda5f5d59661ec549ad61b05b1f37352, type: 2}
   puzzlePiecePrefab: {fileID: 2069265184465711283, guid: 2b9b927168fbb6f488159c20e4ca4e92,
     type: 3}
   puzzleBoardDimensions: {fileID: 11400000, guid: 5943fef3899b9ae4884ff17abd5789a4,
     type: 2}
-  puzzleImageQuads: {fileID: 11400000, guid: 512765f18b0f74f4f929fc135eba40aa, type: 2}
   changedImage:
     m_PersistentCalls:
       m_Calls:
@@ -346,22 +345,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76309ddd86136841b357282e4621554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comp: {fileID: 7200000, guid: bd10d5b4ee930604e8c828328e3493f7, type: 3}
   boardDimensions: {fileID: 11400000, guid: 5943fef3899b9ae4884ff17abd5789a4, type: 2}
   state: {fileID: 11400000, guid: be41d0bc5b2369a4b8625526dafa66d9, type: 2}
-  puzzleImageQuads: {fileID: 11400000, guid: 512765f18b0f74f4f929fc135eba40aa, type: 2}
-  puzzlePiece: {fileID: 2069265184465711283, guid: cd0dbac0075891e4e885facff508642f,
-    type: 3}
   board: {fileID: 7080000491970227304}
   placePoint: {fileID: 6086890470661347111, guid: 9430d5b8d03c96e4a86cad27d6a21d22,
     type: 3}
-  selectedImage: {fileID: 11400000, guid: 33f23f7245f93934bbd2bdeff902fe3a, type: 2}
-  goalSprite: {fileID: 11400000, guid: 5ebd8173a668ffb45a13d10638eb34a0, type: 2}
   placed: {fileID: 11400000, guid: 2cc00cac446f9ea4c94bf57ad65e88c4, type: 2}
-  changedImage:
+  SpawnedPieces:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 89a595b8ee829b244ad9ffba4ea2d8d7, type: 2}
+      - m_Target: {fileID: 11400000, guid: 8ad26b5b0d98a8d4cb370266cb385d07, type: 2}
         m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 1
