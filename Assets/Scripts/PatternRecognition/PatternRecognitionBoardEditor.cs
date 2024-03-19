@@ -20,7 +20,7 @@ namespace PatternRecognition
         public UnityEvent afterResize;
 
         private readonly float _buttonScale = 0.05f;
-        private readonly float _padding = 0.0135f;
+        private readonly float _padding = 0.015f;
 
         private GameObject[] _buttonsPool;
 
