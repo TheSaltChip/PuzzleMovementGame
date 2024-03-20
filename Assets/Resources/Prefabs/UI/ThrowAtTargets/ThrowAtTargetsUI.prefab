@@ -1458,7 +1458,7 @@ GameObject:
   - component: {fileID: 7370934784521756223}
   - component: {fileID: 3089011673830250703}
   - component: {fileID: 8450100466978090411}
-  - component: {fileID: 8281846377810350164}
+  - component: {fileID: 996941597554337427}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -1532,8 +1532,8 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8281846377810350164}
-        m_TargetAssemblyTypeName: UI.ThrowOnTarget.SetSelectedButtonFromIntVariable,
+      - m_Target: {fileID: 996941597554337427}
+        m_TargetAssemblyTypeName: UI.ThrowOnTarget.SetSelectedButtonFromFloatVariable,
           Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 1
@@ -1545,7 +1545,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8281846377810350164
+--- !u!114 &996941597554337427
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1554,11 +1554,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 334220727211052120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 962c35f98ce84f809657c13d7ed316ff, type: 3}
+  m_Script: {fileID: 11500000, guid: e10a885e86f74919bf87eb02c173e175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: {fileID: 11400000, guid: afb3b4b1ddb0973409347fc27f01d50e, type: 2}
-  buttonGroupGameEvent: {fileID: 11400000, guid: cfdb6a8183e714243a97c9458bb9a7dd,
+  id: {fileID: 11400000, guid: 10215c79204f2dd49895f2b26f8f42fe, type: 2}
+  buttonGroupGameEvent: {fileID: 11400000, guid: 1798ea917eb08034dbba9428c7ebc4a2,
     type: 2}
 --- !u!1 &443548184136202280
 GameObject:
@@ -4158,7 +4158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 5087068738393645175}
-  id: 1
+  id: 0
   startSelected: 0
   onCheckState:
     m_PersistentCalls:
@@ -6146,7 +6146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 8913617581101055486}
-  id: 4
+  id: 0.75
   startSelected: 0
   onCheckState:
     m_PersistentCalls:
@@ -8492,7 +8492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1462110947149454709}
-  id: 3
+  id: 0.5
   startSelected: 0
   onCheckState:
     m_PersistentCalls:
@@ -8837,7 +8837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 3572304017344022029}
-  id: 2
+  id: 0.25
   startSelected: 0
   onCheckState:
     m_PersistentCalls:
