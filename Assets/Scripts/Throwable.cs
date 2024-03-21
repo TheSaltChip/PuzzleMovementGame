@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Throwable : MonoBehaviour
 {
-    private Transform _throwableTransform;
     private Vector3 _buildUp;
     private Vector3 _position;
     private Rigidbody _rigidBody;
@@ -13,28 +12,32 @@ public class Throwable : MonoBehaviour
     private void Start()
     {
         _rigidBody = GetComponent<Rigidbody>();
-        _throwableTransform = GetComponent<Transform>();
-        var l = LayerMask.NameToLayer(gameObject.layer.ToString());
+        _layer = LayerMask.NameToLayer("Throwable");
+        gameObject.layer = _layer;
     }
 
     public void Released()
     {
         _useForce = true;
         gameObject.layer = LayerMask.NameToLayer("Hand");
-        var i =  Wait();
-        gameObject.layer = _layer;
+        StartCoroutine(Wait());
     }
 
-    private static IEnumerable Wait()
+    private IEnumerator Wait()
     {
-        yield return new WaitForSeconds(0.5f);
+        for (var i = 0; i < 6; i++)
+        {
+            yield return null;
+        }
+        
+        gameObject.layer = _layer;
     }
 
     private void FixedUpdate()
     {
         if (!_useForce) return;
         _useForce = false;
-        _rigidBody.AddForce(_rigidBody.mass*_rigidBody.velocity, ForceMode.Impulse);
+        _rigidBody.AddForce(_rigidBody.velocity * (_rigidBody.mass * 1.1f), ForceMode.Impulse);
         
     }
 }
