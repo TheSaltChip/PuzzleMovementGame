@@ -60,7 +60,6 @@ namespace Tutorial
         public void SphereGrabbed()
         {
             DeactivateCurrent();
-            _current++;
             txtElements[_sphereText].SetActive(true);
         }
 
