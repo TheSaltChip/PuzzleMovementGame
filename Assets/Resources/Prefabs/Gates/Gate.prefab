@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 3158115155670402706}
   - component: {fileID: 5756570764268385636}
   - component: {fileID: 9154222149706187238}
+  - component: {fileID: 1694837905560208219}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -398,6 +399,34 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Events.String.StringGameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1694837905560208219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2973824062564671717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4283516f3eab420582c36163e6d001b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a4b26f8f2cde45842adccaeff039c573, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9154222149706187238}
+        m_TargetAssemblyTypeName: Lobby.UITeleport, Assembly-CSharp
+        m_MethodName: ActivateGate
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
