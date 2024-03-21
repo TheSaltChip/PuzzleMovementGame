@@ -261,6 +261,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: CabinEnvironment
       objectReference: {fileID: 0}
+    - target: {fileID: 1726460741098199373, guid: eac1c3f0450caf348b53b1bd53b773d7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1124829669a7c849bc83c967792e636, type: 2}
+    - target: {fileID: 1726460741493189391, guid: eac1c3f0450caf348b53b1bd53b773d7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1124829669a7c849bc83c967792e636, type: 2}
+    - target: {fileID: 1726460741836233717, guid: eac1c3f0450caf348b53b1bd53b773d7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1124829669a7c849bc83c967792e636, type: 2}
+    - target: {fileID: 1726460742283801883, guid: eac1c3f0450caf348b53b1bd53b773d7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1124829669a7c849bc83c967792e636, type: 2}
+    - target: {fileID: 1726460742828058665, guid: eac1c3f0450caf348b53b1bd53b773d7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4366d1bbe28f9f148b6c7648a45dc087, type: 2}
+    - target: {fileID: 7388789468696755021, guid: eac1c3f0450caf348b53b1bd53b773d7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f1124829669a7c849bc83c967792e636, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eac1c3f0450caf348b53b1bd53b773d7, type: 3}
 --- !u!1001 &464169635
@@ -429,6 +459,66 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 485938239}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1284743239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1284743241}
+  - component: {fileID: 1284743240}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1284743240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284743239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6ca6fa11d5c4e6db7f8218b26c3ef49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 0
+  activate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 15a1e120f107d0846b301c0ef5f34c90, type: 2}
+        m_TargetAssemblyTypeName: Events.GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!4 &1284743241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284743239}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.90698797, y: 1.4547803, z: -0.56253093}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1442409266
 PrefabInstance:
   m_ObjectHideFlags: 0
