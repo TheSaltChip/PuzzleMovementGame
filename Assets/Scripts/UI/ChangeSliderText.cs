@@ -27,7 +27,7 @@ namespace UI
             slider.onValueChanged?.RemoveListener(ChangeText);
         }
 
-        private void ChangeText(float inputText)
+        public void ChangeText(float inputText)
         {
             text.text = (inputText * constant).ToString(format, CultureInfo.InvariantCulture);
         }

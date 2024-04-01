@@ -12,7 +12,7 @@ namespace UI.SetFromVariable
 
         private void Start()
         {
-            slider.value = variable.value * factor;
+            slider.SetValueWithoutNotify(variable.value * factor);
         }
         
         public void Set()

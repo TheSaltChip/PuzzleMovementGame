@@ -17,33 +17,25 @@ namespace Options
             gameOptions.SmoothTurnSpeed = AutoHandPlayer.Instance.smoothTurnSpeed;
             gameOptions.RotationType = (int)AutoHandPlayer.Instance.rotationType;
 
-            var changed = false;
-
             if (PlayerPrefs.HasKey(PlayerPrefsNames.Turn))
             {
                 var rotType = PlayerPrefs.GetInt(PlayerPrefsNames.Turn);
                 gameOptions.RotationType = rotType;
-                changed = true;
             }
 
             if (PlayerPrefs.HasKey(PlayerPrefsNames.TurnSpeed))
             {
                 var smoothTurnSpeed = PlayerPrefs.GetFloat(PlayerPrefsNames.TurnSpeed);
                 gameOptions.SmoothTurnSpeed = smoothTurnSpeed;
-                changed = true;
             }
 
             if (PlayerPrefs.HasKey(PlayerPrefsNames.SnapTurnAngle))
             {
                 var snapTurnAngle = PlayerPrefs.GetFloat(PlayerPrefsNames.SnapTurnAngle);
                 gameOptions.SnapTurnAngle = snapTurnAngle;
-                changed = true;
             }
 
-            if (changed)
-            {
-                onOptionsChanged?.Invoke();
-            }
+            onOptionsChanged?.Invoke();
         }
 
         public void SetTurnOption(int value)
