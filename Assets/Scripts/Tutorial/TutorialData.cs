@@ -7,5 +7,6 @@ namespace Tutorial
     {
         public VRControllerButtons button;
         public SelectedHand selectedHand;
+        public bool skipAnimation;
     }
 }

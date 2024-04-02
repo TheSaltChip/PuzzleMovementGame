@@ -24,6 +24,7 @@ namespace Tutorial
         private MeshRenderer[] buttons;
         private Material[] materials;
 
+        private bool first = true;
         private int _i;
 
 
@@ -71,36 +72,62 @@ namespace Tutorial
                 tr.rotation = tutorialData.button is VRControllerButtons.Trigger or VRControllerButtons.Grip ? ogRotation : Quaternion.Euler(lookAt);
             }
             
+            animator.Stop();
+            
             switch (tutorialData.button)
             {
                 case VRControllerButtons.Trigger:
                     trigger.material = materialContainer.material;
-                    animator.Play("CubeAction");
+                    if (!tutorialData.skipAnimation)
+                    {
+                        animator.Play("CubeAction");
+                    }
                     break;
                 case VRControllerButtons.Grip:
                     grip.material = materialContainer.material;
                     animator.Play("SideButtonAction");
+                    if (!tutorialData.skipAnimation)
+                    {
+                        animator.Play("CubeAction");
+                    }
                     break;
                 case VRControllerButtons.A:
                     a.material = materialContainer.material;
+                    if (!tutorialData.skipAnimation)
+                    {
+                        animator.Play("AAction");
+                    }
                     break;
                 case VRControllerButtons.B:
                     b.material = materialContainer.material;
+                    if (!tutorialData.skipAnimation)
+                    {
+                        animator.Play("BAction");
+                    }
                     break;
                 case VRControllerButtons.Joystick:
                     joystick.material = materialContainer.material;
                     switch (tutorialData.selectedHand)
                     {
                         case SelectedHand.Right when _i == 0:
-                            animator.Play("JoystickAction");
+                            if (!tutorialData.skipAnimation)
+                            {
+                                animator.Play("JoystickAction");
+                            }
                             _i++;
                             break;
                         case SelectedHand.Right:
-                            animator.Play("Action");
+                            if (!tutorialData.skipAnimation)
+                            {
+                                animator.Play("Action");
+                            }
                             _i--;
                             break;
                         case SelectedHand.Left:
-                            animator.Play(("JoystickAction.001"));
+                            if (!tutorialData.skipAnimation)
+                            {
+                                animator.Play(("JoystickAction.001"));
+                            }
                             break;
                         case SelectedHand.Both:
                             break;
@@ -111,7 +138,10 @@ namespace Tutorial
                     break;
                 case VRControllerButtons.Menu:
                     menu.material = materialContainer.material;
-                    animator.Play("MenuAction");
+                    if (!tutorialData.skipAnimation)
+                    {
+                        animator.Play("MenuAction");
+                    }
                     break;
                 default:
                     print("How did you get here?");
