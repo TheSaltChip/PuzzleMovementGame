@@ -8,6 +8,7 @@ namespace Tutorial
     {
         [SerializeField] private VRControllerButtons button;
         [SerializeField] private SelectedHand selectedHand;
+        [SerializeField] private bool skipAnimation;
         [SerializeField] private TutorialData tutorialData;
         [SerializeField] private UnityEvent tutorialSetUp;
 
@@ -15,6 +16,7 @@ namespace Tutorial
         {
             tutorialData.button = button;
             tutorialData.selectedHand = selectedHand;
+            tutorialData.skipAnimation = skipAnimation;
             tutorialSetUp?.Invoke();
         }
     }
