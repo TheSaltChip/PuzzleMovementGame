@@ -52,8 +52,6 @@ namespace PatternRecognition
 
             boardPlate.transform.localScale = _gridSize;
 
-            boardPlate.GetComponent<BoxCollider>().size = _gridSize;
-
             var x = 0f;
             var z = 0f;
             var dx = 0f;
@@ -111,8 +109,6 @@ namespace PatternRecognition
             poseCollider.size = colSize;
 
             boardPlate.transform.localScale = _gridSize;
-
-            boardPlate.GetComponent<BoxCollider>().size = _gridSize;
 
             var x = 0f;
             var z = 0f;
