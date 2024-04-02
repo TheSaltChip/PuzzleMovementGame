@@ -24,6 +24,7 @@ namespace Tutorial
         private MeshRenderer[] buttons;
         private Material[] materials;
 
+        private bool first = true;
         private int _i;
 
 
@@ -71,6 +72,8 @@ namespace Tutorial
                 tr.rotation = tutorialData.button is VRControllerButtons.Trigger or VRControllerButtons.Grip ? ogRotation : Quaternion.Euler(lookAt);
             }
             
+            animator.Stop();
+            
             switch (tutorialData.button)
             {
                 case VRControllerButtons.Trigger:
@@ -96,7 +99,11 @@ namespace Tutorial
                             _i++;
                             break;
                         case SelectedHand.Right:
-                            animator.Play("Action");
+                            if (first)
+                            {
+                                animator.Play("Action");
+                                first = false;
+                            }
                             _i--;
                             break;
                         case SelectedHand.Left:
