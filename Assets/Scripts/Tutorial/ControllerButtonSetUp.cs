@@ -85,10 +85,9 @@ namespace Tutorial
                     break;
                 case VRControllerButtons.Grip:
                     grip.material = materialContainer.material;
-                    animator.Play("SideButtonAction");
                     if (!tutorialData.skipAnimation)
                     {
-                        animator.Play("CubeAction");
+                        animator.Play("SideButtonAction");
                     }
                     break;
                 case VRControllerButtons.A:
