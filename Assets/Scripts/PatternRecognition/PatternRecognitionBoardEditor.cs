@@ -20,7 +20,7 @@ namespace PatternRecognition
         public UnityEvent afterResize;
 
         private readonly float _buttonScale = 0.05f;
-        private readonly float _padding = 0.0125f;
+        private readonly float _padding = 0.015f;
 
         private GameObject[] _buttonsPool;
 
@@ -51,8 +51,6 @@ namespace PatternRecognition
             poseCollider.size = colSize;
 
             boardPlate.transform.localScale = _gridSize;
-
-            boardPlate.GetComponent<BoxCollider>().size = _gridSize;
 
             var x = 0f;
             var z = 0f;
@@ -111,8 +109,6 @@ namespace PatternRecognition
             poseCollider.size = colSize;
 
             boardPlate.transform.localScale = _gridSize;
-
-            boardPlate.GetComponent<BoxCollider>().size = _gridSize;
 
             var x = 0f;
             var z = 0f;

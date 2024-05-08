@@ -31,5 +31,10 @@ namespace UI
         {
             text.text = (inputText * constant).ToString(format, CultureInfo.InvariantCulture);
         }
+
+        public void SetTextFromSlider()
+        {
+            text.text = (slider.value * constant).ToString(format, CultureInfo.InvariantCulture);
+        }
     }
 }

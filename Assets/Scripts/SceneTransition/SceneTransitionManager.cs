@@ -11,11 +11,13 @@ namespace SceneTransition
     {
         [SerializeField] private FaderScreen faderScreen;
         [SerializeField] private BoolVariable sceneChanged;
- 
+        [SerializeField] private BoolVariable fadeOutCompleted;
+
         public UnityEvent onSceneEnter;
         public UnityEvent onSceneExit;
 
         private AsyncOperation _loadLevelOperation;
+        private  Coroutine _loadSceneCoroutine;
 
         private void Start()
         {
@@ -27,10 +29,10 @@ namespace SceneTransition
 
         public void LoadScene(string sceneName)
         {
-            StartCoroutine(LoadSceneCoroutine(sceneName));
+            _loadSceneCoroutine ??= StartCoroutine(LoadSceneCoroutine(sceneName));
         }
 
-        public IEnumerator LoadSceneCoroutine(string sceneName)
+        private IEnumerator LoadSceneCoroutine(string sceneName)
         {
             _loadLevelOperation = SceneManager.LoadSceneAsync(sceneName);
             _loadLevelOperation.allowSceneActivation = false;
@@ -41,6 +43,7 @@ namespace SceneTransition
 
             _loadLevelOperation.allowSceneActivation = true;
             sceneChanged.value = true;
+            fadeOutCompleted.value = true;
         }
 
         private void HandleSceneChange()
@@ -50,11 +53,11 @@ namespace SceneTransition
 
         private IEnumerator HandleSceneChangeCoroutine()
         {
+            fadeOutCompleted.value = false;
+            
             onSceneEnter?.Invoke();
 
             yield return StartCoroutine(faderScreen.FadeRoutine(Color.black, Color.clear));
-
-            _loadLevelOperation = null;
         }
     }
 }

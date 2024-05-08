@@ -915,7 +915,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2049169211978532382}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.328, y: 0.65999997, z: 1.5980988}
+  m_LocalPosition: {x: 3.328, y: 0.043, z: 1.5980988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1297,7 +1297,7 @@ LightProbeGroup:
   - {x: 0.0302539, y: -0.33771354, z: -0.054434683}
   - {x: 0.29974958, y: -0.35764876, z: 0.41490075}
   - {x: 0.29683656, y: -0.33771354, z: -0.055650428}
-  - {x: 0.024675315, y: -0.3792808, z: 0.41001055}
+  - {x: -0.16283299, y: -0.45073208, z: 0.5211691}
   - {x: 0.25100446, y: -0.5222177, z: 0.4311015}
   - {x: 0.06272037, y: -0.533037, z: 0.46224436}
   - {x: 0.28117794, y: -0.5143885, z: -0.056637198}
@@ -1331,7 +1331,7 @@ LightProbeGroup:
   - {x: -0.5917865, y: -0.55984837, z: -0.5117063}
   - {x: 0.6057166, y: 0.42319715, z: -0.54009575}
   - {x: -0.75759566, y: -0.707707, z: 0.7545709}
-  - {x: -0.7575956, y: -0.707707, z: 0.18319982}
+  - {x: -0.7428939, y: -0.6565416, z: 0.23417743}
   - {x: -0.38129067, y: -0.707707, z: 0.70782435}
   - {x: -0.58999926, y: -0.4519956, z: 0.55214083}
   - {x: 0.7411681, y: -0.7378503, z: -0.55873585}
@@ -1363,6 +1363,10 @@ LightProbeGroup:
   - {x: 0.9273572, y: -0.3143542, z: 0.4394162}
   - {x: 0.9273572, y: -0.3143542, z: 0.1823733}
   - {x: 0.9273572, y: -0.3143542, z: -0.095630646}
+  - {x: -0.16283296, y: -0.44895414, z: 0.35821682}
+  - {x: -0.16283296, y: -0.44895414, z: 0.18379405}
+  - {x: -0.09692016, y: 0.19779292, z: 0.77585363}
+  - {x: 0.37319455, y: 0.19779292, z: 0.77585363}
   m_Dering: 1
 --- !u!1 &2049169212882974915
 GameObject:
@@ -1375,7 +1379,6 @@ GameObject:
   - component: {fileID: 2049169212882974919}
   - component: {fileID: 2049169212882974918}
   - component: {fileID: 2049169212882974917}
-  - component: {fileID: 2049169212882974916}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -1448,19 +1451,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2049169212882974916
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2049169212882974915}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2049169212983736815
 GameObject:
   m_ObjectHideFlags: 0
@@ -5080,6 +5070,18 @@ MonoBehaviour:
   minRange: -0.02
   testAngle: 0
   testRange: 0
+--- !u!114 &3207622915504047303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205853446259507198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4456f6f668512ba4f9900ac1201932f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8114825087193244845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6721,6 +6723,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -0.105
       objectReference: {fileID: 0}
+    - target: {fileID: 8973373899873881349, guid: af5dea01e9b0f25488bbca787aab5407,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 9070223392262364720, guid: af5dea01e9b0f25488bbca787aab5407,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -7080,6 +7087,18 @@ CapsuleCollider:
   m_Height: 0.93824434
   m_Direction: 0
   m_Center: {x: -0.002644837, y: 0.000005915761, z: 0.00000031292439}
+--- !u!114 &2647194171877315874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394808212405599858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4456f6f668512ba4f9900ac1201932f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6708993517787126826
 MonoBehaviour:
   m_ObjectHideFlags: 0

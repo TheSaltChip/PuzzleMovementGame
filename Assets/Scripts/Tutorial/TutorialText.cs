@@ -29,7 +29,7 @@ namespace Tutorial
             _strings = LocalizationSettings.StringDatabase.GetTable("Tutorial");
             _end = txtElements.Length-2;//Not counting ball grabbed
             _current = _start;
-            _sphereText = 6;//Change if BallGrabbedText is moved in the list
+            _sphereText = 7;//Change if BallGrabbedText is moved in the list
             _firstInLine = true;
         }
 
@@ -60,7 +60,6 @@ namespace Tutorial
         public void SphereGrabbed()
         {
             DeactivateCurrent();
-            _current++;
             txtElements[_sphereText].SetActive(true);
         }
 
@@ -71,7 +70,6 @@ namespace Tutorial
             DeactivateCurrent();
             _current++;
             txtElements[_current].SetActive(true);
-            print(txtElements[_current].name);
             ActiveButtons();
         }
 

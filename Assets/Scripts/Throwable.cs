@@ -1,35 +1,43 @@
+using System.Collections;
 using UnityEngine;
 
 public class Throwable : MonoBehaviour
 {
-    private Transform _throwableTransform;
     private Vector3 _buildUp;
     private Vector3 _position;
     private Rigidbody _rigidBody;
     private bool _useForce;
+    private int _layer;
 
-    void Start()
+    private void Start()
     {
         _rigidBody = GetComponent<Rigidbody>();
-        _throwableTransform = GetComponent<Transform>();
-    }
-
-    public void Grabbed()
-    {
-        
+        _layer = LayerMask.NameToLayer("Throwable");
+        gameObject.layer = _layer;
     }
 
     public void Released()
     {
         _useForce = true;
+        gameObject.layer = LayerMask.NameToLayer("Hand");
+        StartCoroutine(Wait());
     }
 
-    void FixedUpdate()
+    private IEnumerator Wait()
     {
-        if (_useForce)
+        for (var i = 0; i < 6; i++)
         {
-            _useForce = false;
-            _rigidBody.AddForce(_rigidBody.mass*_rigidBody.velocity, ForceMode.Impulse);
+            yield return null;
         }
+        
+        gameObject.layer = _layer;
+    }
+
+    private void FixedUpdate()
+    {
+        if (!_useForce) return;
+        _useForce = false;
+        _rigidBody.AddForce(_rigidBody.velocity * (_rigidBody.mass * 1.1f), ForceMode.Impulse);
+        
     }
 }
