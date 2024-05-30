@@ -14,44 +14,49 @@
 // along with this program.  If not, see <https://commonsclause.com/> and <https://www.gnu.org/licenses/>.
 #endregion
 
+using System.Collections;
 using UnityEngine;
-using Variables;
 
-namespace Tutorial
+namespace Util
 {
-    public class TutorialList : MonoBehaviour
+    public class Throwable : MonoBehaviour
     {
-        [SerializeField] private TutorialStep[] tutorialSteps;
-        [SerializeField] private IntVariable length;
-        [SerializeField] private TutorialData data;
-        private int _current;
+        private Vector3 _buildUp;
+        private Vector3 _position;
+        private Rigidbody _rigidBody;
+        private bool _useForce;
+        private int _layer;
 
-        private void Awake()
+        private void Start()
         {
-            length.value = tutorialSteps.Length;
-            data.selectedHand = SelectedHand.Both;
-            data.button = VRControllerButtons.Trigger;
+            _rigidBody = GetComponent<Rigidbody>();
+            _layer = LayerMask.NameToLayer("Throwable");
+            gameObject.layer = _layer;
         }
 
-        public void NextStep()
+        public void Released()
         {
-            if (_current >= tutorialSteps.Length)
+            _useForce = true;
+            gameObject.layer = LayerMask.NameToLayer("Hand");
+            StartCoroutine(Wait());
+        }
+
+        private IEnumerator Wait()
+        {
+            for (var i = 0; i < 6; i++)
             {
-                return;
+                yield return null;
             }
-            _current++;
-            tutorialSteps[_current].SetUpHighlightAndAnimation();
+        
+            gameObject.layer = _layer;
         }
 
-        public void PreviousStep()
+        private void FixedUpdate()
         {
-            if (_current < 0)
-            {
-                return;
-            }
-            _current--;
-            tutorialSteps[_current].SetUpHighlightAndAnimation();
+            if (!_useForce) return;
+            _useForce = false;
+            _rigidBody.AddForce(_rigidBody.velocity * (_rigidBody.mass * 1.1f), ForceMode.Impulse);
+        
         }
-    
     }
 }
