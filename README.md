@@ -6,6 +6,8 @@ The game is a collection of different mini-games, with four mini-games implement
 The code in this repo is a Unity project on Unity version 2021.3.30f1 with URP. You need to download that version of Unity to open this project without issues.
 
 ### Branches
+Release-master-thesis-version is the final version of this game for the master thesis.
+
 Eval1 is how the game was at the time of the first evaluation.
 
 Eval2 is how the game was at the time of the second evaluation.
